@@ -1,0 +1,382 @@
+{% extends 'study/main_base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}直播课程{% endblock %}
+
+
+{% block content %}
+
+
+    <!-- 3、加入后：任务式学习 -->
+    <div class="container">
+        <ol class="breadcrumb breadcrumb-o">
+            <li>
+                <a href="/">首页</a>
+            </li>
+            <li>
+                <a href="/">直播课程</a>
+            </li>
+            <li class="active">{{ vc.name }} </li>
+        </ol>
+
+        <div class="es-section course-detail-section clearfix xt-deatil-section">
+            <div class="course-detail-top clearfix">
+          <span class="tags mrm">
+          </span>
+                <span class="course-detail-heading">
+            {{ vc.name }}
+          </span>
+                <p class="text-overflow subtitle" data-toggle="popover" data-placement="bottom" data-trigger="hover"
+                   data-content=""
+                   data-original-title="" title="">
+                    <a class="color-gray">
+                        {{ vc.intro }}
+                    </a>
+                </p>
+                <ul class="course-operation hidden-xs hidden-sm clearfix">
+                    <!--非营销页显示-->
+
+                    <!--营销页显示-->
+                    <li class="js-unfavorite-btn" id="unfavorite-btn" data-url="/course_set/49/unfavorite"
+                        style="display: {% if isCollection %}block{% else %}none{% endif %}">
+                        <a class="btn btn-default btn-xs" href="javascript:cancel_collection();" data-toggle="tooltip"
+                           data-placement="top"
+                           title="" data-trigger="hover"
+                           data-original-title="已收藏">
+                            <i class="es-icon es-icon-bookmark color-primary"></i>
+                        </a>
+                    </li>
+                    <li class="js-favorite-btn" id="favorite-btn" data-url="/course_set/49/favorite"
+                        style="display: {% if isCollection %}none{% else %}block{% endif %}">
+                        <a class="btn btn-default btn-xs" href="javascript:save_collection();" data-toggle="tooltip"
+                           data-placement="top"
+                           title="" data-trigger="hover"
+                           data-original-title="收藏">
+                            <i class="es-icon es-icon-bookmarkoutline"></i>
+                        </a>
+                    </li>
+
+                    <li class="es-share top">
+                        <a class="btn btn-default btn-xs dropdown-toggle" href="javascript:;"
+                           data-toggle="dropdown" title="分享">
+                            <i class="es-icon es-icon-share"></i>
+                        </a>
+
+
+                        <div class="dropdown-menu  js-social-share-params bdsharebuttonbox" data-title="第一阶丨篆隶筑基课程"
+                             data-summary=""
+                             data-message="我正在学习暄桐教室的《第一阶丨篆隶筑基课程》，享受写字带来的快乐，一起来学习吧！"
+                             data-url="http://www.xuantong.cn/course/49"
+                             data-picture="http://sce4a8b6c0d93v-sb-qn.qiqiuyun.net/files/default/2018/07-19/113822ec81e6915061.png">
+
+                            <a class="bds_tsina" data-cmd="tsina"></a>
+                            <a class="bds_sqq" data-cmd="sqq"></a>
+                            <a class="bds_qzone" data-cmd="qzone"></a>
+                            <a class="bds_weixin" data-cmd="weixin"></a>
+
+                        </div>
+                    </li>
+
+
+                    <div class="handle-btn">
+                        <div class="refund-box">
+                        </div>
+                    </div>
+
+
+                </ul>
+            </div>
+            <div class="course-detail-bottom">
+                <div class="course-detail-img">
+                    <img class="img-responsive" src="{{ vc.get_material_image.url }}" alt="篆隶筑基课程 ">
+                    <div class="image-overlay"></div>
+
+                    <div class="course-detail-remask">
+                        <div class="score pull-right mb0">
+
+                            <i class="es-icon es-icon-star color-warning"></i>
+                            <i class="es-icon es-icon-star color-warning"></i>
+                            <i class="es-icon es-icon-star color-warning"></i>
+                            <i class="es-icon es-icon-star color-warning"></i>
+
+                            <i class="es-icon es-icon-starhalf color-warning"></i>
+
+
+                            <span class="vertical-middle">({{ comment_count }}人评价)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="course-detail-info">
+
+
+                    <div class=" mb15 ">
+
+                        <span class="course-detail-title">价格</span>
+                        <span class="gray-darker mrm">
+                ¥
+                <b class="pirce-num">{{ vc.price }}.00</b>
+              </span>
+
+                    </div>
+
+                    <div class="course-detail-gray  not-activity ">
+                        <div class="course-detail-content">
+                            <span class="course-detail-title vertical-middle mb10">教学计划</span>
+                            <ul class="nav nav-pills nav-pills-sm nav-pills-transparent course-detail-nav">
+                                <li class="mb10 mr10  active ">
+                                    <a href="/" title="{{ vc.plan }}">{{ vc.plan }}
+                                    </a>
+                                    <i class="es-icon es-icon-done done-icon"></i>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="mb15 hidden-xs">
+                            <span class="course-detail-title ">学习有效期</span>
+                            <span class="gray-dark">
+                  开始：{{ vc.start_time|date:"Y-m-d" }} &nbsp; 截止：{{ vc.stop_time|date:"Y-m-d" }}
+
+                </span>
+                        </div>
+
+                        <div class="mb15 hidden-xs">
+                            <span class="course-detail-title ">购买截止日期</span>
+                            <span class="gray-dark mrl">{{ vc.buy_time|date:"Y-m-d H:i" }}</span>
+
+                        </div>
+
+
+                    </div>
+                    <div class="course-detail-section-responsive visible-xs visible-sm clearfix">
+                        <ul class="clearfix">
+                            <!--营销页显示-->
+                            <li class="js-unfavorite-btn" id="unfavorite-btn"
+                                style="display: {% if isCollection %}block{% else %}none{% endif %}">
+                                <a class="color-primary" href="javascript:cancel_collection();" data-toggle="tooltip"
+                                   data-placement="top"
+                                   title="" data-trigger="hover" data-original-title="已收藏">
+                                    <i class="es-icon es-icon-bookmark color-primary"></i>
+                                    <br> 已收藏
+                                </a>
+                            </li>
+                            <li class="js-favorite-btn" id="favorite-btn"
+                                style="display: {% if isCollection %}none{% else %}block{% endif %}">
+                                <a class="" href="javascript:save_collection();" data-toggle="tooltip"
+                                   data-placement="top" title=""
+                                   data-trigger="hover" data-original-title="收藏">
+                                    <i class="es-icon es-icon-bookmarkoutline"></i>
+                                    <br> 收藏
+                                </a>
+                            </li>
+
+                            <li class="es-share top">
+                                <a class=" dropdown-toggle" href="http://www.xuantong.cn/course/49"
+                                   data-toggle="dropdown" title="分享">
+                                    <i class="es-icon es-icon-share"></i>
+                                    <br> 分享
+                                </a>
+
+
+                                <div class="dropdown-menu  js-social-share-params bdsharebuttonbox"
+                                     data-title="第一阶丨篆隶筑基课程"
+                                     data-summary="" data-message="我正在学习暄桐教室的《第一阶丨篆隶筑基课程》，享受写字带来的快乐，一起来学习吧！"
+                                     data-url="http://www.xuantong.cn/course/49"
+                                     data-picture="http://sce4a8b6c0d93v-sb-qn.qiqiuyun.net/files/default/2018/07-19/113822ec81e6915061.png">
+
+                                    <a class="bds_tsina" data-cmd="tsina"></a>
+                                    <a class="bds_sqq" data-cmd="sqq"></a>
+                                    <a class="bds_qzone" data-cmd="qzone"></a>
+                                    <a class="bds_weixin" data-cmd="weixin"></a>
+
+                                </div>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                    {% if vc.get_live_info.live_url == "" %}
+                        {% if isBuy %}
+                            {% if vc.get_live_info.last_live_time == "" %}
+                                <div class="text-right buy-btn-group">
+                                    当前没有直播
+                                </div>
+                            {% else %}
+                                <div class="text-right buy-btn-group">
+                                    {{ vc.get_live_info.last_live_time }}后开始直播
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                        {% if isBuy %}
+                            <div class="text-right buy-btn-group">
+                                <a class="btn btn-primary btn-lg" href="{{ vc.get_live_info.live_url }}">
+                                    进入直播
+                                </a>
+                            </div>
+                        {% else %}
+                            <!--<div class="text-right buy-btn-group">
+                                正在直播
+                            </div>-->
+                        {% endif %}
+
+
+                    {% endif %}
+
+                    {% if isBuy %}
+
+
+
+                    {% else %}
+                        {% if 0 %}
+                            <div class="text-right buy-btn-group">
+                                <a class="btn btn-primary btn-lg" id='sum' href="javascript:;">
+                                    购买
+                                </a>
+                            </div>
+                        {% endif %}
+
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-md-8 course-detail-content">
+
+                <section class="es-section">
+                    <div class="nav-btn-tab">
+
+                        <ul class="nav nav-tabs " role="tablist">
+                            <li role="presentation" id="summary" class="">
+                                <a href="{{ vc.get_absolute_url }}">
+                                    介绍
+                                </a>
+                            </li>
+                            <li role="presentation" id="tasks" class="">
+                                <a href="{{ vc.get_tasks_url }}">
+                                    目录
+                                </a>
+                            </li>
+                            {% if isBuy %}
+                                <li role="presentation" id="material" class="">
+                                    <a href="{{ vc.get_material_url }}">
+                                        资料区
+                                        <small>({{ vc.get_material_count }})</small>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li role="presentation" id="reviews" class="">
+                                <a href="{{ vc.get_reviews_url }}">
+                                    评价
+                                    <small>({{ comment_count }})</small>
+                                </a>
+                            </li>
+
+
+                        </ul>
+
+                    </div>
+                    {% block container %}
+                    {% endblock %}
+
+
+                </section>
+
+
+            </div>
+
+            <div class="col-lg-3 col-md-4 course-sidebar">
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+
+
+        {% block nav_tabs_class %}
+        {% endblock %}
+
+        function save_collection() {
+            $.get("{% url 'video_curriculum_collection' vc.pk %}", {'is_save': "is_save"}, function (ret) {
+                //alert(ret)
+                //document.getElementById('unfavorite-btn').style.display = "block"
+                //document.getElementById('favorite-btn').style.display = "none"
+                ufs = document.getElementsByClassName("js-unfavorite-btn")
+                for (i = 0; i < ufs.length; i++) {
+                    ufs[i].style.display = "block";
+                }
+                fs = document.getElementsByClassName("js-favorite-btn")
+                for (i = 0; i < fs.length; i++) {
+                    fs[i].style.display = "none";
+                }
+
+
+            })
+
+        }
+
+        function cancel_collection() {
+            $.get("{% url 'video_curriculum_collection' vc.pk %}", {}, function (ret) {
+                //document.getElementById('unfavorite-btn').style.display = "none"
+                //document.getElementById('favorite-btn').style.display = "block"
+                ufs = document.getElementsByClassName("js-unfavorite-btn")
+                for (i = 0; i < ufs.length; i++) {
+                    ufs[i].style.display = "none";
+                }
+                fs = document.getElementsByClassName("js-favorite-btn")
+                for (i = 0; i < fs.length; i++) {
+                    fs[i].style.display = "block";
+                }
+            })
+
+        }
+
+        $(document).ready(function () {
+
+            $("#sum").click(function () {
+                {% if 0 %}
+                    $.get("/buyvideocurriculum/", {'pk':{{ vc.pk }}}, function (ret) {
+                        if (ret == "1")
+                            location.reload();
+                    })
+                {% else %}
+                    alert("购买失败")
+                {% endif %}
+            });
+
+        });
+
+        window._bd_share_config = {
+            common: {
+                bdText: '我正在学习扶阳医学的《{{ vc.name }}》，享受写字带来的快乐，一起来学习吧！',
+                bdDesc: '我正在学习扶阳医学的《{{ vc.name }}》，享受写字带来的快乐，一起来学习吧！',
+                bdUrl: window.location.href,
+                bdPic: ''
+            },
+            share: [{
+                "bdSize": 16
+            }],
+            image: [{
+                viewType: 'list',
+                viewPos: 'top',
+                viewColor: 'black',
+                viewSize: '16',
+                viewList: ['qzone', 'tsina', 'tqq', 'renren']
+            }],
+
+        }
+        with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion=' + ~(-new Date() / 36e5)];
+
+    </script>
+{% endblock %}

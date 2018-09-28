@@ -1,0 +1,14 @@
+{% extends 'study/main_base.html' %} 
+
+{% load staticfiles %} 
+
+{% block title %}图文{% endblock %}
+
+
+{% block content %}
+
+                    {% autoescape off %}
+                    {{ ga.content }}
+                    {% endautoescape %}
+
+{% endblock %}

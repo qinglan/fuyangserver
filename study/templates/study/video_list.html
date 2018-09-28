@@ -1,0 +1,103 @@
+{% extends 'study/main_base.html' %}
+{% load staticfiles %}
+{% block title %}视频列表{% endblock %}
+{% block content %}
+    <!--{% block listname %}视频列表{% endblock %}-->
+    <section class="es-poster swiper-container">
+        <div class="swiper-wrapper"
+             style="width: 3375px; transform: translate3d(-1125px, 0px, 0px); transition-duration: 0.3s; height: 117px;">
+            {% for item in abs %}
+                <div class="swiper-slide" style="background: rgb(244, 244, 244); width: 375px; height: 117px;">
+                    <div>
+                        <a href="{{ item.url }}" target="_blank">
+                            <img class="img-responsive" src="{{ item.image.url }}">
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+        <div class="swiper-pager">
+            {% for item in abs %}
+            <span class="swiper-pagination-switch"></span>
+            {% endfor %}
+
+        </div>
+    </section>
+
+    <div id="content-container" class="container">
+        <div class="open-course-list">
+            <div class="row course-list es-open-course-list">
+                {% for info in vis %}
+                <div class="col-md-4 col-xs-6">
+                    <div class="course-item">
+                        <div class="course-img">
+                            <a href="{{ info.get_absolute_url }}" target="_blank">
+                                <img src="{{ info.image.url }}" alt="{{ info.name }}"
+                                     class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="course-info clearfix">
+                            <div class="title">
+                                <a class="link-dark" href="{{ info.get_absolute_url }}" target="_blank"
+                                   title="{{ info.name }}">
+                                    {{ info.name }}
+                                </a>
+                            </div>
+                            <div class="metas pull-right">
+                                <span class="num">
+                                    <i class="es-icon es-icon-removeredeye">
+                                    </i>
+                                    {{ info.views_count }}
+                                </span>
+                                <span class="comment">
+                                    <i class="es-icon es-icon-textsms">
+                                    </i>
+                                    67
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <nav class=" text-center">
+                <ul class="pagination">
+
+                    <li>
+                        <a href="{{ maxleft }}">
+                            <i class="cd-icon cd-icon-first-page"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ left }}">
+                            <i class="cd-icon cd-icon-arrow-left"></i>
+                        </a>
+                    </li>
+                    {% for item in pagelist %}
+                        <li class="{{ item.class }}">
+                            <a href="{{ item.url }}">{{ item.text }}</a>
+                        </li>
+                    {% endfor %}
+
+
+                    <li>
+                        <a href="{{ right }}">
+                            <i class="cd-icon cd-icon-arrow-right"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ maxright }}">
+                            <i class="cd-icon cd-icon-last-page"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+
+{% endblock %}

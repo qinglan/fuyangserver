@@ -1,0 +1,148 @@
+{% extends 'userinfo/userinfo_base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}账户中心{% endblock %}
+
+{% block userinfo_title %}
+    个人信息
+{% endblock %}
+{% block userinfo_base_center_class %}active{% endblock %}
+{% block userinfo_content %}
+
+    <form id="user-profile-form" class="row cd-row" action="{% url 'userinfo_center_change' %}" method="post"
+          novalidate="novalidate">
+        {% csrf_token %}
+        <div class="col-md-11">
+            <div class="cd-image-upload cd-mr24 cd-mb32">
+                <img class="cd-avatar cd-avatar-lg" id="profile-avatar"
+                     src="{{ user.headimgurl }}">
+
+
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group cd-form-group">
+                <label for="profile_truename">昵称</label>
+                <input type="text" id="profile_truename" name="profile[truename]"
+                       class="form-control" value="{{ user.nickname }}">
+            </div>
+        </div>
+        <div class="col-md-5 col-md-offset-1">
+            <div class="form-group cd-form-group">
+                <label>性别</label>
+                <div class="cd-radio-group">
+                    <label class="cd-radio {% if user.sex == 1 %}checked{% endif %}" for="profile_gender_0">
+                        <input type="radio" id="profile_gender_0" name="profile[gender]" value="1"
+                               {% if user.sex == 1 %}checked=""{% endif %}
+                               data-toggle="cd-radio"> 男
+                    </label>
+
+                    <label class="cd-radio {% if user.sex != 1 %}checked{% endif %}" for="profile_gender_1">
+                        <input type="radio" id="profile_gender_1" name="profile[gender]" value="0"
+                               {% if user.sex != 1 %}checked=""{% endif %}
+                               data-toggle="cd-radio"> 女
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="form-group cd-form-group">
+                <label for="profile_title">国家</label>
+                <input type="text" id="profile_title" name="profile[title]" class="form-control"
+                       value="{{ user.country }}">
+            </div>
+        </div>
+
+        <div class="col-md-5 col-md-offset-1">
+            <div class="form-group cd-form-group">
+                <label for="profile_signature">省</label>
+                <input type="text" id="profile_signature" name="profile[signature]" class="form-control"
+                       value="{{ user.province }}">
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="form-group cd-form-group">
+                <label for="profile_title">城市</label>
+                <input type="text" id="profile_city" name="profile[city]" class="form-control"
+                       value="{{ user.city }}">
+            </div>
+        </div>
+
+        <div class="col-md-5 col-md-offset-1">
+            <div class="form-group cd-form-group">
+                <label for="profile_signature">真实姓名</label>
+                <input type="text" id="profile_real_name" name="profile[real_name]" class="form-control"
+                       value="{{ user.real_name }}">
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group cd-form-group">
+                <label for="profile_title">手机号</label>
+                <input type="text" id="profile_phone_number" name="profile[phone_number]" class="form-control"
+                       value="{{ user.phone_number }}">
+            </div>
+        </div>
+
+        <div class="col-md-5 col-md-offset-1">
+            <div class="form-group cd-form-group">
+                <label for="profile_signature">地址</label>
+                <input type="text" id="profile_address" name="profile[address]" class="form-control"
+                       value="{{ user.address }}">
+            </div>
+        </div>
+
+
+        <div class="col-md-5">
+            <div class="form-group cd-form-group">
+                <label for="profile_title">邮箱</label>
+                <input type="text" id="profile_email_address" name="profile[email_address]" class="form-control"
+                       value="{{ user.email_address }}">
+            </div>
+        </div>
+
+
+        <div class="col-md-11">
+            <button class="btn cd-btn cd-btn-primary cd-btn-lg" type='button' onclick="submitForm()">保存
+            </button>
+        </div>
+
+    </form>
+{% endblock %}
+
+{% block scriptfile %}
+
+    <script>
+
+
+        var regBox = {
+            regEmail: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,//邮箱
+            regMobile: /^1[34578]\d{9}$/,
+            regTel: /^0[\d]{2,3}-[\d]{7,8}$/  //电话
+        }
+
+        function submitForm() {
+            em = document.getElementById('profile_email_address').value
+            tel = document.getElementById('profile_phone_number').value
+            em = em.replace(/[ ]/g, "");   //去掉所有空格
+            tel = tel.replace(/[ ]/g, "");   //去掉所有空格
+
+            if (tel!='' && !regBox.regMobile.test(tel) ) {
+                alert("手机号格式错误")
+                return false
+            }
+            if (em!='' && !regBox.regEmail.test(em)) {
+                alert("邮箱格式错误")
+                return false
+            }
+
+            var form = document.getElementById("user-profile-form")
+            form.submit();
+        }
+
+
+    </script>
+
+{% endblock %}

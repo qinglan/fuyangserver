@@ -1,0 +1,49 @@
+{% extends 'study/main_base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}用户中心{% endblock %}
+
+
+{% block content %}
+    <div class="container cd-container">
+        <div class="cd-content">
+            <div class="cd-sidebar">
+                <ul class="cd-sidebar__list">
+                    <li class="cd-sidebar__heading">
+                        账户中心
+                    </li>
+                    <li class="cd-sidebar__item {% block userinfo_base_orders_class %}{% endblock %}">
+                        <a href="{% url 'userinfo_orders' %}">我的订单</a>
+                    </li>
+                    <li class="cd-sidebar__item {% block userinfo_base_center_class %}{% endblock %}">
+                        <a href="{% url 'userinfo_center' %}">个人信息</a>
+                    </li>
+                    <li class="cd-sidebar__item {% block userinfo_base_collection_class %}{% endblock %}">
+                        <a href="{% url 'userinfo_collection' %}">我的收藏</a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="cd-main">
+                <div class="cd-main__heading">
+                    <div class="cd-main__title">
+                        {% block userinfo_title %}
+                            用户中心的标题
+                        {% endblock %}
+                    </div>
+                </div>
+                <div class="cd-main__body">
+                    {% block userinfo_content %}
+                        用户中心的标题
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% block userinfo_content_end %}
+    {% endblock %}
+
+
+{% endblock %}

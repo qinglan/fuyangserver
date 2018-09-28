@@ -1,0 +1,65 @@
+{% extends 'study/base.html' %}
+
+{% load staticfiles %}
+{% load filters %}
+
+
+{% block titlefile %}
+    <style>
+        body {
+            padding-bottom: 50px;
+        }
+
+        .dcenter{
+            text-indent:15px;
+        }
+
+    </style>
+{% endblock %}
+{% block title %}直播讨论{% endblock %}
+
+
+{% block bodycontent %}
+
+    <p>&nbsp;</p>
+    <div class="es-piece">
+        <div class="piece-body p-lg clearfix" id="list-group-item">
+            <!--<div class="list-group-item">-->
+            <ul class="media-list">
+
+                {% for file in files %}
+                    <li class="media">
+                        <div class="media-body">
+                            <div class="mbs dcenter">
+                                <a href="{{ file.get_download_url }}" download="{{ file.name }}"
+                                   target="_blank">{{ file.name }}</a>
+                            </div>
+
+
+                            <div class="text-sm dcenter">
+                                <span class="color-gray">{{ file.get_file_size }}MB</span>
+                                <span class="bullet">•</span>
+
+                                <span class="color-gray">上传于 {{ file.register_date|date:"Y-m-d" }}</span>
+                            </div>
+
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+
+
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
+
+
+{% block scriptfile %}
+    <script>
+
+    </script>
+{% endblock %}

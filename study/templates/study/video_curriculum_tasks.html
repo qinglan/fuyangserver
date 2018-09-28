@@ -1,0 +1,120 @@
+{% extends 'study/video_curriculum.html' %}
+
+{% load staticfiles %}
+
+{% block title %}{{ vc.name }}{% endblock %}
+
+{% block container %}
+
+
+    <div class="es-piece">
+        <div class="piece-header">任务</div>
+        <div class="course-detail-content">
+
+
+            <ul class="task-list task-list-md task-list-hover infinite-container xt-task-list">
+                {% for item in datas %}
+                    <li class="task-item bg-gray-lighter js-task-chapter infinite-item">
+                        <i class="es-icon es-icon-menu left-menu"></i>
+                        <a href="javascript:" class="title gray-dark">{{ item.class.name }}</a>
+                        <i class="right-menu es-icon es-icon-remove js-remove-icon"></i>
+                    </li>
+                    {% for v in item.vs %}
+                        <li id="357" class="task-item task-content mouse-control infinite-item">
+                            <i class="es-icon es-icon-iccheckcircleblack24px color-primary left-menu">
+                            </i>
+                            {% if v.expiry_time > nowtime %}
+                                {% if isBuy %}
+                                    {% if v.is_replay %}
+                                        <a class="title" href="{{ v.get_introduce_url }}">
+                                            {{ v.name }}
+                                        </a>
+                                        <span class="right-menu color-gray">观看回放
+                                            <i class=" es-icon es-icon-videocam" data-toggle="tooltip"
+                                               data-placement="top" title=""
+                                               data-original-title="{{ v.tips }}" data-container="body">
+                                            </i>
+                                        </span>
+                                    {% else %}
+                                        {% if v.is_liveing %}
+                                            <a class="title" href="{{ v.get_introduce_url }}">
+                                                {{ v.name }}
+                                            </a>
+                                            <span class="right-menu color-gray">
+                                                观看直播
+                                                <i class=" es-icon es-icon-videocam" data-toggle="tooltip"
+                                                   data-placement="top" title=""
+                                                   data-original-title="{{ v.tips }}" data-container="body">
+                                                </i>
+                                            </span>
+                                        {% else %}
+                                            <a class="title" href="javascript:;">
+                                                {{ v.name }}
+                                            </a>
+                                            <span class="right-menu color-gray">
+                                                直播未开始
+                                                <i class=" es-icon es-icon-videocam" data-toggle="tooltip"
+                                                   data-placement="top" title=""
+                                                   data-original-title="{{ v.tips }}" data-container="body">
+                                                </i>
+                                            </span>
+                                        {% endif %}
+                                    {% endif %}
+                                {% else %}
+                                    <a class="title" href="javascript:;">
+                                        {{ v.name }}
+                                    </a>
+                                    <span class="right-menu color-gray">购买后观看
+                                            <i class=" es-icon es-icon-videocam" data-toggle="tooltip"
+                                               data-placement="top" title=""
+                                               data-original-title="{{ v.tips }}" data-container="body">
+                                            </i>
+                                        </span>
+                                {% endif %}
+
+                            {% else %}
+                                <a class="title color-gray">
+                                    {{ v.name }}
+                                </a>
+                                <span class="right-menu color-gray">回放已过期
+                                            <i class=" es-icon es-icon-videocam" data-toggle="tooltip"
+                                               data-placement="top" title=""
+                                               data-original-title="{{ v.tips }}" data-container="body">
+                                            </i>
+                                        </span>
+                            {% endif %}
+                            <span class="right-menu mouse-enter">
+                                        </span>
+                        </li>
+                    {% endfor %}
+
+                    {% for j in item.js %}
+                        <li id="360" class="task-item task-content mouse-control infinite-item">
+                            <i class="es-icon es-icon-iccheckcircleblack24px color-primary left-menu">
+                            </i>
+                            <a class="title" href="{{ j.get_absolute_url }}">
+                                {{ j.name }}
+                            </a>
+                            <span class="right-menu color-gray">
+                                            <i class=" es-icon es-icon-zuoye" data-toggle="tooltip" data-placement="top"
+                                               title=""
+                                               data-original-title="{{ j.tips }}" data-container="body">
+                                            </i>
+                                        </span>
+                            <span class="right-menu mouse-enter">
+                                        </span>
+                        </li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block nav_tabs_class %}
+    var v = document.getElementById("tasks");
+    v.classList.add("active");
+{% endblock %}

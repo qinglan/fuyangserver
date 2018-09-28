@@ -1,0 +1,255 @@
+{% extends 'study/base.html' %}
+
+{% load staticfiles %}
+{% block main_titlefile %}
+    <style>
+        .itemDiv {
+
+            background-repeat: repeat;
+            background-image: url("{% static "study/image/title_bg.png"%}?version=2");
+        }
+    </style>
+{% endblock %}
+{% block title %}扶阳医学{% endblock %}
+
+
+{% block bodycontent %}
+
+
+    <div class="es-wrap ">
+
+
+        <header class="es-header navbar itemDiv">
+
+            <div class="navbar-header">
+
+                <div class="visible-xs  navbar-mobile">
+
+                    <a href="javascript:;" class="navbar-more js-navbar-more">
+                        <i class="es-icon es-icon-menu"></i>
+                    </a>
+                    <div class="html-mask"></div>
+                    <div class="nav-mobile">
+
+
+                        <ul class="nav navbar-nav">
+
+                            <!--<li class="">
+                                <a href="/" target="_blank">首页 </a>
+                            </li>-->
+                            <li class="nav-hover">
+                                <a href="/" data-toggle="dropdown">课程
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    {% for item in main_vcs %}
+                                        <li>
+                                            <a href="{{ item.get_absolute_url }}" target="_blank">{{ item.name }}</a>
+                                        </li>
+                                    {% endfor %}
+                                    <li>
+                                        <a href="{% url 'studyfuyang' %}" target="_blank">零起步学扶阳</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'videolecture' %}" target="_blank">讲座视频</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url "picture_text_column" 1 %}" target="_blank">医案精讲</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-hover">
+                                <a href="/" data-toggle="dropdown">指南
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+
+                                    <li>
+                                        <a href="javascript:;" target="_blank">听课指南</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" target="_blank">常见问题解答</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" target="_blank">提交作业&下载资料指南</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-hover">
+                                <a href="/" target="_blank" data-toggle="dropdown">关于我们
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="https://baike.baidu.com/item/%E6%89%B6%E9%98%B3%E5%8C%BB%E5%AD%A6%E4%BC%A0%E6%89%BF%E5%9F%BA%E5%9C%B0/20601127">传承基地</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://baike.baidu.com/item/%E6%89%B6%E9%98%B3%E6%B4%BE/8505232?fr=aladdin">扶阳医学</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;">联系我们</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="/" class="navbar-brand">
+                    <img src="{{ main_info.image.url }}">
+                </a>
+            </div>
+            <nav class="collapse navbar-collapse">
+                <ul class="nav navbar-nav clearfix hidden-xs " id="nav">
+
+                    <!--<li class="">
+                        <a href="/" target="_blank">首页</a>
+                    </li>-->
+                    <li class="nav-hover">
+                        <a href="/" data-toggle="dropdown">课程
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            {% for item in main_vcs %}
+                                <li>
+                                    <a href="{{ item.get_absolute_url }}" target="_blank">{{ item.name }}</a>
+                                </li>
+                            {% endfor %}
+                            <li>
+                                <a href="{% url 'studyfuyang' %}" target="_blank">零起步学扶阳</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'videolecture' %}" target="_blank">讲座视频</a>
+                            </li>
+                            <li>
+                                <a href="{% url "picture_text_column" 1 %}" target="_blank">医案精讲</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-hover">
+                        <a href="/" data-toggle="dropdown">指南
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li>
+                                <a href="javascript:;" target="_blank">听课指南</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" target="_blank">常见问题解答</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" target="_blank">提交作业&下载资料指南</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-hover">
+                        <a href="/" target="_blank" data-toggle="dropdown">关于我们
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="https://baike.baidu.com/item/%E6%89%B6%E9%98%B3%E5%8C%BB%E5%AD%A6%E4%BC%A0%E6%89%BF%E5%9F%BA%E5%9C%B0/20601127">传承基地</a>
+                            </li>
+                            <li>
+                                <a href="https://baike.baidu.com/item/%E6%89%B6%E9%98%B3%E6%B4%BE/8505232?fr=aladdin">扶阳医学</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">联系我们</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="navbar-user  left ">
+                    {% if request.user.is_authenticated %}
+                        <ul class="nav user-nav">
+                            <li class="user-avatar-li nav-hover">
+                                <a href="javascript:;" class="dropdown-toggle">
+                                    <img class="avatar-xs" src="{{ user_info.headimgurl }}">
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li role="presentation" class="dropdown-header">{{ user_info.nickname }}</li>
+                                    <li>
+                                        <a href="{% url 'userinfo_center' %}">
+                                            <i class="es-icon es-icon-setting"></i>个人设置</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="{% url 'userinfo_orders' %}">
+                                            <i class="es-icon es-icon-accountwallet"></i>账户中心</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'userinfo_collection' %}">
+                                            <i class="es-icon es-icon-web"></i>我的收藏</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
+                        </ul>
+                    {% else %}
+                        <ul class="nav user-nav">
+                            <li class="user-avatar-li nav-hover visible-xs">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img class="avatar-xs" src="{% static "xuantong/image/avatar.png" %}">
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li class="user-nav-li-login">
+                                        <a href="/">
+                                            <i class="es-icon es-icon-denglu"></i>登录1
+                                        </a>
+                                    </li>
+                                    <li class="user-nav-li-register">
+                                        <a href="/">
+                                            <i class="es-icon es-icon-zhuce"></i>注册
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="hidden-xs">
+                                <a href="/">登录1</a>
+                            </li>
+                            <li class="hidden-xs">
+                                <a href="/">注册</a>
+                            </li>
+                        </ul>
+                    {% endif %}
+
+                </div>
+            </nav>
+        </header>
+
+        {% block content %}
+            <div>扶阳中医真的好</div>
+        {% endblock %}
+
+
+
+        <footer class="es-footer">
+            <div class="copyright text-sm">
+                <div class="container">
+                    Powered by
+                    <a href="/" target="_blank">扶阳医学</a>
+                    <script src="{% static "xuantong/js/entrance.js" %}" class="zhiCustomBtn" id="zhichiScript"
+                            data-args="属性名1=属性值1&amp;属性名2=属性值2"></script>
+                    <div class="mts">
+                        <a href="http://www.miibeian.gov.cn/" target="_blank">
+                            京ICP备17020743号
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+    </div>
+
+
+
+
+    <div id="login-modal" class="modal" data-url="/login/ajax"></div>
+    <div id="modal" class="modal"></div>
+    <div id="attachment-modal" class="modal"></div>
+
+{% endblock %}

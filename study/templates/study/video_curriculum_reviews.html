@@ -1,0 +1,118 @@
+{% extends 'study/video_curriculum.html' %}
+
+{% load staticfiles %}
+{% load filters %}
+
+{% block title %}{{ vc.name }}{% endblock %}
+
+{% block container %}
+
+
+
+    <div class="">
+        <div class="piece-header">评论</div>
+        <div class="piece-body p-lg clearfix">
+
+            <form id="review-form" method="post" action="{% url 'video_curriculum_reviews_curriculum' vc.pk %}" novalidate="novalidate">
+                {% csrf_token %}
+              <div class="form-group controls">
+                  请打分： <span data-rating="0" data-img-path="/static/xuantong/image/" class="rating-btn"></span>
+                  <input type="hidden" name="rating" value="0">
+                </div>
+
+              <div class="form-group controls">
+                <textarea class="form-control" rows="8" data-display="评价详细内容" name="content"></textarea>
+              </div>
+
+                <div class="form-group clearfix">
+                    <button type="button" class="btn btn-primary pull-right" onclick='submitFormData();'>提交
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+            {% for vcc in vccs %}
+                <div class="js-reviews">
+              <div class="media media-evaluate">
+                <div class="media-left">
+                  <a class="avatar-link-small js-user-card" href="javascript:;" data-card-url="/user/1884/card/show" data-user-id="1884">
+                    <img class="avatar-small" src="{{ vcc.author.headimgurl }}">
+
+                  </a>
+
+                </div>
+                <div class="media-body thread-post">
+                  <div class="title">
+                    <a class="link-dark " href="javascript:;">{{ vcc.author.nickname }}</a>
+
+                    &nbsp;&nbsp; {{ vcc.register_date|date:"Y-m-d" }}
+                  </div>
+                  <div class="score">
+
+
+                        {% for i in vcc.score|get_range %}
+                            <i class="es-icon es-icon-star color-warning"></i>
+                        {% endfor %}
+
+
+
+                  </div>
+                  <div class="content">
+
+                    <div class="full-content">{{ vcc.message|linebreaksbr }}
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block scriptfile %}
+    <script src="{% static "xuantong/js/jquery-raty.js"%}?version=1"></script>
+    <script src="{% static "xuantong/js/jquery-validation.js"%}?version=1"></script>
+    <script src="{% static "xuantong/js/index(7).js" %}?version=1"></script>
+    <script type="text/javascript">
+
+        //拿到form
+        var form = document.getElementById("review-form")
+
+        function submitFormData() {
+            if (document.getElementsByName("rating")[0].value == 0){
+                alert("请打分")
+                return
+            }
+            if (document.getElementsByName("content")[0].value == ""){
+                alert("评论不能为空")
+                return
+            }
+
+            form.submit();
+
+        }
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();   // 取消按键的原始提交行为
+            submitFormData();         //启动监听提交按钮
+        });
+
+    </script>
+
+{% endblock %}
+
+
+{% block nav_tabs_class %}
+    var v = document.getElementById("reviews");
+    v.classList.add("active");
+{% endblock %}

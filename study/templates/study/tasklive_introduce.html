@@ -1,0 +1,503 @@
+{% extends 'study/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}{{ liveinfo.name }}{% endblock %}
+
+
+{% block titlefile %}
+
+    <link href="{% static "xuantong/css/global.css" %}?version=6" rel="stylesheet">
+    <link href="{% static "xuantong/css/live_black.css" %}?version=5" rel="stylesheet">
+
+    <script src="//imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.2.js" charset="utf-8"></script>
+    <link href="http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css" rel="stylesheet">
+    <script src="//imgcache.qq.com/open/qcloud/video/tcplayer/ie8/videojs-ie8.js"></script>
+
+    <script src="http://imgcache.qq.com/open/qcloud/video/tcplayer/lib/hls.min.0.8.8.js"></script>
+
+    <script src="http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js"></script>
+
+    <script type="text/javascript">
+        function callByChild() {
+            return player.currentTime()
+        }
+    </script>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        .tcplayer {
+            margin: 0 auto;
+        }
+
+        /* 通过 css 设置播放器尺寸 这时<video>中的宽高属性将被覆盖*/
+        .player-size {
+            width: 2560px;
+            height: 1440px;
+        }
+
+        @media screen and (max-width: 2560px) {
+            .player-size {
+                width: 100%;
+                height: 1170px;
+            }
+        }
+
+        @media screen and (max-width: 1920px) {
+            .player-size {
+                width: 100%;
+                height: 720px;
+            }
+        }
+
+        @media screen and (max-width: 1280px) {
+            .player-size {
+                width: 100%;
+                height: 540px;
+            }
+        }
+
+        @media screen and (max-width: 640px) {
+            .player-size {
+                width: 100%;
+                height: 270px;
+            }
+        }
+
+        .iframe_size {
+
+            width: 100%;
+            height: 800px;
+            border: 0;
+        }
+
+        .footer {
+            position: fixed;
+            left: 0px;
+            bottom: 0px;
+            width: 100%;
+            height: 34px;
+            z-index: 9999;
+        }
+
+        .pull-center {
+            width: 100%;
+            height: 100%;
+        }
+
+        .form-control1 {
+            display: block;
+            width: 100%;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #919191;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        }
+
+    </style>
+
+
+{% endblock %}
+
+
+{% block bodycode %} onresize="resize()" onload="load()"{% endblock %}
+
+
+{% block bodycontent %}
+    {% if liveinfo.is_replay %}
+        <video id="player-container-id" class="player-size" playsinline webkit-playsinline>
+        </video>
+    {% else %}
+
+        <div id="id_test_video" class="player-size"></div>
+        </div>
+    {% endif %}
+
+    <div class="dashboard-body">
+
+        <div class="tabs border-box">
+            <ul class="display-box ">
+                <li id="summary" class="flex ondoc on">
+                    <a href="javascript:to_introduce();">
+                        <span>文档</span>
+                    </a>
+                </li>
+                <li id="material" class="flex">
+                    <a href="javascript:to_material();">
+                        <span>资料</span>
+                    </a>
+                </li>
+                <li id="reviews" class="flex">
+                    <a href="javascript:to_reviews();">
+                        <span>讨论区</span>
+                    </a>
+                </li>
+                <!--<li id="ask" class="flex">
+                    <a href="javascript:to_ask();">
+                        <span>问答</span>
+                    </a>
+                </li>-->
+
+            </ul>
+        </div>
+        <iframe id="iframe_introduce" class="task-content-iframe iframe_size"
+                src="{{ liveinfo.get_iframe_introduce_url }}"
+                allowfullscreen="" webkitallowfullscreen="">
+        </iframe>
+        <iframe id="iframe_material" style="display:none;" class="task-content-iframe iframe_size"
+                src="{{ liveinfo.get_iframe_material_url }}"
+                allowfullscreen="" webkitallowfullscreen="">
+        </iframe>
+
+        <iframe id="iframe_reviews" style="display:none;" class="task-content-iframe iframe_size"
+                src="{{ liveinfo.get_iframe_reviews_url }}"
+                allowfullscreen="" webkitallowfullscreen="">
+        </iframe>
+
+        <!--<iframe id="iframe_ask" style="display:none;" class="task-content-iframe iframe_size"
+                src="{{ liveinfo.get_iframe_ask_url }}"
+                allowfullscreen="" webkitallowfullscreen="">
+        </iframe>-->
+
+
+    </div>
+
+    <!--<div class="container" id="id_section">
+        <div class="row">
+            <div class="col-lg-9 col-md-8 course-detail-content">
+
+                <section class="es-section">
+                    <div class="nav-btn-tab">
+
+                        <ul class="nav nav-tabs " role="tablist">
+                            <li role="presentation" id="summary" class="active">
+                                <a href="javascript:to_introduce();">
+                                    章节
+                                </a>
+                            </li>
+                            <li role="presentation" id="reviews" class="">
+                                <a href="javascript:to_reviews();">
+                                    讨论
+                                </a>
+                            </li>
+                            <li role="presentation" id="ask" class="">
+                                <a href="javascript:to_ask();">
+                                    问答
+
+                                </a>
+                            </li>
+                            <li role="presentation" id="material" class="">
+                                <a href="javascript:to_material();">
+                                    资料
+
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <iframe id="iframe_introduce" src="{{ liveinfo.get_iframe_introduce_url }}" width="800" height="800"
+                            scrolling="yes" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"
+                            allowtransparency="yes">
+                        <p>Your browser does not support iframes.</p>
+                    </iframe>
+                    <iframe id="iframe_reviews" style="display:none;" src="{{ liveinfo.get_iframe_reviews_url }}"
+                            width="800" height="800"
+                            scrolling="yes" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"
+                            allowtransparency="yes">
+                        <p>Your browser does not support iframes.</p>
+                    </iframe>
+                    <iframe id="iframe_ask" style="display:none;" src="{{ liveinfo.get_iframe_ask_url }}" width="800"
+                            height="800"
+                            scrolling="yes" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"
+                            allowtransparency="yes">
+                        <p>Your browser does not support iframes.</p>
+                    </iframe>
+                    <iframe id="iframe_material" style="display:none;" src="{{ liveinfo.get_iframe_material_url }}" width="800"
+                            height="800"
+                            scrolling="yes" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"
+                            allowtransparency="yes">
+                        <p>Your browser does not support iframes.</p>
+                    </iframe>
+
+                </section>
+
+
+            </div>
+
+            <div class="col-lg-3 col-md-4 course-sidebar">
+
+            </div>
+
+        </div>
+    </div>-->
+
+
+
+    <div id="footer_input" class="footer" style="display: none">
+
+        <form id="chatForm" class="footer" method="POST"
+              action="{{ liveinfo.get_iframe_reviews_post_url }}">{% csrf_token %}
+            <div style="height:100%;width:2%;float:left;"></div>
+            <div id="menu" style="height:100%;width:78%;float:left;">
+                <textarea class="form-control1" name="content" data-display="内容 "></textarea>
+            </div>
+            <div style="height:100%;width:3%;float:left;"></div>
+            <div style="height:100%;width:15%;float:left;">
+                <input type="hidden" name="post_type" value="send_chat"/>
+                <input type="submit" class="btn btn-primary pull-center " value="发送"/>
+            </div>
+            <div style="height:100%;width:2%;float:left;"></div>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block scriptfile %}
+    <script>
+        var isLastPortrait = true;
+        var maxPheight = 0;
+        var maxLheight = 0;
+
+        $("#chatForm").submit(function () {
+            //ajax 提交表单
+            $.post("{{ liveinfo.get_iframe_reviews_post_url }}",
+                $('#chatForm').serialize(),
+                function (data) {
+                    $(".form-control1").val("");  //消息发送成功后清空内容框
+                });
+            return false;       //阻止表单提交
+        });
+        {% if liveinfo.is_replay %}
+            var player = TCPlayer("player-container-id", { // player-container-id 为播放器容器ID，必须与html中一致
+                fileID: "{{ liveinfo.play_id }}", // 请传入需要播放的视频filID 必须
+                appID: "{{ liveinfo.play_app_id }}", // 请传入点播账号的appID 必须
+                autoplay: true //是否自动播放
+
+                //其他参数请在开发文档中查看
+            });
+        {% else %}
+            var player = new TcPlayer('id_test_video', {
+                "m3u8": "http://{{ liveinfo.live_id }}.liveplay.myqcloud.com/live/{{ liveinfo.live_id }}_{{ liveinfo.live_key }}.m3u8",
+
+                "autoplay": true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
+
+
+            });
+        {% endif %}
+        var introduce = document.getElementById("iframe_introduce");
+        var reviews = document.getElementById("iframe_reviews");
+        //var ask = document.getElementById("iframe_ask");
+        var material = document.getElementById("iframe_material");
+
+        var t_summary = document.getElementById("summary");
+        var t_reviews = document.getElementById("reviews");
+        //var t_ask = document.getElementById("ask");
+        var t_material = document.getElementById("material");
+
+
+        var footer_input = document.getElementById("footer_input");
+
+        function changeFrameHeight() {
+
+        }
+
+
+        function isFullscreenEnabled() {
+
+            return document.fullscreenElement ||
+                document.msFullscreenElement ||
+                document.mozFullScreenElement ||
+                document.webkitFullscreenElement || false;
+        }
+
+        function isMobile() {
+            if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        function refreshPlayer() {
+            {% if liveinfo.is_replay %}
+            {% else %}
+                player.destroy();
+                player = new TcPlayer('id_test_video', {
+                    "m3u8": "http://{{ liveinfo.live_id }}.liveplay.myqcloud.com/live/{{ liveinfo.live_id }}_{{ liveinfo.live_key }}.m3u8",
+
+                    "autoplay": true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
+
+
+                });
+            {% endif %}
+        }
+
+        function resize() {
+
+            goPAGE();
+            if (isMobile()) {
+                let isPortrait = document.documentElement.offsetHeight > document.documentElement.offsetWidth;
+                //if (isLastPortrait != isPortrait) {
+                    isLastPortrait = isPortrait;
+                    if(!isLastPortrait){
+                        if(window.screen.availWidth !=document.documentElement.offsetHeight &&
+                        window.screen.availHeight !=document.documentElement.offsetHeight){
+                            refreshPlayer();
+
+                        }
+                    }else{
+                        if(maxPheight >= document.documentElement.offsetHeight){
+                            refreshPlayer();
+                        }
+                    }
+
+
+
+
+                //}
+
+            } else {
+                if (!isFullscreenEnabled()) {
+                    refreshPlayer();
+                }
+            }
+
+
+        }
+
+        function load() {
+            changeFrameHeight();
+            var pdiv = document.getElementById("id_test_video");
+
+            isLastPortrait = document.documentElement.offsetHeight > document.documentElement.offsetWidth;
+            if (isLastPortrait){
+
+                maxPheight = document.documentElement.offsetHeight;
+            }else{
+                maxLheight = document.documentElement.offsetHeight;
+            }
+
+
+
+        }
+
+        function do_remove() {
+            t_summary.classList.remove("ondoc");
+            t_summary.classList.remove("on");
+            t_material.classList.remove("ondoc");
+            t_material.classList.remove("on");
+            t_reviews.classList.remove("ondoc");
+            t_reviews.classList.remove("on");
+
+            footer_input.style.display = "none";
+            //t_ask.classList.remove("ondoc");
+            //t_ask.classList.remove("on");
+
+        }
+
+        function to_introduce() {
+            do_remove()
+
+            introduce.style.display = "block";
+            reviews.style.display = "none";
+            //ask.style.display = "none";
+            material.style.display = "none";
+
+            t_summary.classList.add("ondoc");
+            t_summary.classList.add("on");
+
+
+        }
+
+        function to_reviews() {
+            do_remove()
+
+            introduce.style.display = "none";
+            reviews.style.display = "block";
+            //ask.style.display = "none";
+            material.style.display = "none";
+
+            t_reviews.classList.add("ondoc");
+            t_reviews.classList.add("on");
+
+            {% if liveinfo.speaking %}
+                {% if liveinfo.is_replay %}
+                {% else %}
+                    footer_input.style.display = "block";
+                {% endif %}
+
+            {% endif %}
+        }
+
+        function to_ask() {
+
+
+            do_remove()
+
+            introduce.style.display = "none";
+            reviews.style.display = "none";
+            //ask.style.display = "block";
+            material.style.display = "none";
+
+
+            //t_ask.classList.add("ondoc");
+            //t_ask.classList.add("on");
+        }
+
+        function to_material() {
+            do_remove()
+
+            introduce.style.display = "none";
+            reviews.style.display = "none";
+            //ask.style.display = "none";
+            material.style.display = "block";
+
+            t_material.classList.add("ondoc");
+            t_material.classList.add("on");
+        }
+
+        function goPAGE() {
+            if (document.documentElement.offsetHeight > document.documentElement.offsetWidth) {
+                /*window.location.href="你的手机版地址";*/
+                s = "" + (document.documentElement.offsetHeight - 270 - 38) + "px"
+                introduce.style.height = s
+                reviews.style.height = s
+                //ask.style.height = s
+                material.style.height = s
+            }
+            else {
+                s = "800px"
+                introduce.style.height = s
+                reviews.style.height = s
+                //ask.style.height = s
+                material.style.height = s
+            }
+        }
+
+        function updateOrientation() {
+            //refreshPlayer();
+        }
+
+
+        //window.addEventListener('orientationchange', updateOrientation, false);
+
+
+        goPAGE();
+
+    </script>
+
+{% endblock %}

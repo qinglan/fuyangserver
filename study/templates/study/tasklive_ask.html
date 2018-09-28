@@ -1,0 +1,126 @@
+{% extends 'study/main_base.html' %} 
+
+{% load staticfiles %} 
+
+{% block titlefile %}
+    <script src="//imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.2.js" charset="utf-8"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .tcplayer {
+            margin: 0 auto;
+        }
+
+        /* 通过 css 设置播放器尺寸 这时<video>中的宽高属性将被覆盖*/
+        .player-size {
+            width: 1280px;
+            height: 720px;
+        }
+
+        @media screen and (max-width: 1280px) {
+            .player-size {
+                width: 100%;
+                height: 540px;
+            }
+        }
+        @media screen and (max-width: 640px) {
+            .player-size {
+                width: 100%;
+                height: 270px;
+            }
+        }
+
+        /* 设置logo在高分屏的显示样式 */
+        @media only screen and (min-device-pixel-ratio: 2), only screen and (-webkit-min-device-pixel-ratio: 2) {
+            .tcp-logo-img {
+                width: 50%;
+            }
+        }
+    </style>
+{% endblock %}
+{% block title %}疑难杂症{% endblock %} 
+
+
+{% block content %}
+
+<div id="id_test_video"  class="player-size"></div>
+
+</div>
+<div class="nav-btn-tab">
+
+        <ul class="nav nav-tabs " role="tablist">
+            <li role="presentation" id="summary" class="">
+                <a href="{{ liveinfo.get_introduce_url }}">
+                    章节
+                </a>
+            </li>
+            <li role="presentation" id="tasks" class="">
+                <a href="{{ liveinfo.get_reviews_url }}">
+                    讨论
+                </a>
+            </li>
+            <li role="presentation" id="reviews" class="active">
+                <a href="{{ liveinfo.get_ask_url }}">
+                    问答
+
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+
+    <div class="es-piece">
+        <div class="piece-header">课程介绍</div>
+        <div class="piece-body p-lg clearfix">
+            <p>&nbsp;</p>
+            {% autoescape off %}
+                {{ liveinfo.introduce }}
+            {% endautoescape %}
+
+            <p>&nbsp;</p>
+
+            <p>&nbsp;</p>
+
+            <p>&nbsp;</p>
+
+            <p>&nbsp;</p>
+
+            <p>&nbsp;</p>
+
+            <p>&nbsp;</p>
+
+            <p>&nbsp;</p>
+
+            <p>&nbsp;</p>
+
+            <p>&nbsp;</p>
+
+            <p>&nbsp;</p>
+
+            <p>&nbsp;</p>
+
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block scriptfile %}
+    <script>
+        var player = new TcPlayer('id_test_video', {
+            "m3u8": "http://30010.liveplay.myqcloud.com/live/30010_75a45697cc.m3u8",
+            "flv": "http://30010.liveplay.myqcloud.com/live/30010_75a45697cc.flv", //增加了一个flv的播放地址，用于PC平台的播放 请替换成实际可用的播放地址
+            "autoplay": true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
+            "coverpic": "http://www.test.com/myimage.jpg",
+
+        });
+
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,1937 @@
+<!DOCTYPE html>
+<!-- saved from url=(0035)http://www.xuantong.cn/my/course/50 -->
+<html lang="zh_CN" class="">
+<!--<![endif]-->
+{% load staticfiles %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style type="text/css">
+        .ps-container .ps-scrollbar-x-rail {
+            position: absolute;
+            bottom: 3px;
+            height: 8px;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            -o-transition: background-color .2s linear, opacity .2s linear;
+            -webkit-transition: background-color.2s linear, opacity .2s linear;
+            -moz-transition: background-color .2s linear, opacity .2s linear;
+            transition: background-color .2s linear, opacity .2s linear
+        }
+
+        .ps-container:hover .ps-scrollbar-x-rail,
+        .ps-container.hover .ps-scrollbar-x-rail {
+            opacity: .6;
+            filter: alpha(opacity=60)
+        }
+
+        .ps-container .ps-scrollbar-x-rail:hover,
+        .ps-container .ps-scrollbar-x-rail.hover {
+            background-color: #eee;
+            opacity: .9;
+            filter: alpha(opacity=90)
+        }
+
+        .ps-container .ps-scrollbar-x-rail.in-scrolling {
+            opacity: .9;
+            filter: alpha(opacity=90)
+        }
+
+        .ps-container .ps-scrollbar-y-rail {
+            position: absolute;
+            right: 3px;
+            width: 8px;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            -o-transition: background-color .2s linear, opacity .2s linear;
+            -webkit-transition: background-color.2s linear, opacity .2s linear;
+            -moz-transition: background-color .2s linear, opacity .2s linear;
+            transition: background-color .2s linear, opacity .2s linear
+        }
+
+        .ps-container:hover .ps-scrollbar-y-rail,
+        .ps-container.hover .ps-scrollbar-y-rail {
+            opacity: .6;
+            filter: alpha(opacity=60)
+        }
+
+        .ps-container .ps-scrollbar-y-rail:hover,
+        .ps-container .ps-scrollbar-y-rail.hover {
+            background-color: #eee;
+            opacity: .9;
+            filter: alpha(opacity=90)
+        }
+
+        .ps-container .ps-scrollbar-y-rail.in-scrolling {
+            opacity: .9;
+            filter: alpha(opacity=90)
+        }
+
+        .ps-container .ps-scrollbar-x {
+            position: absolute;
+            bottom: 0;
+            height: 8px;
+            background-color: #aaa;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -o-transition: background-color .2s linear;
+            -webkit-transition: background-color.2s linear;
+            -moz-transition: background-color .2s linear;
+            transition: background-color .2s linear
+        }
+
+        .ps-container.ie6 .ps-scrollbar-x {
+            font-size: 0
+        }
+
+        .ps-container .ps-scrollbar-x-rail:hover .ps-scrollbar-x,
+        .ps-container .ps-scrollbar-x-rail.hover .ps-scrollbar-x {
+            background-color: #999
+        }
+
+        .ps-container .ps-scrollbar-y {
+            position: absolute;
+            right: 0;
+            width: 8px;
+            background-color: #aaa;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -o-transition: background-color .2s linear;
+            -webkit-transition: background-color.2s linear;
+            -moz-transition: background-color .2s linear;
+            transition: background-color .2s linear
+        }
+
+        .ps-container.ie6 .ps-scrollbar-y {
+            font-size: 0
+        }
+
+        .ps-container .ps-scrollbar-y-rail:hover .ps-scrollbar-y,
+        .ps-container .ps-scrollbar-y-rail.hover .ps-scrollbar-y {
+            background-color: #999
+        }
+
+        .ps-container.ie .ps-scrollbar-x,
+        .ps-container.ie .ps-scrollbar-y {
+            visibility: hidden
+        }
+
+        .ps-container.ie:hover .ps-scrollbar-x,
+        .ps-container.ie:hover .ps-scrollbar-y,
+        .ps-container.ie.hover .ps-scrollbar-x,
+        .ps-container.ie.hover .ps-scrollbar-y {
+            visibility: visible
+        }
+    </style>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>第二阶丨楷书精进课程 - 暄桐教室 - 写字是一种生活</title>
+    <meta name="keywords" content="
+书法,写字,书法课,书法零基础,美育,临帖,暄桐,暄桐教室,林曦,林糊糊,ask林曦,儿童书法,齐白石,丰子恺,小世界,闹事集,文人">
+    <meta name="description" content="">
+    <meta content="RObOwYFOfVxm5m5vWHY_DHdXuYj6RJ5fmIiY9AVAbSk" name="csrf-token">
+    <meta content="1" name="is-login">
+    <meta content="1" name="is-open">
+
+
+
+    <link rel="icon" href="{% static "xuantong/image/1715440981cd077006.png"%}"
+        type="image/x-icon">
+    <link rel="shortcut icon" href="{% static "xuantong/image/1715440981cd077006.png"%}"
+        type="image/x-icon" media="screen">
+
+    <!--[if lt IE 9]>
+  <script src="//sce4a8b6c0d93v-sb-qn.qiqiuyun.net/static-dist/libs/html5shiv.js?version=8.2.4_19"></script>
+  <script src="//sce4a8b6c0d93v-sb-qn.qiqiuyun.net/static-dist/es5-shim/es5-shim.js?version=8.2.4_19"></script>
+  <script src="//sce4a8b6c0d93v-sb-qn.qiqiuyun.net/static-dist/es5-shim/es5-sham.js?version=8.2.4_19"></script>
+  <![endif]-->
+
+    <link href="{% static "xuantong/css/bootstrap.css"%}" rel="stylesheet">
+    <link href="{% static "xuantong/css/main.css"%}" rel="stylesheet">
+    <link href="{% static "xuantong/css/main-v2.css"%}" rel="stylesheet">
+
+    <link href="{% static "xuantong/css/header-white.css"%}" rel="stylesheet">
+
+
+    <link href="{% static "xuantong/css/main(1).css"%}" rel="stylesheet">
+
+    <script src="{% static "xuantong/js/index.js"%}"></script>
+    <style></style>
+</head>
+
+<body class="es-main-default es-nav-white course-dashboard-page">
+
+    <!--[if lt IE 9]>
+<script src="//sce4a8b6c0d93v-sb-qn.qiqiuyun.net/static-dist/libs/fix-ie.js?version=8.2.4_19"></script>
+<style>
+  .lt-ie9 {
+    overflow: hidden;
+  }
+  .ie-mask {
+    z-index: 999999;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+    background: #000;
+  }
+  .ie-alert-wrap {
+    position: absolute;
+    z-index: 1000000;
+    margin: -200px auto 0;
+    top: 50%;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+  .ie-alert {
+    width: 514px;
+    height: 397px;
+    margin: 0 auto;
+  }
+  .ie-alert__chrome,
+  .ie-alert__firefox {
+    position: absolute;
+    z-index: 1000001;
+    display: block;
+    bottom: 48px;
+    width: 60px;
+    height: 80px;
+  }
+  .ie-alert__chrome {
+    left: 50%;
+    margin-left: -80px;
+  }
+  .ie-alert__firefox {
+    right: 50%;
+    margin-right: -80px;
+  }
+</style>
+<div class="ie-mask"></div>
+<div class="ie-alert-wrap">
+  <div class="ie-alert" style="background:url('//sce4a8b6c0d93v-sb-qn.qiqiuyun.net/static-dist/app/img/browser/browser_update.png?version=8.2.4_19')">
+    <a href="http://www.baidu.com/s?wd=%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8" target="_blank" class="ie-alert__chrome"></a>
+    <a href="http://firefox.com.cn/download/" target="_blank" class="ie-alert__firefox"></a>
+  </div>
+</div>
+
+<![endif]-->
+
+    <div class="es-wrap">
+
+
+        <header class="es-header navbar">
+            <div class="navbar-header">
+                <div class="visible-xs  navbar-mobile">
+                    <a href="javascript:;" class="navbar-more js-navbar-more">
+                        <i class="es-icon es-icon-menu"></i>
+                    </a>
+                    <div class="html-mask"></div>
+                    <div class="nav-mobile">
+                        <form class="navbar-form" action="http://www.xuantong.cn/search" method="get">
+                            <div class="form-group">
+                                <input class="form-control" placeholder="搜索" name="q">
+                                <button class="button es-icon es-icon-search"></button>
+                            </div>
+                        </form>
+
+                        <ul class="nav navbar-nav">
+
+                            <li class="">
+                                <a href="http://www.xuantong.cn/" target="_blank">首页 </a>
+                            </li>
+                            <li class="nav-hover">
+                                <a href="http://xuantong.cn/course/explore">课程
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="http://xuantong.cn/course/explore" target="_blank">单阶课程</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://xuantong.cn/classroom/explore" target="_blank">全阶课程</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://www.xuantong.cn/page/guidepc2" target="_blank">报名指南</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://www.xuantong.cn/page/guidepc3" target="_blank">听课指南</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://www.xuantong.cn/page/questions1" target="_blank">常见问题解答</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://www.xuantong.cn/page/workPC" target="_blank">提交作业&amp;下载资料指南</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="">
+                                <a href="http://xuantong.cn/open/course/explore" target="_blank">免费视频及讲座 </a>
+                            </li>
+                            <li class="nav-hover">
+                                <a href="https://shlxzh.taobao.com/category-1001045259.htm?spm=a1z10.3-c-s.w5002-15726745217.5.3ccb3530A6SpEZ&amp;search=y&amp;catName=%A1%BE%EA%D1%CD%A9%CE%C4%B7%BF%A1%BF"
+                                    target="_blank">文房商店
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="https://item.taobao.com/item.htm?id=568062350614" target="_blank">购买上课装备——文房文具包</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://shop3432948.youzan.com/v2/tag/1f0xvoo47?reft=1522208649262&amp;spm=f9555232&amp;sf=wx_sm"
+                                            target="_blank">购买暄桐文房</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://www.xuantong.cn/page/protect" target="_blank">文房的养护</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-hover">
+                                <a href="http://xuantong.cn/article" target="_blank">关于我们
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="http://xuantong.cn/article/category/teacher">关于林曦老师</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://xuantong.cn/article/category/classroom">关于暄桐教室</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://xuantong.cn/article/category/classmates">写字的人</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://xuantong.cn/article/category/calligraphy">写字这件事</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="http://www.xuantong.cn/" class="navbar-brand">
+                    <img src="{% static "xuantong/image/17151976bafc671465.png"%}">
+                </a>
+            </div>
+            <nav class="collapse navbar-collapse">
+                <ul class="nav navbar-nav clearfix hidden-xs " id="nav">
+
+                    <li class="">
+                        <a href="http://www.xuantong.cn/" target="_blank">首页 </a>
+                    </li>
+                    <li class="nav-hover">
+                        <a href="http://xuantong.cn/course/explore">课程
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="http://xuantong.cn/course/explore" target="_blank">单阶课程</a>
+                            </li>
+                            <li>
+                                <a href="http://xuantong.cn/classroom/explore" target="_blank">全阶课程</a>
+                            </li>
+                            <li>
+                                <a href="http://www.xuantong.cn/page/guidepc2" target="_blank">报名指南</a>
+                            </li>
+                            <li>
+                                <a href="http://www.xuantong.cn/page/guidepc3" target="_blank">听课指南</a>
+                            </li>
+                            <li>
+                                <a href="http://www.xuantong.cn/page/questions1" target="_blank">常见问题解答</a>
+                            </li>
+                            <li>
+                                <a href="http://www.xuantong.cn/page/workPC" target="_blank">提交作业&amp;下载资料指南</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a href="http://xuantong.cn/open/course/explore" target="_blank">免费视频及讲座 </a>
+                    </li>
+                    <li class="nav-hover">
+                        <a href="https://shlxzh.taobao.com/category-1001045259.htm?spm=a1z10.3-c-s.w5002-15726745217.5.3ccb3530A6SpEZ&amp;search=y&amp;catName=%A1%BE%EA%D1%CD%A9%CE%C4%B7%BF%A1%BF"
+                            target="_blank">文房商店
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="https://item.taobao.com/item.htm?id=568062350614" target="_blank">购买上课装备——文房文具包</a>
+                            </li>
+                            <li>
+                                <a href="https://shop3432948.youzan.com/v2/tag/1f0xvoo47?reft=1522208649262&amp;spm=f9555232&amp;sf=wx_sm"
+                                    target="_blank">购买暄桐文房</a>
+                            </li>
+                            <li>
+                                <a href="http://www.xuantong.cn/page/protect" target="_blank">文房的养护</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-hover">
+                        <a href="http://xuantong.cn/article" target="_blank">关于我们
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="http://xuantong.cn/article/category/teacher">关于林曦老师</a>
+                            </li>
+                            <li>
+                                <a href="http://xuantong.cn/article/category/classroom">关于暄桐教室</a>
+                            </li>
+                            <li>
+                                <a href="http://xuantong.cn/article/category/classmates">写字的人</a>
+                            </li>
+                            <li>
+                                <a href="http://xuantong.cn/article/category/calligraphy">写字这件事</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="navbar-user  left ">
+                    <ul class="nav user-nav">
+                        <li class="user-avatar-li nav-hover">
+                            <a href="javascript:;" class="dropdown-toggle">
+                                <img class="avatar-xs" src="{% static "xuantong/image/083510eb4aa2528767.jpg"%}">
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li role="presentation" class="dropdown-header">Rico</li>
+                                <li>
+                                    <a href="http://www.xuantong.cn/user/7300">
+                                        <i class="es-icon es-icon-person"></i>个人主页</a>
+                                </li>
+                                <li>
+                                    <a href="http://www.xuantong.cn/settings">
+                                        <i class="es-icon es-icon-setting"></i>个人设置</a>
+                                </li>
+                                <li class="hidden-lg user-nav-li-my">
+                                    <a href="http://www.xuantong.cn/my">
+                                        <i class="es-icon es-icon-eventnote"></i>我的学习 </a>
+                                </li>
+                                <li>
+                                    <a href="http://www.xuantong.cn/my/orders">
+                                        <i class="es-icon es-icon-accountwallet"></i>账户中心</a>
+                                </li>
+
+
+                                <li class="hidden-lg">
+                                    <a href="http://www.xuantong.cn/notification">
+                                        <span class="pull-right num">5</span>
+                                        <i class="es-icon es-icon-notificationson"></i>通知</a>
+                                </li>
+                                <li class="hidden-lg">
+                                    <a href="http://www.xuantong.cn/message/">
+                                        <span class="pull-right num"></span>
+                                        <i class="es-icon es-icon-mail"></i>私信</a>
+                                </li>
+                                <li class="user-nav-li-logout">
+                                    <a href="http://www.xuantong.cn/logout">
+                                        <i class="es-icon es-icon-power"></i>退出登录</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="visible-lg">
+                            <a href="http://www.xuantong.cn/my">
+                                我的学习
+                            </a>
+                        </li>
+                        <li class="visible-lg nav-hover">
+                            <a>
+                                <i class="es-icon es-icon-mail"></i>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="http://www.xuantong.cn/message/">
+                                        <span class="pull-right num"></span>
+                                        <i class="es-icon es-icon-mail"></i>私信
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="navbar-form navbar-right hidden-xs hidden-sm" action="http://www.xuantong.cn/search" method="get">
+                        <div class="form-group">
+                            <input class="form-control js-search" value="" name="q" placeholder="搜索">
+                            <button class="button es-icon es-icon-search"></button>
+                        </div>
+                    </form>
+                </div>
+            </nav>
+        </header>
+        <div class="event-report" data-url="/event/dispatch" data-event-name="course.view" data-subject-type="course" data-subject-id="50"
+            data-user-id="7300"></div>
+
+
+        <!-- 3、加入后：任务式学习 -->
+        <div class="container">
+            <ol class="breadcrumb breadcrumb-o">
+                <li>
+                    <a href="http://www.xuantong.cn/">首页</a>
+                </li>
+                <li>
+                    <a href="http://www.xuantong.cn/course/explore/default">默认分类</a>
+                </li>
+                <li>
+                    <a href="http://www.xuantong.cn/course/50">第二阶丨楷书精进课程 </a>
+                </li>
+                <li class="active">楷书精进课程 </li>
+            </ol>
+
+            <div class="es-section course-detail-section clearfix xt-deatil-section">
+                <div class="course-detail-top clearfix">
+                    <span class="tags mrm">
+                    </span>
+                    <span class="course-detail-heading">
+                        楷书精进课程
+                        <span class="es-qrcode top pt5 hidden-xs" data-url="/course/50/qrcode">
+                            <i class="es-icon es-icon-qrcode"></i>
+                            <span class="qrcode-popover">
+                                <img src="http://www.xuantong.cn/my/course/50" alt=""> 扫二维码继续学习二维码时效为半小时
+                            </span>
+                        </span>
+
+                    </span>
+                    <ul class="course-operation hidden-xs hidden-sm clearfix">
+                        <!--非营销页显示-->
+
+                        <!--营销页显示-->
+
+                        <li class="es-share top">
+                            <a class="btn btn-default btn-xs dropdown-toggle" href="http://www.xuantong.cn/my/course/50" data-toggle="dropdown" title="分享">
+                                <i class="es-icon es-icon-share"></i>
+                            </a>
+
+
+                            <div class="dropdown-menu  js-social-share-params" data-title="第二阶丨楷书精进课程" data-summary="" data-message="我正在学习暄桐教室的《第二阶丨楷书精进课程》，享受写字带来的快乐，一起来学习吧！"
+                                data-url="http://www.xuantong.cn/course/50" data-picture="http://sce4a8b6c0d93v-sb-qn.qiqiuyun.net/files/default/2018/07-19/11384885cf62768555.png">
+
+                                <a href="javascript:;" class="js-social-share" data-cmd="weixin" title="分享到微信" data-share="weixin" data-qrcode-url="/common/qrcode?text=http%3A//www.xuantong.cn/course/50">
+                                    <i class="es-icon es-icon-weixin"></i>
+                                </a>
+                                <a href="javascript:;" class="js-social-share" data-cmd="tsina" title="分享到新浪微博" data-share="weibo">
+                                    <i class="es-icon es-icon-weibo"></i>
+                                </a>
+                                <a href="javascript:;" class="js-social-share" data-cmd="qq" title="分享到QQ好友" data-share="qq">
+                                    <i class="es-icon es-icon-qq"></i>
+                                </a>
+                                <a href="javascript:;" class="js-social-share" data-cmd="qzone" title="分享到QQ空间" data-share="qzone">
+                                    <i class="es-icon es-icon-qzone"></i>
+                                </a>
+
+                            </div>
+                        </li>
+
+                        <div class="handle-btn">
+                            <a class="btn btn-common  btn-effective" href="http://www.xuantong.cn/my/course/50#modal" data-toggle="modal" data-url="/apply/invoice?targetId=50&amp;targetType=course">开发票</a>
+                            <div class="refund-box" data-toggle="tooltip" data-placement="top" title="" data-original-title="开课前可退">
+                                <div class="btn-common btn-gray js-timeout-notice">申请退课</div>
+                            </div>
+                        </div>
+
+                        <div class="handle-btn">
+                            <div class="refund-box">
+                            </div>
+                        </div>
+
+
+
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-8 course-detail-content">
+
+
+
+                    <section class="es-section">
+                        <div class="nav-btn-tab">
+
+                            <ul class="nav nav-tabs " role="tablist">
+                                <li role="presentation" id="tasks" class="active">
+                                    <a href="http://www.xuantong.cn/my/course/50">
+                                        目录
+                                    </a>
+                                </li>
+                                <li role="presentation" id="threads" class="">
+                                    <a href="http://www.xuantong.cn/my/course/50/threads">
+                                        话题
+                                        <small>(176)</small>
+                                    </a>
+                                </li>
+                                <li role="presentation" id="material" class="">
+                                    <a href="http://www.xuantong.cn/my/course/50/material">
+                                        资料区
+                                        <small>(66)</small>
+                                    </a>
+                                </li>
+                                <li role="presentation" id="reviews" class="">
+                                    <a href="http://www.xuantong.cn/my/course/50/reviews">
+                                        评价
+                                        <small>(41)</small>
+                                    </a>
+                                </li>
+                                <li role="presentation" id="summary" class="">
+                                    <a href="http://www.xuantong.cn/my/course/50/summary">
+                                        介绍
+                                    </a>
+                                </li>
+                                <li class="highlight" style="left: 0px; width: 92px;"></li>
+                            </ul>
+
+                        </div>
+
+                        <div class="course-detail-content">
+
+
+                            <ul class="task-list task-list-md task-list-hover infinite-container xt-task-list">
+                                <li class="task-item bg-gray-lighter js-task-chapter infinite-item">
+                                    <i class="es-icon es-icon-menu left-menu"></i>
+                                    <a href="javascript:" class="title gray-dark">第1节课: 楷书全貌概览：唐代美学与基本笔法规律</a>
+                                    <i class="right-menu es-icon es-icon-remove js-remove-icon"></i>
+                                </li>
+
+
+                                <li id="357" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-iccheckcircleblack24px color-primary
+                        left-menu"></i>
+
+
+                                    <a class="title color-gray">
+                                        任务1： 【楷书精进直播课第一节】
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+                                        回放已过期
+                                        <i class=" es-icon es-icon-videocam" data-toggle="tooltip" data-placement="top" title="" data-original-title="直播任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+
+                                <li id="360" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-doing color-primary
+                        left-menu"></i>
+
+
+                                    <a class="title" href="http://www.xuantong.cn/course/50/task/360/show">
+                                        任务2： 第01节【写字作业】
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+
+                                        <i class=" es-icon es-icon-zuoye" data-toggle="tooltip" data-placement="top" title="" data-original-title="书法作业任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+
+                                <li id="363" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-doing color-primary
+                        left-menu"></i>
+
+
+                                    <a class="title" href="http://www.xuantong.cn/course/50/task/363/show">
+                                        任务3： 第01节【思考作业】（选做）
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+
+                                        <i class=" es-icon es-icon-zuoye" data-toggle="tooltip" data-placement="top" title="" data-original-title="作业任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+                                <li class="task-item bg-gray-lighter js-task-chapter infinite-item">
+                                    <i class="es-icon es-icon-menu left-menu"></i>
+                                    <a href="javascript:" class="title gray-dark">第2节课: 《颜勤礼碑》练习1：颜真卿-天真雄浑</a>
+                                    <i class="right-menu es-icon es-icon-remove js-remove-icon"></i>
+                                </li>
+
+
+                                <li id="378" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-iccheckcircleblack24px color-primary
+                        left-menu"></i>
+
+
+                                    <a class="title color-gray">
+                                        任务4： 【楷书精进直播课第二节】
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+                                        回放已过期
+                                        <i class=" es-icon es-icon-videocam" data-toggle="tooltip" data-placement="top" title="" data-original-title="直播任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+
+                                <li id="381" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-iccheckcircleblack24px color-primary
+                        left-menu"></i>
+
+
+                                    <a class="title" href="http://www.xuantong.cn/course/50/task/381/show">
+                                        任务5： 第02节【写字作业】
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+
+                                        <i class=" es-icon es-icon-zuoye" data-toggle="tooltip" data-placement="top" title="" data-original-title="书法作业任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+
+                                <li id="384" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-iccheckcircleblack24px color-primary
+                        left-menu"></i>
+
+
+                                    <a class="title" href="http://www.xuantong.cn/course/50/task/384/show">
+                                        任务6： 第02节【思考作业】（选做）
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+
+                                        <i class=" es-icon es-icon-zuoye" data-toggle="tooltip" data-placement="top" title="" data-original-title="作业任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+                                <li class="task-item bg-gray-lighter js-task-chapter infinite-item">
+                                    <i class="es-icon es-icon-menu left-menu"></i>
+                                    <a href="javascript:" class="title gray-dark">第3节课: 《颜勤礼碑》练习2：学习法门-不可省略的双勾练习</a>
+                                    <i class="right-menu es-icon es-icon-remove js-remove-icon"></i>
+                                </li>
+
+
+                                <li id="398" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-iccheckcircleblack24px color-primary
+                        left-menu"></i>
+
+
+                                    <a class="title color-gray">
+                                        任务7： 【楷书精进直播课第三节】
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+                                        回放已过期
+                                        <i class=" es-icon es-icon-videocam" data-toggle="tooltip" data-placement="top" title="" data-original-title="直播任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+
+                                <li id="403" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-iccheckcircleblack24px color-primary
+                        left-menu"></i>
+
+
+                                    <a class="title" href="http://www.xuantong.cn/course/50/task/403/show">
+                                        任务8： 第03节【写字作业】
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+
+                                        <i class=" es-icon es-icon-zuoye" data-toggle="tooltip" data-placement="top" title="" data-original-title="书法作业任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+
+                                <li id="406" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-doing color-primary
+                        left-menu"></i>
+
+
+                                    <a class="title" href="http://www.xuantong.cn/course/50/task/406/show">
+                                        任务9： 第03节【思考作业】（选做）
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+
+                                        <i class=" es-icon es-icon-zuoye" data-toggle="tooltip" data-placement="top" title="" data-original-title="作业任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+                                <li class="task-item bg-gray-lighter js-task-chapter infinite-item">
+                                    <i class="es-icon es-icon-menu left-menu"></i>
+                                    <a href="javascript:" class="title gray-dark">第4节课: 《颜勤礼碑》练习3：学习法门-写好一个字的五步大法</a>
+                                    <i class="right-menu es-icon es-icon-remove js-remove-icon"></i>
+                                </li>
+
+
+                                <li id="412" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-iccheckcircleblack24px color-primary
+                        left-menu"></i>
+
+
+                                    <a class="title color-gray">
+                                        任务10： 【楷书精进直播课第四节】
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+                                        回放已过期
+                                        <i class=" es-icon es-icon-videocam" data-toggle="tooltip" data-placement="top" title="" data-original-title="直播任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+
+                                <li id="417" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-iccheckcircleblack24px color-primary
+                        left-menu"></i>
+
+
+                                    <a class="title" href="http://www.xuantong.cn/course/50/task/417/show">
+                                        任务11： 第04节【写字作业】
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+
+                                        <i class=" es-icon es-icon-zuoye" data-toggle="tooltip" data-placement="top" title="" data-original-title="书法作业任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+                                <li class="task-item bg-gray-lighter js-task-chapter infinite-item">
+                                    <i class="es-icon es-icon-menu left-menu"></i>
+                                    <a href="javascript:" class="title gray-dark">第5节课: 《告身帖》练习1：读书课-先文后墨，书法从读书开始①</a>
+                                    <i class="right-menu es-icon es-icon-remove js-remove-icon"></i>
+                                </li>
+
+
+                                <li id="422" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-iccheckcircleblack24px color-primary
+                        left-menu"></i>
+
+
+                                    <a class="title color-gray">
+                                        任务12： 【楷书精进直播课第五节】
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+                                        回放已过期
+                                        <i class=" es-icon es-icon-videocam" data-toggle="tooltip" data-placement="top" title="" data-original-title="直播任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+
+                                <li id="427" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-iccheckcircleblack24px color-primary
+                        left-menu"></i>
+
+
+                                    <a class="title" href="http://www.xuantong.cn/course/50/task/427/show">
+                                        任务13： 第05节【写字作业】
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+
+                                        <i class=" es-icon es-icon-zuoye" data-toggle="tooltip" data-placement="top" title="" data-original-title="书法作业任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+
+                                <li id="430" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-doing color-primary
+                        left-menu"></i>
+
+
+                                    <a class="title" href="http://www.xuantong.cn/course/50/task/430/show">
+                                        任务14： 第05节【思考作业】（选做）
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+
+                                        <i class=" es-icon es-icon-zuoye" data-toggle="tooltip" data-placement="top" title="" data-original-title="作业任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+                                <li class="task-item bg-gray-lighter js-task-chapter infinite-item">
+                                    <i class="es-icon es-icon-menu left-menu"></i>
+                                    <a href="javascript:" class="title gray-dark">第6节课: 《告身帖》练习2：读书课-先文后墨，书法从读书开始②</a>
+                                    <i class="right-menu es-icon es-icon-remove js-remove-icon"></i>
+                                </li>
+
+
+                                <li id="436" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-iccheckcircleblack24px color-primary
+                        left-menu"></i>
+
+
+                                    <a class="title color-gray">
+                                        任务15： 【楷书精进直播课第六节】
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+                                        回放已过期
+                                        <i class=" es-icon es-icon-videocam" data-toggle="tooltip" data-placement="top" title="" data-original-title="直播任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+
+                                <li id="440" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-undone-check color-gray
+                        left-menu"></i>
+
+
+                                    <a class="title" href="http://www.xuantong.cn/course/50/task/440/show">
+                                        任务16： 第06节【写字作业】
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+
+                                        <i class=" es-icon es-icon-zuoye" data-toggle="tooltip" data-placement="top" title="" data-original-title="书法作业任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+
+                                <li id="443" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-undone-check color-gray
+                        left-menu"></i>
+
+
+                                    <a class="title" href="http://www.xuantong.cn/course/50/task/443/show">
+                                        任务17： 第06节【思考作业】（选做）
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+
+                                        <i class=" es-icon es-icon-zuoye" data-toggle="tooltip" data-placement="top" title="" data-original-title="作业任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+                                <li class="task-item bg-gray-lighter js-task-chapter infinite-item">
+                                    <i class="es-icon es-icon-menu left-menu"></i>
+                                    <a href="javascript:" class="title gray-dark">第7节课: 《九成宫》练习1：欧阳询-字的骨头</a>
+                                    <i class="right-menu es-icon es-icon-remove js-remove-icon"></i>
+                                </li>
+
+
+                                <li id="447" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-iccheckcircleblack24px color-primary
+                        left-menu"></i>
+
+
+                                    <a class="title color-gray">
+                                        任务18： 【楷书精进直播课第七节】
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+                                        回放已过期
+                                        <i class=" es-icon es-icon-videocam" data-toggle="tooltip" data-placement="top" title="" data-original-title="直播任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+
+                                <li id="453" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-undone-check color-gray
+                        left-menu"></i>
+
+
+                                    <a class="title" href="http://www.xuantong.cn/course/50/task/453/show">
+                                        任务19： 第07节【写字作业】
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+
+                                        <i class=" es-icon es-icon-zuoye" data-toggle="tooltip" data-placement="top" title="" data-original-title="书法作业任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+
+                                <li id="456" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-undone-check color-gray
+                        left-menu"></i>
+
+
+                                    <a class="title" href="http://www.xuantong.cn/course/50/task/456/show">
+                                        任务20： 第07节【思考作业】（选做）
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+
+                                        <i class=" es-icon es-icon-zuoye" data-toggle="tooltip" data-placement="top" title="" data-original-title="作业任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+                                <li class="task-item bg-gray-lighter js-task-chapter infinite-item">
+                                    <i class="es-icon es-icon-menu left-menu"></i>
+                                    <a href="javascript:" class="title gray-dark">第8节课: 《九成宫》练习2：笔记也有大学问，怎样有效地做笔记？①</a>
+                                    <i class="right-menu es-icon es-icon-remove js-remove-icon"></i>
+                                </li>
+
+
+                                <li id="476" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-iccheckcircleblack24px color-primary
+                        left-menu"></i>
+
+
+                                    <a class="title color-gray">
+                                        任务21： 【楷书精进直播课第八节】
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+                                        回放已过期
+                                        <i class=" es-icon es-icon-videocam" data-toggle="tooltip" data-placement="top" title="" data-original-title="直播任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+
+                                <li id="480" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-doing color-primary
+                        left-menu"></i>
+
+
+                                    <a class="title" href="http://www.xuantong.cn/course/50/task/480/show">
+                                        任务22： 第08节【写字作业】
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+
+                                        <i class=" es-icon es-icon-zuoye" data-toggle="tooltip" data-placement="top" title="" data-original-title="书法作业任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+
+                                <li id="483" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-undone-check color-gray
+                        left-menu"></i>
+
+
+                                    <a class="title" href="http://www.xuantong.cn/course/50/task/483/show">
+                                        任务23： 第08节【思考作业】（选做）
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+
+                                        <i class=" es-icon es-icon-zuoye" data-toggle="tooltip" data-placement="top" title="" data-original-title="作业任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+
+                                <li id="486" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-undone-check color-gray
+                        left-menu"></i>
+
+
+                                    <a class="title" href="http://www.xuantong.cn/course/50/task/486/show">
+                                        任务24： 第08节【读书作业】（选做）
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+
+                                        <i class=" es-icon es-icon-zuoye" data-toggle="tooltip" data-placement="top" title="" data-original-title="作业任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+                                <li class="task-item bg-gray-lighter js-task-chapter infinite-item">
+                                    <i class="es-icon es-icon-menu left-menu"></i>
+                                    <a href="javascript:" class="title gray-dark">第9节课: 《九成宫》练习3：笔记也有大学问，怎样有效地做笔记？②</a>
+                                    <i class="right-menu es-icon es-icon-remove js-remove-icon"></i>
+                                </li>
+
+
+                                <li id="491" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-iccheckcircleblack24px color-primary
+                        left-menu"></i>
+
+
+                                    <a class="title color-gray">
+                                        任务25： 【楷书精进直播课第九节】
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+                                        回放已过期
+                                        <i class=" es-icon es-icon-videocam" data-toggle="tooltip" data-placement="top" title="" data-original-title="直播任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+
+                                <li id="494" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-doing color-primary
+                        left-menu"></i>
+
+
+                                    <a class="title" href="http://www.xuantong.cn/course/50/task/494/show">
+                                        任务26： 第09节【写字作业】
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+
+                                        <i class=" es-icon es-icon-zuoye" data-toggle="tooltip" data-placement="top" title="" data-original-title="书法作业任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+
+                                <li id="502" class="task-item task-content mouse-control infinite-item">
+                                    <i class="es-icon
+                        es-icon-undone-check color-gray
+                        left-menu"></i>
+
+
+                                    <a class="title" href="http://www.xuantong.cn/course/50/task/502/show">
+                                        任务27： 第09节【读书作业】（选做）
+                                    </a>
+
+
+                                    <span class="right-menu color-gray">
+
+
+                                        <i class=" es-icon es-icon-zuoye" data-toggle="tooltip" data-placement="top" title="" data-original-title="作业任务" data-container="body"></i>
+                                    </span>
+                                    <span class="right-menu mouse-enter">
+                                    </span>
+                                </li>
+
+
+                                <li class="task-item bg-gray-lighter js-task-chapter infinite-item">
+                                    <i class="es-icon es-icon-menu left-menu"></i>
+                                    <a href="javascript:" class="title gray-dark">第10节课: 《九成宫》练习4：作文课-如何写下生活的随笔①</a>
+                                    <i class="right-menu es-icon es-icon-remove js-remove-icon"></i>
+                                </li>
+
+                                <li class="task-item bg-gray-lighter js-task-chapter infinite-item">
+                                    <i class="es-icon es-icon-menu left-menu"></i>
+                                    <a href="javascript:" class="title gray-dark">第11节课: 《雁塔圣教序》练习1：褚遂良-万千变化中的动态与稳定</a>
+                                    <i class="right-menu es-icon es-icon-remove js-remove-icon"></i>
+                                </li>
+
+                                <li class="task-item bg-gray-lighter js-task-chapter infinite-item">
+                                    <i class="es-icon es-icon-menu left-menu"></i>
+                                    <a href="javascript:" class="title gray-dark">第12节课: 《雁塔圣教序》练习2：作文课-如何写下生活的随笔②</a>
+                                    <i class="right-menu es-icon es-icon-remove js-remove-icon"></i>
+                                </li>
+
+                                <li class="task-item bg-gray-lighter js-task-chapter infinite-item">
+                                    <i class="es-icon es-icon-menu left-menu"></i>
+                                    <a href="javascript:" class="title gray-dark">第13节课: 《雁塔圣教序》练习3：学习法门-如何完成一次成功演讲？</a>
+                                    <i class="right-menu es-icon es-icon-remove js-remove-icon"></i>
+                                </li>
+
+                                <li class="task-item bg-gray-lighter js-task-chapter infinite-item">
+                                    <i class="es-icon es-icon-menu left-menu"></i>
+                                    <a href="javascript:" class="title gray-dark">第14节课: 《雁塔圣教序》练习4：学习法门-背诵与复述</a>
+                                    <i class="right-menu es-icon es-icon-remove js-remove-icon"></i>
+                                </li>
+
+                                <li class="task-item bg-gray-lighter js-task-chapter infinite-item">
+                                    <i class="es-icon es-icon-menu left-menu"></i>
+                                    <a href="javascript:" class="title gray-dark">第15节课: 《孔子庙堂碑》练习1：虞世南-静气</a>
+                                    <i class="right-menu es-icon es-icon-remove js-remove-icon"></i>
+                                </li>
+
+                                <li class="task-item bg-gray-lighter js-task-chapter infinite-item">
+                                    <i class="es-icon es-icon-menu left-menu"></i>
+                                    <a href="javascript:" class="title gray-dark">第16节课: 《孔子庙堂碑》练习2：学习法门-考试的秘笈</a>
+                                    <i class="right-menu es-icon es-icon-remove js-remove-icon"></i>
+                                </li>
+
+                                <li class="task-item bg-gray-lighter js-task-chapter infinite-item">
+                                    <i class="es-icon es-icon-menu left-menu"></i>
+                                    <a href="javascript:" class="title gray-dark">第17节课: 《孔子庙堂碑》练习3：与古人对话，从读懂一篇古文开始</a>
+                                    <i class="right-menu es-icon es-icon-remove js-remove-icon"></i>
+                                </li>
+
+                                <li class="task-item bg-gray-lighter js-task-chapter infinite-item">
+                                    <i class="es-icon es-icon-menu left-menu"></i>
+                                    <a href="javascript:" class="title gray-dark">第18节课: 《孔子庙堂碑》练习4：古文学习记-笔记的助力</a>
+                                    <i class="right-menu es-icon es-icon-remove js-remove-icon"></i>
+                                </li>
+
+                                <li class="task-item bg-gray-lighter js-task-chapter infinite-item">
+                                    <i class="es-icon es-icon-menu left-menu"></i>
+                                    <a href="javascript:" class="title gray-dark">第19节课: 《三门记》练习1：古文学习记-作一篇文章</a>
+                                    <i class="right-menu es-icon es-icon-remove js-remove-icon"></i>
+                                </li>
+
+                                <li class="task-item bg-gray-lighter js-task-chapter infinite-item">
+                                    <i class="es-icon es-icon-menu left-menu"></i>
+                                    <a href="javascript:" class="title gray-dark">第20节课: 《三门记》练习2：以法度得自由</a>
+                                    <i class="right-menu es-icon es-icon-remove js-remove-icon"></i>
+                                </li>
+
+                            </ul>
+
+
+                        </div>
+
+
+                    </section>
+
+                    <div class="panel panel-default hidden-xs pt10">
+                        <div class="course-list">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 col-xs-6">
+                                    <div class="course-item">
+                                        <div class="course-img">
+                                            <a href="http://www.xuantong.cn/course/53?ref=relatedCourseSets" target="_blank">
+                                                <img src="{% static "xuantong/image/153124ccb630903020.png"%}" alt="第四阶丨自在行草课程" class="img-responsive">
+                                            </a>
+                                        </div>
+                                        <div class="course-info">
+                                            <div class="title">
+                                                <a class="link-dark" href="http://www.xuantong.cn/course/53?ref=relatedCourseSets" target="_blank">
+                                                    第四阶丨自在行草课程
+                                                </a>
+                                            </div>
+                                            <div class="metas clearfix">
+                                                <span class="comment">
+                                                    <i class="es-icon es-icon-textsms"></i>0</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-xs-6">
+                                    <div class="course-item">
+                                        <div class="course-img">
+                                            <a href="http://www.xuantong.cn/course/51?ref=relatedCourseSets" target="_blank">
+                                                <img src="{% static "xuantong/image/001053d1cca8057936.png"%}" alt="第三阶丨小楷写经课程" class="img-responsive">
+                                            </a>
+                                        </div>
+                                        <div class="course-info">
+                                            <div class="title">
+                                                <a class="link-dark" href="http://www.xuantong.cn/course/51?ref=relatedCourseSets" target="_blank">
+                                                    第三阶丨小楷写经课程
+                                                </a>
+                                            </div>
+                                            <div class="metas clearfix">
+                                                <span class="comment">
+                                                    <i class="es-icon es-icon-textsms"></i>0</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-xs-6">
+                                    <div class="course-item">
+                                        <div class="course-img">
+                                            <a href="http://www.xuantong.cn/course/49?ref=relatedCourseSets" target="_blank">
+                                                <img src="{% static "xuantong/image/113822ec81e6915061.png"%}" alt="第一阶丨篆隶筑基课程" class="img-responsive">
+                                            </a>
+                                        </div>
+                                        <div class="course-info">
+                                            <div class="title">
+                                                <a class="link-dark" href="http://www.xuantong.cn/course/49?ref=relatedCourseSets" target="_blank">
+                                                    第一阶丨篆隶筑基课程
+                                                </a>
+                                            </div>
+                                            <div class="metas clearfix">
+                                                <span class="comment">
+                                                    <i class="es-icon es-icon-textsms"></i>245</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2、加入后：自由式学习 -->
+
+                    <div class="course-freelearn-item">
+                        <section class="course-freelearn-section">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="course-progress">
+                                        <div class="cricle-progress" id="freeprogress" data-percent="52">
+                                            <span class="percent">学习进度
+                                                <br>
+                                                <span class="num">52%</span>
+                                            </span>
+                                            <canvas height="290" width="290" style="height: 146px; width: 146px;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 hidden-xs hidden-sm">
+                                    <ul class="clearfix text-12 course-learn-list ">
+                                        <li>
+                                            <p class="mb15 color-gray">
+                                                <i class="es-icon es-icon-iccheckcircleblack24px mrm"></i>已完成
+                                            </p>
+                                            <span class="text-16">
+                                                <span class="color-primary">14</span> /
+                                                <span class="mrl">27</span>
+                                                任务</span>
+                                        </li>
+                                        <li>
+                                            <p class="mb15 color-gray">
+                                                <i class="es-icon es-icon-today mrm"></i>学习有效期
+                                            </p>
+                                            <span class="text-16">
+                                                2018-12-05
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <p class="mb15 color-gray">
+                                                <i class="es-icon es-icon-book mrm"></i>下一学习任务
+                                            </p>
+                                            <a class="link-dark text-16 js-course-learn" href="javascript:;" data-goto-url="/course/50/task/360/show" data-course-name="第01节【写字作业】"
+                                                data-expired-flag="">第01节【写字作业】</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3 hidden-xs hidden-sm learn-btn">
+                                    <a class="btn btn-primary btn-lg mt10 js-course-learn" href="javascript:;" data-goto-url="/course/50/task/360/show" data-course-name="第01节【写字作业】"
+                                        data-expired-flag="">
+                                        继续学习
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="course-detail-section-responsive visible-xs visible-sm clearfix">
+                                <ul class="clearfix">
+                                    <!--营销页显示-->
+                                    <li class="es-share top   learn-es-share ">
+                                        <a class=" dropdown-toggle" href="http://www.xuantong.cn/my/course/50" data-toggle="dropdown" title="分享">
+                                            <i class="es-icon es-icon-share"></i>
+                                            <br> 分享
+                                        </a>
+
+
+                                        <div class="dropdown-menu  js-social-share-params" data-title="第二阶丨楷书精进课程" data-summary="" data-message="我正在学习暄桐教室的《第二阶丨楷书精进课程》，享受写字带来的快乐，一起来学习吧！"
+                                            data-url="http://www.xuantong.cn/course/50" data-picture="http://sce4a8b6c0d93v-sb-qn.qiqiuyun.net/files/default/2018/07-19/11384885cf62768555.png">
+
+                                            <a href="javascript:;" class="js-social-share" data-cmd="weixin" title="分享到微信" data-share="weixin" data-qrcode-url="/common/qrcode?text=http%3A//www.xuantong.cn/course/50">
+                                                <i class="es-icon es-icon-weixin"></i>
+                                            </a>
+                                            <a href="javascript:;" class="js-social-share" data-cmd="tsina" title="分享到新浪微博" data-share="weibo">
+                                                <i class="es-icon es-icon-weibo"></i>
+                                            </a>
+                                            <a href="javascript:;" class="js-social-share" data-cmd="qq" title="分享到QQ好友" data-share="qq">
+                                                <i class="es-icon es-icon-qq"></i>
+                                            </a>
+                                            <a href="javascript:;" class="js-social-share" data-cmd="qzone" title="分享到QQ空间" data-share="qzone">
+                                                <i class="es-icon es-icon-qzone"></i>
+                                            </a>
+
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <div class="text-right buy-btn-group visible-xs visible-sm">
+                                <span class="mr20">完成任务：14 / 27</span>
+                                <a class="btn btn-primary btn-lg mt10 js-course-learn" href="javascript:;" data-goto-url="/course/50/task/360/show" data-course-name="第01节【写字作业】"
+                                    data-expired-flag="">
+                                    继续学习
+                                </a>
+                            </div>
+                        </section>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3 col-md-4 course-sidebar">
+
+
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">授课教师</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="media media-default">
+                                <div class="media-left">
+                                    <a class="js-user-card" data-user-id="3" data-original-title="" title="">
+                                        <img class="avatar-md" src="{% static "xuantong/image/163246e696df421245.png"%}">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <div class="title">
+                                        <a class="gray-dark">林曦老师</a>
+                                    </div>
+                                    <div class="content">暄桐教室创始人</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">最新学员</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="user-avatar-list clearfix">
+                                <li>
+                                    <a class=" js-user-card" href="http://www.xuantong.cn/user/34" data-card-url="/user/34/card/show" data-user-id="34" data-original-title=""
+                                        title="">
+                                        <img class="avatar-sm" src="{% static "xuantong/image/175934681649868638.jpg"%}">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class=" js-user-card" href="http://www.xuantong.cn/user/40" data-card-url="/user/40/card/show" data-user-id="40" data-original-title=""
+                                        title="">
+                                        <img class="avatar-sm" src="{% static "xuantong/image/190352876774388355.jpg"%}">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class=" js-user-card" href="http://www.xuantong.cn/user/79" data-card-url="/user/79/card/show" data-user-id="79" data-original-title=""
+                                        title="">
+                                        <img class="avatar-sm" src="{% static "xuantong/image/151020cc6f07044044.jpg"%}">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class=" js-user-card" href="http://www.xuantong.cn/user/2105" data-card-url="/user/2105/card/show" data-user-id="2105"
+                                        data-original-title="" title="">
+                                        <img class="avatar-sm" src="{% static "xuantong/image/142746291fee542682.jpg"%}">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class=" js-user-card" href="http://www.xuantong.cn/user/2443" data-card-url="/user/2443/card/show" data-user-id="2443"
+                                        data-original-title="" title="">
+                                        <img class="avatar-sm" src="{% static "xuantong/image/171658aadd35347192.jpg"%}">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class=" js-user-card" href="http://www.xuantong.cn/user/3186" data-card-url="/user/3186/card/show" data-user-id="3186"
+                                        data-original-title="" title="">
+                                        <img class="avatar-sm" src="{% static "xuantong/image/192125546ac5367143.jpg"%}">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class=" js-user-card" href="http://www.xuantong.cn/user/3691" data-card-url="/user/3691/card/show" data-user-id="3691"
+                                        data-original-title="" title="">
+                                        <img class="avatar-sm" src="{% static "xuantong/image/135920833ba7786286.jpg"%}">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class=" js-user-card" href="http://www.xuantong.cn/user/4138" data-card-url="/user/4138/card/show" data-user-id="4138"
+                                        data-original-title="" title="">
+                                        <img class="avatar-sm" src="{% static "xuantong/image/111510e09f4d026790.jpg"%}">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class=" js-user-card" href="http://www.xuantong.cn/user/4877" data-card-url="/user/4877/card/show" data-user-id="4877"
+                                        data-original-title="" title="">
+                                        <img class="avatar-sm" src="{% static "xuantong/image/1920524be391661995.jpg"%}">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class=" js-user-card" href="http://www.xuantong.cn/user/5162" data-card-url="/user/5162/card/show" data-user-id="5162"
+                                        data-original-title="" title="">
+                                        <img class="avatar-sm" src="{% static "xuantong/image/222518ec9bba698551.jpg"%}">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class=" js-user-card" href="http://www.xuantong.cn/user/5418" data-card-url="/user/5418/card/show" data-user-id="5418"
+                                        data-original-title="" title="">
+                                        <img class="avatar-sm" src="{% static "xuantong/image/160607f255ea235478.png"%}">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class=" js-user-card" href="http://www.xuantong.cn/user/5882" data-card-url="/user/5882/card/show" data-user-id="5882"
+                                        data-original-title="" title="">
+                                        <img class="avatar-sm" src="{% static "xuantong/image/160607f255ea235478.png"%}">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class=" js-user-card" href="http://www.xuantong.cn/user/6252" data-card-url="/user/6252/card/show" data-user-id="6252"
+                                        data-original-title="" title="">
+                                        <img class="avatar-sm" src="{% static "xuantong/image/0755004c8b11073851.jpg"%}">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class=" js-user-card" href="http://www.xuantong.cn/user/6423" data-card-url="/user/6423/card/show" data-user-id="6423"
+                                        data-original-title="" title="">
+                                        <img class="avatar-sm" src="{% static "xuantong/image/115801903e95476004.jpg"%}">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class=" js-user-card" href="http://www.xuantong.cn/user/7263" data-card-url="/user/7263/card/show" data-user-id="7263"
+                                        data-original-title="" title="">
+                                        <img class="avatar-sm" src="{% static "xuantong/image/145922ad77aa606925.jpg"%}">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class=" js-user-card" href="http://www.xuantong.cn/user/7465" data-card-url="/user/7465/card/show" data-user-id="7465"
+                                        data-original-title="" title="">
+                                        <img class="avatar-sm" src="{% static "xuantong/image/072123396896172682.jpg"%}">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class=" js-user-card" href="http://www.xuantong.cn/user/7489" data-card-url="/user/7489/card/show" data-user-id="7489"
+                                        data-original-title="" title="">
+                                        <img class="avatar-sm" src="{% static "xuantong/image/160607f255ea235478.png"%}">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class=" js-user-card" href="http://www.xuantong.cn/user/7490" data-card-url="/user/7490/card/show" data-user-id="7490"
+                                        data-original-title="" title="">
+                                        <img class="avatar-sm" src="{% static "xuantong/image/234428c4bb2c681043.jpg"%}">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class=" js-user-card" href="http://www.xuantong.cn/user/7526" data-card-url="/user/7526/card/show" data-user-id="7526"
+                                        data-original-title="" title="">
+                                        <img class="avatar-sm" src="{% static "xuantong/image/061021db371c374709.jpg"%}">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class=" js-user-card" href="http://www.xuantong.cn/user/7581" data-card-url="/user/7581/card/show" data-user-id="7581"
+                                        data-original-title="" title="">
+                                        <img class="avatar-sm" src="{% static "xuantong/image/160607f255ea235478.png"%}">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <i class="es-icon es-icon-recentactors"></i>学员动态</h3>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="media media-number-o color-gray text-overflow">
+                                <a class="link-dark " href="http://www.xuantong.cn/user/7129">邱倩</a>
+
+
+                                的作业"第09节【写字作业】"已被批阅
+
+                            </div>
+                            <div class="media media-number-o color-gray text-overflow">
+                                <a class="link-dark " href="http://www.xuantong.cn/user/7007">小凤</a>
+
+
+                                的作业"第09节【写字作业】"已被批阅
+
+                            </div>
+                            <div class="media media-number-o color-gray text-overflow">
+                                <a class="link-dark " href="http://www.xuantong.cn/user/4257">王岑若</a>
+
+
+                                开始学习
+                                <a class="link-dark" href="http://www.xuantong.cn/course/50/task/494/show?from=student_status"
+                                    title="第09节【写字作业】">第09节【写字作业】</a>
+
+                            </div>
+                            <div class="media media-number-o color-gray text-overflow">
+                                <a class="link-dark " href="http://www.xuantong.cn/user/827">笑笑</a>
+
+
+                                完成了
+                                <a class="link-dark" href="http://www.xuantong.cn/course/50/task/486/show?from=student_status"
+                                    title="第08节【读书作业】（选做）">第08节【读书作业】（选做）</a>
+
+                            </div>
+                            <div class="media media-number-o color-gray text-overflow">
+                                <a class="link-dark " href="http://www.xuantong.cn/user/827">笑笑</a>
+
+
+                                完成了
+                                <a class="link-dark" href="http://www.xuantong.cn/course/50/task/483/show?from=student_status"
+                                    title="第08节【思考作业】（选做）">第08节【思考作业】（选做）</a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <footer class="es-footer">
+            <div class="copyright text-sm">
+                <div class="container">
+                    Powered by
+                    <a href="http://www.xuantong.cn/" target="_blank">暄桐教室</a>
+                    <script src="{% static "xuantong/js/entrance.js"%}" class="zhiCustomBtn" id="zhichiScript" data-args="属性名1=属性值1&amp;属性名2=属性值2"></script>
+                    <div class="mts">
+                        <a href="http://www.miibeian.gov.cn/" target="_blank">
+                            京ICP备17020743号
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+    </div>
+
+
+
+
+    <!-- 侧边栏快捷操作 -->
+    <div class="es-bar hidden-xs">
+
+        <!-- 左侧列表 -->
+        <div class="es-bar-menu">
+            <ul class="bar-menu-top">
+                <li data-id="#bar-user-center" class="bar-user">
+                    <a href="javascript:;" data-url="/esbar/my/study_center">学
+                        <br>习
+                        <br>中
+                        <br>心
+                    </a>
+                </li>
+                <li data-id="#bar-homework" data-toggle="tooltip" data-placement="left" title="" data-trigger="hover" data-container=".es-bar"
+                    data-original-title="我的考试/作业">
+                    <a href="javascript:;" data-url="/esbar/my/practice/finished">
+                        <i class="es-icon es-icon-edit"></i>
+                    </a>
+                </li>
+                <li data-id="#bar-course-list" data-placement="left" data-toggle="tooltip" title="" data-trigger="hover"
+                    data-container=".es-bar" data-original-title="我的课程/全阶课程">
+                    <a data-url="/esbar/my/course" href="javascript:;">
+                        <i class="es-icon es-icon-book">
+                        </i>
+                    </a>
+                </li>
+                <li data-id="#bar-message" data-toggle="tooltip" data-placement="left" title="" data-trigger="hover" data-container=".es-bar"
+                    data-original-title="通知">
+                    <a href="javascript:;" data-url="/esbar/my/notify">
+                        <i class="es-icon es-icon-notificationson"></i>
+                        <span class="dot"></span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="bar-menu-sns">
+                <li class="popover-btn bar-weixin-btn" data-container=".bar-weixin-btn" data-content-element="#bar-weixin-content" data-original-title=""
+                    title="">
+                    <a>
+                        <i class="es-icon es-icon-weixin"></i>
+                    </a>
+                </li>
+
+                <li class="go-top show" style="margin:-10px auto 0 auto;" data-toggle="tooltip" data-placement="left" title="" data-trigger="hover"
+                    data-container=".es-bar" data-original-title="回到顶端">
+                    <a href="javascript:;">
+                        <i class="es-icon es-icon-keyboardarrowup" style="margin-bottom:-8px"></i>
+                        <span class="text-sm">TOP</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 列表内容 -->
+        <!-- 通知 -->
+        <div class="es-bar-main" id="bar-message">
+            <div class="bar-main-header">
+                <a href="javascript:;" class="js-bar-shrink link-dark">
+                    <i class="es-icon es-icon-arrowforward"></i>
+                </a>
+                通知
+            </div>
+
+            <div class="bar-main-body">
+                <ul class="bar-message">
+
+                </ul>
+            </div>
+        </div>
+
+        <!-- 考试/作业 -->
+        <div class="es-bar-main" id="bar-homework">
+            <div class="bar-main-header">
+                <a href="javascript:;" class="js-bar-shrink link-dark">
+                    <i class="es-icon es-icon-arrowforward"></i>
+                </a>
+                我的考试/作业
+            </div>
+
+            <div class="bar-main-body">
+                <div class="text-center">
+                    <div class="btn-group btn-action">
+                        <a href="javascript:;" data-url="/esbar/my/practice/finished" class="btn btn-primary " id="bar-practice-finish">
+                            <span>已批阅</span>
+                        </a>
+                        <a href="javascript:;" data-url="/esbar/my/practice/reviewing" class="btn btn-primary active" id="bar-practice-review">已提交</a>
+                    </div>
+                </div>
+                <div class="bar-homework">
+
+                </div>
+            </div>
+        </div>
+
+        <!-- 课程/班级 -->
+        <div class="es-bar-main" id="bar-course-list">
+            <div class="bar-main-header">
+                <a href="javascript:;" class="js-bar-shrink link-dark">
+                    <i class="es-icon es-icon-arrowforward"></i>
+                </a>
+                我的课程/全阶课程
+            </div>
+
+            <div class="bar-main-body">
+                <div class="text-center">
+                    <div class="btn-group btn-action">
+                        <a href="javascript:;" data-url="/esbar/my/course" class="btn btn-primary active" id="bar-course-btn">课程</a>
+                        <a href="javascript:;" data-url="/esbar/my/classroom" class="btn btn-primary " id="bar-classroom-btn">全阶课程</a>
+                    </div>
+                </div>
+
+                <div id="bar-my-course">
+                </div>
+            </div>
+        </div>
+
+        <!-- 学习中心 -->
+        <div class="es-bar-main" id="bar-user-center">
+        </div>
+
+        <!-- 学习历史 -->
+
+
+        <div class="bar-popover-content" style="display:none;">
+            <div id="bar-qq-content">
+                <hr>
+            </div>
+
+            <div id="bar-phone-content">
+                <p class="mtm">
+                    <i class="es-icon es-icon-mail mrm"></i>邮箱：
+                    <a class="link-dark" href="mailto:xuantonglearning@126.com">xuantonglearning@126.com</a>
+                </p>
+            </div>
+
+            <div id="bar-weixin-content">
+                <img width="110" class="img-responsive" src="{% static "xuantong/image/18095640c04e564997.jpg"%}" alt="">
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="login-modal" class="modal" data-url="/login/ajax"></div>
+    <div id="modal" class="modal"></div>
+    <div id="attachment-modal" class="modal"></div>
+
+
+
+
+
+
+    <script>
+        if (typeof app === 'undefined') {
+            var app = {};
+        }
+        app.version = '8.2.4_19';
+        app.httpHost = 'http://www.xuantong.cn';
+        app.basePath = 'http://sce4a8b6c0d93v-sb-qn.qiqiuyun.net';
+        app.theme = 'jianmo';
+
+
+        var CLOUD_FILE_SERVER = "";
+
+        app.config = { "api": { "weibo": { "key": "" }, "qq": { "key": "" }, "douban": { "key": "" }, "renren": { "key": "" } }, "loading_img_path": "\/\/sce4a8b6c0d93v-sb-qn.qiqiuyun.net\/assets\/img\/default\/loading.gif?version=8.2.4_19" };
+
+        app.arguments = {};
+
+        app.scripts = null;
+
+        app.fileSingleSizeLimit = 3;
+
+        app.uploadUrl = '/file/upload';
+        app.imgCropUrl = '/file/img/crop';
+        app.lessonCopyEnabled = '1';
+        app.cloudSdkCdn = '';
+        app.lang = 'zh_CN';
+    </script>
+
+    <script src="{% static "xuantong/js/translator.min.js"%}"></script>
+
+    <script src="{% static "xuantong/js/zh_CN.js"%}"></script>
+    <script src="{% static "xuantong/js/base.js"%}"></script>
+    <script src="{% static "xuantong/js/common.js"%}"></script>
+    <script src="{% static "xuantong/js/main.js"%}"></script>
+    <script src="{% static "xuantong/js/main(2).js"%}"></script>
+    <script src="{% static "xuantong/js/jquery.easypiechart.js"%}"></script>
+    <script src="{% static "xuantong/js/excanvas-compiled.js"%}"></script>
+    <script src="{% static "xuantong/js/echo-js.js"%}"></script>
+    <script src="{% static "xuantong/js/jquery-countdown.js"%}"></script>
+    <script src="{% static "xuantong/js/index(1).js"%}"></script>
+    <script src="{% static "xuantong/js/index(2).js"%}"></script>
+    <script src="{% static "xuantong/js/index(3).js"%}"></script>
+    <script src="{% static "xuantong/js/index(4).js"%}"></script>
+    <script src="{% static "xuantong/js/index(5).js"%}"></script>
+    <script src="{% static "xuantong/js/index(6).js"%}"></script>
+    <script src="{% static "xuantong/js/index(7).js"%}"></script>
+    <script src="{% static "xuantong/js/index(8).js"%}"></script>
+    <script src="{% static "xuantong/js/perfect-scrollbar.js"%}"></script>
+    <script src="{% static "xuantong/js/index(9).js"%}"></script>
+
+    <script type="text/javascript">
+        window.seajsBoot && window.seajsBoot();
+    </script>
+
+
+
+</body>
+
+</html>

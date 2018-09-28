@@ -1,0 +1,9 @@
+{% extends 'study/video_play.html' %}
+
+{% load staticfiles %}
+
+{% block title %}{{ videoinfo.name }}{% endblock %}
+
+{% block video_play_lastlink %}
+    <li><a href="/videolecture/">免费视频讲座</a></li>
+{% endblock %}

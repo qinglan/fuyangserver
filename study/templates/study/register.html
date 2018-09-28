@@ -1,0 +1,102 @@
+{% extends 'study/main_base.html' %} 
+
+{% load staticfiles %} 
+
+{% block title %}注册账号{% endblock %}
+
+
+{% block content %}
+
+
+<div id="content-container" class="container">
+    <div class="es-section login-section">
+        <div class="logon-tab clearfix">
+            <a href="http://www.xuantong.cn/login?goto=/">登录帐号</a>
+            <a class="active">注册帐号</a>
+        </div>
+        <div class="login-main">
+            <form id="register-form" method="post" action="http://www.xuantong.cn/register?goto=/" novalidate="novalidate">
+
+
+
+                <div class="form-group mbl">
+                    <label class="control-label required" for="register_mobile" aria-required="true">手机号码</label>
+                    <div class="controls">
+                        <input type="number" id="register_mobile" name="verifiedMobile" class="form-control input-lg" data-url="/register/mobile/check"
+                            placeholder="填写你常用的手机号码作为登录帐号" aria-required="true">
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+
+                <div class="form-group mbl has-error">
+                    <label class="control-label required" for="register_nickname" aria-required="true">用户名</label>
+                    <div class="controls">
+                        <input type="text" id="register_nickname" name="nickname" required="required" class="form-control input-lg form-control-error"
+                            data-url="/register/nickname/check" placeholder="中、英文均可，最长18个英文或9个汉字" aria-required="true" aria-describedby="register_nickname-error"
+                            aria-invalid="true">
+                        <p class="help-block" style="display: none;"></p>
+                        <p id="register_nickname-error" class="form-error-message jq-validate-error">不允许以1开头的11位纯数字</p>
+                    </div>
+                </div>
+
+                <div class="form-group mbl">
+                    <label class="control-label required" for="register_password" aria-required="true">密码</label>
+                    <div class="controls">
+                        <input type="password" id="register_password" name="password" required="required" class="form-control input-lg" placeholder="5-20位英文、数字、符号，区分大小写"
+                            aria-required="true" aria-invalid="false">
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+                <div class="form-group mbl  email_mobile_msg">
+                    <label class="control-label required" for="sms_code" aria-required="true">短信验证码</label>
+                    <div class="controls row">
+                        <div class="col-xs-7">
+                            <input type="number" class="form-control input-lg" id="sms_code" name="sms_code" placeholder="填写你的短信验证码" data-url="/edu_cloud/sms_check/sms_registration">
+                            <p class="help-block"> </p>
+                        </div>
+                        <div class="col-xs-5">
+                            <a href="http://www.xuantong.cn/register?goto=/#modal" data-toggle="modal" class="btn btn-default btn-lg js-sms-send disabled"
+                                data-url="/register/captcha/modal" data-sms-url="/edu_cloud/sms_send">
+                                <span id="js-time-left"></span>
+                                <span id="js-fetch-btn-text">获取验证码</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mbl">
+                    <div class="controls">
+                        <button type="submit" id="register-btn" data-submiting-text="正在提交..." class="btn btn-primary btn-lg btn-block">同意服务协议并注册</button>
+                    </div>
+                </div>
+
+                <div class="form-group mbl">
+                    <div class="controls">
+                        <span>请详细阅读</span>
+                        <a href="http://www.xuantong.cn/userterms" target="_blank">《用户服务协议》</a>
+                    </div>
+                </div>
+
+                <input type="hidden" name="captcha_enabled" value="1">
+                <input type="hidden" name="_csrf_token" value="e_C8OGeEu6Pvg_gtYVgNCc1KIuuY4v8VNV2wwUF16GU">
+
+            </form>
+
+            <div class="social-login">
+
+                <span>
+
+                    <a href="http://www.xuantong.cn/login/bind/weixinweb?_target_path=/&amp;inviteCode=" class="social-icon social-weixin">
+                        <i class="es-icon es-icon-weixin"></i>
+                    </a>
+
+
+
+                </span>
+                <div class="line"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

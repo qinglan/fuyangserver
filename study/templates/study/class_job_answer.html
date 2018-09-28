@@ -1,0 +1,132 @@
+{% extends 'study/main_base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}作业回答{% endblock %}
+{% block titlefile %}
+    <style type="text/css">
+        .red_div {
+            color: #FF0000;
+            text-indent:2em;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="container mt20 container-homework">
+        <div class="row">
+
+            <div class="prevent-copy xt-prevent-box  comment-left">
+                <span id="grid-judge" data-judge=""></span>
+                <div class="testpaper-body js-testpaper-body  " data-copy="0">
+                    <div class="es-section testpaper-heading js-testpaper-heading">
+                        <div class="testpaper-titlebar clearfix xt-testpaper-titlebar">
+                            <h1 class="testpaper-title">
+                                {{ job.name }} <br>
+                                <small class="text-sm">
+                                    答题人：{{ answer.author.nickname }} 交卷时间：{{ answer.pub_date|date:"Y-m-d H:i" }}
+                                </small>
+                            </h1>
+
+                            <div class="btn-group pull-right" style="margin-top:20px;margin-bottom:10px;">
+                                <a href="{% url 'class_job_redo' job.pk %}" class="btn btn-primary"
+                                   style="border-radius:3px;">再次尝试</a>
+                            </div>
+                        </div>
+
+                        <div class="testpaper-description">
+                            {% autoescape off %}
+                                {{ job.job_questions }}
+                            {% endautoescape %}
+                        </div>
+
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="xt-calligraphy-title gray-darker ptm"><b>你的回答</b></div>
+
+                        <div class="panel-body">
+                            <div class="question-set-items">
+
+                                <div class="xt-testpaper-content testpaper-question testpaper-question-essay js-testpaper-question "
+                                     data-watermark-url="/cloud/testpaper_watermark"
+                                     id="question147">
+                                    <div class="testpaper-question-body">
+                                        <div class="testpaper-question-stem-wrap clearfix xt-testpaper-wrap">
+                                            <div class="testpaper-question-seq-wrap">
+                                            </div>
+
+                                            <div class="testpaper-question-stem">
+                                                <p>
+                                                    {% autoescape off %}
+                                                    {{ answer.job_content|linebreaksbr }}
+                                                    {% endautoescape %}
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                    <div class="testpaper-question-teacherSay mtl">
+                                        <div class="testpaper-question-result-title">评语</div>
+                                        <div class="red_div">
+
+                                                &thinsp;&thinsp;&thinsp;&thinsp;{{ answer.comment|linebreaksbr }}
+
+
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="xt-calligraphy-title gray-darker ptm"><b>标准答案</b></div>
+
+                        <div class="panel-body">
+                            <div class="question-set-items">
+
+                                <div class="xt-testpaper-content testpaper-question testpaper-question-essay js-testpaper-question "
+                                     data-watermark-url="/cloud/testpaper_watermark"
+                                     id="question147">
+                                    <div class="testpaper-question-body">
+                                        <div class="testpaper-question-stem-wrap clearfix xt-testpaper-wrap">
+                                            <div class="testpaper-question-seq-wrap">
+                                            </div>
+
+                                            <div class="testpaper-question-stem">
+                                                {% autoescape off %}
+                                                    {{ job.job_answer }}
+                                                {% endautoescape %}
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends 'study/main_base.html' %}
+{% load staticfiles %}
+{% block title %}{{ paper.name }}{% endblock %}
+{% block content%}
+
+    <div id="content-container" class="container">
+
+        <div class="article-detail row" id="detail-content">
+            <!-- 主内容 -->
+            <div class="col-md-12 article-detail-main">
+                <section class="es-section article-content">
+                    <ol class="breadcrumb">
+                        <li><a href="{% url "picture_text_column" paper.column.pk %}">{{ paper.column.name }}</a></li>
+                        <li class="active">正文</li>
+                    </ol>
+
+                    <div class="article-metas">
+                        <div class="pull-left">
+                            <div class="date">
+                                <div class="day">{{ paper.register_date|date:"d" }}</div>
+                                <div class="month">{{ paper.register_date|date:"m" }}月</div>
+                            </div>
+                        </div>
+                        <div class="metas-body">
+                            <h2 class="title">
+                                {{ paper.name }}
+                            </h2>
+                            <div class="sns">
+                            <span class="views-num">
+                                <i class="es-icon es-icon-visibility"></i>{{ paper.views_count }}
+                            </span>
+                                <span class="comment-num">
+                                <i class="es-icon es-icon-textsms"></i>{{ paper.get_comment_count }}
+                            </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="article-text">
+                        {% autoescape off %}
+                            {{ paper.content }}
+                        {% endautoescape %}
+                    </div>
+                    <div class="article-tags">
+                    </div>
+
+
+                    <form class="es-commet" id="thread-post-form" method="POST"
+                          action="{% url 'picture_text_paper_comment' paper.pk %}" novalidate="novalidate">
+                        {% csrf_token %}
+                        <div class="es-commet-header">
+                            文章评论<span class="badge badge-primary thread-post-num">{{ paper.get_comment_count }}</span>
+
+                        </div>
+                        <textarea class="form-control form-control-o" rows="6" placeholder="您的想法" name="content"
+                                  data-display="您的想法"></textarea>
+                        <div class="form-group clearfix">
+                            <button type="submit" class="btn btn-default pull-right " data-loading-text="正在评论...">发表评论
+                            </button>
+                        </div>
+                        <input type="hidden" name="_csrf_token" value="RXiRDzbXC_Q9pSCdJDu8Gpay41_kER2B3ydElkOwsoI">
+                    </form>
+
+                    <ul class="comment-list thread-pripost-list">
+                        {% for comment in comments %}
+                        <li id="post-370" data-user-id="4720"
+                            class="thread-post thread-post-370 media media-comment user-id-4720">
+                            <div class="media-left">
+                                <a class="user-avatar js-user-card" href="http://www.xuantong.cn/user/4720"
+                                   data-card-url="/user/4720/card/show" data-user-id="4720">
+                                    <img class="avatar-sm"
+                                         src="{{ comment.author.headimgurl }}">
+
+                                </a>
+
+                            </div>
+
+                            <div class="media-body">
+                                <div class="metas title">
+                                    <a href="http://www.xuantong.cn/user/4720" class="nickname">{{ comment.author.nickname }}</a>
+                                    <span class="bullet">•</span>
+                                    <span class="color-gray">{{ comment.register_date|date:"Y-m-d" }}</span>
+                                </div>
+                                <div class="editor-text">{{ comment.message|linebreaksbr }}</div>
+
+
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+                    <nav class="text-center">
+
+                    </nav>
+
+                </section>
+            </div>
+
+
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block scriptfile %}
+    <script type="text/javascript">
+
+        //拿到form
+
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'study/video_curriculum.html' %}
+
+{% load staticfiles %}
+
+{% block title %}{{ vc.name }}{% endblock %}
+
+{% block container %}
+
+
+
+    <div class="es-piece">
+        <div class="piece-header">课程介绍</div>
+        <div class="piece-body p-lg clearfix">
+            {% autoescape off %}
+                {{ vc.introduce }}
+            {% endautoescape %}
+
+            <p>&nbsp;</p>
+
+            <p>&nbsp;</p>
+
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block nav_tabs_class %}
+    var v = document.getElementById("summary");
+    v.classList.add("active");
+{% endblock %}
+
+

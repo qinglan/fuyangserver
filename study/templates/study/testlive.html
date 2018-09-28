@@ -1,0 +1,168 @@
+{% extends 'study/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}作业{% endblock %}
+
+
+{% block titlefile %}
+
+    <link href="{% static "xuantong/css/global.css" %}?version=6" rel="stylesheet">
+    <link href="{% static "xuantong/css/live_black.css" %}?version=5" rel="stylesheet">
+
+    <script src="//imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.2.js" charset="utf-8"></script>
+    <link href="http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css" rel="stylesheet">
+    <script src="//imgcache.qq.com/open/qcloud/video/tcplayer/ie8/videojs-ie8.js"></script>
+
+    <script src="http://imgcache.qq.com/open/qcloud/video/tcplayer/lib/hls.min.0.8.8.js"></script>
+
+    <script src="http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js"></script>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .tcplayer {
+            margin: 0 auto;
+        }
+
+        /* 通过 css 设置播放器尺寸 这时<video>中的宽高属性将被覆盖*/
+        .player-size {
+            width: 2560px;
+            height: 1440px;
+        }
+
+        @media screen and (max-width: 2560px) {
+            .player-size {
+                width: 100%;
+                height: 1170px;
+            }
+        }
+
+        @media screen and (max-width: 1920px) {
+            .player-size {
+                width: 100%;
+                height: 720px;
+            }
+        }
+
+        @media screen and (max-width: 1280px) {
+            .player-size {
+                width: 100%;
+                height: 540px;
+            }
+        }
+
+        @media screen and (max-width: 640px) {
+            .player-size {
+                width: 100%;
+                height: 270px;
+            }
+        }
+
+
+
+
+        .iframe_size {
+
+            width: 100%;
+            height:800px;
+            border: 0;
+        }
+
+
+    </style>
+
+
+{% endblock %}
+
+
+{% block bodycontent %}
+
+
+
+
+
+
+
+        <video id="player-container-id" class="player-size" playsinline webkit-playsinline>
+        </video>
+        <div class="dashboard-body">
+
+            <div class="tabs border-box">
+                <ul class="display-box ">
+                    <li id="doc-tab" class=" flex">
+                        <a>
+                            <span>文档</span>
+                        </a>
+                    </li>
+                    <li class="flex ondoc on">
+                        <a>
+                            <span>章节</span>
+                        </a>
+                    </li>
+                    <li class="flex">
+                        <a>
+                            <span>聊天</span>
+                        </a>
+                    </li>
+                    <li class="flex">
+                        <a>
+                            <span>问答</span>
+                        </a>
+                    </li>
+                    <li class="flex">
+                        <a>
+                            <span>简介</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <iframe id="task-content-iframe" class="task-content-iframe iframe_size"
+                    src="{{ liveinfo.get_iframe_introduce_url }}"
+                    allowfullscreen="" webkitallowfullscreen="">
+            </iframe>
+
+
+
+
+        </div>
+
+
+
+
+
+{% endblock %}
+
+{% block scriptfile %}
+    <script>
+
+        var player = TCPlayer("player-container-id", { // player-container-id 为播放器容器ID，必须与html中一致
+                fileID: "{{ liveinfo.play_id }}", // 请传入需要播放的视频filID 必须
+                appID: "{{ liveinfo.play_app_id }}", // 请传入点播账号的appID 必须
+                autoplay: true //是否自动播放
+                //其他参数请在开发文档中查看
+            });
+
+        function goPAGE() {
+            if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
+                /*window.location.href="你的手机版地址";*/
+                s = "" + (document.documentElement.offsetHeight - 270 - 38) + "px"
+                document.getElementById("task-content-iframe").style.height = s
+            }
+            else {
+                /*window.location.href="你的电脑版地址";    */
+                //alert("pc")
+            }
+        }
+
+        goPAGE();
+    </script>
+{% endblock %}
+
+
+
+
+

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh_CN" class="" {% block htmlcode %} {% endblock %} >
+{% load staticfiles %}
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="description" content="扶阳中医">
+    <meta content="LNtBUFJ35fAfOGhz3Ed845YlXneDj6R9OA-MpZPKj2c" name="csrf-token">
+    <meta content="0" name="is-login">
+    <meta content="1" name="is-open">
+
+
+    <link rel="icon" href="{% static "fuyangicon.png" %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static "fuyangicon.png" %}" type="image/x-icon"
+          media="screen">
+
+    <link href="{% static "xuantong/css/bootstrap.css" %}" rel="stylesheet">
+    <link href="{% static "xuantong/css/main.css" %}" rel="stylesheet">
+    <link href="{% static "xuantong/css/main-v2.css" %}" rel="stylesheet">
+
+    <link href="{% static "xuantong/css/header-white.css" %}" rel="stylesheet">
+
+
+    <link href="{% static "xuantong/css/main(1).css" %}" rel="stylesheet">
+
+    <script src="{% static "xuantong/js/index.js" %}"></script>
+    {% block main_titlefile %}
+    {% endblock %}
+    {% block titlefile %}
+    {% endblock %}
+    <title>{% block title %}扶阳医学{% endblock %} - 扶阳医学</title>
+
+</head>
+
+<body class="es-main-default es-nav-white homepage {% block bodyclass %} {% endblock %}" {% block bodycode %} {% endblock %}>
+
+{% block bodycontent %}
+    <div>扶阳中医真的好</div>
+{% endblock %}
+
+
+
+<script>
+    if (typeof app === 'undefined') {
+        var app = {};
+    }
+
+</script>
+
+
+<script src="{% static "xuantong/js/translator.min.js" %}"></script>
+
+<script src="{% static "xuantong/js/zh_CN.js" %}"></script>
+<script src="{% static "xuantong/js/base.js" %}?version=1"></script>
+<script src="{% static "xuantong/js/common.js" %}"></script>
+<script src="{% static "xuantong/js/main.js" %}"></script>
+<script src="{% static "xuantong/js/main(2).js" %}"></script>
+<script src="{% static "xuantong/js/echo-js.js" %}"></script>
+<script src="{% static "xuantong/js/index_main.js" %}?version=4"></script>
+<script src="{% static "xuantong/js/index(1).js" %}?version=4"></script>
+<script src="{% static "xuantong/js/index(2).js" %}"></script>
+<script src="{% static "xuantong/js/perfect-scrollbar.js" %}"></script>
+<script src="{% static "xuantong/js/index(3).js" %}"></script>
+{% block scriptfile %}
+
+{% endblock %}
+
+<script type="text/javascript">
+    window.seajsBoot && window.seajsBoot();
+</script>
+</body>
+
+</html>

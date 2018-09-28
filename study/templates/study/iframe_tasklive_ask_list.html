@@ -1,0 +1,24 @@
+{% for comment in comments %}
+    <div class="js-reviews">
+        <div class="media media-evaluate">
+            <div class="media-left">
+
+            </div>
+            <div class="media-body thread-post">
+                <div class="title">
+                    <a class="link-dark " href="javascript:;">{{ comment.author.nickname }}</a>
+                    &nbsp;{{ comment.register_date|date:"Y-m-d H:i" }}
+                </div>
+                <div class="content">
+
+                    <div class="full-content">
+                        {{ comment.message|linebreaksbr }}
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <input type="hidden" class="chat_id" value="{{comment.id}}"/>
+{% endfor %}

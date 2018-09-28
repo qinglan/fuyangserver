@@ -1,0 +1,82 @@
+{% extends 'userinfo/orders_base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}账户中心{% endblock %}
+
+{% block userinfo_title %}
+    我的订单
+{% endblock %}
+{% block orders_base_invoice_style %}class="active"{% endblock %}
+
+{% block orders_base_table %}
+    <table class="table cd-table" id="invoice-table">
+        <thead>
+        <tr>
+            <th width="25%">商品名称</th>
+            <th>订单号</th>
+            <th class="text-right">开票金额</th>
+            <th>申请时间</th>
+            <th>申请状态</th>
+            <th style="min-width:100px">操作</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for item in orders %}
+            <tr id="order-table-13553">
+                <td>
+                    <a class="cd-link-gray-dark" href="{{ item.get_goods_url }}"
+                       target="_blank">{{ item.get_name }}</a>
+                </td>
+                <td>{{ item.get_order_id }}</td>
+                <td class="text-right">{{ item.price }} 元</td>
+                <td>{{ item.invoice_date|date:"Y-m-d" }}</td>
+                <td>
+                    {% if item.is_draw_bill %}
+                        <span class="cd-status cd-status-success">已开发票</span>
+                    {% else %}
+                        <span class="cd-status cd-status-success">申请中</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <div class="table-action">
+                        <div class="table-action__item">
+                            {% if item.is_draw_bill %}
+                                <a class=" btn-effective"
+                                   data-toggle="modal" data-url="">已开发票</a>
+                            {% else %}
+                                {% if item.apply_bill %}
+                                    <a class=" btn-effective" href="javascript:cannel({{ item.pk }});"
+                                       data-toggle="modal" data-url="">取消申请</a>
+                                {% else %}
+                                    <a class=" btn-effective"
+                                       data-toggle="modal" data-url="">开发票</a>
+                                {% endif %}
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block scriptfile %}
+
+    <script>
+
+
+        function cannel(pk) {
+            $.get("{% url 'userinfo_invoice_cannel' %}", {'pk': pk}, function (ret) {
+                if (ret == "1")
+                    location.reload();
+            })
+        }
+
+
+    </script>
+
+{% endblock %}

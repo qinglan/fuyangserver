@@ -1,0 +1,168 @@
+{% extends 'study/base.html' %}
+
+{% load staticfiles %}
+
+{% block titlefile %}
+    <script type="text/javascript" src="{% static "ueditor/ueditor.config.js" %}"></script>
+    <script type="text/javascript" src="{% static "ueditor/ueditor.all.min.js" %}"></script>
+{% endblock %}
+
+{% block title %}作业内容{% endblock %}
+
+
+{% block bodycontent %}
+
+
+
+
+    <div class="iframe-parent-content" style="padding-bottom: 80px">
+
+        <div class="container  container-homework">
+            <div class="row">
+
+                <div class="prevent-copy xt-prevent-box  comment-left">
+                    <span id="grid-judge" data-judge=""></span>
+                    <div class="testpaper-body js-testpaper-body mt20 " data-copy="0">
+                        <div class="es-section testpaper-heading js-testpaper-heading">
+                            <div class="testpaper-titlebar clearfix xt-testpaper-titlebar">
+                                <h1 class="testpaper-title">
+                                    {{ job.name }} <br>
+                                    <small class="text-sm">
+                                    </small>
+                                </h1>
+
+                            </div>
+
+                            <div class="testpaper-description">
+                                <p style="text-align:center">&nbsp;
+                                </p>
+                                {% autoescape off %}
+                                    {{ job.job_questions }}
+                                {% endautoescape %}
+                            </div>
+
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="xt-calligraphy-title gray-darker ptm"><b>作业题目</b></div>
+
+                            <div class="panel-body">
+                                <div class="question-set-items">
+
+                                    <div class="xt-testpaper-content testpaper-question testpaper-question-essay js-testpaper-question "
+                                         data-watermark-url="/cloud/testpaper_watermark" id="question147">
+                                        <form id="review-form" method="post" action="{{ job.get_post_url }}" novalidate="novalidate">
+                                            {% csrf_token %}
+                                            <div class="testpaper-question-body">
+                                                <div class="testpaper-question-stem-wrap clearfix xt-testpaper-wrap">
+                                                    <div class="testpaper-question-seq-wrap">
+                                                    </div>
+
+                                                    <div class="testpaper-question-stem">
+                                                         <textarea id="xt-textarea" class="form-control xt-textarea-content"
+                                                                   rows="3" name="answer" placeholder="输入你的答案..."
+                                                                   style="height: 112px; overflow-y: hidden;"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group clearfix btn-submit-container">
+                                                <span class="color-success pull-left js-review-remind"
+                                                      style="display: none;">评价已保存！</span>
+                                                <input type="hidden" name="post_type" value="send_chat"/>
+
+                                                <input type="submit" class="btn btn-primary pull-right js-btn-save" value="提交作业"/>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+  <div id="modal_tip" class="modal fade in" style="display: none;">
+    <div class="modal-dialog cd-modal-dialog cd-modal-dialog-sm">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title">作业提示</h4>
+        </div>
+
+
+        <div class="modal-body">
+          <div class="cd-pb24 cd-text-gray-dark">
+            <div class="text-center"><span class="mlm"
+                style="font-size:16px">作业提交成功</span></div>
+          </div>
+        </div>
+
+
+        <div class="modal-footer">
+          <button class="btn cd-btn cd-btn-flat-default cd-btn-lg" type="button" data-dismiss="modal" onclick="onOkBtn()">
+            好的
+          </button>
+
+          <button class="hidden btn cd-btn cd-btn-flat-danger cd-btn-lg" type="button" data-toggle="cd-confirm-btn" data-url="">
+            confirm
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div id="modal_bg" class="modal-backdrop fade in" style="display: none;"></div>
+{% endblock %}
+
+{% block scriptfile %}
+
+<script type="text/javascript">
+
+        //拿到form
+
+
+        $(function () {
+
+            $("#review-form").submit(function () {
+                //ajax 提交表单
+                $.post("{{ job.get_post_url }}",
+                    $('#review-form').serialize(),
+                    function (data) {
+                        var modal_bg = document.getElementById("modal_bg");
+                        modal_bg.style.display = "block";
+                        var modal_tip = document.getElementById("modal_tip");
+                        modal_tip.style.display = "block";
+
+                    });
+                return false;       //阻止表单提交
+            });
+        });
+
+        function onOkBtn() {
+            parent.callByChild()
+        }
+
+
+
+    </script>
+
+{% endblock %}

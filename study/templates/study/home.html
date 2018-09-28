@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<!-- saved from url=(0023)http://www.xuantong.cn/ -->
+<html lang="zh_CN" class="">
+<!--<![endif]-->
+{% load staticfiles %}
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <title>扶阳医学 - 扶阳春秋</title>
+  <meta name="keywords" content="
+书法,写字,书法课,书法零基础,美育,临帖,暄桐,暄桐教室,林曦,林糊糊,ask林曦,儿童书法,齐白石,丰子恺,小世界,闹事集,文人">
+  <meta name="description" content="暄桐是一间教室，基于中式文人审美，教授以书法为主的传统文化与技艺，推崇非功利的学习态度。教室认为写字是一种生活方式，师生共同以书法为原点延展深入传统与艺术的种种乐趣，探索着心手相应，知行合一的可能。">
+  <meta content="LNtBUFJ35fAfOGhz3Ed845YlXneDj6R9OA-MpZPKj2c" name="csrf-token">
+  <meta content="0" name="is-login">
+  <meta content="1" name="is-open">
+
+
+
+  <link rel="icon" href="{% static "xuantong/image/1715440981cd077006.png"%}" type="image/x-icon">
+  <link rel="shortcut icon" href="{% static "xuantong/image/1715440981cd077006.png"%}" type="image/x-icon"
+    media="screen">
+
+  <!--[if lt IE 9]>
+  <script src="/static-dist/libs/html5shiv.js?version=8.2.4_19"></script>
+  <script src="/static-dist/es5-shim/es5-shim.js?version=8.2.4_19"></script>
+  <script src="/static-dist/es5-shim/es5-sham.js?version=8.2.4_19"></script>
+  <![endif]-->
+
+  <link href="{% static "xuantong/css/bootstrap.css"%}" rel="stylesheet">
+  <link href="{% static "xuantong/css/main.css"%}" rel="stylesheet">
+  <link href="{% static "xuantong/css/main-v2.css"%}" rel="stylesheet">
+
+  <link href="{% static "xuantong/css/header-white.css"%}" rel="stylesheet">
+
+
+  <link href="{% static "xuantong/css/main(1).css"%}" rel="stylesheet">
+
+  <script src="{% static "xuantong/js/index.js"%}"></script>
+  
+</head>
+
+<body class="es-main-default es-nav-white homepage">
+
+
+  <div class="es-wrap">
+
+
+    <header class="es-header navbar">
+      <div class="navbar-header">
+        <div class="visible-xs  navbar-mobile">
+          <a href="javascript:;" class="navbar-more js-navbar-more">
+            <i class="es-icon es-icon-menu"></i>
+          </a>
+          <div class="html-mask"></div>
+          <div class="nav-mobile">
+            <form class="navbar-form" action="http://www.xuantong.cn/search" method="get">
+              <div class="form-group">
+                <input class="form-control" placeholder="搜索" name="q">
+                <button class="button es-icon es-icon-search"></button>
+              </div>
+            </form>
+
+            <ul class="nav navbar-nav">
+
+              <li class="">
+                <a href="/" target="_blank">首页 </a>
+              </li>
+              <li class="nav-hover">
+                <a href="http://xuantong.cn/course/explore" data-toggle="dropdown">课程
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                    <a href="http://xuantong.cn/course/explore" target="_blank">单阶课程</a>
+                  </li>
+                  <li>
+                    <a href="http://xuantong.cn/classroom/explore" target="_blank">全阶课程</a>
+                  </li>
+                  <li>
+                    <a href="http://www.xuantong.cn/page/guidepc2" target="_blank">报名指南</a>
+                  </li>
+                  <li>
+                    <a href="http://www.xuantong.cn/page/guidepc3" target="_blank">听课指南</a>
+                  </li>
+                  <li>
+                    <a href="http://www.xuantong.cn/page/questions1" target="_blank">常见问题解答</a>
+                  </li>
+                  <li>
+                    <a href="http://www.xuantong.cn/page/workPC" target="_blank">提交作业&amp;下载资料指南</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="">
+                <a href="http://xuantong.cn/open/course/explore" target="_blank">免费视频及讲座 </a>
+              </li>
+              <li class="nav-hover">
+                <a href="https://shlxzh.taobao.com/category-1001045259.htm?spm=a1z10.3-c-s.w5002-15726745217.5.3ccb3530A6SpEZ&amp;search=y&amp;catName=%A1%BE%EA%D1%CD%A9%CE%C4%B7%BF%A1%BF"
+                  target="_blank" data-toggle="dropdown">文房商店
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                    <a href="https://item.taobao.com/item.htm?id=568062350614" target="_blank">购买上课装备——文房文具包</a>
+                  </li>
+                  <li>
+                    <a href="https://shop3432948.youzan.com/v2/tag/1f0xvoo47?reft=1522208649262&amp;spm=f9555232&amp;sf=wx_sm"
+                      target="_blank">购买暄桐文房</a>
+                  </li>
+                  <li>
+                    <a href="http://www.xuantong.cn/page/protect" target="_blank">文房的养护</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-hover">
+                <a href="http://xuantong.cn/article" target="_blank" data-toggle="dropdown">关于我们
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                    <a href="http://xuantong.cn/article/category/teacher">关于林曦老师</a>
+                  </li>
+                  <li>
+                    <a href="http://xuantong.cn/article/category/classroom">关于暄桐教室</a>
+                  </li>
+                  <li>
+                    <a href="http://xuantong.cn/article/category/classmates">写字的人</a>
+                  </li>
+                  <li>
+                    <a href="http://xuantong.cn/article/category/calligraphy">写字这件事</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <a href="http://www.xuantong.cn/" class="navbar-brand">
+          <img src="{% static "xuantong/image/17151976bafc671465.png"%}?version=1">
+        </a>
+      </div>
+      <nav class="collapse navbar-collapse">
+        <ul class="nav navbar-nav clearfix hidden-xs " id="nav">
+
+          <li class="">
+            <a href="/" target="_blank">首页</a>
+          </li>
+          <li class="nav-hover">
+            <a href="http://xuantong.cn/course/explore" data-toggle="dropdown">课程
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="http://xuantong.cn/course/explore" target="_blank">单阶课程</a>
+              </li>
+              <li>
+                <a href="http://xuantong.cn/classroom/explore" target="_blank">全阶课程</a>
+              </li>
+              <li>
+                <a href="http://www.xuantong.cn/page/guidepc2" target="_blank">报名指南</a>
+              </li>
+              <li>
+                <a href="http://www.xuantong.cn/page/guidepc3" target="_blank">听课指南</a>
+              </li>
+              <li>
+                <a href="http://www.xuantong.cn/page/questions1" target="_blank">常见问题解答</a>
+              </li>
+              <li>
+                <a href="http://www.xuantong.cn/page/workPC" target="_blank">提交作业&amp;下载资料指南</a>
+              </li>
+            </ul>
+          </li>
+          <li class="">
+            <a href="http://xuantong.cn/open/course/explore" target="_blank">免费视频及讲座 </a>
+          </li>
+          <li class="nav-hover">
+            <a href="https://shlxzh.taobao.com/category-1001045259.htm?spm=a1z10.3-c-s.w5002-15726745217.5.3ccb3530A6SpEZ&amp;search=y&amp;catName=%A1%BE%EA%D1%CD%A9%CE%C4%B7%BF%A1%BF"
+              target="_blank" data-toggle="dropdown">文房商店
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="https://item.taobao.com/item.htm?id=568062350614" target="_blank">购买上课装备——文房文具包</a>
+              </li>
+              <li>
+                <a href="https://shop3432948.youzan.com/v2/tag/1f0xvoo47?reft=1522208649262&amp;spm=f9555232&amp;sf=wx_sm"
+                  target="_blank">购买暄桐文房</a>
+              </li>
+              <li>
+                <a href="http://www.xuantong.cn/page/protect" target="_blank">文房的养护</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-hover">
+            <a href="http://xuantong.cn/article" target="_blank" data-toggle="dropdown">关于我们
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="http://xuantong.cn/article/category/teacher">关于林曦老师</a>
+              </li>
+              <li>
+                <a href="http://xuantong.cn/article/category/classroom">关于暄桐教室</a>
+              </li>
+              <li>
+                <a href="http://xuantong.cn/article/category/classmates">写字的人</a>
+              </li>
+              <li>
+                <a href="http://xuantong.cn/article/category/calligraphy">写字这件事</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div class="navbar-user  left ">
+          <ul class="nav user-nav">
+            <li class="user-avatar-li nav-hover visible-xs">
+              <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                <img class="avatar-xs" src="{% static "xuantong/image/avatar.png"%}">
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li class="user-nav-li-login">
+                  <a href="http://www.xuantong.cn/login?goto=/">
+                    <i class="es-icon es-icon-denglu"></i>登录
+                  </a>
+                </li>
+                <li class="user-nav-li-register">
+                  <a href="http://www.xuantong.cn/register?goto=/">
+                    <i class="es-icon es-icon-zhuce"></i>注册
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="hidden-xs">
+              <a href="http://www.xuantong.cn/login?goto=/">登录</a>
+            </li>
+            <li class="hidden-xs">
+              <a href="http://www.xuantong.cn/register?goto=/">注册</a>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-right hidden-xs hidden-sm" action="http://www.xuantong.cn/search" method="get">
+            <div class="form-group">
+              <input class="form-control js-search" value="" name="q" placeholder="搜索">
+              <button class="button es-icon es-icon-search"></button>
+            </div>
+          </form>
+        </div>
+      </nav>
+    </header>
+
+    <section class="es-poster swiper-container">
+      <div class="swiper-wrapper" style="width: 3375px; transform: translate3d(-1125px, 0px, 0px); transition-duration: 0.3s; height: 117px;">
+        {% for item in abs %}
+          <div class="swiper-slide" style="background: rgb(244, 244, 244); width: 375px; height: 117px;">
+            <div>
+              <a href="{{ item.url }}" target="_blank">
+                <img class="img-responsive" src="{{ item.image.url }}">
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+
+      </div>
+      <div class="swiper-pager">
+        <span class="swiper-pagination-switch"></span>
+        <span class="swiper-pagination-switch"></span>
+        <span class="swiper-pagination-switch swiper-visible-switch swiper-active-switch"></span>
+        <span class="swiper-pagination-switch"></span>
+        <span class="swiper-pagination-switch"></span>
+        <span class="swiper-pagination-switch"></span>
+        <span class="swiper-pagination-switch"></span>
+      </div>
+    </section>
+
+
+
+    <!-- 推荐班级 -->
+    <section class="class-section section-gray">
+      <div class="container">
+        <div class="text-line">
+          <h5>
+            <span>扶阳 医学 春秋</span>
+            <div class="line"></div>
+          </h5>
+          <div class="subtitle">一步一脚印地学习扶阳医学，逐步提升</div>
+        </div>
+        <div class="recommend-class-list row">
+          {% for item in vcs %}
+            <div class="col-md-3 col-xs-6">
+              <div class="class-item">
+                <div class="class-img-wrap">
+                  <a class="class-img" href="http://www.xuantong.cn/classroom/3">
+                    <img src="{{ item.image.url }}" alt="{{ item.name}}" class="img-responsive">
+                  </a>
+                  <div class="mask">
+  
+                    <a href="http://www.xuantong.cn/classroom/3" class="btn btn-warning">立即加入</a>
+                  </div>
+                </div>
+                <h3>
+                  <a class="link-dark" href="http://www.xuantong.cn/classroom/3">{{ item.name}}</a>
+                </h3>
+                <div class="metas">共
+                  <span>{{ item.subcourse}}</span>课</div>
+              </div>
+            </div>
+          {% endfor %}
+          
+          
+            
+        </div>
+        <div class="section-more-btn">
+          <a href="/" class="btn btn-default btn-lg">
+            更多全阶课程
+            <i class="mrs-o es-icon es-icon-chevronright"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="course-list-section section-wihte" id="course-list-section">
+
+      <div class="container">
+        <div class="text-line">
+          <h5>
+            <span>单阶课程</span>
+            <div class="line"></div>
+          </h5>
+          <div class="subtitle">课程以不同主题展开，一起学习，一起玩耍</div>
+        </div>
+        <div class="course-filter" id="course-filter">
+          <ul class="nav nav-pills hidden-xs" role="tablist">
+            <li role="presentation" class="active  js-course-filter" data-url="/course/search?orderBy=recommendedSeq" data-type="course">
+              <a href="javascript:;">全部课程</a>
+            </li>
+            <li role="presentation" class=" js-course-filter" data-url="/course/search?categoryId=1&amp;orderBy=recommendedSeq" data-type="course">
+              <a href="javascript:;">默认分类</a>
+            </li>
+          </ul>
+          <div class="btn-group visible-xs">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">全部课程
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li role="presentation" class="js-course-filter active " data-url="/course/search?orderBy=recommendedSeq" data-type="course">
+                <a href="javascript:;">全部课程</a>
+              </li>
+              <li role="presentation" class="js-course-filter " data-url="/course/search?categoryId=1&amp;orderBy=recommendedSeq" data-type="course">
+                <a href="javascript:;">默认分类</a>
+              </li>
+            </ul>
+          </div>
+          <div class="course-sort btn-group">
+            <a href="javascript:;" class="btn btn-default js-course-filter" data-url="/course/search?categoryId=0&amp;orderBy=latest"
+              data-type="course">
+              最新
+            </a>
+            <a href="javascript:;" class="btn btn-default js-course-filter" data-url="/course/search?categoryId=0&amp;orderBy=studentNum"
+              data-type="course">
+              最热
+            </a>
+            <a href="javascript:;" class="btn btn-default  active js-course-filter" data-url="/course/search?categoryId=0&amp;orderBy=recommendedSeq"
+              data-type="course">
+              推荐
+            </a>
+          </div>
+        </div>
+        <div class="course-list">
+          <div class="row">
+            <div class="col-lg-3 col-md-4 col-xs-6">
+              <div class="course-item">
+                <div class="course-img">
+
+                  <a href="http://www.xuantong.cn/course/49" target="_blank">
+                    <img src="{% static "xuantong/image/0001437cbc84013400.png"%}" alt="第一阶丨篆隶筑基课程" class="img-responsive">
+                  </a>
+                </div>
+                <div class="course-info">
+                  <div class="title">
+                    <a class="link-dark" href="http://www.xuantong.cn/course/49" target="_blank">
+                      第一阶丨篆隶筑基课程
+                    </a>
+                  </div>
+                  <div class="metas clearfix">
+                    <span class="comment">
+                      <i class="es-icon es-icon-textsms"></i>245</span>
+
+                    <span class="course-price-widget">
+                      <span class="
+                              price
+            ">
+                        3280元
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+              <div class="course-item">
+                <div class="course-img">
+
+                  <a href="http://www.xuantong.cn/course/50" target="_blank">
+                    <img src="{% static "xuantong/image/102310e3dd0e051976.png"%}" alt="第二阶丨楷书精进课程" class="img-responsive">
+                  </a>
+                </div>
+                <div class="course-info">
+                  <div class="title">
+                    <a class="link-dark" href="http://www.xuantong.cn/course/50" target="_blank">
+                      第二阶丨楷书精进课程
+                    </a>
+                  </div>
+                  <div class="metas clearfix">
+                    <span class="comment">
+                      <i class="es-icon es-icon-textsms"></i>42</span>
+
+                    <span class="course-price-widget">
+                      <span class="
+                              price
+            ">
+                        6560元
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+              <div class="course-item">
+                <div class="course-img">
+
+                  <a href="http://www.xuantong.cn/course/51" target="_blank">
+                    <img src="{% static "xuantong/image/001053d1cca8057936.png"%}" alt="第三阶丨小楷写经课程" class="img-responsive">
+                  </a>
+                </div>
+                <div class="course-info">
+                  <div class="title">
+                    <a class="link-dark" href="http://www.xuantong.cn/course/51" target="_blank">
+                      第三阶丨小楷写经课程
+                    </a>
+                  </div>
+                  <div class="metas clearfix">
+                    <span class="comment">
+                      <i class="es-icon es-icon-textsms"></i>0</span>
+
+                    <span class="course-price-widget">
+                      <span class="
+                              price
+            ">
+                        3280元
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+              <div class="course-item">
+                <div class="course-img">
+
+                  <a href="http://www.xuantong.cn/course/53" target="_blank">
+                    <img src="{% static "xuantong/image/153124ccb630903020.png"%}" alt="第四阶丨自在行草课程" class="img-responsive">
+                  </a>
+                </div>
+                <div class="course-info">
+                  <div class="title">
+                    <a class="link-dark" href="http://www.xuantong.cn/course/53" target="_blank">
+                      第四阶丨自在行草课程
+                    </a>
+                  </div>
+                  <div class="metas clearfix">
+                    <span class="comment">
+                      <i class="es-icon es-icon-textsms"></i>0</span>
+
+                    <span class="course-price-widget">
+                      <span class="
+                              price
+            ">
+                        6560元
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="section-more-btn">
+          <a href="http://www.xuantong.cn/course/explore" class="btn btn-default btn-lg">
+            更多课程
+            <i class="mrs-o es-icon es-icon-chevronright"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="feature-banner" style="background: #e2133a">
+      <a href="http://www.xuantong.cn/page/39" target="_blank">
+        <img class="img-responsive" src="{% static "xuantong/image/block_picture_1524105724.jpg"%}" alt="学习包海报">
+      </a>
+    </section>
+
+    <section class="course-list-section open-course-list-section section-wihte" id="open-course-list-section">
+
+
+      <div class="container">
+        <div class="text-line">
+          <h5>
+            <span>免费讲座及视频</span>
+            <div class="line"></div>
+          </h5>
+          <div class="subtitle">是智慧，也是滋养</div>
+        </div>
+
+        <div class="course-list">
+          <div class="row">
+            <div class="col-lg-3 col-md-4 col-xs-6">
+              <div class="course-item">
+                <div class="course-img">
+                  <a href="http://www.xuantong.cn/open/course/16" target="_blank">
+                    <img src="{% static "xuantong/image/102202a38ab4211477.png"%}" alt="【免费试听课】暄桐线上课程" class="img-responsive">
+                  </a>
+                </div>
+                <div class="course-info">
+                  <div class="title">
+                    <a class="link-dark" href="http://www.xuantong.cn/open/course/16" target="_blank" title="【免费试听课】暄桐线上课程">
+                      【免费试听课】暄桐线上课程
+                    </a>
+                  </div>
+                  <div class="metas clearfix">
+                    <span class="num">
+                      <i class="es-icon es-icon-removeredeye"></i>48509</span>
+                    <span class="comment">
+                      <i class="es-icon es-icon-textsms"></i>65</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+              <div class="course-item">
+                <div class="course-img">
+                  <a href="http://www.xuantong.cn/open/course/13" target="_blank">
+                    <img src="{% static "xuantong/image/170508422be5914528.png"%}" alt="【林曦老师欢迎你】暄桐教室线上课程" class="img-responsive">
+                  </a>
+                </div>
+                <div class="course-info">
+                  <div class="title">
+                    <a class="link-dark" href="http://www.xuantong.cn/open/course/13" target="_blank" title="【林曦老师欢迎你】暄桐教室线上课程">
+                      【林曦老师欢迎你】暄桐教室线上课程
+                    </a>
+                  </div>
+                  <div class="metas clearfix">
+                    <span class="num">
+                      <i class="es-icon es-icon-removeredeye"></i>16271</span>
+                    <span class="comment">
+                      <i class="es-icon es-icon-textsms"></i>22</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+              <div class="course-item">
+                <div class="course-img">
+                  <a href="http://www.xuantong.cn/open/course/14" target="_blank">
+                    <img src="{% static "xuantong/image/170441970e90588295.png"%}" alt="【报名指南】暄桐线上课程" class="img-responsive">
+                  </a>
+                </div>
+                <div class="course-info">
+                  <div class="title">
+                    <a class="link-dark" href="http://www.xuantong.cn/open/course/14" target="_blank" title="【报名指南】暄桐线上课程">
+                      【报名指南】暄桐线上课程
+                    </a>
+                  </div>
+                  <div class="metas clearfix">
+                    <span class="num">
+                      <i class="es-icon es-icon-removeredeye"></i>8630</span>
+                    <span class="comment">
+                      <i class="es-icon es-icon-textsms"></i>23</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6">
+              <div class="course-item">
+                <div class="course-img">
+                  <a href="http://www.xuantong.cn/open/course/9" target="_blank">
+                    <img src="{% static "xuantong/image/102331342166520764.png"%}" alt="一起学习，一起玩耍" class="img-responsive">
+                  </a>
+                </div>
+                <div class="course-info">
+                  <div class="title">
+                    <a class="link-dark" href="http://www.xuantong.cn/open/course/9" target="_blank" title="一起学习，一起玩耍">
+                      一起学习，一起玩耍
+                    </a>
+                  </div>
+                  <div class="metas clearfix">
+                    <span class="num">
+                      <i class="es-icon es-icon-removeredeye"></i>8930</span>
+                    <span class="comment">
+                      <i class="es-icon es-icon-textsms"></i>10</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="section-more-btn">
+          <a href="http://www.xuantong.cn/open/course/explore" class="btn btn-default btn-lg">
+            更多公开课
+            <i class="mrs-o es-icon es-icon-chevronright"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 小组动态 -->
+    <section class="dynamic-section section-gray">
+      <div class="container">
+        <div class="text-line gray">
+          <h5>
+            <span>乐园</span>
+            <div class="line"></div>
+          </h5>
+          <div class="subtitle">关于那些让我们欢喜的物事和可爱的生活方式</div>
+        </div>
+        <div class="dynamic-section-main row">
+          <div class="col-md-6">
+            <div class="panel panel-default index-article">
+              <div class="panel-heading">
+                <h3 class="panel-title">
+                  最新文章
+                  <a class="more" href="http://www.xuantong.cn/article">
+                    <i class="es-icon es-icon-morehoriz"></i>
+                  </a>
+                </h3>
+              </div>
+              <div class="panel-body clearfix">
+                <ul class="index-recommend-aricle clearfix">
+                  <li class="">
+                    <a href="http://www.xuantong.cn/article/18">
+                      <img src="{% static "xuantong/image/223215fe9507468559.png"%}" alt="写字的人 | 不爱自己，我拿什么爱你呢？" class="img-responsive">
+                      <div class="image-overlay"></div>
+                      <div class="title">写字的人 | 不爱自己，我拿什么爱你呢？</div>
+                    </a>
+                  </li>
+                  <li class="last">
+                    <a href="http://www.xuantong.cn/article/22">
+                      <img src="{% static "xuantong/image/162812c50fb7846478.png"%}" alt="写字的人 | 我的进步奖" class="img-responsive">
+                      <div class="image-overlay"></div>
+                      <div class="title">写字的人 | 我的进步奖</div>
+                    </a>
+                  </li>
+                </ul>
+                <ul class="index-new-article ">
+                  <li class=" clearfix">
+                    <i class="es-icon es-icon-dot color-primary mrs"></i>
+                    <a class="link-dark" href="http://www.xuantong.cn/article/18" title="写字的人 | 不爱自己，我拿什么爱你呢？">写字的人 | 不爱自己，我拿什么爱你呢？</a>
+                    <span class="date">04-16</span>
+                  </li>
+                  <li class=" clearfix">
+                    <i class="es-icon es-icon-dot color-primary mrs"></i>
+                    <a class="link-dark" href="http://www.xuantong.cn/article/22" title="写字的人 | 我的进步奖">写字的人 | 我的进步奖</a>
+                    <span class="date">04-17</span>
+                  </li>
+                  <li class=" clearfix">
+                    <i class="es-icon es-icon-dot color-primary mrs"></i>
+                    <a class="link-dark" href="http://www.xuantong.cn/article/17" title="写字的人 | “随性的，但也真喜欢”">写字的人 | “随性的，但也真喜欢”</a>
+                    <span class="date">04-13</span>
+                  </li>
+                  <li class=" clearfix">
+                    <i class="es-icon es-icon-dot color-primary mrs"></i>
+                    <a class="link-dark" href="http://www.xuantong.cn/article/16" title="林曦的书 | 有一种生活，只生欢喜不生愁">林曦的书 | 有一种生活，只生欢喜不生愁</a>
+                    <span class="date">04-05</span>
+                  </li>
+                  <li class="last clearfix">
+                    <i class="es-icon es-icon-dot color-primary mrs"></i>
+                    <a class="link-dark" href="http://www.xuantong.cn/article/14" title="写字的人 | “喜欢时髦的东西，但也和我喜欢写字画画不相悖”">写字的人 | “喜欢时髦的东西，但也和我喜欢写字画画不相悖”</a>
+                    <span class="date">03-01</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <footer class="es-footer">
+      <div class="copyright text-sm">
+        <div class="container">
+          Powered by
+          <a href="/" target="_blank">扶阳医学</a>
+          <script src="{% static "xuantong/js/entrance.js"%}" class="zhiCustomBtn" id="zhichiScript" data-args="属性名1=属性值1&amp;属性名2=属性值2"></script>
+          <div class="mts">
+            <a href="http://www.miibeian.gov.cn/" target="_blank">
+              京ICP备17020743号
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+  </div>
+
+
+
+
+  <!-- 侧边栏快捷操作 -->
+  <div class="es-bar hidden-xs">
+
+    <!-- 左侧列表 -->
+    <div class="es-bar-menu">
+      <ul class="bar-menu-top">
+        <li data-id="#bar-user-center" class="bar-user">
+          <a href="javascript:;" data-url="/esbar/my/study_center">学
+            <br>习
+            <br>中
+            <br>心</a>
+        </li>
+        <li data-id="#bar-homework" data-toggle="tooltip" data-placement="left" title="" data-trigger="hover" data-container=".es-bar"
+          data-original-title="我的考试/作业">
+          <a href="javascript:;" data-url="/esbar/my/practice/finished">
+            <i class="es-icon es-icon-edit"></i>
+          </a>
+        </li>
+        <li data-id="#bar-course-list" data-placement="left" data-toggle="tooltip" title="" data-trigger="hover" data-container=".es-bar"
+          data-original-title="我的课程/全阶课程">
+          <a data-url="/esbar/my/course" href="javascript:;">
+            <i class="es-icon es-icon-book">
+            </i>
+          </a>
+        </li>
+        <li data-id="#bar-message" data-toggle="tooltip" data-placement="left" title="" data-original-title="通知">
+          <a href="javascript:;">
+            <i class="es-icon es-icon-notifications"></i>
+          </a>
+        </li>
+      </ul>
+      <ul class="bar-menu-sns">
+        <li class="popover-btn bar-weixin-btn" data-container=".bar-weixin-btn" data-content-element="#bar-weixin-content" data-original-title=""
+          title="">
+          <a>
+            <i class="es-icon es-icon-weixin"></i>
+          </a>
+        </li>
+
+        <li class="go-top" style="margin:-10px auto 0 auto;" data-toggle="tooltip" data-placement="left" title="" data-trigger="hover"
+          data-container=".es-bar" data-original-title="回到顶端">
+          <a href="javascript:;">
+            <i class="es-icon es-icon-keyboardarrowup" style="margin-bottom:-8px"></i>
+            <span class="text-sm">TOP</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 列表内容 -->
+
+    <div class="bar-popover-content" style="display:none;">
+      <div id="bar-qq-content">
+        <hr>
+      </div>
+
+      <div id="bar-phone-content">
+        <p class="mtm">
+          <i class="es-icon es-icon-mail mrm"></i>邮箱：
+          <a class="link-dark" href="mailto:xuantonglearning@126.com">xuantonglearning@126.com</a>
+        </p>
+      </div>
+
+      <div id="bar-weixin-content">
+        <img width="110" class="img-responsive" src="{% static "xuantong/image/18095640c04e564997.jpg"%}" alt="">
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="login-modal" class="modal" data-url="/login/ajax"></div>
+  <div id="modal" class="modal"></div>
+  <div id="attachment-modal" class="modal"></div>
+
+
+
+
+
+
+  <script>
+    if (typeof app === 'undefined') {
+      var app = {};
+    }
+    app.version = '8.2.4_19';
+    app.httpHost = 'http://www.xuantong.cn';
+    app.basePath = 'http://www.xuantong.cn';
+    app.theme = 'jianmo';
+
+
+    var CLOUD_FILE_SERVER = "";
+
+    app.config = { "api": { "weibo": { "key": "" }, "qq": { "key": "" }, "douban": { "key": "" }, "renren": { "key": "" } }, "loading_img_path": "\/assets\/img\/default\/loading.gif?version=8.2.4_19" };
+
+    app.arguments = {};
+
+    app.scripts = null;
+
+    app.fileSingleSizeLimit = 3;
+
+    app.uploadUrl = '/file/upload';
+    app.imgCropUrl = '/file/img/crop';
+    app.lessonCopyEnabled = '1';
+    app.cloudSdkCdn = '';
+    app.lang = 'zh_CN';
+  </script>
+
+  <script src="{% static "xuantong/js/translator.min.js"%}"></script>
+
+  <script src="{% static "xuantong/js/zh_CN.js"%}"></script>
+  <script src="{% static "xuantong/js/base.js"%}"></script>
+  <script src="{% static "xuantong/js/common.js"%}"></script>
+  <script src="{% static "xuantong/js/main.js"%}"></script>
+  <script src="{% static "xuantong/js/main(2).js"%}"></script>
+  <script src="{% static "xuantong/js/echo-js.js"%}"></script>
+  <script src="{% static "xuantong/js/index(1).js"%}"></script>
+  <script src="{% static "xuantong/js/index(2).js"%}"></script>
+  <script src="{% static "xuantong/js/perfect-scrollbar.js"%}"></script>
+  <script src="{% static "xuantong/js/index(3).js"%}"></script>
+
+  <script type="text/javascript">
+    window.seajsBoot && window.seajsBoot();
+  </script>
+
+
+
+</body>
+
+</html>

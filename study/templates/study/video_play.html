@@ -1,0 +1,322 @@
+{% extends 'study/main_base.html' %}
+
+{% load staticfiles %}
+{% load filters %}
+{% block titlefile %}
+    <link href="http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css" rel="stylesheet">
+    <script src="//imgcache.qq.com/open/qcloud/video/tcplayer/ie8/videojs-ie8.js"></script>
+
+    <script src="http://imgcache.qq.com/open/qcloud/video/tcplayer/lib/hls.min.0.8.8.js"></script>
+
+    <script src="http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js"></script>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .tcplayer {
+            margin: 0 auto;
+        }
+
+        /* 通过 css 设置播放器尺寸 这时<video>中的宽高属性将被覆盖*/
+        .player-size {
+            width: 1280px;
+            height: 720px;
+        }
+
+        @media screen and (max-width: 1280px) {
+            .player-size {
+                width: 100%;
+                height: 540px;
+            }
+        }
+
+        @media screen and (max-width: 640px) {
+            .player-size {
+                width: 100%;
+                height: 270px;
+            }
+        }
+
+        /* 设置logo在高分屏的显示样式 */
+        @media only screen and (min-device-pixel-ratio: 2), only screen and (-webkit-min-device-pixel-ratio: 2) {
+            .tcp-logo-img {
+                width: 50%;
+            }
+        }
+
+        .divcss-right {
+            float: right;
+        }
+        .favorite-right {
+            float: right;
+        }
+
+
+        .divcss_center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -20px;
+            margin-left: -60px;
+        }
+
+        .backcolor {
+            background-color: #000000;
+        }
+
+
+    </style>
+{% endblock %}
+{% block title %}在线视频{% endblock %}
+
+
+{% block content %}
+
+    <div id="content-container" class="container">
+        <ol class="breadcrumb open-course-breadcrumb">
+            <li><a href="/">首页</a></li>
+            {% block video_play_lastlink %}
+                <li><a href="/">视频</a></li>
+            {% endblock %}
+            <li>{{ videoinfo.name }}</li>
+        </ol>
+        <div class="open-course-header">
+            <div class="row">
+                {% if isBuy %}
+                    <video id="player-container-id" class="player-size" playsinline webkit-playsinline>
+                    </video>
+
+                {% else %}
+                    {% if 0 %}
+                        <div class="text-right player-size backcolor">
+                            <a class="btn btn-primary btn-lg divcss_center" id='sum' href="javascript:buyVideo();">
+                                ￥{{ videoinfo.price }} 购买
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="es-section open-course-detail clearfix">
+            <div class="open-course-detail-main media hidden-sm hidden-xs">
+                <div class="media-left">
+                    <img class="img-responsive" src="{{ videoinfo.image.url }}"
+                         alt="{{ videoinfo.name }}">
+                </div>
+                <div class="media-body">
+                    <div class="title">{{ videoinfo.name }}</div>
+                    <div class="metas">
+                        <span><i class="es-icon es-icon-removeredeye mrs"></i>{{ videoinfo.views_count }}</span>
+                        <span><i class="es-icon es-icon-textsms mrs"></i>{{ videoinfo.get_comment_count }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="open-course-detail-operation">
+
+
+                <div class="operation-list divcss-right">
+                    <div class="operation-img  operation-share es-share top">
+                        <a href="http://www.xuantong.cn/open/course/39" class="dropdown-toggle"
+                           data-toggle="dropdown"><i class="es-icon es-icon-share"></i></a>
+
+
+                        <div class="dropdown-menu  js-social-share-params bdsharebuttonbox" data-title="ASK 林曦 | 佛是什么样子"
+                             data-summary=""
+                             data-message="我正在学习暄桐教室的《ASK 林曦 | 佛是什么样子》，享受写字带来的快乐，一起来学习吧！"
+                             data-url="http://www.xuantong.cn/open/course/39"
+                             data-picture="http://sce4a8b6c0d93v-sb-qn.qiqiuyun.net/files/default/2018/06-11/11073680c31d065906.jpg">
+
+                            <a class="bds_tsina" data-cmd="tsina"></a>
+                            <a class="bds_sqq" data-cmd="sqq"></a>
+                            <a class="bds_qzone" data-cmd="qzone"></a>
+                            <a class="bds_weixin" data-cmd="weixin"></a>
+
+                        </div>
+                    </div>
+                    分享
+                </div>
+                <div class="operation-list no-border favorite-right" id="id_favorite" style="display: {% if isCollection %}none{% else %}block{% endif %}">
+                    <div class="operation-img operation-collection">
+                        <a href="javascript:save_collection();" class="js-favorite-num " data-cancel-favorite-url="/open/course/13/unfavorite
+                " data-favorite-url="/open/course/13/favorite " data-login-url="/login/ajax "><i
+                                class="es-icon es-icon-bookmarkoutline "></i></a>
+                    </div>
+                    <span>收藏</span>
+                </div>
+
+                <div class="operation-list no-border favorite-right" id="id_unfavorite" style="display: {% if isCollection %}block{% else %}none{% endif %}">
+                    <div class="operation-img operation-collection active">
+                        <a href="javascript:cancel_collection();" class="js-favorite-num " data-cancel-favorite-url="/open/course/13/unfavorite
+                " data-favorite-url="/open/course/13/favorite " data-login-url="/login/ajax "><i
+                                class="es-icon es-icon-bookmarkoutline "></i></a>
+                    </div>
+                    <span>已收藏</span>
+                </div>
+                <div class="operation-list no-border favorite-right" style="display: none">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="open-course-detail row">
+            <div class="col-md-12">
+                <div class="es-section gray-darker editor-text">
+                    {% autoescape off %}
+                        {{ videoinfo.introduce }}
+                    {% endautoescape %}
+
+                </div>
+
+                <div class="es-section" id="open-course-comment">
+                    <div class="gray-darker pbl">评论(<span class="thread-post-num">0</span>)</div>
+                    <form id="review-form" class="es-commet" id="thread-post-form" method="POST"
+                          action="{{ videoinfo.get_post_url }}" onsubmit="return false"
+                          novalidate="novalidate">
+                        {% csrf_token %}
+                        <textarea class="form-control form-control-o" rows="6" placeholder="您的想法" name="content"
+                                  data-display="您的想法"></textarea>
+                        <div class="form-group clearfix">
+                            <button type="button" class="btn btn-primary pull-right" onclick='submitFormData();'>发表评论
+                            </button>
+                        </div>
+                        <input type="hidden" name="_csrf_token" value="Q-lzhL_E_7toNsGMb1p2l1SFMboFgP0rhFqOwqdQMzg">
+                    </form>
+                    {% for item in vpcs %}
+                        <li id="post-44 " data-user-id="1729 " style="list-style-type:none;"
+                            class="thread-post thread-post-44 media media-comment user-id-1729 ">
+                            <div class="media-body ">
+                                <div class="metas title ">
+                                    <a href="javascript:;" class="nickname ">{{ item.author.nickname }}</a>
+                                    <span class="bullet ">•</span>
+                                    <span class="color-gray ">{{ item.register_date|date:"Y-m-d" }}</span>
+                                </div>
+                                <div class="editor-text "><p>
+                                    {{ item.message|linebreaksbr }}
+                                </p>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    <nav class="text-center">
+
+                    </nav>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <!--<div class="modal fade weixin-share-modal in" tabindex="-1" role="dialog" aria-hidden="true" style="display: block; padding-left: 0px;">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title">分享到微信朋友圈</h4>
+          </div>
+          <div class="modal-body">
+            <p class="weixin-share-loading" style="text-align: center; display: none;">正在加载二维码...</p>
+            <p class="weixin-share-qrcode text-center">
+              <img src="./一起学习，一起玩耍 - 暄桐教室 - 写字是一种生活_files/qrcode.png">
+            </p>
+            <p class="text-muted text-center">
+              <small>打开微信，点击底部的“发现”，<br>使用 “扫一扫” 即可将网页分享到我的朋友圈。
+              </small>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>-->
+
+
+    </div>
+
+
+    <script>
+        function save_collection() {
+
+            $.get("{{ videoinfo.get_collection_url }}", {'is_save': "is_save"}, function (ret) {
+                //alert(ret)
+                document.getElementById('id_unfavorite').style.display = "block"
+                document.getElementById('id_favorite').style.display = "none"
+
+
+
+            })
+
+        }
+
+        function cancel_collection() {
+
+            $.get("{{ videoinfo.get_collection_url }}", {}, function (ret) {
+                document.getElementById('id_unfavorite').style.display = "none"
+                document.getElementById('id_favorite').style.display = "block"
+            })
+
+        }
+        function buyVideo() {
+            {% if 0 %}
+                $.get("{{ videoinfo.get_buy_url }}", {}, function (ret) {
+                    if (ret == "1")
+                        location.reload();
+                })
+            {% else %}
+                alert("购买失败")
+            {% endif %}
+        }
+
+        //拿到form
+        var form = document.getElementById("review-form")
+
+        function submitFormData() {
+            form.submit();
+
+        }
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();   // 取消按键的原始提交行为
+            submitFormData();         //启动监听提交按钮
+        });
+
+        {% if isBuy %}
+            var player = TCPlayer("player-container-id", { // player-container-id 为播放器容器ID，必须与html中一致
+                fileID: "{{ videoinfo.play_id }}", // 请传入需要播放的视频filID 必须
+                appID: "{{ videoinfo.play_app_id }}", // 请传入点播账号的appID 必须
+                autoplay: true //是否自动播放
+                //其他参数请在开发文档中查看
+            });
+        {% endif %}
+
+        window._bd_share_config = {
+            common: {
+                bdText: '我正在学习扶阳医学的《{{ videoinfo.name }}》，享受写字带来的快乐，一起来学习吧！',
+                bdDesc: '我正在学习扶阳医学的《{{ videoinfo.name }}》，享受写字带来的快乐，一起来学习吧！',
+                bdUrl: window.location.href,
+                bdPic: ''
+            },
+            share: [{
+                "bdSize": 16
+            }],
+            image: [{
+                viewType: 'list',
+                viewPos: 'top',
+                viewColor: 'black',
+                viewSize: '16',
+                viewList: ['qzone', 'tsina', 'tqq', 'renren']
+            }],
+            
+        }
+        with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion=' + ~(-new Date() / 36e5)];
+    </script>
+
+
+
+{% endblock %}

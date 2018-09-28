@@ -1,0 +1,27 @@
+{% extends 'userinfo/userinfo_base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}账户中心{% endblock %}
+
+{% block userinfo_title %}
+    我的订单
+{% endblock %}
+{% block userinfo_base_orders_class %}active{% endblock %}
+{% block userinfo_content %}
+
+    <ul class="cd-tabs">
+        <li {% block orders_base_orders_style %}{% endblock %}>
+            <a href="{% url 'userinfo_orders' %}">订单列表</a>
+        </li>
+        <li {% block orders_base_invoice_style %}{% endblock %}>
+            <a href="{% url 'userinfo_invoice' %}">开票记录</a>
+        </li>
+    </ul>
+
+    <div class="table-responsive cd-table-responsive">
+        {% block orders_base_table %}
+
+        {% endblock %}
+    </div>
+{% endblock %}

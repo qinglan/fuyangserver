@@ -1,0 +1,72 @@
+{% extends 'study/main_base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}{{ column.name }}{% endblock %}
+
+
+{% block content %}
+
+    <div id="content-container" class="container">
+
+        <div class="es-tabs article-list-header">
+            <div class="tab-header">
+                <ul class="clearfix">
+                    {% for c in columns %}
+                    <li class="{% if c.pk == column.pk %}active{% endif %}">
+                        <a href="{% url "picture_text_column" c.pk %}">{{ c.name }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+
+
+        <div class="article-list-body row">
+            <div class="col-md-12 article-list-main">
+
+                <section class="es-section">
+                    <div class="article-list">
+                        {% for paper in papers %}
+                        <article class="article-item xt-article-item">
+                            <div class="article-metas clearfix">
+                                <div class="pull-left">
+                                    <div class="date">
+                                        <div class="day">{{ paper.register_date|date:"d" }}</div>
+                                        <div class="month">{{ paper.register_date|date:"m" }}月</div>
+                                    </div>
+                                </div>
+                                <div class="metas-body">
+                                    <p>
+                                        <a class="link-dark" href="{% url "picture_text_column" paper.column.pk %}">{{ paper.column.name }}</a>
+                                    </p>
+                                    <h2 class="title">
+                                        <a class="link-dark" target="_blank" href="{% url "picture_text_paper" paper.pk %}">{{ paper.name }}</a>
+                                    </h2>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <div class="media-left">
+                                    <a target="_blank" href="{% url "picture_text_paper" paper.pk %}">
+                                        <img class="thumb-img"
+                                             src="{{ paper.image.url }}"
+                                             alt="{{ paper.name }}"></a>
+                                </div>
+                                <div class="media-body"><a class="color-gray" target="_blank" href="{% url "picture_text_paper" paper.pk %}">{{ paper.introduce }}</a>
+                                    <a class="all-article-btn" target="_blank" href="{% url "picture_text_paper" paper.pk %}">查看全文</a>
+                                </div>
+                            </div>
+                        </article>
+                        {% endfor %}
+
+                    </div>
+
+                </section>
+            </div>
+
+
+        </div>
+
+    </div>
+{% endblock %}
