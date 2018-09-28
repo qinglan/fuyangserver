@@ -30,15 +30,13 @@
                     </a>
                     <div class="html-mask"></div>
                     <div class="nav-mobile">
-
-
                         <ul class="nav navbar-nav">
 
                             <!--<li class="">
                                 <a href="/" target="_blank">首页 </a>
                             </li>-->
                             <li class="nav-hover">
-                                <a href="/" data-toggle="dropdown">课程
+                                <a href="/" data-toggle="dropdown">扶阳学院
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
@@ -48,49 +46,30 @@
                                         </li>
                                     {% endfor %}
                                     <li>
-                                        <a href="{% url 'studyfuyang' %}" target="_blank">零起步学扶阳</a>
+                                        <a href="{% url 'studyfuyang' %}" target="_blank">报名区</a>
                                     </li>
                                     <li>
-                                        <a href="{% url 'videolecture' %}" target="_blank">讲座视频</a>
+                                        <a href="{% url 'videolecture' %}" target="_blank">直播区</a>
                                     </li>
                                     <li>
-                                        <a href="{% url "picture_text_column" 1 %}" target="_blank">医案精讲</a>
+                                        <a href="{% url "picture_text_column" 1 %}" target="_blank">视频区</a>
                                     </li>
+                                    <li><a href="javascript:;" target="_blank">资料区</a></li>
+                                    <li><a href="javascript:;" target="_blank">使用指南</a></li>
                                 </ul>
                             </li>
                             <li class="nav-hover">
-                                <a href="/" data-toggle="dropdown">指南
+                                <a href="/" data-toggle="dropdown">扶阳论坛
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-
-                                    <li>
-                                        <a href="javascript:;" target="_blank">听课指南</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;" target="_blank">常见问题解答</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;" target="_blank">提交作业&下载资料指南</a>
-                                    </li>
+                                    <li><a href="javascript:;" target="_blank">扶阳提议</a></li>
+                                    <li><a href="javascript:;" target="_blank">医案辨析</a></li>
+                                    <li><a href="javascript:;" target="_blank">扶阳天天乐</a></li>
+                                    <li><a href="javascript:;" target="_blank">扶阳国医馆</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-hover">
-                                <a href="/" target="_blank" data-toggle="dropdown">关于我们
-                                    <b class="caret"></b>
-                                </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="https://baike.baidu.com/item/%E6%89%B6%E9%98%B3%E5%8C%BB%E5%AD%A6%E4%BC%A0%E6%89%BF%E5%9F%BA%E5%9C%B0/20601127">传承基地</a>
-                                    </li>
-                                    <li>
-                                        <a href="https://baike.baidu.com/item/%E6%89%B6%E9%98%B3%E6%B4%BE/8505232?fr=aladdin">扶阳医学</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">联系我们</a>
-                                    </li>
-                                </ul>
-                            </li>
+                            <li class="nav-hover"><a href="/" target="_blank" data-toggle="dropdown">扶阳商城</a></li>
                         </ul>
                     </div>
                 </div>
@@ -105,7 +84,7 @@
                         <a href="/" target="_blank">首页</a>
                     </li>-->
                     <li class="nav-hover">
-                        <a href="/" data-toggle="dropdown">课程
+                        <a href="/" data-toggle="dropdown">扶阳学院
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu" role="menu">
@@ -114,52 +93,26 @@
                                     <a href="{{ item.get_absolute_url }}" target="_blank">{{ item.name }}</a>
                                 </li>
                             {% endfor %}
-                            <li>
-                                <a href="{% url 'studyfuyang' %}" target="_blank">零起步学扶阳</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'videolecture' %}" target="_blank">讲座视频</a>
-                            </li>
-                            <li>
-                                <a href="{% url "picture_text_column" 1 %}" target="_blank">医案精讲</a>
-                            </li>
-
+                            <li><a href="{% url 'studyfuyang' %}" target="_blank">报名区</a></li>
+                            <li><a href="{% url 'videolecture' %}" target="_blank">直播区</a></li>
+                            <li><a href="{% url "picture_text_column" 1 %}" target="_blank">视频区</a></li>
+                            <li><a href="javascript:;" target="_blank">资料区</a></li>
+                            <li><a href="javascript:;" target="_blank">使用指南</a></li>
                         </ul>
                     </li>
                     <li class="nav-hover">
-                        <a href="/" data-toggle="dropdown">指南
+                        <a href="/" data-toggle="dropdown">扶阳论坛
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-
-                            <li>
-                                <a href="javascript:;" target="_blank">听课指南</a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" target="_blank">常见问题解答</a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" target="_blank">提交作业&下载资料指南</a>
-                            </li>
+                            <li><a href="javascript:;" target="_blank">扶阳提议</a></li>
+                            <li><a href="javascript:;" target="_blank">医案辨析</a></li>
+                            <li><a href="javascript:;" target="_blank">扶阳天天乐</a></li>
+                            <li><a href="javascript:;" target="_blank">扶阳国医馆</a></li>
                         </ul>
                     </li>
 
-                    <li class="nav-hover">
-                        <a href="/" target="_blank" data-toggle="dropdown">关于我们
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href="https://baike.baidu.com/item/%E6%89%B6%E9%98%B3%E5%8C%BB%E5%AD%A6%E4%BC%A0%E6%89%BF%E5%9F%BA%E5%9C%B0/20601127">传承基地</a>
-                            </li>
-                            <li>
-                                <a href="https://baike.baidu.com/item/%E6%89%B6%E9%98%B3%E6%B4%BE/8505232?fr=aladdin">扶阳医学</a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">联系我们</a>
-                            </li>
-                        </ul>
-                    </li>
+                    <li class="nav-hover"><a href="/" target="_blank">扶阳商城</a></li>
                 </ul>
                 <div class="navbar-user  left ">
                     {% if request.user.is_authenticated %}
