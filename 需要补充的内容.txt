@@ -1,0 +1,4 @@
+1、立即报名的链接
+
+2、http://localhost:8000/videolecture/videoplaylecture/9/
+ipad下评论数不对，手机端要显示评论数（不能，空间不够）

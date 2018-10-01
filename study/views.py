@@ -554,11 +554,11 @@ def videoplaylecture(request, pk):
             break
     isBuy = gas[0].price == 0 or b
 
-    isCollection = Collection.is_collection(request.user, gas[0])
+    #isCollection = Collection.is_collection(request.user, gas[0])
     return render(request, 'study/video_play_lecture.html', {'videoinfo': gas[0],
                                                              'isBuy': isBuy,
                                                              'vpcs': vpcs,
-                                                             'isCollection': isCollection})
+                                                             'isCollection': None})
 
 
 def videoplaylecture_comment(request, pk):

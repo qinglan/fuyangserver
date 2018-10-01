@@ -45,15 +45,9 @@
                                             <a href="{{ item.get_absolute_url }}" target="_blank">{{ item.name }}</a>
                                         </li>
                                     {% endfor %}
-                                    <li>
-                                        <a href="{% url 'studyfuyang' %}" target="_blank">报名区</a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'videolecture' %}" target="_blank">直播区</a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url "picture_text_column" 1 %}" target="_blank">视频区</a>
-                                    </li>
+                                    <li><a href="{% url "picture_text_column" 1 %}" target="_blank">报名区</a></li>
+                                    <li><a href="{% url 'studyfuyang' %}" target="_blank">直播区</a></li>
+                                    <li><a href="{% url 'videolecture' %}" target="_blank">视频区</a></li>
                                     <li><a href="javascript:;" target="_blank">资料区</a></li>
                                     <li><a href="javascript:;" target="_blank">使用指南</a></li>
                                 </ul>
@@ -93,9 +87,9 @@
                                     <a href="{{ item.get_absolute_url }}" target="_blank">{{ item.name }}</a>
                                 </li>
                             {% endfor %}
-                            <li><a href="{% url 'studyfuyang' %}" target="_blank">报名区</a></li>
-                            <li><a href="{% url 'videolecture' %}" target="_blank">直播区</a></li>
-                            <li><a href="{% url "picture_text_column" 1 %}" target="_blank">视频区</a></li>
+                            <li><a href="{% url "picture_text_column" 1 %}" target="_blank">报名区</a></li>
+                            <li><a href="{% url 'studyfuyang' %}" target="_blank">直播区</a></li>
+                            <li><a href="{% url 'videolecture' %}" target="_blank">视频区</a></li>
                             <li><a href="javascript:;" target="_blank">资料区</a></li>
                             <li><a href="javascript:;" target="_blank">使用指南</a></li>
                         </ul>

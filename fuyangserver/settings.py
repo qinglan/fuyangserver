@@ -93,7 +93,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'fuyangdatabase',
         'USER': 'root',
-        'PASSWORD': 'zwlei0827.',
+        'PASSWORD': 'fly#snow02',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4'},

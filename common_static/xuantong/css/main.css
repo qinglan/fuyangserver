@@ -5576,9 +5576,11 @@ a.transition:hover {
 .pbm {
   padding-bottom: 10px !important;
 }
+/*
 .pbl {
   padding-bottom: 20px !important;
 }
+*/
 .pls {
   padding-left: 5px !important;
 }
@@ -8462,7 +8464,7 @@ fieldset[disabled] a.btn {
 }
 .es-tabs {
   background: #fff;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   border: 1px solid #e4ecf3;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -8483,7 +8485,7 @@ fieldset[disabled] a.btn {
 }
 .es-tabs .tab-header > ul > li > a {
   display: block;
-  padding: 15px 30px;
+  padding: 10px 30px;
   color: #616161;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
@@ -8492,7 +8494,7 @@ fieldset[disabled] a.btn {
 }
 @media (max-width: 767px) {
   .es-tabs .tab-header > ul > li > a {
-    padding: 8px 10px;
+    padding: 5px 10px;
   }
 }
 .es-tabs .tab-header > ul > li > a:hover {
@@ -11974,8 +11976,14 @@ textarea {
   background-color: #f5f5f5;
   border-radius: 50%;
 }
+/* 新增:报名区列表显示序号 */
+.article-metas .date .num {
+  padding-top: 13px;
+  font-size: 16px;
+  line-height: 1.2;
+}
 .article-metas .date .day {
-  padding-top: 5px;
+  padding-top: 6px;
   font-size: 16px;
   line-height: 1.2;
 }
@@ -12105,9 +12113,11 @@ textarea {
   color: #fff;
   z-index: 999;
 }
+/*
 .es-commet {
   margin: 30px auto;
 }
+*/
 .es-commet .badge {
   margin-left: 5px;
 }
@@ -15789,7 +15799,7 @@ textarea {
 .open-course-detail-operation {
   float: left;
   width: 55%;
-  padding: 20px 0;
+  /*padding: 20px 0;*/
 }
 @media (max-width: 991px) {
   .open-course-detail-operation {

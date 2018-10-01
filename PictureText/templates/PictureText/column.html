@@ -31,10 +31,10 @@
                         {% for paper in papers %}
                         <article class="article-item xt-article-item">
                             <div class="article-metas clearfix">
+                                <div class="pull-right"><a href="javascript:;">立即报名</a></div>
                                 <div class="pull-left">
                                     <div class="date">
-                                        <div class="day">{{ paper.register_date|date:"d" }}</div>
-                                        <div class="month">{{ paper.register_date|date:"m" }}月</div>
+                                        <div class="num">{{ forloop.counter }}</div>
                                     </div>
                                 </div>
                                 <div class="metas-body">
