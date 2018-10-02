@@ -25,7 +25,7 @@
     <div id="content-container" class="container">
         <ol class="breadcrumb open-course-breadcrumb">
             <li><a href="/">首页</a></li>
-            <li><a href="{% url "picture_text_column" paper.column.pk %}">{{ paper.column.name }}</a></li>
+            <li><a href="{% url "picture_text_category" paper.column.pk %}">{{ paper.column.name }}</a></li>
             <li>正文</li>
         </ol>
 
@@ -113,14 +113,8 @@
                         {% endfor %}
                     </ul>
 
-                    <nav class="text-center">
-
-                    </nav>
-
                 </section>
             </div>
-
-
         </div>
 
     </div>

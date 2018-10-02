@@ -19,7 +19,7 @@
         </div>
         <div class="swiper-pager">
             {% for item in abs %}
-            <span class="swiper-pagination-switch"></span>
+                <span class="swiper-pagination-switch"></span>
             {% endfor %}
 
         </div>
@@ -29,42 +29,22 @@
         <div class="open-course-list">
             <div class="row course-list es-open-course-list">
                 {% for info in vis %}
-                <div class="col-md-4 col-xs-6">
-                    <div class="course-item">
-                        <div class="course-img">
+                    <div class="col-md-4 col-xs-6">
+                        <div class="thumbnail">
                             <a href="{{ info.get_absolute_url }}" target="_blank">
-                                <img src="{{ info.image.url }}" alt="{{ info.name }}"
-                                     class="img-responsive">
+                                <img src="{{ info.image.url }}" style="min-height: 120px" alt="{{ info.name }}"
+                                     class="img-responsive"/>
                             </a>
-                        </div>
-                        <div class="course-info clearfix">
-                            <div class="title">
-                                <a class="link-dark" href="{{ info.get_absolute_url }}" target="_blank"
-                                   title="{{ info.name }}">
-                                    {{ info.name }}
-                                </a>
-                            </div>
-                            <div class="metas pull-right">
-                                <span class="num">
-                                    <i class="es-icon es-icon-removeredeye">
-                                    </i>
-                                    {{ info.views_count }}
-                                </span>
-                                <span class="comment">
-                                    <i class="es-icon es-icon-textsms">
-                                    </i>
-                                    {{ info.videoinfostudyfuyangcomment_set.count|default:0 }}
-                                </span>
+                            <div class="caption">
+                                <h4>{{ info.name }}</h4>
                             </div>
                         </div>
-
                     </div>
-                </div>
                 {% endfor %}
             </div>
-            <nav class=" text-center">
-                <ul class="pagination">
 
+            <nav class="text-center">
+                <ul class="pagination">
                     <li>
                         <a href="{{ maxleft }}">
                             <i class="cd-icon cd-icon-first-page"></i>
@@ -82,7 +62,6 @@
                         </li>
                     {% endfor %}
 
-
                     <li>
                         <a href="{{ right }}">
                             <i class="cd-icon cd-icon-arrow-right"></i>
@@ -96,7 +75,6 @@
                     </li>
                 </ul>
             </nav>
-
         </div>
     </div>
 

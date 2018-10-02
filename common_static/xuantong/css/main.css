@@ -8487,6 +8487,7 @@ fieldset[disabled] a.btn {
   display: block;
   padding: 10px 30px;
   color: #616161;
+  font-size:12px;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
@@ -8495,6 +8496,7 @@ fieldset[disabled] a.btn {
 @media (max-width: 767px) {
   .es-tabs .tab-header > ul > li > a {
     padding: 5px 10px;
+	font-size:12px;
   }
 }
 .es-tabs .tab-header > ul > li > a:hover {
@@ -8506,6 +8508,7 @@ fieldset[disabled] a.btn {
 }
 .es-tabs .tab-header > ul > li.active > a {
   background-color: #fff;
+  color:#04bf04;
 }
 .es-tabs .tab-body {
   padding: 5px 15px;

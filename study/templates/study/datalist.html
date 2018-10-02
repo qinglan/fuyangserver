@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 
-{% block title %}{{ column.name }}{% endblock %}
+{% block title %}资料区{% endblock %}
 
 
 {% block content %}
@@ -30,31 +30,26 @@
         <div class="es-tabs article-list-header">
             <div class="tab-header">
                 <ul class="clearfix">
-                    {% for c in columns %}
-                        <li class="{% if c.pk == column.pk %}active{% endif %}">
-                            <a href="{% url "picture_text_category" c.pk %}">{{ c.name }}</a>
-                        </li>
-                    {% endfor %}
+                    <li class="active"><a href=".">资料区</a></li>
                 </ul>
             </div>
-
         </div>
-
 
         <div class="article-list-body row">
             <div class="col-md-12 article-list-main">
 
                 <section class="es-section">
                     <div class="article-list">
-                        {% for paper in papers %}
+                        {% for item in ds %}
                             <div class="media media-sm">
-                                <a class="media-left" href="{% url "picture_details" paper.pk %}">
-                                    <img src="{{ paper.image.url }}" alt="{{ paper.name }}" class="media-object"
+                                <a class="media-left" href="{% url "datadetail" item.pk %}">
+                                    <img src="{{ item.image.url }}" alt="{{ item.name }}" class="media-object"
                                          width="80" height="60"/>
                                 </a>
                                 <div class="media-body">
-                                    <h4 class="media-heading" style="color: #000;">{{ paper.name }}</h4>
-                                    <p>{{ paper.introduce|truncatechars:43 }}</p>
+                                    <h4 class="media-heading" style="color: #000;">{{ item.name }}</h4>
+                                    <p>{{ item.introduce|truncatechars:43 }}</p>
+                                    <p><a href="{{ item.file.url }}" target="_blank">立即下载</a></p>
                                 </div>
                             </div>
                         {% endfor %}

@@ -5,7 +5,7 @@ from django.conf import settings
 from django.http import HttpResponse
 from fuyangserver.settings import HERE
 from fuyangserver.settings import MEDIA_URL
-from study.models import AdvertisingBanners, VideoInfoLectureBanners, VideoInfoStudyFuyangBanners, TaskLiveFile
+from study.models import AdvertisingBanners, VideoInfoLectureBanners, VideoInfoStudyFuyangBanners, SinglePage
 from study.models import VideoColumn
 from study.models import VideoCurriculum
 from study.models import VideoCurriculumComment
@@ -14,7 +14,7 @@ import xml.dom.minidom
 from study.models import GraphicArticle
 from study.models import VideoClass
 from study.models import CurriculumTaskInfoVideo
-from study.models import CurriculumTaskInfoJob
+from study.models import DataLst
 from study.models import VideoInfoLecture, VideoInfoLectureComment
 from study.models import VideoInfoStudyFuyang, VideoInfoStudyFuyangComment
 from study.models import TaskInfoVideoComment
@@ -80,7 +80,7 @@ def index(request):
     # logging.warning(request.user.has_perm('blog.delete_article'))
     abs = AdvertisingBanners.objects.all()
     vcs = VideoCurriculum.objects.all().order_by('sequeue')
-    # if len(vcs) > 0: return video_curriculum_detail(request, vcs[0].pk)
+    if len(vcs) > 0: return video_curriculum_detail(request, vcs[0].pk)
 
     return render(request, 'study/index.html', {'abs': abs, 'vcs': vcs})
 
@@ -405,7 +405,7 @@ def studyfuyang(request):
     if 'page' in request.GET:
         page = int(request.GET['page'])
 
-    maxpage = int((len(VideoInfoStudyFuyang.objects.all()) - 1) / PAGE_HAS_VIDEO) + 1
+    maxpage = int((len(VideoCurriculum.objects.all()) - 1) / PAGE_HAS_VIDEO) + 1
     if page < 1:
         page = 1
     if page > maxpage:
@@ -438,7 +438,7 @@ def studyfuyang(request):
             itme['class'] = ''
         pagelist.append(itme)
 
-    vis = VideoInfoStudyFuyang.objects.all().order_by('sequeue')[
+    vis = VideoCurriculum.objects.all().order_by('sequeue')[
           page * PAGE_HAS_VIDEO - PAGE_HAS_VIDEO:page * PAGE_HAS_VIDEO]
     abs = VideoInfoStudyFuyangBanners.objects.all()
     return render(request, 'study/study_fuyang.html', \
@@ -561,11 +561,11 @@ def videoplaylecture(request, pk):
             break
     isBuy = gas[0].price == 0 or b
 
-    # isCollection = Collection.is_collection(request.user, gas[0])
+    isCollection = Collection.is_collection(request.user, gas[0])
     return render(request, 'study/video_play_lecture.html', {'videoinfo': gas[0],
                                                              'isBuy': isBuy,
                                                              'vpcs': vpcs,
-                                                             'isCollection': None})
+                                                             'isCollection': isCollection})
 
 
 def videoplaylecture_comment(request, pk):
@@ -600,6 +600,33 @@ def videoplaystudyfuyang_comment(request, pk):
             form.clean()
             return HttpResponseRedirect(vcs[0].get_absolute_url())
     return HttpResponse('error')
+
+
+def guide(request, pk):
+    '使用指南'
+    zhinan = SinglePage.objects.filter(pk=pk)
+    if any(zhinan):
+        return render(request, 'study/guide.html', {'zhinan': zhinan.first()})
+    else:
+        return HttpResponse('参数有误：数据不存在')
+
+
+def getdatalist(request):
+    '资料区'
+    abs = VideoInfoLectureBanners.objects.all()
+    ds = DataLst.objects.all().order_by('-id')
+    if any(ds):
+        return render(request, 'study/datalist.html', {'ds': ds, 'abs': abs})
+    else:
+        return HttpResponse('没有数据')
+
+def getdatadetail(request,pk):
+    abs = VideoInfoLectureBanners.objects.all()
+    ds = DataLst.objects.filter(pk=pk)
+    if any(ds):
+        return render(request, 'study/datadetail.html', {'item': ds.first(), 'abs': abs})
+    else:
+        return HttpResponse('没有数据')
 
 
 def testlive(request):

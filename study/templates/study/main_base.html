@@ -4,7 +4,6 @@
 {% block main_titlefile %}
     <style>
         .itemDiv {
-
             background-repeat: repeat;
             background-image: url("{% static "study/image/title_bg.png"%}?version=2");
         }
@@ -14,17 +13,10 @@
 
 
 {% block bodycontent %}
-
-
     <div class="es-wrap ">
-
-
         <header class="es-header navbar itemDiv">
-
             <div class="navbar-header">
-
                 <div class="visible-xs  navbar-mobile">
-
                     <a href="javascript:;" class="navbar-more js-navbar-more">
                         <i class="es-icon es-icon-menu"></i>
                     </a>
@@ -43,8 +35,8 @@
                                     <li><a href="{% url "picture_text_column" 1 %}">报名区</a></li>
                                     <li><a href="{% url 'studyfuyang' %}">直播区</a></li>
                                     <li><a href="{% url 'videolecture' %}">视频区</a></li>
-                                    <li><a href="{% url "picture_text_category" 7 %}">资料区</a></li>
-                                    <li><a href="javascript:;" target="_blank">使用指南</a></li>
+                                    <li><a href="{% url 'datalist' %}">资料区</a></li>
+                                    <li><a href="{% url 'guide' 1 %}" target="_blank">使用指南</a></li>
                                 </ul>
                             </li>
                             <li class="nav-hover">
@@ -80,7 +72,7 @@
                             <li><a href="{% url "picture_text_column" 1 %}">报名区</a></li>
                             <li><a href="{% url 'studyfuyang' %}">直播区</a></li>
                             <li><a href="{% url 'videolecture' %}">视频区</a></li>
-                            <li><a href="{% url "picture_text_category" 7 %}">资料区</a></li>
+                            <li><a href="{% url 'datalist' %}">资料区</a></li>
                             <li><a href="javascript:;" target="_blank">使用指南</a></li>
                         </ul>
                     </li>

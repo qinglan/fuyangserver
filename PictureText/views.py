@@ -55,6 +55,19 @@ def picture_text_category(request, pk):
         return render(request, 'PictureText/category.html', {'abs': abs})
 
 
+def picture_text_details(request, pk):
+    '新增栏目的详情页面'
+    abs = VideoInfoLectureBanners.objects.all()
+    papers = PictureTextPaper.objects.filter(pk=pk)
+
+    if len(papers) > 0:
+        papers[0].views_count = papers[0].views_count + 1
+        papers[0].save()
+        comments = PictureTextPaperComment.objects.filter(ascription=papers[0])
+        return render(request, 'PictureText/details.html', {'paper': papers[0], 'abs': abs, 'comments': comments})
+    return HttpResponse('error')
+
+
 def picture_text_paper_comment(request, pk):
     if request.method == 'POST':
         new_chat = PictureTextPaperComment.objects.create(

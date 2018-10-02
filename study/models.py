@@ -15,6 +15,7 @@ from fuyangserver.settings import MEDIA_URL
 
 
 class AdvertisingBanners(models.Model):
+    '课程报名页面顶部广告'
     name = models.CharField('广告名', max_length=256)
     image = models.ImageField('封面 1921×601 px', upload_to='image')
     url = models.CharField('图文栏目网址', max_length=256, db_index=True)
@@ -649,3 +650,42 @@ class TaskLiveFile(models.Model):
         verbose_name = 'a4直播章节资料'
         verbose_name_plural = 'a4直播章节资料'
         ordering = ['-register_date']
+
+
+class SinglePage(models.Model):
+    '单页面实体'
+    name = models.CharField('标题', max_length=256)
+    content = UEditorField('正文', height=300, width=1000,
+                           default=u'', blank=True, imagePath="uploads/images/",
+                           toolbars='besttome', filePath='uploads/files/')
+    updatetime = models.DateTimeField('更新日期', default=timezone.now, editable=False)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = '单页面维护'
+        verbose_name_plural = '单页面维护'
+        db_table = 'singlepage'
+        ordering = ['id']
+
+
+class DataLst(models.Model):
+    '资料区'
+    name = models.CharField('标题', max_length=256)
+    introduce = models.TextField('简介', default='')
+    content = UEditorField('正文', height=300, width=1000,
+                           default=u'', blank=True, imagePath="uploads/images/",
+                           toolbars='besttome', filePath='uploads/files/')
+    image = models.ImageField('封面', upload_to='image')
+    file = models.FileField('文件', upload_to='files/')
+    updatetime = models.DateTimeField('更新日期', default=timezone.now, editable=False)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = '资料区'
+        verbose_name_plural = '资料区'
+        db_table = 'datalist'
+        ordering = ['id']

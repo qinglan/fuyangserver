@@ -6,8 +6,8 @@ from PictureText import views
 
 urlpatterns = [
     path('paper/<int:pk>/', views.picture_text_paper, name='picture_text_paper'),
+    path('details/<int:pk>/', views.picture_text_details, name='picture_details'),
     path('paper/comment/<int:pk>/', views.picture_text_paper_comment, name='picture_text_paper_comment'),
     path('column/<int:pk>/', views.picture_text_column, name='picture_text_column'),
     path('category/<int:pk>/', views.picture_text_category, name='picture_text_category'),
-
 ]

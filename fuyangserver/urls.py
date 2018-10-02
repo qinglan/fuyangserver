@@ -39,7 +39,8 @@ urlpatterns = [
 
     path('MP_verify_svvmO8SYa47rm2Sm.txt', study_views.MP_verify_svvmO8SYa47rm2Sm),
 
-    path('videocurriculum/collection/<int:pk>/', study_views.video_curriculum_collection, name='video_curriculum_collection'),
+    path('videocurriculum/collection/<int:pk>/', study_views.video_curriculum_collection,
+         name='video_curriculum_collection'),
 
     path('videocurriculum/<int:pk>/', study_views.video_curriculum_detail, name='video_curriculum_detail'),
     path('videocurriculumtasks/<int:pk>/', study_views.video_curriculum_tasks, name='video_curriculum_tasks'),
@@ -59,7 +60,8 @@ urlpatterns = [
 
     path('tasklive/reviews/<int:pk>/', study_views.tasklive_reviews, name='tasklive_reviews'),
 
-    path('tasklive/introduce/iframe/<int:pk>/', study_views.iframe_tasklive_introduce, name='iframe_tasklive_introduce'),
+    path('tasklive/introduce/iframe/<int:pk>/', study_views.iframe_tasklive_introduce,
+         name='iframe_tasklive_introduce'),
 
     path('tasklive/introduce/iframe/nextimage/<int:pk>/', study_views.iframe_tasklive_introduce_nextimage,
          name='iframe_tasklive_introduce_nextimage'),
@@ -72,41 +74,40 @@ urlpatterns = [
     path('tasklive/ask/iframe/post/<int:pk>/', \
          study_views.iframe_tasklive_ask_post, name='iframe_tasklive_ask_post'),
 
-
     path('tasklive/reviews/iframe/<int:pk>/', study_views.iframe_tasklive_reviews, name='iframe_tasklive_reviews'),
 
     path('tasklive/reviews/iframe/post/<int:pk>/', \
          study_views.iframe_tasklive_reviews_post, name='iframe_tasklive_reviews_post'),
 
-
     path('tasklive/material/iframe/<int:pk>/', study_views.iframe_tasklive_material, name='iframe_tasklive_material'),
-
 
     path('studyfuyang/', study_views.studyfuyang, name='studyfuyang'),
     path('videolecture/', study_views.videolecture, name='videolecture'),
+    path('singlepage/<int:pk>/', study_views.guide, name='guide'),
+    path('datalist/', study_views.getdatalist, name='datalist'),
+    path('datadetail/<int:pk>/', study_views.getdatadetail, name='datadetail'),
 
+    path('studyfuyang/videoplaystudyfuyang/collection/<int:pk>/', study_views.videoplaystudyfuyang_collection,
+         name='videoplaystudyfuyang_collection'),
 
-
-
-    path('studyfuyang/videoplaystudyfuyang/collection/<int:pk>/', study_views.videoplaystudyfuyang_collection, name='videoplaystudyfuyang_collection'),
-
-    path('videolecture/videoplaylecture/collection/<int:pk>/', study_views.videoplaylecture_collection, name='videoplaylecture_collection'),
-
+    path('videolecture/videoplaylecture/collection/<int:pk>/', study_views.videoplaylecture_collection,
+         name='videoplaylecture_collection'),
 
     path('studyfuyang/videoplaystudyfuyang/<int:pk>/', study_views.videoplaystudyfuyang, name='videoplaystudyfuyang'),
 
     path('videolecture/videoplaylecture/<int:pk>/', study_views.videoplaylecture, name='videoplaylecture'),
 
-    path('studyfuyang/videoplaystudyfuyang/comment/<int:pk>/', study_views.videoplaystudyfuyang_comment, name='videoplaystudyfuyang_comment'),
+    path('studyfuyang/videoplaystudyfuyang/comment/<int:pk>/', study_views.videoplaystudyfuyang_comment,
+         name='videoplaystudyfuyang_comment'),
 
-    path('videolecture/videoplaylecture/comment/<int:pk>/', study_views.videoplaylecture_comment, name='videoplaylecture_comment'),
+    path('videolecture/videoplaylecture/comment/<int:pk>/', study_views.videoplaylecture_comment,
+         name='videoplaylecture_comment'),
 
     path('buyvideolecture/<int:pk>/', study_views.buyvideolecture, name='buyvideolecture'),
 
     path('buystudyfuyang/<int:pk>/', study_views.buystudyfuyang, name='buystudyfuyang'),
 
     path('buyvideocurriculum/', study_views.buyvideocurriculum, name='buyvideocurriculum'),
-
 
     path('filedownload/<int:pk>/', study_views.big_file_download, name='big_file_download'),
 
@@ -118,24 +119,19 @@ urlpatterns = [
 
     path('class/job/iframe/post/<int:pk>/', study_views.class_job_iframe_post, name='class_job_iframe_post'),
 
-    #userinfo
+    # userinfo
 
-    #url(r'^userinfo/', include('userinfo.urls')),
+    # url(r'^userinfo/', include('userinfo.urls')),
     path('userinfo/', include('userinfo.urls')),
 
     path('picture/text/', include('PictureText.urls')),
 
     url(r'^ueditor/', include('DjangoUeditor.urls')),
 
-
-
-
 ]
 
-
-
- 
 if settings.DEBUG:
     from django.conf.urls.static import static
+
     urlpatterns += static(
         settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
