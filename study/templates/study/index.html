@@ -2,11 +2,9 @@
 
 {% load staticfiles %}
 
-{% block title %}课程报名{% endblock %}
-
+{% block title %}首页{% endblock %}
 
 {% block content %}
-
 
     <section class="es-poster swiper-container">
         <div class="swiper-wrapper"
@@ -20,61 +18,35 @@
                     </div>
                 </div>
             {% endfor %}
-
         </div>
         <div class="swiper-pager">
             {% for item in abs %}
-            <span class="swiper-pagination-switch"></span>
+                <span class="swiper-pagination-switch"></span>
             {% endfor %}
-
         </div>
     </section>
 
-
-
     <!-- 推荐班级 -->
-    <section class="class-section section-gray">
-        <div class="container">
-            <div class="text-line">
-                <h5>
-                    <span>{{ main_info.text_1 }}</span>
-                    <div class="line"></div>
-                </h5>
-                <div class="subtitle">{{ main_info.text_2 }}</div>
-            </div>
+    <div id="content-container" class="container">
+        <div class="open-course-list">
             <div class="recommend-class-list row">
                 {% for item in vcs %}
                     <div class="col-md-3 col-xs-6">
                         <div class="class-item">
                             <div class="class-img-wrap">
-                                <a class="class-img" href="http://www.xuantong.cn/classroom/3">
+                                <a class="class-img" href="{% url 'video_curriculum_detail' item.id %}">
                                     <img src="{{ item.image.url }}" alt="{{ item.name }}" class="img-responsive">
                                 </a>
-                                <div class="mask">
-
-                                    <a href="{{ item.get_absolute_url }}" class="btn btn-warning">立即加入</a>
-                                </div>
                             </div>
                             <h3>
                                 <a class="link-dark" href="{{ item.get_absolute_url }}">{{ item.name }}</a>
                             </h3>
-                            <div class="metas">共
-                                <span>{{ item.count }}</span>课
-                            </div>
                         </div>
                     </div>
                 {% endfor %}
-
-
-            </div>
-            <div class="section-more-btn">
-                <a href="/" class="btn btn-default btn-lg">
-                    更多全阶课程
-                    <i class="mrs-o es-icon es-icon-chevronright"></i>
-                </a>
             </div>
         </div>
-    </section>
+    </div>
 
 
 {% endblock %}

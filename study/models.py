@@ -91,6 +91,7 @@ class VideoCurriculum(models.Model):
     price = models.IntegerField('价格')
 
     count = models.IntegerField('课程数', default=0)
+    sequeue = models.IntegerField('排序', default=9999)
 
     def __str__(self):
         return self.name
@@ -328,7 +329,7 @@ class CurriculumTaskInfoVideo(CurriculumTaskInfo):
 
     live_image = models.CharField('当前直播显示的图片', null=True, blank=True, max_length=256, default='')
 
-    image_show_time = models.TextField('图片显示时间', null=True, blank=True,default='')
+    image_show_time = models.TextField('图片显示时间', null=True, blank=True, default='')
 
     speaking = models.BooleanField('是否可以发言', default=True)
 
@@ -346,7 +347,6 @@ class CurriculumTaskInfoVideo(CurriculumTaskInfo):
 
     def get_iframe_tasklive_introduce_nextimage_url(self):
         return reverse('iframe_tasklive_introduce_nextimage', args=(self.pk,))
-
 
     def get_iframe_ask_url(self):
         return reverse('iframe_tasklive_ask', args=(self.pk,))
@@ -423,10 +423,9 @@ class VideoInfo(models.Model):
     image = models.ImageField('封面 304x171 px', upload_to='image', null=True, )
     pub_date = models.DateTimeField('开始时间', default=timezone.now, editable=False)
 
-
     views_count = models.IntegerField('浏览次数', default=0, editable=False)
 
-    price = models.IntegerField('价格',default=0)
+    price = models.IntegerField('价格', default=0)
 
     def __str__(self):
         return self.name
@@ -459,6 +458,7 @@ class VideoInfo(models.Model):
 
 class VideoInfoLecture(VideoInfo):
     intro = models.CharField('简介', max_length=256)
+    sequeue = models.IntegerField('排序', default=9999)
 
     def __str__(self):
         return self.name
@@ -496,7 +496,7 @@ class VideoInfoLectureComment(models.Model):
     ascription = models.ForeignKey(VideoInfoLecture, on_delete=models.CASCADE, blank=True, verbose_name='所属视频')
     register_date = models.DateTimeField('注册时间', default=timezone.now, editable=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, verbose_name='作者')
-    score = models.IntegerField('评论得分',default=0)
+    score = models.IntegerField('评论得分', default=0)
 
     def __str__(self):
         return self.message
@@ -509,6 +509,7 @@ class VideoInfoLectureComment(models.Model):
 
 class VideoInfoStudyFuyang(VideoInfo):
     intro = models.CharField('简介', max_length=256)
+    sequeue = models.IntegerField('排序', default=9999)
 
     def __str__(self):
         return self.name
@@ -547,7 +548,7 @@ class VideoInfoStudyFuyangComment(models.Model):
     ascription = models.ForeignKey(VideoInfoStudyFuyang, on_delete=models.CASCADE, blank=True, verbose_name='所属视频')
     register_date = models.DateTimeField('注册时间', default=timezone.now, editable=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, verbose_name='作者')
-    score = models.IntegerField('评论得分',default=0)
+    score = models.IntegerField('评论得分', default=0)
 
     def __str__(self):
         return self.message

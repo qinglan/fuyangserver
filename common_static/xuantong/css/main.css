@@ -1814,7 +1814,7 @@ html.nav-active body {
   -webkit-backface-visibility: hidden;
 }
 #content-container {
-  margin: 30px auto;
+  margin: 15px auto 30px;
   min-height: 400px;
 }
 @media (max-width: 767px) {
@@ -9968,11 +9968,13 @@ textarea {
 .course-list .course-item .metas .comment {
   margin-left: 10px;
 }
+/*
 @media (max-width: 767px) {
   .course-list .course-item .metas .comment {
     display: none;
   }
 }
+*/
 .course-list .course-date {
   position: relative;
   padding: 20px 0;

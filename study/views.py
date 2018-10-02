@@ -5,7 +5,7 @@ from django.conf import settings
 from django.http import HttpResponse
 from fuyangserver.settings import HERE
 from fuyangserver.settings import MEDIA_URL
-from study.models import AdvertisingBanners, VideoInfoLectureBanners, VideoInfoStudyFuyangBanners,TaskLiveFile
+from study.models import AdvertisingBanners, VideoInfoLectureBanners, VideoInfoStudyFuyangBanners, TaskLiveFile
 from study.models import VideoColumn
 from study.models import VideoCurriculum
 from study.models import VideoCurriculumComment
@@ -71,7 +71,7 @@ WEIXIN_APPSECRET = 'f8930880edce3dcf0039539e08074d5a'
 DO_MAIN = 'http://fuyang.51nayun.com/'
 
 
-#@login_required(login_url='/accounts/login/')
+@login_required(login_url='/accounts/login/')
 def index(request):
     # return render(request, 'study/index.html')
     # logging.warning(request.user.username)
@@ -79,9 +79,8 @@ def index(request):
     # logging.warning(request.user.user_permissions)
     # logging.warning(request.user.has_perm('blog.delete_article'))
     abs = AdvertisingBanners.objects.all()
-    vcs = VideoCurriculum.objects.all()
-    if len(vcs) > 0:
-        return video_curriculum_detail(request, vcs[0].pk)
+    vcs = VideoCurriculum.objects.all().order_by('sequeue')
+    # if len(vcs) > 0: return video_curriculum_detail(request, vcs[0].pk)
 
     return render(request, 'study/index.html', {'abs': abs, 'vcs': vcs})
 
@@ -189,7 +188,7 @@ def password_reset(request):
     return render(request, 'study/password_reset.html')
 
 
-#@login_required(login_url='/accounts/login/')
+@login_required(login_url='/accounts/login/')
 def yinanzazheng(request):
     abs = AdvertisingBanners.objects.all()
     vcs = VideoColumn.objects.all()[0:2]
@@ -199,12 +198,13 @@ def yinanzazheng(request):
 def mp_verify(request):
     return render(request, 'study/MP_verify_9OqPDvvikphMdXB2.txt')
 
+
 def MP_verify_SjPP8XG0lmvxzlAs(request):
     return render(request, 'study/MP_verify_SjPP8XG0lmvxzlAs.txt')
 
+
 def MP_verify_svvmO8SYa47rm2Sm(request):
     return render(request, 'study/MP_verify_svvmO8SYa47rm2Sm.txt')
-
 
 
 def weixin_check_signature(request):
@@ -234,8 +234,8 @@ def weixin_check_signature(request):
 def video_curriculum_getinfo(request, pk):
     vcs = VideoCurriculum.objects.filter(pk=pk)
     if len(vcs) <= 0:
-        return None, None, None, None,None
-    isCollection = Collection.is_collection(request.user,vcs[0])
+        return None, None, None, None, None
+    isCollection = Collection.is_collection(request.user, vcs[0])
     comment_count = len(VideoCurriculumComment.objects.filter(ascription=vcs[0]))
     us = VideoCurriculumOrder.objects.filter(video_curriculum__pk=pk)
 
@@ -244,21 +244,22 @@ def video_curriculum_getinfo(request, pk):
         if u.purchaser.pk == request.user.pk:
             isBuy = True
             break
-    return vcs[0], comment_count, datetime.datetime.now(), isBuy,isCollection
+    return vcs[0], comment_count, datetime.datetime.now(), isBuy, isCollection
 
 
-#@login_required(login_url='/accounts/login/')
+@login_required(login_url='/accounts/login/')
 def video_curriculum_detail(request, pk):
-    vc, comment_count, nowtime, isBuy , isCollection = video_curriculum_getinfo(request, pk)
+    vc, comment_count, nowtime, isBuy, isCollection = video_curriculum_getinfo(request, pk)
     if vc is None:
         return HttpResponse('error')
     return render(request, 'study/video_curriculum_detail.html', {'vc': vc,
                                                                   'comment_count': comment_count,
                                                                   'nowtime': nowtime,
                                                                   'isBuy': isBuy,
-                                                                  'isCollection':isCollection})
+                                                                  'isCollection': isCollection})
 
-def video_curriculum_collection(request,pk):
+
+def video_curriculum_collection(request, pk):
     vcs = VideoCurriculum.objects.filter(pk=pk)
     if len(vcs) > 0:
         if 'is_save' in request.GET:
@@ -269,9 +270,10 @@ def video_curriculum_collection(request,pk):
             return HttpResponse('1')
     return HttpResponse('error')
 
-#@login_required(login_url='/accounts/login/')
+
+@login_required(login_url='/accounts/login/')
 def video_curriculum_tasks(request, pk):
-    vc, comment_count, nowtime, isBuy,isCollection = video_curriculum_getinfo(request, pk)
+    vc, comment_count, nowtime, isBuy, isCollection = video_curriculum_getinfo(request, pk)
     if vc is None:
         return HttpResponse('error')
     classs = VideoClass.objects.filter(video_curriculum=vc).order_by("pub_date")
@@ -290,11 +292,12 @@ def video_curriculum_tasks(request, pk):
                                                                  'datas': datas,
                                                                  'nowtime': nowtime,
                                                                  'isBuy': isBuy,
-                                                                  'isCollection':isCollection})
+                                                                 'isCollection': isCollection})
 
-#@login_required(login_url='/accounts/login/')
+
+@login_required(login_url='/accounts/login/')
 def video_curriculum_material(request, pk):
-    vc, comment_count, nowtime, isBuy,isCollection = video_curriculum_getinfo(request, pk)
+    vc, comment_count, nowtime, isBuy, isCollection = video_curriculum_getinfo(request, pk)
     if vc is None:
         return HttpResponse('error')
 
@@ -305,15 +308,15 @@ def video_curriculum_material(request, pk):
                                                                     'files': files,
                                                                     'nowtime': nowtime,
                                                                     'isBuy': isBuy,
-                                                                  'isCollection':isCollection})
+                                                                    'isCollection': isCollection})
 
 
 PAGE_HAS_COMMENT = 20
 
 
-#@login_required(login_url='/accounts/login/')
+@login_required(login_url='/accounts/login/')
 def video_curriculum_reviews(request, pk):
-    vc, comment_count, nowtime, isBuy,isCollection = video_curriculum_getinfo(request, pk)
+    vc, comment_count, nowtime, isBuy, isCollection = video_curriculum_getinfo(request, pk)
     if vc is None:
         return HttpResponse('error')
     page = 1
@@ -362,7 +365,7 @@ def video_curriculum_reviews(request, pk):
                    'comment_count': comment_count,
                    'nowtime': nowtime,
                    'isBuy': isBuy,
-                'isCollection':isCollection,
+                   'isCollection': isCollection,
                    'vccs': vccs,
                    })
 
@@ -396,7 +399,7 @@ def graphic_article(request, pk):
 PAGE_HAS_VIDEO = 18
 
 
-#@login_required(login_url='/accounts/login/')
+@login_required(login_url='/accounts/login/')
 def studyfuyang(request):
     page = 1
     if 'page' in request.GET:
@@ -435,7 +438,8 @@ def studyfuyang(request):
             itme['class'] = ''
         pagelist.append(itme)
 
-    vis = VideoInfoStudyFuyang.objects.all()[page * PAGE_HAS_VIDEO - PAGE_HAS_VIDEO:page * PAGE_HAS_VIDEO]
+    vis = VideoInfoStudyFuyang.objects.all().order_by('sequeue')[
+          page * PAGE_HAS_VIDEO - PAGE_HAS_VIDEO:page * PAGE_HAS_VIDEO]
     abs = VideoInfoStudyFuyangBanners.objects.all()
     return render(request, 'study/study_fuyang.html', \
                   {'vis': vis, \
@@ -444,7 +448,7 @@ def studyfuyang(request):
                    'pagelist': pagelist})
 
 
-#@login_required(login_url='/accounts/login/')
+@login_required(login_url='/accounts/login/')
 def videolecture(request):
     page = 1
     if 'page' in request.GET:
@@ -483,7 +487,8 @@ def videolecture(request):
             itme['class'] = ''
         pagelist.append(itme)
 
-    vis = VideoInfoLecture.objects.all()[page * PAGE_HAS_VIDEO - PAGE_HAS_VIDEO:page * PAGE_HAS_VIDEO]
+    vis = VideoInfoLecture.objects.all().order_by('sequeue')[
+          page * PAGE_HAS_VIDEO - PAGE_HAS_VIDEO:page * PAGE_HAS_VIDEO]
     abs = VideoInfoLectureBanners.objects.all()
     return render(request, 'study/video_lecture.html', \
                   {'vis': vis, \
@@ -491,7 +496,8 @@ def videolecture(request):
                    'maxleft': maxleft, 'left': left, 'maxright': maxright, 'right': right, \
                    'pagelist': pagelist})
 
-def videoplaylecture_collection(request,pk):
+
+def videoplaylecture_collection(request, pk):
     vcs = VideoInfoLecture.objects.filter(pk=pk)
     if len(vcs) > 0:
         if 'is_save' in request.GET:
@@ -502,7 +508,8 @@ def videoplaylecture_collection(request,pk):
             return HttpResponse('1')
     return HttpResponse('error')
 
-def videoplaystudyfuyang_collection(request,pk):
+
+def videoplaystudyfuyang_collection(request, pk):
     vcs = VideoInfoStudyFuyang.objects.filter(pk=pk)
     if len(vcs) > 0:
         if 'is_save' in request.GET:
@@ -513,7 +520,8 @@ def videoplaystudyfuyang_collection(request,pk):
             return HttpResponse('1')
     return HttpResponse('error')
 
-#@login_required(login_url='/accounts/login/')
+
+@login_required(login_url='/accounts/login/')
 def videoplaystudyfuyang(request, pk):
     gas = VideoInfoStudyFuyang.objects.filter(pk=pk)
     if len(gas) <= 0:
@@ -528,16 +536,15 @@ def videoplaystudyfuyang(request, pk):
             b = True
             break
     isBuy = gas[0].price == 0 or b
-    isCollection = Collection.is_collection(request.user,gas[0])
+    isCollection = Collection.is_collection(request.user, gas[0])
     return render(request, 'study/video_play_studyfuyang.html', {'videoinfo': gas[0],
                                                                  'isBuy': isBuy,
                                                                  'vpcs': vpcs,
-                                                                 'isCollection':isCollection})
+                                                                 'isCollection': isCollection})
 
 
-#@login_required(login_url='/accounts/login/')
+@login_required(login_url='/accounts/login/')
 def videoplaylecture(request, pk):
-
     gas = VideoInfoLecture.objects.filter(pk=pk)
     if len(gas) <= 0:
         return HttpResponse('error')
@@ -554,7 +561,7 @@ def videoplaylecture(request, pk):
             break
     isBuy = gas[0].price == 0 or b
 
-    #isCollection = Collection.is_collection(request.user, gas[0])
+    # isCollection = Collection.is_collection(request.user, gas[0])
     return render(request, 'study/video_play_lecture.html', {'videoinfo': gas[0],
                                                              'isBuy': isBuy,
                                                              'vpcs': vpcs,
@@ -603,7 +610,7 @@ def testlive(request):
     return render(request, 'study/testlive.html', {'liveinfo': liveinfos[0]})
 
 
-#@login_required(login_url='/accounts/login/')
+@login_required(login_url='/accounts/login/')
 def tasklive_introduce(request, pk):
     liveinfos = CurriculumTaskInfoVideo.objects.filter(pk=pk)
     if len(liveinfos) <= 0:
@@ -634,11 +641,11 @@ def iframe_tasklive_introduce(request, pk):
     if len(liveinfos) <= 0:
         return HttpResponse('error')
 
-    s = str(liveinfos[0].introduce).replace("&nbsp;",'')
+    s = str(liveinfos[0].introduce).replace("&nbsp;", '')
     timelist = liveinfos[0].image_show_time.split('.')
     if liveinfos[0].image_show_time == '':
-        timelist= []
-    xs = "<images>"+s+"</images>"
+        timelist = []
+    xs = "<images>" + s + "</images>"
     domt = xml.dom.minidom.parseString(xs)
 
     imgs = domt.documentElement.getElementsByTagName("img")
@@ -649,14 +656,13 @@ def iframe_tasklive_introduce(request, pk):
             if image.hasAttribute("src"):
                 i = {}
                 i["src"] = image.getAttribute("src")
-                i["time"] = int(time)-startTime
+                i["time"] = int(time) - startTime
                 imageUrls.append(i)
 
-
-
     return render(request, 'study/iframe_tasklive_introduce.html', \
-                  {'liveinfo': liveinfos[0],'imageUrls': imageUrls,\
-                   'is_superuser':request.user.is_superuser})
+                  {'liveinfo': liveinfos[0], 'imageUrls': imageUrls, \
+                   'is_superuser': request.user.is_superuser})
+
 
 def iframe_tasklive_introduce_nextimage(request, pk):
     liveinfos = CurriculumTaskInfoVideo.objects.filter(pk=pk)
@@ -664,14 +670,14 @@ def iframe_tasklive_introduce_nextimage(request, pk):
         return HttpResponse('error')
 
     s = str(liveinfos[0].introduce)
-    xs = "<images>"+s+"</images>"
+    xs = "<images>" + s + "</images>"
     domt = xml.dom.minidom.parseString(xs)
 
     imgs = domt.documentElement.getElementsByTagName("img")
 
     timelist = liveinfos[0].image_show_time.split('.')
     if liveinfos[0].image_show_time == '':
-        timelist= []
+        timelist = []
 
     if len(imgs) > len(timelist):
         liveinfos[0].live_image = imgs[len(timelist)].getAttribute("src")
@@ -682,6 +688,7 @@ def iframe_tasklive_introduce_nextimage(request, pk):
         liveinfos[0].save()
 
     return HttpResponse('1')
+
 
 def iframe_tasklive_introduce_liveimage(request, pk):
     liveinfos = CurriculumTaskInfoVideo.objects.filter(pk=pk)
@@ -733,13 +740,13 @@ def iframe_tasklive_reviews_post(request, pk):
             new_chat.save()
             return HttpResponse()
         elif post_type == 'get_chat':
-            last_chat_id=0
+            last_chat_id = 0
             if 'last_chat_id' in request.POST:
                 last_chat_id = int(request.POST.get('last_chat_id'))
 
             comments = TaskInfoVideoComment.objects.filter(id__gt=last_chat_id, ascription__pk=pk)
             return render(request, 'study/iframe_tasklive_reviews_list.html', \
-                {'comments': comments})
+                          {'comments': comments})
     else:
         return HttpResponse('error')
 
@@ -764,7 +771,7 @@ def iframe_tasklive_ask_post(request, pk):
 
             comments = TaskInfoVideoAsk.objects.filter(id__gt=last_chat_id, ascription__pk=pk)
             return render(request, 'study/iframe_tasklive_ask_list.html', \
-                              {'comments': comments})
+                          {'comments': comments})
 
     else:
         return HttpResponse('error')
@@ -891,5 +898,3 @@ def buystudyfuyang(request, pk):
         order.save()
 
     return HttpResponse('1')
-
-

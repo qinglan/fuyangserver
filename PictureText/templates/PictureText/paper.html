@@ -1,18 +1,39 @@
 {% extends 'study/main_base.html' %}
 {% load staticfiles %}
 {% block title %}{{ paper.name }}{% endblock %}
-{% block content%}
+{% block content %}
+    <section class="es-poster swiper-container">
+        <div class="swiper-wrapper"
+             style="width: 3375px; transform: translate3d(-1125px, 0px, 0px); transition-duration: 0.3s; height: 117px;">
+            {% for item in abs %}
+                <div class="swiper-slide" style="background: rgb(244, 244, 244); width: 375px; height: 117px;">
+                    <div>
+                        <a href="{{ item.url }}" target="_blank">
+                            <img class="img-responsive" src="{{ item.image.url }}">
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="swiper-pager">
+            {% for item in abs %}
+                <span class="swiper-pagination-switch"></span>
+            {% endfor %}
+        </div>
+    </section>
 
     <div id="content-container" class="container">
+        <ol class="breadcrumb open-course-breadcrumb">
+            <li><a href="/">首页</a></li>
+            <li><a href="{% url "picture_text_column" paper.column.pk %}">{{ paper.column.name }}</a></li>
+            <li>正文</li>
+        </ol>
 
         <div class="article-detail row" id="detail-content">
             <!-- 主内容 -->
             <div class="col-md-12 article-detail-main">
                 <section class="es-section article-content">
-                    <ol class="breadcrumb">
-                        <li><a href="{% url "picture_text_column" paper.column.pk %}">{{ paper.column.name }}</a></li>
-                        <li class="active">正文</li>
-                    </ol>
+
 
                     <div class="article-metas">
                         <div class="pull-left">
@@ -65,29 +86,30 @@
 
                     <ul class="comment-list thread-pripost-list">
                         {% for comment in comments %}
-                        <li id="post-370" data-user-id="4720"
-                            class="thread-post thread-post-370 media media-comment user-id-4720">
-                            <div class="media-left">
-                                <a class="user-avatar js-user-card" href="http://www.xuantong.cn/user/4720"
-                                   data-card-url="/user/4720/card/show" data-user-id="4720">
-                                    <img class="avatar-sm"
-                                         src="{{ comment.author.headimgurl }}">
+                            <li id="post-370" data-user-id="4720"
+                                class="thread-post thread-post-370 media media-comment user-id-4720">
+                                <div class="media-left">
+                                    <a class="user-avatar js-user-card" href="http://www.xuantong.cn/user/4720"
+                                       data-card-url="/user/4720/card/show" data-user-id="4720">
+                                        <img class="avatar-sm"
+                                             src="{{ comment.author.headimgurl }}">
 
-                                </a>
+                                    </a>
 
-                            </div>
-
-                            <div class="media-body">
-                                <div class="metas title">
-                                    <a href="http://www.xuantong.cn/user/4720" class="nickname">{{ comment.author.nickname }}</a>
-                                    <span class="bullet">•</span>
-                                    <span class="color-gray">{{ comment.register_date|date:"Y-m-d" }}</span>
                                 </div>
-                                <div class="editor-text">{{ comment.message|linebreaksbr }}</div>
+
+                                <div class="media-body">
+                                    <div class="metas title">
+                                        <a href="http://www.xuantong.cn/user/4720"
+                                           class="nickname">{{ comment.author.nickname }}</a>
+                                        <span class="bullet">•</span>
+                                        <span class="color-gray">{{ comment.register_date|date:"Y-m-d" }}</span>
+                                    </div>
+                                    <div class="editor-text">{{ comment.message|linebreaksbr }}</div>
 
 
-                            </div>
-                        </li>
+                                </div>
+                            </li>
                         {% endfor %}
                     </ul>
 

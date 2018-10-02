@@ -40,15 +40,10 @@
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    {% for item in main_vcs %}
-                                        <li>
-                                            <a href="{{ item.get_absolute_url }}" target="_blank">{{ item.name }}</a>
-                                        </li>
-                                    {% endfor %}
-                                    <li><a href="{% url "picture_text_column" 1 %}" target="_blank">报名区</a></li>
-                                    <li><a href="{% url 'studyfuyang' %}" target="_blank">直播区</a></li>
-                                    <li><a href="{% url 'videolecture' %}" target="_blank">视频区</a></li>
-                                    <li><a href="javascript:;" target="_blank">资料区</a></li>
+                                    <li><a href="{% url "picture_text_column" 1 %}">报名区</a></li>
+                                    <li><a href="{% url 'studyfuyang' %}">直播区</a></li>
+                                    <li><a href="{% url 'videolecture' %}">视频区</a></li>
+                                    <li><a href="{% url "picture_text_category" 7 %}">资料区</a></li>
                                     <li><a href="javascript:;" target="_blank">使用指南</a></li>
                                 </ul>
                             </li>
@@ -57,10 +52,10 @@
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="javascript:;" target="_blank">扶阳提议</a></li>
-                                    <li><a href="javascript:;" target="_blank">医案辨析</a></li>
-                                    <li><a href="javascript:;" target="_blank">扶阳天天乐</a></li>
-                                    <li><a href="javascript:;" target="_blank">扶阳国医馆</a></li>
+                                    <li><a href="{% url "picture_text_category" 3 %}">扶阳显议</a></li>
+                                    <li><a href="{% url "picture_text_category" 4 %}">医案辨析</a></li>
+                                    <li><a href="{% url "picture_text_category" 5 %}">扶阳天天乐</a></li>
+                                    <li><a href="{% url "picture_text_category" 6 %}">扶阳国医馆</a></li>
                                 </ul>
                             </li>
                             <li class="nav-hover"><a href="/" target="_blank" data-toggle="dropdown">扶阳商城</a></li>
@@ -82,15 +77,10 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            {% for item in main_vcs %}
-                                <li>
-                                    <a href="{{ item.get_absolute_url }}" target="_blank">{{ item.name }}</a>
-                                </li>
-                            {% endfor %}
-                            <li><a href="{% url "picture_text_column" 1 %}" target="_blank">报名区</a></li>
-                            <li><a href="{% url 'studyfuyang' %}" target="_blank">直播区</a></li>
-                            <li><a href="{% url 'videolecture' %}" target="_blank">视频区</a></li>
-                            <li><a href="javascript:;" target="_blank">资料区</a></li>
+                            <li><a href="{% url "picture_text_column" 1 %}">报名区</a></li>
+                            <li><a href="{% url 'studyfuyang' %}">直播区</a></li>
+                            <li><a href="{% url 'videolecture' %}">视频区</a></li>
+                            <li><a href="{% url "picture_text_category" 7 %}">资料区</a></li>
                             <li><a href="javascript:;" target="_blank">使用指南</a></li>
                         </ul>
                     </li>
@@ -99,10 +89,10 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="javascript:;" target="_blank">扶阳提议</a></li>
-                            <li><a href="javascript:;" target="_blank">医案辨析</a></li>
-                            <li><a href="javascript:;" target="_blank">扶阳天天乐</a></li>
-                            <li><a href="javascript:;" target="_blank">扶阳国医馆</a></li>
+                            <li><a href="{% url "picture_text_category" 3 %}">扶阳显议</a></li>
+                            <li><a href="{% url "picture_text_category" 4 %}">医案辨析</a></li>
+                            <li><a href="{% url "picture_text_category" 5 %}">扶阳天天乐</a></li>
+                            <li><a href="{% url "picture_text_category" 6 %}">扶阳国医馆</a></li>
                         </ul>
                     </li>
 
