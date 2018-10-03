@@ -1587,7 +1587,7 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: 250px;
+  width: 180px;
   overflow-x: hidden;
   overflow-y: auto;
   background: #3f3f3f;
@@ -1797,10 +1797,10 @@ html.nav-active body {
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
-  transform: translate3d(250px, 0, 0);
-  -webkit-transform: translate3d(250px, 0, 0);
-  -o-transform: translate3d(250px, 0, 0);
-  -moz-transform: translate3d(250px, 0, 0);
+  transform: translate3d(180px, 0, 0);
+  -webkit-transform: translate3d(180px, 0, 0);
+  -o-transform: translate3d(180px, 0, 0);
+  -moz-transform: translate3d(180px, 0, 0);
 }
 .html-mask.active {
   position: fixed;
