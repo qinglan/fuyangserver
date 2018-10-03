@@ -4,9 +4,7 @@
 
 {% block title %}直播课程{% endblock %}
 
-
 {% block content %}
-
 
     <!-- 3、加入后：任务式学习 -->
     <div class="container">
@@ -15,21 +13,16 @@
                 <a href="/">首页</a>
             </li>
             <li>
-                <a href="/">直播区</a>
+                <a href="{% url 'studyfuyang' %}">直播区</a>
             </li>
             <li class="active">{{ vc.name }} </li>
         </ol>
 
         <div class="es-section course-detail-section clearfix xt-deatil-section">
             <div class="course-detail-top clearfix">
-          <span class="tags mrm">
-          </span>
-                <span class="course-detail-heading">
-            {{ vc.name }}
-          </span>
-                <p class="text-overflow subtitle" data-toggle="popover" data-placement="bottom" data-trigger="hover"
-                   data-content=""
-                   data-original-title="" title="">
+                <span class="tags mrm"></span>
+                <span class="course-detail-heading">{{ vc.name }}</span>
+                <p class="text-overflow subtitle" data-toggle="popover" data-placement="bottom" data-trigger="hover">
                     <a class="color-gray">
                         {{ vc.intro }}
                     </a>
@@ -41,18 +34,14 @@
                     <li class="js-unfavorite-btn" id="unfavorite-btn" data-url="/course_set/49/unfavorite"
                         style="display: {% if isCollection %}block{% else %}none{% endif %}">
                         <a class="btn btn-default btn-xs" href="javascript:cancel_collection();" data-toggle="tooltip"
-                           data-placement="top"
-                           title="" data-trigger="hover"
-                           data-original-title="已收藏">
+                           data-placement="top" data-trigger="hover" data-original-title="已收藏">
                             <i class="es-icon es-icon-bookmark color-primary"></i>
                         </a>
                     </li>
                     <li class="js-favorite-btn" id="favorite-btn" data-url="/course_set/49/favorite"
                         style="display: {% if isCollection %}none{% else %}block{% endif %}">
                         <a class="btn btn-default btn-xs" href="javascript:save_collection();" data-toggle="tooltip"
-                           data-placement="top"
-                           title="" data-trigger="hover"
-                           data-original-title="收藏">
+                           data-placement="top" data-trigger="hover" data-original-title="收藏">
                             <i class="es-icon es-icon-bookmarkoutline"></i>
                         </a>
                     </li>
@@ -65,7 +54,6 @@
 
 
                         <div class="dropdown-menu  js-social-share-params bdsharebuttonbox" data-title="第一阶丨篆隶筑基课程"
-                             data-summary=""
                              data-message="我正在学习暄桐教室的《第一阶丨篆隶筑基课程》，享受写字带来的快乐，一起来学习吧！"
                              data-url="http://www.xuantong.cn/course/49"
                              data-picture="http://sce4a8b6c0d93v-sb-qn.qiqiuyun.net/files/default/2018/07-19/113822ec81e6915061.png">
@@ -77,41 +65,29 @@
 
                         </div>
                     </li>
-
-
                     <div class="handle-btn">
                         <div class="refund-box">
                         </div>
                     </div>
-
-
                 </ul>
             </div>
             <div class="course-detail-bottom">
                 <div class="course-detail-img">
                     <img class="img-responsive" src="{{ vc.get_material_image.url }}" alt="篆隶筑基课程 ">
                     <div class="image-overlay"></div>
-
                     <div class="course-detail-remask">
                         <div class="score pull-right mb0">
-
                             <i class="es-icon es-icon-star color-warning"></i>
                             <i class="es-icon es-icon-star color-warning"></i>
                             <i class="es-icon es-icon-star color-warning"></i>
                             <i class="es-icon es-icon-star color-warning"></i>
-
                             <i class="es-icon es-icon-starhalf color-warning"></i>
-
-
                             <span class="vertical-middle">({{ comment_count }}人评价)</span>
                         </div>
                     </div>
                 </div>
                 <div class="course-detail-info">
-
-
                     <div class=" mb15 ">
-
                         <span class="course-detail-title">价格</span>
                         <span class="gray-darker mrm">
                 ¥

@@ -7825,9 +7825,10 @@ a.transition:hover {
 .media-body {
   word-break: break-all;
 }
+/*
 .media-left {
   padding-right: 15px;
-}
+}*/
 .media .media-object-small img {
   width: 48px;
   height: 48px;
@@ -11956,6 +11957,7 @@ textarea {
 }
 .article-list .media {
   color: #919191;
+  border-bottom: 1px dotted #e2e2e2;
 }
 .article-list .media .media-body {
   padding-left: 10px;

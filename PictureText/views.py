@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import PictureTextColumn, PictureTextPaper, PictureTextPaperComment
-from study.models import VideoInfoLectureBanners
+from advertise.models import VideoInfoLectureBanners
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 

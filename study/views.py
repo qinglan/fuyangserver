@@ -5,7 +5,7 @@ from django.conf import settings
 from django.http import HttpResponse
 from fuyangserver.settings import HERE
 from fuyangserver.settings import MEDIA_URL
-from study.models import AdvertisingBanners, VideoInfoLectureBanners, VideoInfoStudyFuyangBanners, SinglePage
+from advertise.models import AdvertisingBanners, VideoInfoLectureBanners, VideoInfoStudyFuyangBanners
 from study.models import VideoColumn
 from study.models import VideoCurriculum
 from study.models import VideoCurriculumComment
@@ -14,7 +14,7 @@ import xml.dom.minidom
 from study.models import GraphicArticle
 from study.models import VideoClass
 from study.models import CurriculumTaskInfoVideo
-from study.models import DataLst
+from study.models import DataLst, SinglePage
 from study.models import VideoInfoLecture, VideoInfoLectureComment
 from study.models import VideoInfoStudyFuyang, VideoInfoStudyFuyangComment
 from study.models import TaskInfoVideoComment
@@ -190,6 +190,7 @@ def password_reset(request):
 
 @login_required(login_url='/accounts/login/')
 def yinanzazheng(request):
+    '疑难杂症'
     abs = AdvertisingBanners.objects.all()
     vcs = VideoColumn.objects.all()[0:2]
     return render(request, 'study/yinanzazheng.html', {'abs': abs, 'vcs': vcs})
@@ -620,7 +621,8 @@ def getdatalist(request):
     else:
         return HttpResponse('没有数据')
 
-def getdatadetail(request,pk):
+
+def getdatadetail(request, pk):
     abs = VideoInfoLectureBanners.objects.all()
     ds = DataLst.objects.filter(pk=pk)
     if any(ds):

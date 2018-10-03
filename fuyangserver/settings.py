@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'DjangoUeditor',
     'userinfo',
     'PictureText',
+    'advertise',
 ]
 
 AUTH_USER_MODEL = 'users.User'

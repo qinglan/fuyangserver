@@ -27,17 +27,8 @@
     </section>
 
     <div id="content-container" class="container">
-        <div class="es-tabs article-list-header">
-            <div class="tab-header">
-                <ul class="clearfix">
-                    <li class="active"><a href=".">资料区</a></li>
-                </ul>
-            </div>
-        </div>
-
         <div class="article-list-body row">
             <div class="col-md-12 article-list-main">
-
                 <section class="es-section">
                     <div class="article-list">
                         {% for item in ds %}
@@ -47,20 +38,16 @@
                                          width="80" height="60"/>
                                 </a>
                                 <div class="media-body">
-                                    <h4 class="media-heading" style="color: #000;">{{ item.name }}</h4>
+                                    <p class="pull-right" style="padding-left: 10px;"><a href="{{ item.file.url }}"
+                                                                                         target="_blank">下载</a></p>
+                                    <p class="media-heading" style="color: #000;">{{ item.name }}</p>
                                     <p>{{ item.introduce|truncatechars:43 }}</p>
-                                    <p><a href="{{ item.file.url }}" target="_blank">立即下载</a></p>
                                 </div>
                             </div>
                         {% endfor %}
-
                     </div>
-
                 </section>
             </div>
-
-
         </div>
-
     </div>
 {% endblock %}

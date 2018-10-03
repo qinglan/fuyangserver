@@ -6,11 +6,14 @@ from .models import PictureTextColumn, PictureTextPaper
 
 
 class PictureTextColumnAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'id')
+    list_display = ('id', 'name', 'category')
+    list_display_links = ('id', 'name')
 
 
 class PictureTextPaperAdmin(admin.ModelAdmin):
-    list_display = ('name', 'id')
+    list_display = ('id', 'name')
+    list_display_links = ('id', 'name')
+    search_fields = ('name',)
 
 
 admin.site.register(PictureTextPaper, PictureTextPaperAdmin)

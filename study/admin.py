@@ -2,12 +2,9 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import VideoColumn, VideoCurriculum, VideoClass, \
-    GraphicColumn, GraphicArticle, AdvertisingBanners, VideoCurriculumComment, DataLst, \
-    CurriculumTaskInfoJob, CurriculumTaskInfoVideo, \
-    VideoInfoStudyFuyang, VideoInfoLecture, SinglePage, \
-    MianInfo, TaskLiveFile, CurriculumTaskInfoJobAnswer, \
-    VideoInfoLectureBanners, VideoInfoStudyFuyangBanners
+from .models import VideoColumn, GraphicColumn, GraphicArticle, GraphicComment, VideoCurriculumFile, VideoCurriculum, \
+    VideoClass, VideoCurriculumComment, DataLst, CurriculumTaskInfoJob, CurriculumTaskInfoVideo, VideoInfoStudyFuyang, \
+    VideoInfoLecture, SinglePage, MianInfo, TaskLiveFile, CurriculumTaskInfoJobAnswer
 
 
 class VideoColumnAdmin(admin.ModelAdmin):
@@ -44,18 +41,6 @@ class GraphicColumnAdmin(admin.ModelAdmin):
 class GraphicArticleAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'slug', 'author', 'content', \
                     'image', 'register_date', 'update_date', 'published')
-
-
-class AdvertisingBannersAdmin(admin.ModelAdmin):
-    list_display = ('name', 'image', 'url')
-
-
-class VideoInfoLectureBannersAdmin(admin.ModelAdmin):
-    list_display = ('name', 'image', 'url')
-
-
-class VideoInfoStudyFuyangBannersAdmin(admin.ModelAdmin):
-    list_display = ('name', 'image', 'url')
 
 
 class VideoCurriculumCommentAdmin(admin.ModelAdmin):
@@ -96,12 +81,6 @@ admin.site.register(TaskLiveFile, TaskLiveFileAdmin)
 
 admin.site.register(VideoClass, VideoClassAdmin)
 
-admin.site.register(AdvertisingBanners, AdvertisingBannersAdmin)
-
-admin.site.register(VideoInfoLectureBanners, VideoInfoLectureBannersAdmin)
-
-admin.site.register(VideoInfoStudyFuyangBanners, VideoInfoStudyFuyangBannersAdmin)
-
 admin.site.register(VideoCurriculumComment, VideoCurriculumCommentAdmin)
 
 admin.site.register(CurriculumTaskInfoJob, CurriculumTaskInfoJobAdmin)
@@ -118,6 +97,8 @@ admin.site.register(MianInfo, MianInfoAdmin)
 
 admin.site.register(SinglePage, SinglePageAdmin)
 admin.site.register(DataLst, DataListAdmin)
+
+
 '''admin.site.unregister(MianInfo)
 
 admin.site.unregister(VideoCurriculumFile)

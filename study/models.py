@@ -14,49 +14,6 @@ from django.urls import reverse
 from fuyangserver.settings import MEDIA_URL
 
 
-class AdvertisingBanners(models.Model):
-    '课程报名页面顶部广告'
-    name = models.CharField('广告名', max_length=256)
-    image = models.ImageField('封面 1921×601 px', upload_to='image')
-    url = models.CharField('图文栏目网址', max_length=256, db_index=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'z2课程报名页面图片维护'
-        verbose_name_plural = 'z2课程报名页面图片维护'
-        ordering = ['name']
-
-
-class VideoInfoLectureBanners(models.Model):
-    name = models.CharField('广告名', max_length=256)
-    image = models.ImageField('封面 1921×601 px', upload_to='image')
-    url = models.CharField('图文栏目网址', max_length=256, db_index=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'b3免费视频讲座页面图片维护'
-        verbose_name_plural = 'b3免费视频讲座页面图片维护'
-        ordering = ['name']
-
-
-class VideoInfoStudyFuyangBanners(models.Model):
-    name = models.CharField('广告名', max_length=256)
-    image = models.ImageField('封面 1921×601 px', upload_to='image')
-    url = models.CharField('图文栏目网址', max_length=256, db_index=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'b4天天乐页面图片维护'
-        verbose_name_plural = 'b4天天乐页面图片维护'
-        ordering = ['name']
-
-
 class VideoColumn(models.Model):
     name = models.CharField('视频栏目名称', max_length=256)
     slug = models.CharField('英文名', max_length=256, db_index=True)
@@ -154,6 +111,7 @@ class VideoCurriculum(models.Model):
 
 
 class GraphicColumn(models.Model):
+    '图文栏类别'
     name = models.CharField('图文栏目名称', max_length=256)
     slug = models.CharField('图文栏目网址', max_length=256, db_index=True)
     intro = models.TextField('图文栏目简介', default='')
