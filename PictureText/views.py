@@ -24,17 +24,14 @@ def picture_text_column(request, pk):
     '报名区'
     columns = PictureTextColumn.objects.filter(category='报名区').order_by('id')  # 返回前2条数据
     fs = PictureTextColumn.objects.filter(pk=pk)
-    papers = PictureTextPaper.objects.filter(column__pk=pk)
+    papers = PictureTextPaper.objects.filter(column__pk=pk).order_by('-id')
     column = {}
-    if len(fs) > 0:
-        column = fs[0]
+    if len(fs) > 0: column = fs[0]
 
     abs = VideoInfoLectureBanners.objects.all()
 
-    return render(request, 'PictureText/column.html', {'columns': columns,
-                                                       'column': column,
-                                                       'abs': abs,
-                                                       'papers': papers})
+    return render(request, 'PictureText/column.html',
+                  {'columns': columns, 'column': column, 'abs': abs, 'papers': papers})
 
 
 def picture_text_category(request, pk):
@@ -45,9 +42,8 @@ def picture_text_category(request, pk):
         catename = papers.first().column.category
         columns = PictureTextColumn.objects.filter(category=catename).order_by('id')  # 返回类别列表
         column = {}
-        fs = PictureTextColumn.objects.filter(pk=pk)
-        if len(fs) > 0:
-            column = fs[0]
+        fs = PictureTextColumn.objects.filter(pk=pk).order_by('-id')
+        if len(fs) > 0: column = fs[0]
 
         return render(request, 'PictureText/category.html',
                       {'columns': columns, 'column': column, 'abs': abs, 'papers': papers})

@@ -43,6 +43,7 @@ class OrderBase(models.Model):
 
 class VideoCurriculumOrder(OrderBase):
     video_curriculum = models.ForeignKey(VideoCurriculum, on_delete=models.CASCADE, blank=True, verbose_name='所属视频课程')
+    ticket = models.CharField('发票内容', max_length=255, default='咨询费')
 
     def __str__(self):
         return self.get_order_id()
@@ -106,7 +107,7 @@ class VideoInfoStudyFuyangOrder(OrderBase):
 class Collection(models.Model):
     class_name = models.CharField('类名', max_length=256, default='', null=True, blank=True)
     item_pk = models.IntegerField('收藏的pk', default=0)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, verbose_name='收藏者',default=None)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, verbose_name='收藏者', default=None)
 
     def __str__(self):
         return str(self.get_item())

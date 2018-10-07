@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 # Create your views here.
-from .models import VideoCurriculumOrder, VideoInfoStudyFuyangOrder, VideoInfoLectureOrder,Collection
+from .models import VideoCurriculumOrder, VideoInfoStudyFuyangOrder, VideoInfoLectureOrder, Collection
 
 
 def ordersSortKey(elem):
@@ -16,7 +16,7 @@ def userinfo_center(request):
 
 def userinfo_collection(request):
     collections = Collection.objects.filter(author=request.user)
-    return render(request, 'userinfo/collection.html', {'collections':collections})
+    return render(request, 'userinfo/collection.html', {'collections': collections})
 
 
 def userinfo_center_change(request):
@@ -50,14 +50,15 @@ def userinfo_orders(request):
 
 def userinfo_invoice(request):
     orders = []
-    a = VideoCurriculumOrder.objects.filter(purchaser=request.user,apply_bill=True)
-    b = VideoInfoStudyFuyangOrder.objects.filter(purchaser=request.user,apply_bill=True)
-    c = VideoInfoLectureOrder.objects.filter(purchaser=request.user,apply_bill=True)
+    a = VideoCurriculumOrder.objects.filter(purchaser=request.user, apply_bill=True)
+    b = VideoInfoStudyFuyangOrder.objects.filter(purchaser=request.user, apply_bill=True)
+    c = VideoInfoLectureOrder.objects.filter(purchaser=request.user, apply_bill=True)
     orders.extend(a)
     orders.extend(b)
     orders.extend(c)
     orders.sort(key=ordersSortKey, reverse=True)
     return render(request, 'userinfo/invoice.html', {'orders': orders})
+
 
 def userinfo_invoice_cannel(request):
     if 'pk' in request.GET:
@@ -76,13 +77,14 @@ def userinfo_orders_inner(request):
             return render(request, 'userinfo/orders_inner.html', {'order': order})
     return HttpResponse("")
 
-def userinfo_orders_invoice(request,pk):
 
+def userinfo_orders_invoice(request, pk):
     if request.method == 'POST':
         headName = request.POST.get('headName')
         headType = request.POST.get('headType')
         invoiceSn = request.POST.get('invoiceSn')
         targetEmail = request.POST.get('targetEmail')
+        tkc = request.POST.get('ticket')
 
         order = get_order(pk)
 
@@ -92,6 +94,7 @@ def userinfo_orders_invoice(request,pk):
             order.recognition_id = invoiceSn
             order.email = targetEmail
             order.apply_bill = True
+            order.ticket = tkc
             order.save()
             return HttpResponseRedirect(reverse('userinfo_orders'))
 

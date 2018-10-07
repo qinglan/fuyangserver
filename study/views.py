@@ -43,7 +43,7 @@ from userinfo.models import VideoCurriculumOrder
 from userinfo.models import VideoInfoLectureOrder
 from userinfo.models import VideoInfoStudyFuyangOrder
 from django.db.models import Q
-from django import forms
+from PictureText import views as pv
 
 import urllib.request
 import json
@@ -73,16 +73,12 @@ DO_MAIN = 'http://fuyang.51nayun.com/'
 
 @login_required(login_url='/accounts/login/')
 def index(request):
-    # return render(request, 'study/index.html')
-    # logging.warning(request.user.username)
-    # logging.warning(request.user)
-    # logging.warning(request.user.user_permissions)
-    # logging.warning(request.user.has_perm('blog.delete_article'))
-    abs = AdvertisingBanners.objects.all()
-    vcs = VideoCurriculum.objects.all().order_by('sequeue')
-    if len(vcs) > 0: return video_curriculum_detail(request, vcs[0].pk)
-
-    return render(request, 'study/index.html', {'abs': abs, 'vcs': vcs})
+    return pv.picture_text_column(request, 1)  # 首页直接跳转到报名区
+    # abs = AdvertisingBanners.objects.all()
+    # vcs = VideoCurriculum.objects.all().order_by('sequeue')
+    # if len(vcs) > 0: return video_curriculum_detail(request, vcs[0].pk)
+    #
+    # return render(request, 'study/index.html', {'abs': abs, 'vcs': vcs})
 
 
 def do_login(request):
@@ -367,7 +363,8 @@ def video_curriculum_reviews(request, pk):
                    'nowtime': nowtime,
                    'isBuy': isBuy,
                    'isCollection': isCollection,
-                   'vccs': vccs,
+                   'vccs': vccs, 'maxleft': maxleft, 'left': left, 'maxright': maxright, 'right': right,
+                   'pagelist': pagelist
                    })
 
 
@@ -619,7 +616,7 @@ def getdatalist(request):
     if any(ds):
         return render(request, 'study/datalist.html', {'ds': ds, 'abs': abs})
     else:
-        return HttpResponse('没有数据')
+        return render(request, 'study/datalist.html', {'abs': abs})
 
 
 def getdatadetail(request, pk):

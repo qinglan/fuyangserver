@@ -38,12 +38,17 @@
                                          width="80" height="60"/>
                                 </a>
                                 <div class="media-body">
-                                    <p class="pull-right" style="padding-left: 10px;"><a href="{{ item.file.url }}"
-                                                                                         target="_blank">下载</a></p>
-                                    <p class="media-heading" style="color: #000;">{{ item.name }}</p>
+                                    <p class="pull-right" style="padding-left: 10px;">
+                                        <a href="{{ item.file.url }}" target="_blank">下载</a>
+                                    </p>
+                                    <p class="media-heading" style="color: #000;">
+                                        <a href="{% url 'datadetail' item.pk %}" style="color:#666;">{{ item.name }}</a>
+                                    </p>
                                     <p>{{ item.introduce|truncatechars:43 }}</p>
                                 </div>
                             </div>
+                        {% empty %}
+                            没有数据
                         {% endfor %}
                     </div>
                 </section>

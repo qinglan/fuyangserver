@@ -3,11 +3,11 @@
 {% block title %}使用指南{% endblock %}
 {% block content %}
     <div id="content-container" class="container">
-        <div class="page-header">
-            <h3>{{ zhinan.name }}</h3>
-        </div>
-        {% autoescape off %}
-            {{ zhinan.content }}
-        {% endautoescape %}
+        <section class="es-section">
+            <div class="section-header"><h3>{{ zhinan.name }}</h3></div>
+            {% autoescape off %}
+                {{ zhinan.content }}
+            {% endautoescape %}
+        </section>
     </div>
 {% endblock %}

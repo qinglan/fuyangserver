@@ -36,7 +36,15 @@
                                      class="img-responsive"/>
                             </a>
                             <div class="caption">
-                                <h4>{{ info.name }}</h4>
+                                <p>{{ info.name }}</p>
+                                <div class="metas" style="color: #ccc;">
+                                    <span class="num">
+                                        <i class="es-icon es-icon-removeredeye"></i> {{ info.views_count|default:0 }}
+                                    </span>
+                                    <span class="comment">
+                                        <i class="es-icon es-icon-textsms"></i> {{ info.get_comment_count|default:0 }}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
