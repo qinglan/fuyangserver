@@ -37,12 +37,12 @@ def picture_text_column(request, pk):
 def picture_text_category(request, pk):
     '新增栏目：扶阳显议、医案辨析、天天乐、扶阳国医馆'
     abs = VideoInfoLectureBanners.objects.all()
-    papers = PictureTextPaper.objects.filter(column__pk=pk)
+    papers = PictureTextPaper.objects.filter(column__pk=pk).order_by('-id')
     if any(papers):
         catename = papers.first().column.category
         columns = PictureTextColumn.objects.filter(category=catename).order_by('id')  # 返回类别列表
         column = {}
-        fs = PictureTextColumn.objects.filter(pk=pk).order_by('-id')
+        fs = PictureTextColumn.objects.filter(pk=pk)
         if len(fs) > 0: column = fs[0]
 
         return render(request, 'PictureText/category.html',

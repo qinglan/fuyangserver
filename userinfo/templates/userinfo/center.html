@@ -15,17 +15,13 @@
         {% csrf_token %}
         <div class="col-md-11">
             <div class="cd-image-upload cd-mr24 cd-mb32">
-                <img class="cd-avatar cd-avatar-lg" id="profile-avatar"
-                     src="{{ user.headimgurl }}">
-
-
+                <img class="cd-avatar cd-avatar-lg" id="profile-avatar" src="{{ user.headimgurl }}">
             </div>
         </div>
         <div class="col-md-5">
             <div class="form-group cd-form-group">
                 <label for="profile_truename">昵称</label>
-                <input type="text" id="profile_truename" name="profile[truename]"
-                       class="form-control" value="{{ user.nickname }}">
+                <input type="text" id="profile_truename" name="profile[truename]" class="form-control" value="{{ user.nickname }}">
             </div>
         </div>
         <div class="col-md-5 col-md-offset-1">
@@ -188,11 +184,15 @@ b. 经平台批准的第三方合作网站登录的用户，包括微信绑定�
 本协议适用中华人民共和国法律。当本协议的任何内容与中华人民共和国法律相抵触时，以法律规定为准，同时相关内容将按法律规定进行修改或重新解释。本协议其他部分的法律效力不变。 本协议自您同意之日起生效，您与扶阳在线共同遵守。扶阳在线不行使、未能及时行使或者未充分行使本协议或者按照法律规定所享有的权利，不应被视为放弃该权利，也不影响扶阳在线在未来行使该权利。
 
 本协议的最终解释权归深圳市国医传承医学研究院有限公司所有。</textarea>
+                <div class="checkbox">
+                    <label><input type="checkbox" name="agree" style="margin-top: 0;" id="btnAgree" checked="checked">
+                        同意</label>
+                </div>
             </div>
         </div>
 
         <div class="col-md-11">
-            <button class="btn cd-btn cd-btn-primary cd-btn-lg" type='button' onclick="submitForm()">保存
+            <button class="btn cd-btn cd-btn-primary cd-btn-lg" type='button' id="btnsmt" onclick="submitForm()">保存
             </button>
         </div>
 
@@ -201,14 +201,19 @@ b. 经平台批准的第三方合作网站登录的用户，包括微信绑定�
 
 {% block scriptfile %}
 
-    <script>
-
-
+    <script type="text/javascript">
         var regBox = {
             regEmail: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,//邮箱
             regMobile: /^1[34578]\d{9}$/,
             regTel: /^0[\d]{2,3}-[\d]{7,8}$/  //电话
         }
+
+        $(function () {
+            $('#btnAgree').on('change', function () {
+                chkstate = $(this).prop('checked');
+                chkstate ? $('#btnsmt').removeAttr('disabled') : $('#btnsmt').attr('disabled', 'disabled');
+            });
+        });
 
         function submitForm() {
             em = document.getElementById('profile_email_address').value
