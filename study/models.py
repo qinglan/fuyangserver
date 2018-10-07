@@ -50,6 +50,7 @@ class VideoCurriculum(models.Model):
 
     count = models.IntegerField('课程数', default=0)
     sequeue = models.IntegerField('排序', default=9999)
+    views_count = models.IntegerField('浏览次数', default=0, editable=False)
 
     def __str__(self):
         return self.name
@@ -103,6 +104,10 @@ class VideoCurriculum(models.Model):
                     ret = item.image
 
         return ret
+
+    def get_comment_count(self):
+        '获取评论数'
+        return VideoCurriculumComment.objects.filter(ascription=self.pk).count()
 
     class Meta:
         verbose_name = 'a1直播课程'

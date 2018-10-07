@@ -249,6 +249,8 @@ def video_curriculum_detail(request, pk):
     vc, comment_count, nowtime, isBuy, isCollection = video_curriculum_getinfo(request, pk)
     if vc is None:
         return HttpResponse('error')
+    vc.views_count += 1
+    vc.save()
     return render(request, 'study/video_curriculum_detail.html', {'vc': vc,
                                                                   'comment_count': comment_count,
                                                                   'nowtime': nowtime,
