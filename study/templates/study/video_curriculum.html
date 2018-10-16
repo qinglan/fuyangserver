@@ -51,19 +51,6 @@
                            data-toggle="dropdown" title="分享">
                             <i class="es-icon es-icon-share"></i>
                         </a>
-
-
-                        <div class="dropdown-menu  js-social-share-params bdsharebuttonbox" data-title="第一阶丨篆隶筑基课程"
-                             data-message="我正在学习暄桐教室的《第一阶丨篆隶筑基课程》，享受写字带来的快乐，一起来学习吧！"
-                             data-url="http://www.xuantong.cn/course/49"
-                             data-picture="http://sce4a8b6c0d93v-sb-qn.qiqiuyun.net/files/default/2018/07-19/113822ec81e6915061.png">
-
-                            <a class="bds_tsina" data-cmd="tsina"></a>
-                            <a class="bds_sqq" data-cmd="sqq"></a>
-                            <a class="bds_qzone" data-cmd="qzone"></a>
-                            <a class="bds_weixin" data-cmd="weixin"></a>
-
-                        </div>
                     </li>
                     <div class="handle-btn">
                         <div class="refund-box">
@@ -73,7 +60,7 @@
             </div>
             <div class="course-detail-bottom">
                 <div class="course-detail-img">
-                    <img class="img-responsive" src="{{ vc.get_material_image.url }}" alt="篆隶筑基课程 ">
+                    <img class="img-responsive" src="{{ vc.get_material_image.url }}" alt="{{ vc.name }} ">
                     <div class="image-overlay"></div>
                     <div class="course-detail-remask">
                         <div class="score pull-right mb0">
@@ -89,11 +76,7 @@
                 <div class="course-detail-info">
                     <div class=" mb15 ">
                         <span class="course-detail-title">价格</span>
-                        <span class="gray-darker mrm">
-                ¥
-                <b class="pirce-num">{{ vc.price }}.00</b>
-              </span>
-
+                        <span class="gray-darker mrm">¥ <b class="pirce-num">{{ vc.price }}.00</b></span>
                     </div>
 
                     <div class="course-detail-gray  not-activity ">
@@ -110,10 +93,7 @@
 
                         <div class="mb15 hidden-xs">
                             <span class="course-detail-title ">学习有效期</span>
-                            <span class="gray-dark">
-                  开始：{{ vc.start_time|date:"Y-m-d" }} &nbsp; 截止：{{ vc.stop_time|date:"Y-m-d" }}
-
-                </span>
+                            <span class="gray-dark">开始：{{ vc.start_time|date:"Y-m-d" }} &nbsp; 截止：{{ vc.stop_time|date:"Y-m-d" }}</span>
                         </div>
 
                         <div class="mb15 hidden-xs">
@@ -147,28 +127,12 @@
                             </li>
 
                             <li class="es-share top">
-                                <a class=" dropdown-toggle" href="http://www.xuantong.cn/course/49"
+                                <a class="dropdown-toggle" href="javascript:;"
                                    data-toggle="dropdown" title="分享">
                                     <i class="es-icon es-icon-share"></i>
                                     <br> 分享
                                 </a>
-
-
-                                <div class="dropdown-menu  js-social-share-params bdsharebuttonbox"
-                                     data-title="第一阶丨篆隶筑基课程"
-                                     data-summary="" data-message="我正在学习暄桐教室的《第一阶丨篆隶筑基课程》，享受写字带来的快乐，一起来学习吧！"
-                                     data-url="http://www.xuantong.cn/course/49"
-                                     data-picture="http://sce4a8b6c0d93v-sb-qn.qiqiuyun.net/files/default/2018/07-19/113822ec81e6915061.png">
-
-                                    <a class="bds_tsina" data-cmd="tsina"></a>
-                                    <a class="bds_sqq" data-cmd="sqq"></a>
-                                    <a class="bds_qzone" data-cmd="qzone"></a>
-                                    <a class="bds_weixin" data-cmd="weixin"></a>
-
-                                </div>
                             </li>
-
-
                         </ul>
                     </div>
                     {% if vc.get_live_info.live_url == "" %}

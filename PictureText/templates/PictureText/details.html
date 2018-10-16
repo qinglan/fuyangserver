@@ -1,6 +1,7 @@
 {% extends 'study/main_base.html' %}
 {% load staticfiles %}
 {% block title %}{{ paper.name }}{% endblock %}
+
 {% block content %}
     <section class="es-poster swiper-container">
         <div class="swiper-wrapper"
@@ -87,7 +88,7 @@
                             <li id="post-370" data-user-id="4720"
                                 class="thread-post thread-post-370 media media-comment user-id-4720">
                                 <div class="media-left">
-                                    <a class="user-avatar js-user-card" 
+                                    <a class="user-avatar js-user-card"
                                        data-card-url="/user/4720/card/show" data-user-id="4720">
                                         <img class="avatar-sm"
                                              src="{{ comment.author.headimgurl }}">
@@ -103,7 +104,6 @@
                                         <span class="color-gray">{{ comment.register_date|date:"Y-m-d" }}</span>
                                     </div>
                                     <div class="editor-text">{{ comment.message|linebreaksbr }}</div>
-
 
                                 </div>
                             </li>

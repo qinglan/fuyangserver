@@ -84,18 +84,18 @@ def index(request):
 def do_login(request):
     '''logging.warning(request.user.is_authenticated)
 
-logging.warning(request.user.username)
-logging.warning(request.user)
-logging.warning(request.user.user_permissions)
+    logging.warning(request.user.username)
+    logging.warning(request.user)
+    logging.warning(request.user.user_permissions)
 
-logging.warning(request.user.has_perm('blog.delete_article'))
-logging.warning(request.user.user_permissions.add('blog.delete_article'))
+    logging.warning(request.user.has_perm('blog.delete_article'))
+    logging.warning(request.user.user_permissions.add('blog.delete_article'))
 
-#request.uesr.auth.add_permission('blog.delete_article')
-user = authenticate(request, username='branch', password='t66y123456')
-if user is not None:
-    if user.is_active:
-        login(request, user)'''
+    #request.uesr.auth.add_permission('blog.delete_article')
+    user = authenticate(request, username='branch', password='t66y123456')
+    if user is not None:
+        if user.is_active:
+            login(request, user)'''
 
     return render(request, 'study/login.html')
 
@@ -272,6 +272,7 @@ def video_curriculum_collection(request, pk):
 
 @login_required(login_url='/accounts/login/')
 def video_curriculum_tasks(request, pk):
+    '直播页面目录链接'
     vc, comment_count, nowtime, isBuy, isCollection = video_curriculum_getinfo(request, pk)
     if vc is None:
         return HttpResponse('error')
@@ -450,6 +451,7 @@ def studyfuyang(request):
 
 @login_required(login_url='/accounts/login/')
 def videolecture(request):
+    '视频区首页'
     page = 1
     if 'page' in request.GET:
         page = int(request.GET['page'])
@@ -545,6 +547,7 @@ def videoplaystudyfuyang(request, pk):
 
 @login_required(login_url='/accounts/login/')
 def videoplaylecture(request, pk):
+    '视频区详情页面'
     gas = VideoInfoLecture.objects.filter(pk=pk)
     if len(gas) <= 0:
         return HttpResponse('error')
@@ -640,6 +643,7 @@ def testlive(request):
 
 @login_required(login_url='/accounts/login/')
 def tasklive_introduce(request, pk):
+    '直播详情页面'
     liveinfos = CurriculumTaskInfoVideo.objects.filter(pk=pk)
     if len(liveinfos) <= 0:
         return HttpResponse('error')
@@ -665,6 +669,7 @@ def tasklive_reviews(request, pk):
 
 
 def iframe_tasklive_introduce(request, pk):
+    '直播详情页面：文档'
     liveinfos = CurriculumTaskInfoVideo.objects.filter(pk=pk)
     if len(liveinfos) <= 0:
         return HttpResponse('error')
@@ -867,9 +872,8 @@ def class_job_iframe(request, pk):
     if len(jas) <= 0:
         return render(request, 'study/iframe_class_job.html', {'job': js[0]})
     else:
-        return HttpResponse('error')
-
-    return render(request, 'study/iframe_class_job.html')
+        # return HttpResponse('error')
+        return render(request, 'study/iframe_class_job.html')
 
 
 def class_job_iframe_post(request, pk):
@@ -926,3 +930,47 @@ def buystudyfuyang(request, pk):
         order.save()
 
     return HttpResponse('1')
+
+
+def wxsign(request):
+    '获取微信签名:用于分享'
+    ret = {
+        'nonceStr': __create_nonce_str(),
+        'timestamp': __create_timestamp(),
+        'url': 'url'
+    }
+    requrl = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s' % (
+        WEIXIN_APP_ID, WEIXIN_APPSECRET)
+
+    jsonobj = GetData(requrl)
+    access_token = jsonobj.access_token
+    ret['access_token'] = access_token
+
+    string = '&'.join(['%s=%s' % (key.lower(), ret[key]) for key in sorted(ret)])
+    ret['signature'] = hashlib.sha1(string).hexdigest()
+    requrl = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token=%s' % access_token
+
+    jsonobj = GetData(requrl)
+    ret['jsapi_ticket'] = jsonobj.ticket
+
+    return ret
+
+
+def __create_nonce_str():
+    import string, random
+    return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(15))
+
+
+def __create_timestamp():
+    return int(time.time()) + 7000
+
+
+def GetData(strurl):
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36"}
+    request = urllib.request.Request(strurl, headers=headers)
+    import ssl
+    context = ssl._create_unverified_context()
+    res = urllib.request.urlopen(request, context=context)
+    d = res.read().decode()
+    return d
