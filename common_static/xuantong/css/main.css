@@ -16007,6 +16007,12 @@ textarea {
     display: block;
     max-width: 100%;
   }
+  .es-open-course-list .col-xs-6 { padding-left:5px; padding-right:5px;}
+  .es-open-course-list .thumbnail {
+  	border:0 none;
+	margin-bottom:5px;
+  }
+  .es-open-course-list .thumbnail img { min-height:120px; }
 }
 .es-open-course-list .course-item .course-img .img-responsive {
   padding: 0;
