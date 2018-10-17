@@ -23,15 +23,11 @@ class PictureTextColumn(models.Model):
 
 class PictureTextPaper(models.Model):
     name = models.CharField('图文标题', max_length=256)
-
     column = models.ForeignKey(PictureTextColumn, on_delete=models.CASCADE, blank=True, verbose_name='所属栏目')
-
+    remark = models.CharField('说明', max_length=256, blank=True, default='')  # 新增字段:用于标明课程价格、时长
     introduce = models.TextField('图文简介', default='')
-
     image = models.ImageField('封面', upload_to='image')
-
     register_date = models.DateTimeField('发表时间', default=timezone.now, editable=False)
-
     content = UEditorField('图文内容', height=300, width=1000,
                            default=u'', blank=True, imagePath="uploads/images/",
                            toolbars='besttome', filePath='uploads/files/')

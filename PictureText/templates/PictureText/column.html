@@ -4,7 +4,6 @@
 
 {% block title %}{{ column.name }}{% endblock %}
 
-
 {% block content %}
     <section class="es-poster swiper-container">
         <div class="swiper-wrapper"
@@ -30,20 +29,17 @@
         <div class="es-tabs article-list-header">
             <div class="tab-header">
                 <ul class="clearfix">
-                    {% for c in columns %}
-                        <li class="{% if c.pk == column.pk %}active{% endif %}">
-                            <a href="{% url "picture_text_column" c.pk %}">{{ c.name }}</a>
+                    {% for c in categories %}
+                        <li class="{% if c.id == column.id %}active{% endif %}">
+                            <a href="{% url "picture_text_column" c.id %}">{{ c.name }}</a>
                         </li>
                     {% endfor %}
                 </ul>
             </div>
-
         </div>
-
 
         <div class="article-list-body row">
             <div class="col-md-12 article-list-main">
-
                 <section class="es-section">
                     <div class="article-list">
                         {% for paper in papers %}
@@ -60,17 +56,20 @@
                                             <a class="link-dark" target="_blank"
                                                href="{% url "picture_text_paper" paper.pk %}">{{ paper.name }}</a>
                                         </h2>
+                                        {% if paper.remark %}
+                                            <small>{{ paper.remark }}</small>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="media">
                                     <div class="media-left">
                                         <a target="_blank" href="{% url "picture_text_paper" paper.pk %}">
-                                            <img class="thumb-img"
-                                                 src="{{ paper.image.url }}"
-                                                 alt="{{ paper.name }}"></a>
+                                            <img class="thumb-img" src="{{ paper.image.url }}" alt="{{ paper.name }}">
+                                        </a>
                                     </div>
-                                    <div class="media-body"><a class="color-gray" target="_blank"
-                                                               href="{% url "picture_text_paper" paper.pk %}">{{ paper.introduce }}</a>
+                                    <div class="media-body">
+                                        <a class="color-gray" target="_blank"
+                                           href="{% url "picture_text_paper" paper.pk %}">{{ paper.introduce }}</a>
                                         <a class="all-article-btn" target="_blank"
                                            href="{% url "picture_text_paper" paper.pk %}">查看全文</a>
                                     </div>
@@ -82,9 +81,6 @@
 
                 </section>
             </div>
-
-
         </div>
-
     </div>
 {% endblock %}

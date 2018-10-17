@@ -22,16 +22,14 @@ def picture_text_paper(request, pk):
 
 def picture_text_column(request, pk):
     '报名区'
-    columns = PictureTextColumn.objects.filter(category='报名区').order_by('id')  # 返回前2条数据
-    fs = PictureTextColumn.objects.filter(pk=pk)
+    categories = PictureTextColumn.objects.filter(category='报名区').values('id', 'name').order_by('id')  # 获取报名区的所有类别
+    curr_cate = PictureTextColumn.objects.filter(pk=pk).first()  # 获取当前栏目类别
     papers = PictureTextPaper.objects.filter(column__pk=pk).order_by('-id')
-    column = {}
-    if len(fs) > 0: column = fs[0]
 
-    abs = VideoInfoLectureBanners.objects.all()
+    abs = VideoInfoLectureBanners.objects.all()  # banner广告
 
     return render(request, 'PictureText/column.html',
-                  {'columns': columns, 'column': column, 'abs': abs, 'papers': papers})
+                  {'categories': categories, 'column': curr_cate, 'abs': abs, 'papers': papers})
 
 
 def picture_text_category(request, pk):
