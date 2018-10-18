@@ -53,11 +53,9 @@
                                 <span class="comment-num">
                                 <i class="es-icon es-icon-textsms"></i>{{ paper.get_comment_count }}
                             </span>
-
                             </div>
                         </div>
                     </div>
-
 
                     <div class="article-text">
                         {% autoescape off %}
@@ -67,13 +65,11 @@
                     <div class="article-tags">
                     </div>
 
-
                     <form class="es-commet" id="thread-post-form" method="POST"
                           action="{% url 'picture_text_paper_comment' paper.pk %}" novalidate="novalidate">
                         {% csrf_token %}
                         <div class="es-commet-header">
                             文章评论<span class="badge badge-primary thread-post-num">{{ paper.get_comment_count }}</span>
-
                         </div>
                         <textarea class="form-control form-control-o" rows="6" placeholder="您的想法" name="content"
                                   data-display="您的想法"></textarea>
@@ -91,38 +87,23 @@
                                 <div class="media-left">
                                     <a class="user-avatar js-user-card" 
                                        data-card-url="/user/4720/card/show" data-user-id="4720">
-                                        <img class="avatar-sm"
-                                             src="{{ comment.author.headimgurl }}">
-
+                                        <img class="avatar-sm" src="{{ comment.author.headimgurl }}">
                                     </a>
-
                                 </div>
 
                                 <div class="media-body">
                                     <div class="metas title">
-                                        <a 
-                                           class="nickname">{{ comment.author.nickname }}</a>
+                                        <a class="nickname">{{ comment.author.nickname }}</a>
                                         <span class="bullet">•</span>
                                         <span class="color-gray">{{ comment.register_date|date:"Y-m-d" }}</span>
                                     </div>
                                     <div class="editor-text">{{ comment.message|linebreaksbr }}</div>
-
-
                                 </div>
                             </li>
                         {% endfor %}
                     </ul>
-
-                    <nav class="text-center">
-
-                    </nav>
-
                 </section>
             </div>
-
-
         </div>
-
     </div>
-
 {% endblock %}

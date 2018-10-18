@@ -45,7 +45,16 @@ class GraphicArticleAdmin(admin.ModelAdmin):
 
 
 class VideoCurriculumCommentAdmin(admin.ModelAdmin):
-    list_display = ('message',)
+    list_display = ('message', 'register_date', 'author')
+    list_per_page = 30
+    list_filter = ('author',)
+    search_fields = ('message',)
+    date_hierarchy = 'register_date'
+
+    readonly_fields = ('message', 'ascription', 'register_date', 'author')
+
+    def has_add_permission(self, request):
+        return False
 
 
 class GraphicCommentAdmin(admin.ModelAdmin):

@@ -46,7 +46,7 @@ class PictureTextPaper(models.Model):
 
 
 class PictureTextPaperComment(models.Model):
-    message = models.CharField('图文评论', max_length=256)
+    message = models.TextField('图文评论', max_length=256)
     ascription = models.ForeignKey(PictureTextPaper, on_delete=models.CASCADE, blank=True, verbose_name='所属图文')
     register_date = models.DateTimeField('评论时间', auto_now_add=True, editable=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, verbose_name='作者')
