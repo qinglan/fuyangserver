@@ -24,6 +24,7 @@ from django.conf.urls import include, url
 
 urlpatterns = [
     path('', study_views.index),  # new
+    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
 
     path('yinanzazheng/', study_views.yinanzazheng),
