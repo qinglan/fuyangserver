@@ -4,7 +4,7 @@ from django.contrib import admin
 
 from .models import VideoColumn, GraphicColumn, GraphicArticle, GraphicComment, VideoCurriculumFile, VideoCurriculum, \
     VideoClass, VideoCurriculumComment, DataLst, CurriculumTaskInfoJob, CurriculumTaskInfoVideo, VideoInfoStudyFuyang, \
-    VideoInfoLecture, SinglePage, MianInfo, TaskLiveFile, CurriculumTaskInfoJobAnswer
+    VideoInfoLecture, VideoInfoLectureComment, SinglePage, MianInfo, TaskLiveFile, CurriculumTaskInfoJobAnswer
 
 
 class VideoColumnAdmin(admin.ModelAdmin):
@@ -45,6 +45,20 @@ class GraphicArticleAdmin(admin.ModelAdmin):
 
 
 class VideoCurriculumCommentAdmin(admin.ModelAdmin):
+    list_display = ('message', 'register_date', 'author')
+    list_per_page = 30
+    list_filter = ('author',)
+    search_fields = ('message',)
+    date_hierarchy = 'register_date'
+
+    readonly_fields = ('message', 'ascription', 'register_date', 'author')
+
+    def has_add_permission(self, request):
+        return False
+
+
+class VideoInfoLectureCommentAdmin(admin.ModelAdmin):
+    '视频区评论'
     list_display = ('message', 'register_date', 'author')
     list_per_page = 30
     list_filter = ('author',)
@@ -102,7 +116,7 @@ admin.site.register(VideoInfoLecture, VideoInfoLectureAdmin)
 admin.site.register(VideoInfoStudyFuyang, VideoInfoStudyFuyangAdmin)
 
 admin.site.register(VideoCurriculum, VideoCurriculumAdmin)
-
+admin.site.register(VideoInfoLectureComment, VideoInfoLectureCommentAdmin)
 admin.site.register(MianInfo, MianInfoAdmin)
 
 admin.site.register(SinglePage, SinglePageAdmin)

@@ -358,6 +358,7 @@ class CurriculumTaskInfoVideo(CurriculumTaskInfo):
 
 
 class VideoCurriculumComment(models.Model):
+    '直播课程评论'
     message = models.CharField('课程评论', max_length=256)
     ascription = models.ForeignKey(VideoCurriculum, on_delete=models.CASCADE, blank=True, verbose_name='所属课程')
     register_date = models.DateTimeField('注册时间', default=timezone.now, editable=False)
@@ -374,6 +375,7 @@ class VideoCurriculumComment(models.Model):
 
 
 class VideoInfo(models.Model):
+    '视频区基类'
     name = models.CharField('视频名字', default='', max_length=256)
 
     introduce = UEditorField('视频介绍', height=300, width=1000,
@@ -421,6 +423,7 @@ class VideoInfo(models.Model):
 
 
 class VideoInfoLecture(VideoInfo):
+    '视频区'
     intro = models.CharField('简介', max_length=256)
     sequeue = models.IntegerField('排序', default=9999)
 
@@ -450,12 +453,13 @@ class VideoInfoLecture(VideoInfo):
         return reverse('buyvideolecture', args=(self.pk,))
 
     class Meta:
-        verbose_name = 'b2免费视频讲座'
-        verbose_name_plural = 'b2免费视频讲座'
+        verbose_name = '视频区'
+        verbose_name_plural = '视频区'
         ordering = ['name']
 
 
 class VideoInfoLectureComment(models.Model):
+    '视频区评论'
     message = models.CharField('视频评论', max_length=256)
     ascription = models.ForeignKey(VideoInfoLecture, on_delete=models.CASCADE, blank=True, verbose_name='所属视频')
     register_date = models.DateTimeField('注册时间', default=timezone.now, editable=False)
@@ -466,8 +470,8 @@ class VideoInfoLectureComment(models.Model):
         return self.message
 
     class Meta:
-        verbose_name = 'bz免费视频讲座视频评论'
-        verbose_name_plural = 'bz免费视频讲座视频评论'
+        verbose_name = '视频区评论'
+        verbose_name_plural = '视频区评论'
         ordering = ['-register_date']
 
 
