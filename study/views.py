@@ -554,7 +554,7 @@ def videoplaylecture(request, pk):
     gas[0].views_count = gas[0].views_count + 1
     gas[0].save()
 
-    vpcs = VideoInfoLectureComment.objects.filter(ascription__pk=pk)
+    vpcs = VideoInfoLectureComment.objects.filter(ascription__pk=pk)    #视频评论
 
     us = VideoInfoLectureOrder.objects.filter(video__pk=pk)
     b = False
@@ -647,7 +647,9 @@ def tasklive_introduce(request, pk):
     liveinfos = CurriculumTaskInfoVideo.objects.filter(pk=pk)
     if len(liveinfos) <= 0:
         return HttpResponse('error')
-    s = str(liveinfos[0].introduce)
+    a = VideoCurriculumOrder.objects.filter(purchaser=request.user)
+    b=a.video_curriculum.id
+
 
     return render(request, 'study/tasklive_introduce.html', {'liveinfo': liveinfos[0]})
 

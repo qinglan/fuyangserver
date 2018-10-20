@@ -113,8 +113,8 @@
 {% block scriptfile %}
     <script>
         var player = new TcPlayer('id_test_video', {
-            "m3u8": "http://30010.liveplay.myqcloud.com/live/30010_75a45697cc.m3u8",
-            "flv": "http://30010.liveplay.myqcloud.com/live/30010_75a45697cc.flv", //增加了一个flv的播放地址，用于PC平台的播放 请替换成实际可用的播放地址
+            "m3u8": "http://{{ liveinfo.play_id }}.liveplay.myqcloud.com/live/{{ liveinfo.play_id }}_{{ liveinfo.play_app_id }}.m3u8",
+            "flv": "http://{{ liveinfo.play_id }}.liveplay.myqcloud.com/live/{{ liveinfo.play_id }}_{{ liveinfo.play_app_id }}.flv", //增加了一个flv的播放地址，用于PC平台的播放 请替换成实际可用的播放地址
             "autoplay": true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
             "coverpic": "http://www.test.com/myimage.jpg",
 

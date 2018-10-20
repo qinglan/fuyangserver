@@ -38,13 +38,11 @@
                                          width="80" height="60"/>
                                 </a>
                                 <div class="media-body">
-                                    <p class="pull-right" style="padding-left: 10px;">
-                                        <a href="{{ item.file.url }}" target="_blank">下载</a>
-                                    </p>
-                                    <p class="media-heading" style="color: #000;">
+                                    <p class="media-heading">
+                                        <a href="{{ item.file.url }}" target="_blank" class="pull-right">下载</a>
                                         <a href="{% url 'datadetail' item.pk %}" style="color:#666;">{{ item.name }}</a>
                                     </p>
-                                    <p>{{ item.introduce|truncatechars:43 }}</p>
+                                    <p>{{ item.introduce|truncatechars:50 }}</p>
                                 </div>
                             </div>
                         {% empty %}

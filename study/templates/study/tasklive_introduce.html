@@ -37,7 +37,7 @@
 
         /* 通过 css 设置播放器尺寸 这时<video>中的宽高属性将被覆盖*/
         .player-size {
-            width: 2560px;
+            width: 100%;
             height: 1440px;
         }
 
@@ -121,9 +121,7 @@
         <video id="player-container-id" class="player-size" playsinline webkit-playsinline>
         </video>
     {% else %}
-
         <div id="id_test_video" class="player-size"></div>
-        </div>
     {% endif %}
 
     <div class="dashboard-body">
