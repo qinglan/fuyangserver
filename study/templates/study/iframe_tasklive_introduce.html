@@ -2,56 +2,26 @@
 
 {% load staticfiles %}
 
-
 {% block titlefile %}
-
-
-    <style>
-
-        html, body {
-        height: 100%;
-
-        }
-        .image_size {
-            width: 100%;
-
-        }
-        .text-left {
-            text-align: left;
-        }
-        .back_color{
+    <style type="text/css">
+        .back_color {
             background-color: #1d1d1d;
             height: 100%;
-            bottom:38px;
-        }
-
-        .span {
-            display: inline-block;
-            height: 100%;
-            vertical-align: middle;
-        }
-
-        .wei {
-            vertical-align: middle;
+            bottom: 38px;
         }
     </style>
 {% endblock %}
-{% block title %}直播简介{% endblock %}
 
+{% block title %}直播简介{% endblock %}
 
 {% block bodycontent %}
 
-
-
     <div class="back_color">
-
         {% if is_superuser %}
             {% if not liveinfo.is_replay %}
-                <div class="text-left player-size backcolor">
-                    <a class="btn btn-primary btn-lg divcss_center" id='sum' href="javascript:nextPage();">
-                        下一页
-                    </a>
-                </div>
+                <p>
+                    <button class="btn btn-primary btn-lg" id="sum" onclick="nextPage();">下一页</button>
+                </p>
             {% endif %}
         {% endif %}
 
@@ -60,32 +30,33 @@
                 <td><img id="id_liveimage" class="image_size" src=""></td>
             </tr>
         </table>
-
-
     </div>
-
-
-
-
-
-
 
 {% endblock %}
 
 {% block scriptfile %}
-    <script>
+    <script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+    <script type="text/javascript">
 
         {% if liveinfo.is_replay %}
-            var srcs = new Array()
-            var times = new Array()
+            var srcs = new Array();
+            var times = new Array();
             {% for item in imageUrls %}
-                srcs.push("{{ item.src }}")
-                times.push({{ item.time }})
+                srcs.push("{{ item.src }}");
+                times.push({{ item.time }});
             {% endfor %}
-
         {% endif %}
-        $(function () {
 
+        var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+        var chatSocket = new WebSocket(ws_scheme + '://' + window.location.host + '/ws/chat/' + {{ liveinfo.pk }} +'/');
+
+        chatSocket.onmessage = function (e) {
+            var data = JSON.parse(e.data);
+            var message = data['message'];
+            console.log(message + '\n');
+        };
+
+        $(function () {
             updateMsg();    //更细信息
         });
 
@@ -94,14 +65,12 @@
             {% if liveinfo.is_replay %}
                 var t = parent.callByChild()
                 for (var i = 0; i < srcs.length; i++) {
-
                     var s = ""
                     if (times[i] <= t) {
                         s = srcs[i]
                     }
                     var index = document.getElementById("id_liveimage").src.indexOf(s)
-                    if ( index == -1  && s != ""){
-
+                    if (index == -1 && s != "") {
                         document.getElementById("id_liveimage").src = s
                     }
                 }
@@ -113,14 +82,13 @@
                     })
                 }
             {% endif %}
-
             //setTimeout("updateMsg()", 1000);        //每秒更新一次
         }
 
         function nextPage() {
             $.get("{% url 'iframe_tasklive_introduce_nextimage' liveinfo.pk %}", {}, function (ret) {
-                })
-
+                $('#id_liveimage').attr('src', ret);
+            })
         }
     </script>
 

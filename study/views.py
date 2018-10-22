@@ -554,7 +554,7 @@ def videoplaylecture(request, pk):
     gas[0].views_count = gas[0].views_count + 1
     gas[0].save()
 
-    vpcs = VideoInfoLectureComment.objects.filter(ascription__pk=pk)    #视频评论
+    vpcs = VideoInfoLectureComment.objects.filter(ascription__pk=pk)  # 视频评论
 
     us = VideoInfoLectureOrder.objects.filter(video__pk=pk)
     b = False
@@ -647,9 +647,8 @@ def tasklive_introduce(request, pk):
     liveinfos = CurriculumTaskInfoVideo.objects.filter(pk=pk)
     if len(liveinfos) <= 0:
         return HttpResponse('error')
-    a = VideoCurriculumOrder.objects.filter(purchaser=request.user)
-    b=a.video_curriculum.id
-
+    # a = VideoCurriculumOrder.objects.filter(purchaser=request.user)
+    # b=a.video_curriculum.id
 
     return render(request, 'study/tasklive_introduce.html', {'liveinfo': liveinfos[0]})
 
@@ -700,29 +699,31 @@ def iframe_tasklive_introduce(request, pk):
 
 
 def iframe_tasklive_introduce_nextimage(request, pk):
+    '直播详情页面：文档下一页'
     liveinfos = CurriculumTaskInfoVideo.objects.filter(pk=pk)
     if len(liveinfos) <= 0:
         return HttpResponse('error')
+    info = liveinfos.first()
 
-    s = str(liveinfos[0].introduce)
+    s = str(info.introduce)
     xs = "<images>" + s + "</images>"
     domt = xml.dom.minidom.parseString(xs)
 
     imgs = domt.documentElement.getElementsByTagName("img")
 
-    timelist = liveinfos[0].image_show_time.split('.')
-    if liveinfos[0].image_show_time == '':
+    timelist = info.image_show_time.split('.')
+    if info.image_show_time == '':
         timelist = []
 
     if len(imgs) > len(timelist):
-        liveinfos[0].live_image = imgs[len(timelist)].getAttribute("src")
+        info.live_image = imgs[len(timelist)].getAttribute("src")
         nowtime = timezone.now()
         s = str(int(time.mktime(nowtime.timetuple())))
         timelist.append(s)
-        liveinfos[0].image_show_time = '.'.join(timelist)
-        liveinfos[0].save()
-
-    return HttpResponse('1')
+        info.image_show_time = '.'.join(timelist)
+        info.save()
+        return HttpResponse(info.live_image)
+    return HttpResponse(imgs[0].getAttribute('src'))  # 默认返回第一张图片
 
 
 def iframe_tasklive_introduce_liveimage(request, pk):
