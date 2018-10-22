@@ -2,3 +2,11 @@
 /media/
 .idea/
 .vscode/
+/common_static/
+/static/
+/fuyangserver/settings.py
+/advertise/migrations/
+/PictureText/migrations/
+/study/migrations/
+/userinfo/migrations/
+/users/migrations/
