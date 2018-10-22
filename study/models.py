@@ -583,16 +583,18 @@ class VideoCurriculumFile(models.Model):
 
 
 class MianInfo(models.Model):
+    '顶部背景图片设置'
     image = models.ImageField('主页图标 500x100 px', upload_to='image')
-    text_1 = models.CharField('黑色文字', max_length=256)
-    text_2 = models.CharField('灰色文字', max_length=256)
+    text_1 = models.CharField('Alt文字', max_length=256)
+    text_2 = models.CharField('LongDesc文字', max_length=256)
+    background = models.ImageField('背景图片', upload_to='image', default='image/title_bg.png')
 
     def __str__(self):
         return self.text_1
 
     class Meta:
-        verbose_name = 'z1主页信息维护'
-        verbose_name_plural = 'z1主页信息维护'
+        verbose_name = '顶部背景图片设置'
+        verbose_name_plural = '顶部背景图片设置'
 
 
 class TaskLiveFile(models.Model):

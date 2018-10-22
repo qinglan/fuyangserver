@@ -24,13 +24,7 @@
         }
     </script>
 
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-
-        }
-
+    <style type="text/css">
         .tcplayer {
             margin: 0 auto;
         }
@@ -70,7 +64,6 @@
         }
 
         .iframe_size {
-
             width: 100%;
             height: 800px;
             border: 0;
@@ -112,9 +105,7 @@
 
 {% endblock %}
 
-
 {% block bodycode %} onresize="resize()" onload="load()"{% endblock %}
-
 
 {% block bodycontent %}
     {% if liveinfo.is_replay %}
@@ -164,88 +155,9 @@
                 src="{{ liveinfo.get_iframe_reviews_url }}"
                 allowfullscreen="" webkitallowfullscreen="">
         </iframe>
-
-        <!--<iframe id="iframe_ask" style="display:none;" class="task-content-iframe iframe_size"
-                src="{{ liveinfo.get_iframe_ask_url }}"
-                allowfullscreen="" webkitallowfullscreen="">
-        </iframe>-->
-
-
     </div>
 
-    <!--<div class="container" id="id_section">
-        <div class="row">
-            <div class="col-lg-9 col-md-8 course-detail-content">
-
-                <section class="es-section">
-                    <div class="nav-btn-tab">
-
-                        <ul class="nav nav-tabs " role="tablist">
-                            <li role="presentation" id="summary" class="active">
-                                <a href="javascript:to_introduce();">
-                                    章节
-                                </a>
-                            </li>
-                            <li role="presentation" id="reviews" class="">
-                                <a href="javascript:to_reviews();">
-                                    讨论
-                                </a>
-                            </li>
-                            <li role="presentation" id="ask" class="">
-                                <a href="javascript:to_ask();">
-                                    问答
-
-                                </a>
-                            </li>
-                            <li role="presentation" id="material" class="">
-                                <a href="javascript:to_material();">
-                                    资料
-
-                                </a>
-                            </li>
-                        </ul>
-
-                    </div>
-                    <iframe id="iframe_introduce" src="{{ liveinfo.get_iframe_introduce_url }}" width="800" height="800"
-                            scrolling="yes" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"
-                            allowtransparency="yes">
-                        <p>Your browser does not support iframes.</p>
-                    </iframe>
-                    <iframe id="iframe_reviews" style="display:none;" src="{{ liveinfo.get_iframe_reviews_url }}"
-                            width="800" height="800"
-                            scrolling="yes" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"
-                            allowtransparency="yes">
-                        <p>Your browser does not support iframes.</p>
-                    </iframe>
-                    <iframe id="iframe_ask" style="display:none;" src="{{ liveinfo.get_iframe_ask_url }}" width="800"
-                            height="800"
-                            scrolling="yes" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"
-                            allowtransparency="yes">
-                        <p>Your browser does not support iframes.</p>
-                    </iframe>
-                    <iframe id="iframe_material" style="display:none;" src="{{ liveinfo.get_iframe_material_url }}" width="800"
-                            height="800"
-                            scrolling="yes" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"
-                            allowtransparency="yes">
-                        <p>Your browser does not support iframes.</p>
-                    </iframe>
-
-                </section>
-
-
-            </div>
-
-            <div class="col-lg-3 col-md-4 course-sidebar">
-
-            </div>
-
-        </div>
-    </div>-->
-
-
-
     <div id="footer_input" class="footer" style="display: none">
-
         <form id="chatForm" class="footer" method="POST"
               action="{{ liveinfo.get_iframe_reviews_post_url }}">{% csrf_token %}
             <div style="height:100%;width:2%;float:left;"></div>
@@ -257,7 +169,6 @@
                 <input type="hidden" name="post_type" value="send_chat"/>
                 <input type="submit" class="btn btn-primary pull-center " value="发送"/>
             </div>
-            <div style="height:100%;width:2%;float:left;"></div>
         </form>
     </div>
 
@@ -289,10 +200,7 @@
         {% else %}
             var player = new TcPlayer('id_test_video', {
                 "m3u8": "http://{{ liveinfo.live_id }}.liveplay.myqcloud.com/live/{{ liveinfo.live_id }}_{{ liveinfo.live_key }}.m3u8",
-
                 "autoplay": true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
-
-
             });
         {% endif %}
         var introduce = document.getElementById("iframe_introduce");
@@ -305,16 +213,13 @@
         //var t_ask = document.getElementById("ask");
         var t_material = document.getElementById("material");
 
-
         var footer_input = document.getElementById("footer_input");
 
         function changeFrameHeight() {
 
         }
 
-
         function isFullscreenEnabled() {
-
             return document.fullscreenElement ||
                 document.msFullscreenElement ||
                 document.mozFullScreenElement ||
@@ -336,16 +241,12 @@
                 player.destroy();
                 player = new TcPlayer('id_test_video', {
                     "m3u8": "http://{{ liveinfo.live_id }}.liveplay.myqcloud.com/live/{{ liveinfo.live_id }}_{{ liveinfo.live_key }}.m3u8",
-
                     "autoplay": true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
-
-
                 });
             {% endif %}
         }
 
         function resize() {
-
             goPAGE();
             if (isMobile()) {
                 let isPortrait = document.documentElement.offsetHeight > document.documentElement.offsetWidth;
@@ -355,24 +256,17 @@
                     if (window.screen.availWidth != document.documentElement.offsetHeight &&
                         window.screen.availHeight != document.documentElement.offsetHeight) {
                         refreshPlayer();
-
                     }
                 } else {
                     if (maxPheight >= document.documentElement.offsetHeight) {
                         refreshPlayer();
                     }
                 }
-
-
-                //}
-
             } else {
                 if (!isFullscreenEnabled()) {
                     refreshPlayer();
                 }
             }
-
-
         }
 
         function load() {
@@ -386,8 +280,6 @@
             } else {
                 maxLheight = document.documentElement.offsetHeight;
             }
-
-
         }
 
         function do_remove() {
@@ -401,7 +293,6 @@
             footer_input.style.display = "none";
             //t_ask.classList.remove("ondoc");
             //t_ask.classList.remove("on");
-
         }
 
         function to_introduce() {
@@ -414,8 +305,6 @@
 
             t_summary.classList.add("ondoc");
             t_summary.classList.add("on");
-
-
         }
 
         function to_reviews() {
@@ -439,15 +328,12 @@
         }
 
         function to_ask() {
-
-
             do_remove()
 
             introduce.style.display = "none";
             reviews.style.display = "none";
             //ask.style.display = "block";
             material.style.display = "none";
-
 
             //t_ask.classList.add("ondoc");
             //t_ask.classList.add("on");
@@ -487,9 +373,7 @@
             //refreshPlayer();
         }
 
-
         //window.addEventListener('orientationchange', updateOrientation, false);
-
 
         goPAGE();
         $(function () {

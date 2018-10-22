@@ -5,7 +5,8 @@
 
 from django.conf import settings as original_settings
 from users.models import User
-from study.models import MianInfo,VideoCurriculum
+from study.models import MianInfo, VideoCurriculum
+
 
 def user_info(request):
     if request.user.is_authenticated:
@@ -19,6 +20,6 @@ def main_info(request):
     main_infos = MianInfo.objects.all();
     main_vcs = VideoCurriculum.objects.all()
     if len(main_infos) > 0:
-        return {'main_info': main_infos[0],'main_vcs':main_vcs}
+        return {'main_info': main_infos[0], 'main_vcs': main_vcs}
 
-    return {'main_info':{},'main_vcs':main_vcs}
+    return {'main_info': {}, 'main_vcs': main_vcs}
