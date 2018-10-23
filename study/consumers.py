@@ -18,6 +18,8 @@ class LivingRoomConsumer(WebsocketConsumer):
     def receive(self, text_data=None, bytes_data=None):
         txt_data_json = json.loads(text_data)
         message = txt_data_json['message']
+        action = txt_data_json['action']
         self.send(text_data=json.dumps({
+            'action': action,
             'message': message
         }))

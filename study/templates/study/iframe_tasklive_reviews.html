@@ -3,12 +3,8 @@
 {% load staticfiles %}
 {% load filters %}
 
-
 {% block titlefile %}
-    <style>
-
-
-
+    <style type="text/css">
         .pull-center {
             width: 100%;
             height: 100%;
@@ -36,10 +32,12 @@
 
 
 {% block bodycontent %}
-    <p>&nbsp;</p>
     <div class="es-piece">
+        <p>
+            <button class="btn btn-primary btn-lg" id="trv" onclick="nextPage();">关闭评论</button>
+        </p>
         <div class="piece-body p-lg clearfix" id="list-group-item">
-        <!--<div class="list-group-item">-->
+            <!--<div class="list-group-item">-->
             {% for comment in comments %}
                 <div class="js-reviews">
                     <div class="media media-evaluate">
@@ -62,10 +60,8 @@
                         </div>
                     </div>
                 </div>
-                <input type="hidden" class="chat_id" value="{{comment.id}}"/>
+                <input type="hidden" class="chat_id" value="{{ comment.id }}"/>
             {% endfor %}
-
-
 
         </div>
     </div>
@@ -91,40 +87,69 @@
 
 
 {% block scriptfile %}
-    <script>
+    <script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+    <script type="text/javascript">
+        var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+        var chatSocket = new WebSocket(ws_scheme + '://' + window.location.host + '/ws/chat/' + {{ liveinfo.pk }} +'/');
+
         $(function () {
             updateMsg();    //更细信息
             //表单 submit 事件
             $("#chatForm").submit(function () {
                 //ajax 提交表单
-                $.post("{{ liveinfo.get_iframe_reviews_post_url }}",
-                    $('#chatForm').serialize(),
-                    function (data) {
-                        $(".form-control1").val("");  //消息发送成功后清空内容框
-                    });
+                $.post("{{ liveinfo.get_iframe_reviews_post_url }}", $('#chatForm').serialize(), function (data) {
+                    $(".form-control1").val("");  //消息发送成功后清空内容框
+                });
                 return false;       //阻止表单提交
+            });
+            //打开|关闭评论
+            $('#trv').on('click', function () {
+                var btntxt = $(this).text();
+                var text_data = {'message': '', 'action': 'toggle'};
+                if (btntxt == '关闭评论') {
+                    text_data['message'] = 'close';
+                    $(this).text('关闭评论');
+                } else {
+                    text_data['message'] = 'open';
+                    $(this).text('打开评论');
+                }
+
+                var jsonstr = JSON.stringify(text_data);
+                console.log('send directive:' + jsonstr);
+                chatSocket.send(jsonstr);
             });
         });
 
         //更新消息
         function updateMsg() {
-
             if (self.document.body.clientWidth > 0) {
-                $.post(
-                "{{ liveinfo.get_iframe_reviews_post_url }}",
-                {
-                    csrfmiddlewaretoken: "{{ csrf_token }}",
-                    post_type: "get_chat",
-                    last_chat_id: $(".chat_id").first().val()
-                },
-                function (data) {
-
-                    $("#list-group-item").prepend(data);    //解析返回的 xml
-                });
+                $.post("{{ liveinfo.get_iframe_reviews_post_url }}",
+                    {
+                        csrfmiddlewaretoken: "{{ csrf_token }}",
+                        post_type: "get_chat",
+                        last_chat_id: $(".chat_id").first().val()
+                    },
+                    function (data) {
+                        $("#list-group-item").prepend(data);    //解析返回的 xml
+                    });
             }
-
-
-            setTimeout("updateMsg()", 1000);        //每秒更新一次
+            //setTimeout("updateMsg()", 1000);        //每秒更新一次
         }
+
+        chatSocket.onmessage = function (e) {
+            var data = JSON.parse(e.data);
+            var message = data['message'];
+            var action = data['action'];
+            if (action == 'refresh') {
+                updateMsg();
+            }
+            console.log('receive response:' + message);
+        };
+
+        chatSocket.onopen = function () {
+            console.log('websocket connection is created:[reviews]');
+            //var text_data = {'message': 'heelo channels'};
+            //chatSocket.send(JSON.stringify(text_data));
+        };
     </script>
 {% endblock %}

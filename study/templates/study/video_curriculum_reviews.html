@@ -116,10 +116,19 @@
     <script src="{% static "xuantong/js/jquery-validation.js" %}?version=1"></script>
     <script src="{% static "xuantong/js/index(7).js" %}?version=1"></script>
     <script type="text/javascript">
-
+        var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+        var chatSocket = new WebSocket(ws_scheme + '://' + window.location.host + '/ws/chat/' + {{ liveinfo.pk }} +'/');
+        chatSocket.onmessage = function (e) {
+            var jsonobj = JSON.parse(e.data);
+            var message = jsonobj['message'];
+            var action = jsonobj['action'];
+            if (action == 'toggle') {
+                message = 'close' ? $('#review-form').hide() : $('#review-form').show();
+            }
+            console.log('receive response:' + e.data);
+        };
         //拿到form
         var form = document.getElementById("review-form")
-
         function submitFormData() {
             if (document.getElementsByName("rating")[0].value == 0) {
                 alert("请打分")
@@ -129,16 +138,13 @@
                 alert("评论不能为空")
                 return
             }
-
             form.submit();
-
         }
 
         form.addEventListener("submit", function (event) {
             event.preventDefault();   // 取消按键的原始提交行为
             submitFormData();         //启动监听提交按钮
         });
-
     </script>
 
 {% endblock %}

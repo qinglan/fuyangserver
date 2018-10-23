@@ -53,7 +53,17 @@
         chatSocket.onmessage = function (e) {
             var data = JSON.parse(e.data);
             var message = data['message'];
-            console.log(message + '\n');
+            var action = data['action'];
+            if (action == 'nextimg') {
+                $('#id_liveimage').attr('src', message);
+            }
+            console.log('receive response:' + message);
+        };
+
+        chatSocket.onopen = function () {
+            console.log('websocket connection is created:[nextimg]');
+            //var text_data = {'message': 'heelo channels'};
+            //chatSocket.send(JSON.stringify(text_data));
         };
 
         $(function () {
@@ -87,7 +97,11 @@
 
         function nextPage() {
             $.get("{% url 'iframe_tasklive_introduce_nextimage' liveinfo.pk %}", {}, function (ret) {
-                $('#id_liveimage').attr('src', ret);
+                //$('#id_liveimage').attr('src', ret);
+                var text_data = {'message': ret, 'action': 'nextimg'};
+                var jsonstr = JSON.stringify(text_data);
+                console.log('send directive:' + jsonstr);
+                chatSocket.send(jsonstr);
             })
         }
     </script>

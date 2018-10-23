@@ -747,6 +747,7 @@ def iframe_tasklive_ask(request, pk):
 
 
 def iframe_tasklive_reviews(request, pk):
+    '直播：讨论区'
     liveinfos = CurriculumTaskInfoVideo.objects.filter(pk=pk)
     if len(liveinfos) <= 0:
         return render(request, 'study/iframe_tasklive_reviews.html')
