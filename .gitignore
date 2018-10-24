@@ -1,12 +1,24 @@
 # Byte-compiled / optimized / DLL files
-/media/
+.gitignore
+.DS_Store
 .idea/
 .vscode/
+/media/
 /common_static/
 /static/
-/fuyangserver/settings.py
 /advertise/migrations/
 /PictureText/migrations/
 /study/migrations/
 /userinfo/migrations/
 /users/migrations/
+DjangoUeditor/__pycache__/
+PictureText/__pycache__/
+advertise/__pycache__/
+fuyangserver/.DS_Store
+fuyangserver/__pycache__/
+study/__pycache__/
+study/templatetags/__pycache__/
+userinfo/__pycache__/
+users/__pycache__/
+users/templatetags/__pycache__/
+
