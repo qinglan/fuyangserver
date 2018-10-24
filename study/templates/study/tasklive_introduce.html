@@ -105,7 +105,7 @@
 
 {% endblock %}
 
-{% block bodycode %} onresize="resize()" onload="load()"{% endblock %}
+{% block bodycode %} onload="load()"{% endblock %}
 
 {% block bodycontent %}
     {% if liveinfo.is_replay %}
@@ -268,8 +268,6 @@
 
         function load() {
             changeFrameHeight();
-            var pdiv = document.getElementById("id_test_video");
-
             isLastPortrait = document.documentElement.offsetHeight > document.documentElement.offsetWidth;
             if (isLastPortrait) {
 

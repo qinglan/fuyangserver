@@ -91,14 +91,16 @@
             //setTimeout("updateMsg()", 1000);        //每秒更新一次
         }
 
+        var startnum = 0;  //起始课件
         function nextPage() {
-            $.get("{% url 'iframe_tasklive_introduce_nextimage' liveinfo.pk %}", {}, function (ret) {
+            $.get("{% url 'iframe_tasklive_introduce_nextimage' liveinfo.pk %}", {num: startnum}, function (ret) {
                 //$('#id_liveimage').attr('src', ret);
                 var text_data = {'message': ret, 'action': 'nextimg'};
                 var jsonstr = JSON.stringify(text_data);
                 console.log('send directive:' + jsonstr);
                 chatSocket.send(jsonstr);
             })
+            startnum += 1;  //下一张课件
         }
     </script>
 

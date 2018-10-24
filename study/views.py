@@ -710,20 +710,22 @@ def iframe_tasklive_introduce_nextimage(request, pk):
     domt = xml.dom.minidom.parseString(xs)
 
     imgs = domt.documentElement.getElementsByTagName("img")
+    n = int(request.GET.get('num', 1))
+    if n >= len(imgs): n = n % len(imgs)
 
-    timelist = info.image_show_time.split('.')
-    if info.image_show_time == '':
-        timelist = []
-
-    if len(imgs) > len(timelist):
-        info.live_image = imgs[len(timelist)].getAttribute("src")
-        nowtime = timezone.now()
-        s = str(int(time.mktime(nowtime.timetuple())))
-        timelist.append(s)
-        info.image_show_time = '.'.join(timelist)
-        info.save()
-        return HttpResponse(info.live_image)
-    return HttpResponse(imgs[0].getAttribute('src'))  # 默认返回第一张图片
+    # timelist = info.image_show_time.split('.')
+    # if info.image_show_time == '':
+    #     timelist = []
+    #
+    # if len(imgs) > len(timelist):
+    #     info.live_image = imgs[len(timelist)].getAttribute("src")
+    #     nowtime = timezone.now()
+    #     s = str(int(time.mktime(nowtime.timetuple())))
+    #     timelist.append(s)
+    #     info.image_show_time = '.'.join(timelist)
+    #     info.save()
+    #     return HttpResponse(info.live_image)
+    return HttpResponse(imgs[n - 1].getAttribute('src'))  # 默认返回第一张图片
 
 
 def iframe_tasklive_introduce_liveimage(request, pk):
