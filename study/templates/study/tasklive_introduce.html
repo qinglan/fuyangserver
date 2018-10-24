@@ -169,18 +169,21 @@
 {% endblock %}
 
 {% block scriptfile %}
-    <script>
+    <script type="text/javascript">
+        var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+        var chatSocket = new WebSocket(ws_scheme + '://' + window.location.host + '/ws/chat/' + {{ liveinfo.pk }} +'/');
+
         var isLastPortrait = true;
         var maxPheight = 0;
         var maxLheight = 0;
 
         $("#chatForm").submit(function () {
             //ajax 提交表单
-            $.post("{{ liveinfo.get_iframe_reviews_post_url }}",
-                $('#chatForm').serialize(),
-                function (data) {
-                    $(".form-control1").val("");  //消息发送成功后清空内容框
-                });
+            $.post("{{ liveinfo.get_iframe_reviews_post_url }}", $('#chatForm').serialize(), function (data) {
+                $(".form-control1").val("");  //消息发送成功后清空内容框
+                var text_data = {'action': 'refresh', 'message': 'new reviews'};
+                chatSocket.send(JSON.stringify(text_data));
+            });
             return false;       //阻止表单提交
         });
         {% if liveinfo.is_replay %}
@@ -368,9 +371,28 @@
         }
 
         //window.addEventListener('orientationchange', updateOrientation, false);
+        chatSocket.onmessage = function (e) {
+            var data = JSON.parse(e.data);
+            var message = data['message'];
+            var action = data['action'];
+            if (action == 'toggle') {
+                message == 'close' ? $('#chatForm').hide() : $('#chatForm').show();
+                sessionStorage.setItem('reviewstate', message);
+            }
+            console.log('receive response:' + message);
+        };
+        chatSocket.onopen = function () {
+            console.log('websocket connection is created:[livingroom page]');
+            //var text_data = {'message': 'heelo channels'};
+            //chatSocket.send(JSON.stringify(text_data));
+        };
 
         goPAGE();
         $(function () {
+            //页面恢复时还原评论状态
+            var rst = sessionStorage.getItem('reviewstate');
+            if (rst != null) rst == 'close' ? $('#chatForm').hide() : $('#chatForm').show();
+
             /* begin禁用微信分享功能 */
             function onBridgeReady() {
                 WeixinJSBridge.call('hideOptionMenu');

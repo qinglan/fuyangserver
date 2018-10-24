@@ -34,8 +34,11 @@
 {% block bodycontent %}
     <div class="es-piece">
         <p>
-            <button class="btn btn-primary btn-lg" id="trv" onclick="nextPage();">关闭评论</button>
+            {% if request.user.is_superuser %}
+                <button class="btn btn-primary btn-lg" id="trv">关闭评论</button>
+            {% endif %}
         </p>
+
         <div class="piece-body p-lg clearfix" id="list-group-item">
             <!--<div class="list-group-item">-->
             {% for comment in comments %}
@@ -108,10 +111,10 @@
                 var text_data = {'message': '', 'action': 'toggle'};
                 if (btntxt == '关闭评论') {
                     text_data['message'] = 'close';
-                    $(this).text('关闭评论');
+                    $('#trv').text('打开评论');
                 } else {
                     text_data['message'] = 'open';
-                    $(this).text('打开评论');
+                    $('#trv').text('关闭评论');
                 }
 
                 var jsonstr = JSON.stringify(text_data);

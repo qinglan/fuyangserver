@@ -17,19 +17,15 @@
 {% block bodycontent %}
 
     <div class="back_color">
-        {% if is_superuser %}
-            {% if not liveinfo.is_replay %}
-                <p>
+        <p>
+            {% if is_superuser %}
+                {% if not liveinfo.is_replay %}
                     <button class="btn btn-primary btn-lg" id="sum" onclick="nextPage();">下一页</button>
-                </p>
+                {% endif %}
             {% endif %}
-        {% endif %}
+        </p>
 
-        <table style="width:100%;height:100%;">
-            <tr valign=middle align=center>
-                <td><img id="id_liveimage" class="image_size" src=""></td>
-            </tr>
-        </table>
+        <p><img id="id_liveimage" class="img-responsive" alt="直播课件"></p>
     </div>
 
 {% endblock %}

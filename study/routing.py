@@ -8,5 +8,5 @@ from django.conf.urls import url
 from . import consumers
 
 websocket_urlpatterns = [
-    url(r'^ws/chat/(\d+)/$', consumers.LivingRoomConsumer),
+    url(r'^ws/chat/(?P<room_id>\d+)/$', consumers.LivingRoomConsumer),
 ]
