@@ -246,6 +246,7 @@ def video_curriculum_getinfo(request, pk):
 
 @login_required(login_url='/accounts/login/')
 def video_curriculum_detail(request, pk):
+    '直播详情页面'
     vc, comment_count, nowtime, isBuy, isCollection = video_curriculum_getinfo(request, pk)
     if vc is None:
         return HttpResponse('error')
@@ -297,6 +298,7 @@ def video_curriculum_tasks(request, pk):
 
 @login_required(login_url='/accounts/login/')
 def video_curriculum_material(request, pk):
+    '直播：资料区'
     vc, comment_count, nowtime, isBuy, isCollection = video_curriculum_getinfo(request, pk)
     if vc is None:
         return HttpResponse('error')
@@ -647,10 +649,18 @@ def tasklive_introduce(request, pk):
     liveinfos = CurriculumTaskInfoVideo.objects.filter(pk=pk)
     if len(liveinfos) <= 0:
         return HttpResponse('error')
-    # a = VideoCurriculumOrder.objects.filter(purchaser=request.user)
-    # b=a.video_curriculum.id
+    info = liveinfos.first()
+    vid = info.video_class.video_curriculum_id  # 视频Id
+    us = VideoCurriculumOrder.objects.filter(video_curriculum__pk=vid)
+    isBuy = False
+    for u in us:
+        if u.purchaser.pk == request.user.pk:
+            isBuy = True
+            break
 
-    return render(request, 'study/tasklive_introduce.html', {'liveinfo': liveinfos[0]})
+    if request.user.is_superuser or isBuy:  # 管理员和购买人才可能看视频
+        return render(request, 'study/tasklive_introduce.html', {'liveinfo': info, 'isBud': isBuy})
+    return HttpResponse('您还未购买该课程')
 
 
 def tasklive_ask(request, pk):
@@ -672,26 +682,26 @@ def tasklive_reviews(request, pk):
 def iframe_tasklive_introduce(request, pk):
     '直播详情页面：文档'
     liveinfos = CurriculumTaskInfoVideo.objects.filter(pk=pk)
-    if len(liveinfos) <= 0:
-        return HttpResponse('error')
+    if len(liveinfos) <= 0: return HttpResponse('error')
 
     s = str(liveinfos[0].introduce).replace("&nbsp;", '')
     timelist = liveinfos[0].image_show_time.split('.')
-    if liveinfos[0].image_show_time == '':
-        timelist = []
+    if liveinfos[0].image_show_time == '': timelist = []
     xs = "<images>" + s + "</images>"
     domt = xml.dom.minidom.parseString(xs)
 
     imgs = domt.documentElement.getElementsByTagName("img")
     imageUrls = []
-    if len(timelist) > 0:
-        startTime = int(timelist[0])
-        for (image, time) in zip(imgs, timelist):
-            if image.hasAttribute("src"):
-                i = {}
-                i["src"] = image.getAttribute("src")
-                i["time"] = int(time) - startTime
-                imageUrls.append(i)
+    for i in imgs:
+        imageUrls.append(i.getAttribute('src'))
+    # if len(timelist) > 0:
+    #     startTime = int(timelist[0])
+    #     for (image, time) in zip(imgs, timelist):
+    #         if image.hasAttribute("src"):
+    #             i = {}
+    #             i["src"] = image.getAttribute("src")
+    #             i["time"] = int(time) - startTime
+    #             imageUrls.append(i)
 
     return render(request, 'study/iframe_tasklive_introduce.html', \
                   {'liveinfo': liveinfos[0], 'imageUrls': imageUrls, \
@@ -701,8 +711,7 @@ def iframe_tasklive_introduce(request, pk):
 def iframe_tasklive_introduce_nextimage(request, pk):
     '直播详情页面：文档下一页'
     liveinfos = CurriculumTaskInfoVideo.objects.filter(pk=pk)
-    if len(liveinfos) <= 0:
-        return HttpResponse('error')
+    if len(liveinfos) <= 0: return HttpResponse('error')
     info = liveinfos.first()
 
     s = str(info.introduce)
@@ -713,18 +722,6 @@ def iframe_tasklive_introduce_nextimage(request, pk):
     n = int(request.GET.get('num', 1))
     if n >= len(imgs): n = n % len(imgs)
 
-    # timelist = info.image_show_time.split('.')
-    # if info.image_show_time == '':
-    #     timelist = []
-    #
-    # if len(imgs) > len(timelist):
-    #     info.live_image = imgs[len(timelist)].getAttribute("src")
-    #     nowtime = timezone.now()
-    #     s = str(int(time.mktime(nowtime.timetuple())))
-    #     timelist.append(s)
-    #     info.image_show_time = '.'.join(timelist)
-    #     info.save()
-    #     return HttpResponse(info.live_image)
     return HttpResponse(imgs[n - 1].getAttribute('src'))  # 默认返回第一张图片
 
 

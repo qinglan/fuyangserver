@@ -537,8 +537,8 @@ class TaskInfoVideoComment(models.Model):
         return self.message
 
     class Meta:
-        verbose_name = 'a直播评论'
-        verbose_name_plural = 'a直播评论'
+        verbose_name = 'a7直播评论'
+        verbose_name_plural = 'a7直播评论'
         ordering = ['-register_date']
 
 

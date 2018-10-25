@@ -6,10 +6,11 @@
 
 {% block container %}
 
-
     <div class="es-piece">
         <div class="piece-header">资料下载</div>
         <span style="color:red">声明：本资料区所有文件均为内部机密，只供已经报名的学员参考学习，严禁分享、转发、转载及摘编，违者将取消其学习资格并追究其法律责任！</span>
+        <br/>
+        <hr/>
         <div class="course-detail-content">
             <ul class="media-list">
                 {% for file in files %}
@@ -18,7 +19,6 @@
                             <div class="mbs">
                                 <a href="{{ file.get_download_url }}" target="_blank">{{ file.name }}</a>
                             </div>
-
 
                             <div class="text-sm">
                                 <span class="color-gray">{{ file.get_file_size }}MB</span>
@@ -31,8 +31,6 @@
                     </li>
                 {% endfor %}
             </ul>
-
-
         </div>
     </div>
 

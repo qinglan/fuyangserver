@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh_CN" class="" {% block htmlcode %} {% endblock %} >
 {% load staticfiles %}
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
     <meta name="renderer" content="webkit">
     <meta name="viewport"
@@ -13,8 +11,6 @@
     <meta content="LNtBUFJ35fAfOGhz3Ed845YlXneDj6R9OA-MpZPKj2c" name="csrf-token">
     <meta content="0" name="is-login">
     <meta content="1" name="is-open">
-
-
     <link rel="icon" href="{% static "fuyangicon.png" %}" type="image/x-icon">
     <link rel="shortcut icon" href="{% static "fuyangicon.png" %}" type="image/x-icon"
           media="screen">
@@ -22,39 +18,23 @@
     <link href="{% static "xuantong/css/bootstrap.css" %}" rel="stylesheet">
     <link href="{% static "xuantong/css/main.css" %}" rel="stylesheet">
     <link href="{% static "xuantong/css/main-v2.css" %}" rel="stylesheet">
-
     <link href="{% static "xuantong/css/header-white.css" %}" rel="stylesheet">
-
-
     <link href="{% static "xuantong/css/main(1).css" %}" rel="stylesheet">
-
     <script src="{% static "xuantong/js/index.js" %}"></script>
     {% block main_titlefile %}
     {% endblock %}
     {% block titlefile %}
     {% endblock %}
     <title>{% block title %}扶阳医学{% endblock %} - 扶阳医学</title>
-
 </head>
 
 <body class="es-main-default es-nav-white homepage {% block bodyclass %} {% endblock %}" {% block bodycode %} {% endblock %}>
-<div style="margin:0;width:0;height:0;overflow:hidden;"><img src="/media/image/wxscreenshot.png" width="360" height="360" alt="火神门"></div>
+<div style="margin:0;width:0;height:0;overflow:hidden;"><img src="/media/image/wxscreenshot.png" width="360" height="360" alt="火神门" longdesc="{{ main_vcs.text_2 }}"></div>
 {% block bodycontent %}
     <div>扶阳中医真的好</div>
 {% endblock %}
 
-
-
-<script>
-    if (typeof app === 'undefined') {
-        var app = {};
-    }
-
-</script>
-
-
 <script src="{% static "xuantong/js/translator.min.js" %}"></script>
-
 <script src="{% static "xuantong/js/zh_CN.js" %}"></script>
 <script src="{% static "xuantong/js/base.js" %}?version=1"></script>
 <script src="{% static "xuantong/js/common.js" %}"></script>
@@ -67,12 +47,6 @@
 <script src="{% static "xuantong/js/perfect-scrollbar.js" %}"></script>
 <script src="{% static "xuantong/js/index(3).js" %}"></script>
 {% block scriptfile %}
-
 {% endblock %}
-
-<script type="text/javascript">
-    window.seajsBoot && window.seajsBoot();
-</script>
 </body>
-
 </html>
