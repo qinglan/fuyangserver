@@ -28,12 +28,19 @@
     <title>{% block title %}扶阳医学{% endblock %} - 扶阳医学</title>
 </head>
 
-<body class="es-main-default es-nav-white homepage {% block bodyclass %} {% endblock %}" {% block bodycode %} {% endblock %}>
-<div style="margin:0;width:0;height:0;overflow:hidden;"><img src="/media/image/wxscreenshot.png" width="360" height="360" alt="火神门" longdesc="{{ main_vcs.text_2 }}"></div>
+<body class="es-main-default es-nav-white homepage {% block bodyclass %} {% endblock %}"
+{% block bodycode %} {% endblock %}>
+<div style="margin:0;width:0;height:0;overflow:hidden;">
+    <img src="/media/image/wxscreenshot.png" width="360" height="360" alt="火神门" longdesc="{{ main_vcs.text_2 }}">
+</div>
 {% block bodycontent %}
     <div>扶阳中医真的好</div>
 {% endblock %}
-
+<script type="text/javascript">
+    if (typeof app === 'undefined') {
+        var app = {};
+    }
+</script>
 <script src="{% static "xuantong/js/translator.min.js" %}"></script>
 <script src="{% static "xuantong/js/zh_CN.js" %}"></script>
 <script src="{% static "xuantong/js/base.js" %}?version=1"></script>
