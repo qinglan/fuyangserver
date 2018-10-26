@@ -7,7 +7,7 @@
 {% block bodycontent %}
     <div class="es-piece">
         <p>
-            {% if request.user.is_superuser %}
+            {% if request.user.is_superuser and liveinfo.is_liveing %}
                 <button class="btn btn-primary btn-lg" id="trv">关闭评论</button>
             {% endif %}
         </p>

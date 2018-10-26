@@ -315,6 +315,7 @@
 
             {% if liveinfo.speaking %}
                 {% if liveinfo.is_replay %}
+                    //录播是不显示评论
                 {% else %}
                     footer_input.style.display = "block";
                 {% endif %}
