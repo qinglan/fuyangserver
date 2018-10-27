@@ -6,8 +6,6 @@
     <style type="text/css">
         .back_color {
             background-color: #1d1d1d;
-            height: 100%;
-            bottom: 38px;
         }
 
         .carousel-control {
@@ -50,7 +48,7 @@
                 </a>
             </div>
         {% else %}
-            <p><img id="id_liveimage" class="img-responsive" alt="直播课件" src="/media/image/loading.gif"></p>
+            <p><img id="id_liveimage" class="img-responsive" alt="直播课件" src=""></p>
         {% endif %}
     </div>
 
@@ -69,8 +67,8 @@
             var action = data['action'];
             if (action == 'nextimg') {
                 $('#id_liveimage').attr('src', message);
+                console.log('receive last kejian:' + message);
             }
-            console.log('receive response:' + message);
         };
 
         $(function () {
@@ -82,7 +80,11 @@
             {% if liveinfo.is_liveing %}
                 if (self.document.body.clientWidth > 0) {
                     $.get("{% url 'iframe_tasklive_introduce_liveimage' liveinfo.pk %}", {}, function (ret) {
-                        document.getElementById("id_liveimage").src = ret;
+                        if (ret.length > 0)
+                            $('#id_liveimage').attr('src', ret);
+                        var courseware = sessionStorage.getItem('lastkejian'); //获取服务器最后一次刷新的课件
+                        if (courseware != null)
+                            $('#id_liveimage').attr('src', lkj);
                     })
                 }
             {% endif %}
@@ -93,6 +95,7 @@
             $.get("{% url 'iframe_tasklive_introduce_nextimage' liveinfo.pk %}", {num: startnum}, function (ret) {
                 //$('#id_liveimage').attr('src', ret);
                 var text_data = {'message': ret, 'action': 'nextimg'};
+                sessionStorage.setItem('lastkejian', ret);   //记录最后一次服务器刷新的课件
                 var jsonstr = JSON.stringify(text_data);
                 console.log('send directive:' + jsonstr);
                 chatSocket.send(jsonstr);

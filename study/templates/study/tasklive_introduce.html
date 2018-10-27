@@ -13,17 +13,8 @@
     <script src="//imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.2.js" charset="utf-8"></script>
     <link href="http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css" rel="stylesheet">
     <script src="//imgcache.qq.com/open/qcloud/video/tcplayer/ie8/videojs-ie8.js"></script>
-
     <script src="http://imgcache.qq.com/open/qcloud/video/tcplayer/lib/hls.min.0.8.8.js"></script>
-
     <script src="http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js"></script>
-
-    <script type="text/javascript">
-        function callByChild() {
-            return player.currentTime()
-        }
-    </script>
-
     <style type="text/css">
         .tcplayer {
             margin: 0 auto;
@@ -99,7 +90,6 @@
             -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
             transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
         }
-
     </style>
 
 
@@ -116,7 +106,6 @@
     {% endif %}
 
     <div class="dashboard-body">
-
         <div class="tabs border-box">
             <ul class="display-box ">
                 <li id="summary" class="flex ondoc on">
@@ -377,8 +366,8 @@
             if (action == 'toggle') {
                 message == 'close' ? $('#chatForm').hide() : $('#chatForm').show();
                 sessionStorage.setItem('reviewstate', message);
+                console.log('receive reviews state:' + message);
             }
-            console.log('receive response:' + message);
         };
         chatSocket.onopen = function () {
             console.log('websocket connection is created:[livingroom page]');

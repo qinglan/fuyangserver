@@ -89,9 +89,9 @@
             var message = data['message'];
             var action = data['action'];
             if (action == 'refresh') {
+                console.log('receive new reviews:' + message);
                 updateMsg();
             }
-            console.log('receive response:' + message);
         };
 
         chatSocket.onopen = function () {

@@ -659,7 +659,7 @@ def tasklive_introduce(request, pk):
             break
 
     if request.user.is_superuser or isBuy:  # 管理员和购买人才可能看视频
-        return render(request, 'study/tasklive_introduce.html', {'liveinfo': info, 'isBud': isBuy})
+        return render(request, 'study/tasklive_introduce.html', {'liveinfo': info})
     return HttpResponse('您还未购买该课程')
 
 
@@ -720,9 +720,9 @@ def iframe_tasklive_introduce_nextimage(request, pk):
 
     imgs = domt.documentElement.getElementsByTagName("img")
     n = int(request.GET.get('num', 1))
-    if n >= len(imgs): n = n % len(imgs)
+    if n >= len(imgs): n = n + 1 % len(imgs)
 
-    return HttpResponse(imgs[n - 1].getAttribute('src'))  # 默认返回第一张图片
+    return HttpResponse(imgs[n].getAttribute('src'))  # 默认返回第一张图片
 
 
 def iframe_tasklive_introduce_liveimage(request, pk):
