@@ -35,7 +35,7 @@ from users.models import User
 import hashlib
 import urllib.parse
 import datetime
-from django.utils import timezone
+import string, random
 import time
 import urllib
 
@@ -935,37 +935,47 @@ def buystudyfuyang(request, pk):
     return HttpResponse('1')
 
 
-def wxsign(request):
-    '获取微信签名:用于分享'
-    ret = {
-        'nonceStr': __create_nonce_str(),
-        'timestamp': __create_timestamp(),
-        'url': 'url'
-    }
-    requrl = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s' % (
-        WEIXIN_APP_ID, WEIXIN_APPSECRET)
+class wxsign(object):
+    '获取微信签名'
 
-    jsonobj = GetData(requrl)
-    access_token = jsonobj.access_token
-    ret['access_token'] = access_token
+    def __init__(self):
+        self.ret = {
+            'appId': WEIXIN_APP_ID,
+            'nonceStr': self.__create_nonce_str(),
+            'timestamp': self.__create_timestamp(),
+            'url': DO_MAIN,
+        }
+        self.__ticket()
 
-    string = '&'.join(['%s=%s' % (key.lower(), ret[key]) for key in sorted(ret)])
-    ret['signature'] = hashlib.sha1(string).hexdigest()
-    requrl = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token=%s' % access_token
+    def __create_nonce_str(self):
+        return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(15))
 
-    jsonobj = GetData(requrl)
-    ret['jsapi_ticket'] = jsonobj.ticket
+    def __create_timestamp(self):
+        return int(time.time()) + 7000
 
-    return ret
+    def __ticket(self):
+        strurl = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s' % (
+            WEIXIN_APP_ID, WEIXIN_APPSECRET)
+        # self.ret['responseText'] = GetData(strurl)
+        jsondata = json.loads(GetData(strurl))
+        access_token = jsondata['access_token']
+        self.ret['access_token'] = access_token
+
+        strurl = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token=%s' % access_token
+        jsondata = json.loads(GetData(strurl))
+        self.ret['jsapi_ticket'] = jsondata['ticket']
+
+    def getSign(self):
+        string = '&'.join(['%s=%s' % (key.lower(), self.ret[key]) for key in sorted(self.ret)])
+        self.ret['signature'] = hashlib.sha1(string.encode()).hexdigest()
+        return self.ret
 
 
-def __create_nonce_str():
-    import string, random
-    return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(15))
-
-
-def __create_timestamp():
-    return int(time.time()) + 7000
+def getwxsign(request):
+    '获取微信签名'
+    wx = wxsign()
+    wxdata = wx.getSign()
+    return HttpResponse(json.dumps(wxdata))
 
 
 def GetData(strurl):

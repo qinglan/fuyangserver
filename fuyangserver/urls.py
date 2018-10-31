@@ -120,6 +120,8 @@ urlpatterns = [
 
     path('class/job/iframe/post/<int:pk>/', study_views.class_job_iframe_post, name='class_job_iframe_post'),
 
+    path('wxsign/', study_views.getwxsign),
+
     # userinfo
 
     # url(r'^userinfo/', include('userinfo.urls')),
