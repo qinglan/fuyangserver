@@ -164,7 +164,11 @@
             </div>
         </div>
     </div>
+{% endblock %}
 
+{% block scriptfile %}
+    <script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+    <script type="text/javascript" src="http://res2.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
     <script type="text/javascript">
         function save_collection() {
             $.get("{{ videoinfo.get_collection_url }}", {'is_save': "is_save"}, function (ret) {
@@ -226,5 +230,43 @@
                 //其他参数请在开发文档中查看
             });
         {% endif %}
+
+        window.onload = function () {
+            $.get('/wxsign/', function (d) {
+                console.log('wxsign:' + d);
+                var jsonobj = JSON.parse(d);
+                wx.config({
+                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                    appId: jsonobj.appId, // 必填，公众号的唯一标识
+                    timestamp: jsonobj.timestamp, // 必填，生成签名的时间戳
+                    nonceStr: jsonobj.nonceStr, // 必填，生成签名的随机串
+                    signature: jsonobj.signature,// 必填，签名，见附录1
+                    jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                });
+                var img_url = encodeURI(location.protocol + '//' + location.host + '/media/image/wxscreenshot.png');
+                console.log('share img:' + img_url);
+                wx.ready(function () {
+                    //分享给朋友
+                    wx.updateAppMessageShareData({
+                        title: document.title, // 分享标题
+                        desc: '扶阳医学', // 分享描述
+                        link: location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                        imgUrl: img_url, // 分享图标
+                        success: function () {
+                            alert('share success');
+                        }
+                    });
+                    //分享到朋友圈
+                    wx.updateTimelineShareData({
+                        title: document.title, // 分享标题
+                        link: location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                        imgUrl: img_url, // 分享图标
+                        success: function () {
+                            alert('share friends success');
+                        }
+                    });
+                });
+            });
+        };
     </script>
 {% endblock %}

@@ -939,12 +939,12 @@ def buystudyfuyang(request, pk):
 class wxsign(object):
     '获取微信签名'
 
-    def __init__(self):
+    def __init__(self, url):
         self.ret = {
             'appId': WEIXIN_APP_ID,
             'nonceStr': self.__create_nonce_str(),
             'timestamp': self.__create_timestamp(),
-            'url': DO_MAIN,
+            'url': url,
         }
         self.__ticket()
 
@@ -974,7 +974,8 @@ class wxsign(object):
 
 def getwxsign(request):
     '获取微信签名'
-    wx = wxsign()
+    url = '{0}://{1}{2}'.format(request.scheme.lower(), request.get_host(), request.get_full_path())
+    wx = wxsign(url)
     wxdata = wx.getSign()
     return HttpResponse(json.dumps(wxdata))
 
