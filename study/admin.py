@@ -29,7 +29,7 @@ class DataListAdmin(admin.ModelAdmin):
 
 
 class MianInfoAdmin(admin.ModelAdmin):
-    list_display = ('text_1',)
+    list_display = ('name','text_1',)
 
 
 class VideoClassAdmin(admin.ModelAdmin):

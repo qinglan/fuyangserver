@@ -318,6 +318,7 @@ PAGE_HAS_COMMENT = 20
 
 @login_required(login_url='/accounts/login/')
 def video_curriculum_reviews(request, pk):
+    '直播详情页面评论'
     vc, comment_count, nowtime, isBuy, isCollection = video_curriculum_getinfo(request, pk)
     if vc is None:
         return HttpResponse('error')

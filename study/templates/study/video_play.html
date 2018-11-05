@@ -137,7 +137,7 @@
                           novalidate="novalidate">
                         {% csrf_token %}
                         <textarea class="form-control form-control-o" rows="6" placeholder="您的想法" name="content"
-                                  data-display="您的想法"></textarea>
+                                  data-display="您的想法" id="neirong"></textarea>
                         <div class="form-group clearfix">
                             <button type="button" class="btn btn-primary pull-right" onclick='submitFormData();'>发表评论
                             </button>
@@ -196,6 +196,20 @@
         var form = document.getElementById("review-form")
 
         function submitFormData() {
+            var wordsclean = '{{ main_info.wordsclean }}';
+            var content = $('#neirong').val();
+            if (content.length == 0) {
+                alert('评论内容不能为空');
+                return;
+            }
+            var wordsarr = wordsclean.split(/[,|;]+/);
+            var result = $.grep(wordsarr, function (i) {
+                return content.indexOf(i) > -1;
+            });
+            if (result.length > 0) {
+                alert('评论内容含有敏感词语,请文明发言.');
+                return;
+            }
             form.submit();
         }
 

@@ -145,7 +145,7 @@
               action="{{ liveinfo.get_iframe_reviews_post_url }}">{% csrf_token %}
             <div style="height:100%;width:2%;float:left;"></div>
             <div id="menu" style="height:100%;width:78%;float:left;">
-                <textarea class="form-control1" name="content" data-display="内容 "></textarea>
+                <textarea class="form-control1" name="content" id="neirong" data-display="内容 "></textarea>
             </div>
             <div style="height:100%;width:3%;float:left;"></div>
             <div style="height:100%;width:15%;float:left;">
@@ -168,6 +168,20 @@
 
         $("#chatForm").submit(function () {
             //ajax 提交表单
+            var wordsclean = '{{ main_info.wordsclean }}';
+            var content = $('#neirong').val();
+            if (content.length == 0) {
+                alert('评论内容不能为空');
+                return;
+            }
+            var wordsarr = wordsclean.split(/[,|;]+/);
+            var result = $.grep(wordsarr, function (i) {
+                return content.indexOf(i) > -1;
+            });
+            if (result.length > 0) {
+                alert('评论内容含有敏感词语,请文明发言.');
+                return;
+            }
             $.post("{{ liveinfo.get_iframe_reviews_post_url }}", $('#chatForm').serialize(), function (data) {
                 $(".form-control1").val("");  //消息发送成功后清空内容框
                 var text_data = {'action': 'refresh', 'message': 'new reviews'};

@@ -68,14 +68,14 @@
 
 
                     <form class="es-commet" id="thread-post-form" method="POST"
-                          action="{% url 'picture_text_paper_comment' paper.pk %}" novalidate="novalidate">
+                          action="{% url 'picture_text_paper_comment' paper.pk %}" onsubmit="return checkform()">
                         {% csrf_token %}
                         <div class="es-commet-header">
                             文章评论<span class="badge badge-primary thread-post-num">{{ paper.get_comment_count }}</span>
 
                         </div>
                         <textarea class="form-control form-control-o" rows="6" placeholder="您的想法" name="content"
-                                  data-display="您的想法"></textarea>
+                                  data-display="您的想法" id="neirong"></textarea>
                         <div class="form-group clearfix">
                             <button type="submit" class="btn btn-default pull-right " data-loading-text="正在评论...">发表评论
                             </button>
@@ -116,4 +116,26 @@
 
     </div>
 
+{% endblock %}
+
+{% block scriptfile %}
+    <script type="text/javascript">
+        function checkform() {
+            var wordsclean = '{{ main_info.wordsclean }}';
+            var content = $('#neirong').val();
+            if (content.length == 0) {
+                alert('评论内容不能为空');
+                return false;
+            }
+            var wordsarr = wordsclean.split(/[,|;]+/);
+            var result = $.grep(wordsarr, function (i) {
+                return content.indexOf(i) > -1;
+            });
+            if (result.length > 0) {
+                alert('评论内容含有敏感词语,请文明发言.');
+                return false;
+            }
+            return true;
+        }
+    </script>
 {% endblock %}

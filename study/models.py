@@ -583,18 +583,20 @@ class VideoCurriculumFile(models.Model):
 
 
 class MianInfo(models.Model):
-    '顶部背景图片设置'
+    '站点信息配置'
+    name = models.CharField('站点名称', max_length=256, default='扶阳医学')
+    text_1 = models.CharField('站点关键字', max_length=256)
+    text_2 = models.CharField('站点描述', max_length=256)
     image = models.ImageField('主页图标 500x100 px', upload_to='image')
-    text_1 = models.CharField('Alt文字', max_length=256)
-    text_2 = models.CharField('LongDesc文字', max_length=256)
     background = models.ImageField('背景图片', upload_to='image', default='image/title_bg.png')
+    wordsclean = models.TextField('评论内容过虑', max_length=256, blank=True, help_text='使用,|;分隔')
 
     def __str__(self):
         return self.text_1
 
     class Meta:
-        verbose_name = '顶部背景图片设置'
-        verbose_name_plural = '顶部背景图片设置'
+        verbose_name = '站点信息配置'
+        verbose_name_plural = verbose_name
 
 
 class TaskLiveFile(models.Model):
