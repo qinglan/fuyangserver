@@ -91,11 +91,7 @@
             transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
         }
     </style>
-
-
 {% endblock %}
-
-{% block bodycode %} onload="load()"{% endblock %}
 
 {% block bodycontent %}
     {% if liveinfo.is_replay %}
@@ -109,17 +105,17 @@
         <div class="tabs border-box">
             <ul class="display-box ">
                 <li id="summary" class="flex ondoc on">
-                    <a href="javascript:to_introduce();">
+                    <a href="javascript:void(0);" onclick="toggletabs('s')">
                         <span>文档</span>
                     </a>
                 </li>
                 <li id="material" class="flex">
-                    <a href="javascript:to_material();">
+                    <a href="javascript:void(0);" onclick="toggletabs('m')">
                         <span>资料</span>
                     </a>
                 </li>
                 <li id="reviews" class="flex">
-                    <a href="javascript:to_reviews();">
+                    <a href="javascript:void(0);" onclick="toggletabs('r')">
                         <span>讨论区</span>
                     </a>
                 </li>
@@ -129,12 +125,12 @@
                 src="{{ liveinfo.get_iframe_introduce_url }}"
                 allowfullscreen="" webkitallowfullscreen="">
         </iframe>
-        <iframe id="iframe_material" style="display:none;" class="task-content-iframe iframe_size"
+        <iframe id="iframe_material" class="task-content-iframe iframe_size hidden"
                 src="{{ liveinfo.get_iframe_material_url }}"
                 allowfullscreen="" webkitallowfullscreen="">
         </iframe>
 
-        <iframe id="iframe_reviews" style="display:none;" class="task-content-iframe iframe_size"
+        <iframe id="iframe_reviews" class="task-content-iframe iframe_size hidden"
                 src="{{ liveinfo.get_iframe_reviews_url }}"
                 allowfullscreen="" webkitallowfullscreen="">
         </iframe>
@@ -161,10 +157,6 @@
     <script type="text/javascript">
         var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
         var chatSocket = new WebSocket(ws_scheme + '://' + window.location.host + '/ws/chat/' + {{ liveinfo.pk }} +'/');
-
-        var isLastPortrait = true;
-        var maxPheight = 0;
-        var maxLheight = 0;
 
         $("#chatForm").submit(function () {
             //ajax 提交表单
@@ -194,7 +186,6 @@
                 fileID: "{{ liveinfo.play_id }}", // 请传入需要播放的视频filID 必须
                 appID: "{{ liveinfo.play_app_id }}", // 请传入点播账号的appID 必须
                 autoplay: true //是否自动播放
-
                 //其他参数请在开发文档中查看
             });
         {% else %}
@@ -203,37 +194,6 @@
                 "autoplay": true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
             });
         {% endif %}
-        var introduce = document.getElementById("iframe_introduce");
-        var reviews = document.getElementById("iframe_reviews");
-        //var ask = document.getElementById("iframe_ask");
-        var material = document.getElementById("iframe_material");
-
-        var t_summary = document.getElementById("summary");
-        var t_reviews = document.getElementById("reviews");
-        //var t_ask = document.getElementById("ask");
-        var t_material = document.getElementById("material");
-
-        var footer_input = document.getElementById("footer_input");
-
-        function changeFrameHeight() {
-
-        }
-
-        function isFullscreenEnabled() {
-            return document.fullscreenElement ||
-                document.msFullscreenElement ||
-                document.mozFullScreenElement ||
-                document.webkitFullscreenElement || false;
-        }
-
-        function isMobile() {
-            if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
 
         function refreshPlayer() {
             {% if liveinfo.is_replay %}
@@ -246,133 +206,46 @@
             {% endif %}
         }
 
-        function resize() {
-            goPAGE();
-            if (isMobile()) {
-                let isPortrait = document.documentElement.offsetHeight > document.documentElement.offsetWidth;
-                //if (isLastPortrait != isPortrait) {
-                isLastPortrait = isPortrait;
-                if (!isLastPortrait) {
-                    if (window.screen.availWidth != document.documentElement.offsetHeight &&
-                        window.screen.availHeight != document.documentElement.offsetHeight) {
-                        refreshPlayer();
-                    }
-                } else {
-                    if (maxPheight >= document.documentElement.offsetHeight) {
-                        refreshPlayer();
-                    }
-                }
-            } else {
-                if (!isFullscreenEnabled()) {
-                    refreshPlayer();
-                }
+        function toggletabs(t) {
+            $('#summary,#material,#reviews').removeClass('on').removeClass('ondoc');
+            $('#footer_input').hide();
+            switch (t) {
+                case 's':   //文档tab
+                    $('#summary').addClass('on').addClass('ondoc');
+                    $('#iframe_introduce').removeClass('hidden');
+                    $('#iframe_material,#iframe_reviews').addClass('hidden');
+                    break;
+                case 'm':   //资料tab
+                    $('#material').addClass('on').addClass('ondoc');
+                    $('#iframe_material').removeClass('hidden');
+                    $('#iframe_introduce,#iframe_reviews').addClass('hidden');
+                    break;
+                default:    //讨论tab
+                    $('#reviews').addClass('on').addClass('ondoc');
+                    $('#iframe_reviews').removeClass('hidden');
+                    $('#iframe_introduce,#iframe_material').addClass('hidden');
+                    {% if liveinfo.speaking and liveinfo.is_liveing %}
+                        $('#footer_input').show();  //录播是不显示评论,直播时才显示
+                    {% endif %}
+                    break;
             }
-        }
-
-        function load() {
-            changeFrameHeight();
-            isLastPortrait = document.documentElement.offsetHeight > document.documentElement.offsetWidth;
-            if (isLastPortrait) {
-
-                maxPheight = document.documentElement.offsetHeight;
-            } else {
-                maxLheight = document.documentElement.offsetHeight;
-            }
-        }
-
-        function do_remove() {
-            t_summary.classList.remove("ondoc");
-            t_summary.classList.remove("on");
-            t_material.classList.remove("ondoc");
-            t_material.classList.remove("on");
-            t_reviews.classList.remove("ondoc");
-            t_reviews.classList.remove("on");
-
-            footer_input.style.display = "none";
-            //t_ask.classList.remove("ondoc");
-            //t_ask.classList.remove("on");
-        }
-
-        function to_introduce() {
-            do_remove()
-
-            introduce.style.display = "block";
-            reviews.style.display = "none";
-            //ask.style.display = "none";
-            material.style.display = "none";
-
-            t_summary.classList.add("ondoc");
-            t_summary.classList.add("on");
-        }
-
-        function to_reviews() {
-            do_remove()
-
-            introduce.style.display = "none";
-            reviews.style.display = "block";
-            //ask.style.display = "none";
-            material.style.display = "none";
-
-            t_reviews.classList.add("ondoc");
-            t_reviews.classList.add("on");
-
-            {% if liveinfo.speaking %}
-                {% if liveinfo.is_replay %}
-                    //录播是不显示评论
-                {% else %}
-                    footer_input.style.display = "block";
-                {% endif %}
-
-            {% endif %}
-        }
-
-        function to_ask() {
-            do_remove()
-
-            introduce.style.display = "none";
-            reviews.style.display = "none";
-            //ask.style.display = "block";
-            material.style.display = "none";
-
-            //t_ask.classList.add("ondoc");
-            //t_ask.classList.add("on");
-        }
-
-        function to_material() {
-            do_remove()
-
-            introduce.style.display = "none";
-            reviews.style.display = "none";
-            //ask.style.display = "none";
-            material.style.display = "block";
-
-            t_material.classList.add("ondoc");
-            t_material.classList.add("on");
         }
 
         function goPAGE() {
             if (document.documentElement.offsetHeight > document.documentElement.offsetWidth) {
-                /*window.location.href="你的手机版地址";*/
-                s = "" + (document.documentElement.offsetHeight - 270 - 38) + "px"
-                introduce.style.height = s
-                reviews.style.height = s
-                //ask.style.height = s
-                material.style.height = s
+                //坚屏
+                vh=$('#player-size').height();  //视频播放器高度
+                th=$('.tabs').height(); //选项卡高度
+                s = (document.documentElement.offsetHeight - vh - th) + "px"
+                $('#iframe_introduce,#iframe_reviews,#iframe_material').attr('height',s);
             }
             else {
+                //横屏
                 s = "800px"
-                introduce.style.height = s
-                reviews.style.height = s
-                //ask.style.height = s
-                material.style.height = s
+                $('#iframe_introduce,#iframe_reviews,#iframe_material').attr('height',s);
             }
         }
 
-        function updateOrientation() {
-            //refreshPlayer();
-        }
-
-        //window.addEventListener('orientationchange', updateOrientation, false);
         chatSocket.onmessage = function (e) {
             var data = JSON.parse(e.data);
             var message = data['message'];
