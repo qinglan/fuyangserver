@@ -3,11 +3,11 @@
 {% load staticfiles %}
 {% load filters %}
 {% block titlefile %}
-    <link href="http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css" rel="stylesheet">
-    <script src="//imgcache.qq.com/open/qcloud/video/tcplayer/ie8/videojs-ie8.js"></script>
-    <script src="http://imgcache.qq.com/open/qcloud/video/tcplayer/lib/hls.min.0.8.8.js"></script>
-    <script src="http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js"></script>
-    <style type="text/css">
+<link href="http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css" rel="stylesheet">
+<script src="//imgcache.qq.com/open/qcloud/video/tcplayer/ie8/videojs-ie8.js"></script>
+<script src="http://imgcache.qq.com/open/qcloud/video/tcplayer/lib/hls.min.0.8.8.js"></script>
+<script src="http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js"></script>
+<style type="text/css">
         html, body {
             margin: 0;
             padding: 0;
@@ -55,121 +55,122 @@
         .backcolor {
             background-color: #000000;
         }
-    </style>
+
+</style>
 {% endblock %}
 {% block title %}在线视频{% endblock %}
 
 
 {% block content %}
 
-    <div id="content-container" class="container">
-        <ol class="breadcrumb open-course-breadcrumb">
-            <li><a href="/">首页</a></li>
-            {% block video_play_lastlink %}
-                <li><a href="/">视频</a></li>
-            {% endblock %}
-            <li>{{ videoinfo.name }}</li>
-        </ol>
-        <div class="open-course-header">
-            <div class="row">
-                {% if isBuy %}
-                    <video id="player-container-id" class="player-size" playsinline webkit-playsinline>
-                    </video>
-                {% else %}
-                    <div class="text-right player-size backcolor">
-                        <a class="btn btn-primary btn-lg divcss_center" id='sum' href="javascript:buyVideo();">
-                            ￥{{ videoinfo.price }} 购买
-                        </a>
-                    </div>
-                {% endif %}
+<div id="content-container" class="container">
+    <ol class="breadcrumb open-course-breadcrumb">
+        <li><a href="/">首页</a></li>
+        {% block video_play_lastlink %}
+        <li><a href="/">视频</a></li>
+        {% endblock %}
+        <li>{{ videoinfo.name }}</li>
+    </ol>
+    <div class="open-course-header">
+        <div class="row">
+            {% if isBuy %}
+            <video id="player-container-id" class="player-size" playsinline webkit-playsinline>
+            </video>
+            {% else %}
+            <div class="text-right player-size backcolor">
+                <a class="btn btn-primary btn-lg divcss_center" id='sum' href="javascript:buyVideo();">
+                    ￥{{ videoinfo.price }} 购买
+                </a>
             </div>
+            {% endif %}
         </div>
+    </div>
 
-        <div class="es-section open-course-detail clearfix">
-            <div class="open-course-detail-main media hidden-sm hidden-xs">
-                <div class="media-left">
-                    <img class="img-responsive" src="{{ videoinfo.image.url }}"
-                         alt="{{ videoinfo.name }}">
-                </div>
-                <div class="media-body">
-                    <div class="title">{{ videoinfo.name }}</div>
-                    <div class="metas">
-                        <span><i class="es-icon es-icon-removeredeye mrs"></i>{{ videoinfo.views_count }}</span>
-                        <span><i class="es-icon es-icon-textsms mrs"></i>{{ videoinfo.get_comment_count }}</span>
-                    </div>
-                </div>
+    <div class="es-section open-course-detail clearfix">
+        <div class="open-course-detail-main media hidden-sm hidden-xs">
+            <div class="media-left">
+                <img class="img-responsive" src="{{ videoinfo.image.url }}"
+                     alt="{{ videoinfo.name }}">
             </div>
-            <div class="open-course-detail-operation">
-                <div class="operation-list no-border favorite-right" id="id_favorite"
-                     style="display: {% if isCollection %}none{% else %}block{% endif %}">
-                    <div class="operation-img operation-collection">
-                        <a href="javascript:save_collection();" class="js-favorite-num " data-cancel-favorite-url="/open/course/13/unfavorite
-                " data-favorite-url="/open/course/13/favorite " data-login-url="/login/ajax "><i
-                                class="es-icon es-icon-bookmarkoutline "></i></a>
-                    </div>
-                    <span>收藏</span>
-                </div>
-
-                <div class="operation-list no-border favorite-right" id="id_unfavorite"
-                     style="display: {% if isCollection %}block{% else %}none{% endif %}">
-                    <div class="operation-img operation-collection active">
-                        <a href="javascript:cancel_collection();" class="js-favorite-num " data-cancel-favorite-url="/open/course/13/unfavorite
-                " data-favorite-url="/open/course/13/favorite " data-login-url="/login/ajax "><i
-                                class="es-icon es-icon-bookmarkoutline "></i></a>
-                    </div>
-                    <span>已收藏</span>
+            <div class="media-body">
+                <div class="title">{{ videoinfo.name }}</div>
+                <div class="metas">
+                    <span><i class="es-icon es-icon-removeredeye mrs"></i>{{ videoinfo.views_count }}</span>
+                    <span><i class="es-icon es-icon-textsms mrs"></i>{{ videoinfo.get_comment_count }}</span>
                 </div>
             </div>
         </div>
-
-        <div class="open-course-detail row">
-            <div class="col-md-12">
-                <div class="es-section gray-darker editor-text">
-                    {% autoescape off %}
-                        {{ videoinfo.introduce }}
-                    {% endautoescape %}
+        <div class="open-course-detail-operation">
+            <div class="operation-list no-border favorite-right" id="id_favorite"
+                 style="display: {% if isCollection %}none{% else %}block{% endif %}">
+                <div class="operation-img operation-collection">
+                    <a href="javascript:save_collection();" class="js-favorite-num " data-cancel-favorite-url="/open/course/13/unfavorite
+                " data-favorite-url="/open/course/13/favorite " data-login-url="/login/ajax "><i
+                            class="es-icon es-icon-bookmarkoutline "></i></a>
                 </div>
+                <span>收藏</span>
+            </div>
 
-                <div class="es-section" id="open-course-comment">
-                    <div class="gray-darker pbl">评论(<span class="thread-post-num">0</span>)</div>
-                    <form id="review-form" class="es-commet" id="thread-post-form" method="POST"
-                          action="{{ videoinfo.get_post_url }}" onsubmit="return false"
-                          novalidate="novalidate">
-                        {% csrf_token %}
-                        <textarea class="form-control form-control-o" rows="6" placeholder="您的想法" name="content"
-                                  data-display="您的想法" id="neirong"></textarea>
-                        <div class="form-group clearfix">
-                            <button type="button" class="btn btn-primary pull-right" onclick='submitFormData();'>发表评论
-                            </button>
-                        </div>
-                        <input type="hidden" name="_csrf_token" value="Q-lzhL_E_7toNsGMb1p2l1SFMboFgP0rhFqOwqdQMzg">
-                    </form>
-                    {% for item in vpcs %}
-                        <li id="post-44 " data-user-id="1729 " style="list-style-type:none;"
-                            class="thread-post thread-post-44 media media-comment user-id-1729 ">
-                            <div class="media-body ">
-                                <div class="metas title ">
-                                    <a href="javascript:;" class="nickname ">{{ item.author.nickname }}</a>
-                                    <span class="bullet ">•</span>
-                                    <span class="color-gray ">{{ item.register_date|date:"Y-m-d" }}</span>
-                                </div>
-                                <div class="editor-text "><p>
-                                    {{ item.message|linebreaksbr }}
-                                </p>
-                                </div>
-                            </div>
-                        </li>
-                    {% endfor %}
+            <div class="operation-list no-border favorite-right" id="id_unfavorite"
+                 style="display: {% if isCollection %}block{% else %}none{% endif %}">
+                <div class="operation-img operation-collection active">
+                    <a href="javascript:cancel_collection();" class="js-favorite-num " data-cancel-favorite-url="/open/course/13/unfavorite
+                " data-favorite-url="/open/course/13/favorite " data-login-url="/login/ajax "><i
+                            class="es-icon es-icon-bookmarkoutline "></i></a>
                 </div>
+                <span>已收藏</span>
             </div>
         </div>
     </div>
+
+    <div class="open-course-detail row">
+        <div class="col-md-12">
+            <div class="es-section gray-darker editor-text">
+                {% autoescape off %}
+                {{ videoinfo.introduce }}
+                {% endautoescape %}
+            </div>
+
+            <div class="es-section" id="open-course-comment">
+                <div class="gray-darker pbl">评论(<span class="thread-post-num">0</span>)</div>
+                <form id="review-form" class="es-commet" id="thread-post-form" method="POST"
+                      action="{{ videoinfo.get_post_url }}" onsubmit="return false"
+                      novalidate="novalidate">
+                    {% csrf_token %}
+                    <textarea class="form-control form-control-o" rows="6" placeholder="您的想法" name="content"
+                              data-display="您的想法" id="neirong"></textarea>
+                    <div class="form-group clearfix">
+                        <button type="button" class="btn btn-primary pull-right" onclick='submitFormData();'>发表评论
+                        </button>
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="Q-lzhL_E_7toNsGMb1p2l1SFMboFgP0rhFqOwqdQMzg">
+                </form>
+                {% for item in vpcs %}
+                <li id="post-44 " data-user-id="1729 " style="list-style-type:none;"
+                    class="thread-post thread-post-44 media media-comment user-id-1729 ">
+                    <div class="media-body ">
+                        <div class="metas title ">
+                            <a href="javascript:;" class="nickname ">{{ item.author.nickname }}</a>
+                            <span class="bullet ">•</span>
+                            <span class="color-gray ">{{ item.register_date|date:"Y-m-d" }}</span>
+                        </div>
+                        <div class="editor-text "><p>
+                            {{ item.message|linebreaksbr }}
+                        </p>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block scriptfile %}
-    <script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+<script type="text/javascript" src="{% static " js/jquery.min.js" %}"></script>
     <script type="text/javascript" src="http://res2.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
-    <script type="text/javascript">
+<script type="text/javascript">
         function save_collection() {
             $.get("{{ videoinfo.get_collection_url }}", {'is_save': "is_save"}, function (ret) {
                 //alert(ret)
@@ -241,32 +242,45 @@
                     timestamp: jsonobj.timestamp, // 必填，生成签名的时间戳
                     nonceStr: jsonobj.nonceStr, // 必填，生成签名的随机串
                     signature: jsonobj.signature,// 必填，签名，见附录1
-                    jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
                 });
                 var img_url = encodeURI(location.protocol + '//' + location.host + '/media/image/wxscreenshot.png');
                 console.log('share img:' + img_url);
                 wx.ready(function () {
                     //分享给朋友
-                    wx.updateAppMessageShareData({
+                    wx.onMenuShareAppMessage({
                         title: document.title, // 分享标题
                         desc: '扶阳医学', // 分享描述
                         link: location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                         imgUrl: img_url, // 分享图标
+                        type:'link',
                         success: function () {
-                            alert('share success');
+                            //alert('share success');
                         }
                     });
                     //分享到朋友圈
-                    wx.updateTimelineShareData({
+                    wx.onMenuShareTimeline({
                         title: document.title, // 分享标题
                         link: location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                         imgUrl: img_url, // 分享图标
+
                         success: function () {
-                            alert('share friends success');
+                            //alert('share friends success');
                         }
                     });
+
+                     wx.checkJsApi({
+                                jsApiList: [
+                                    'onMenuShareAppMessage','onMenuShareTimeline'
+                                ],
+                                success: function (res) {
+                                //alert(res.errMsg);
+                                }
+                            });
+
                 });
             });
         };
-    </script>
+
+</script>
 {% endblock %}

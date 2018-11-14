@@ -941,7 +941,6 @@ class wxsign(object):
 
     def __init__(self, url):
         self.ret = {
-            'appId': WEIXIN_APP_ID,
             'nonceStr': self.__create_nonce_str(),
             'timestamp': self.__create_timestamp(),
             'url': url,
@@ -952,7 +951,7 @@ class wxsign(object):
         return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(15))
 
     def __create_timestamp(self):
-        return int(time.time()) + 7000
+        return int(time.time())
 
     def __ticket(self):
         strurl = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s' % (
@@ -960,7 +959,7 @@ class wxsign(object):
         # self.ret['responseText'] = GetData(strurl)
         jsondata = json.loads(GetData(strurl))
         access_token = jsondata['access_token']
-        self.ret['access_token'] = access_token
+        # self.ret['access_token'] = access_token
 
         strurl = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token=%s' % access_token
         jsondata = json.loads(GetData(strurl))
@@ -968,13 +967,18 @@ class wxsign(object):
 
     def getSign(self):
         string = '&'.join(['%s=%s' % (key.lower(), self.ret[key]) for key in sorted(self.ret)])
+        # print('check sign:', string)
         self.ret['signature'] = hashlib.sha1(string.encode()).hexdigest()
+        self.ret['appId'] = WEIXIN_APP_ID
         return self.ret
 
 
 def getwxsign(request):
     '获取微信签名'
-    url = '{0}://{1}{2}'.format(request.scheme.lower(), request.get_host(), request.get_full_path())
+    # url = '{0}://{1}{2}'.format(request.scheme.lower(), request.get_host(), request.get_full_path())
+    # url = 'http://fuyang.51nayun.com/videolecture/videoplaylecture/25/'
+    url = request.META.get('HTTP_REFERER')
+    # print('share url:', url)
     wx = wxsign(url)
     wxdata = wx.getSign()
     return HttpResponse(json.dumps(wxdata))
