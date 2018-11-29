@@ -11,11 +11,11 @@ from random import Random
 from bs4 import BeautifulSoup
 
 APP_ID = "wx6ce6cc38ff2c028c"  # 公众账号appid
-MCH_ID = "1516292141"  # 商户号
-API_KEY = "1GuoyIcHuanchENgyiXUEyAnjiuyUan0"  # 微信商户平台(pay.weixin.qq.com) -->账户设置 -->API安全 -->密钥设置，设置完成后把密钥复制到这里
-APP_SECRECT = "b99cf0e2eef5b8b1e8fbca5ec55f09ae"
+MCH_ID = "1517550611"  # 商户号
+API_KEY = "szGyccyxYjyx20191128bAcdCnWpyxgs"  # 微信商户平台(pay.weixin.qq.com) -->账户设置 -->API安全 -->密钥设置，设置完成后把密钥复制到这里
+APP_SECRECT = "f8930880edce3dcf0039539e08074d5a"
 UFDODER_URL = "https://api.mch.weixin.qq.com/pay/unifiedorder"  # url是微信下单api
-NOTIFY_URL = "http://fuyang.51nayun.com/"  # 微信支付结果回调接口,需要你自定义
+NOTIFY_URL = "http://fuyang.51nayun.com"  # 微信支付结果回调接口,需要你自定义
 CREATE_IP = '134.175.177.28'  # 服务器ip
 
 
@@ -50,10 +50,12 @@ def get_sign(data_dict, key):
     # 签名函数，参数为签名的数据和密钥
     params_list = sorted(data_dict.items(), key=lambda e: e[0], reverse=False)  # 参数字典倒排序为列表
     params_str = "&".join(u"{}={}".format(k, v) for k, v in params_list) + '&key=' + key
+    print('params_str',params_str)
     # 组织参数字符串并在末尾添加商户交易密钥
     md5 = hashlib.md5()  # 使用MD5加密模式
     md5.update(params_str.encode('utf-8'))  # 将参数字符串传入
     sign = md5.hexdigest().upper()  # 完成加密并转为大写
+    print('sign',sign)
     return sign
 
 
@@ -83,10 +85,12 @@ def wx_pay_unifiedorde(detail):
     :return:
     """
     detail['sign'] = get_sign(detail, API_KEY)
-    # print(detail)
+    print('detail',detail)
     xml = trans_dict_to_xml(detail)  # 转换字典为XML
+    print('xml',xml)
     response = requests.request('post', UFDODER_URL, data=xml)  # 以POST方式向微信公众平台服务器发起请求
     # data_dict = trans_xml_to_dict(response.content)  # 将请求返回的数据转为字典
+
     return response.content
 
 
@@ -98,7 +102,7 @@ def get_redirect_url():
     WeChatcode = 'https://open.weixin.qq.com/connect/oauth2/authorize'
     urlinfo = OrderedDict()
     urlinfo['appid'] = APP_ID
-    urlinfo['redirect_uri'] = 'http://xxx/wxjsapipay/?getInfo=yes'  # 设置重定向路由
+    urlinfo['redirect_uri'] = 'http://fuyang.51nayun.com?getInfo=yes'  # 设置重定向路由
     urlinfo['response_type'] = 'code'
     urlinfo['scope'] = 'snsapi_base'  # 只获取基本信息
     urlinfo['state'] = 'mywxpay'  # 自定义的状态码
@@ -125,6 +129,8 @@ def get_openid(code, state):
         info = requests.get(url=WeChatcode, params=urlinfo)
         info_dict = eval(info.content.decode('utf-8'))
 
+        print('info_dict',info_dict)
+
         return info_dict['openid']
     return None
 
@@ -147,14 +153,21 @@ def get_jsapi_params(openid):
         'spbill_create_ip': CREATE_IP,  # 发送请求服务器的IP地址
         'openid': openid,
         'notify_url': NOTIFY_URL,  # 支付成功后微信回调路由
-        'body': '扶阳医学',  # 商品描述
+        'body': '1111111111111',  # 商品描述
+        'sign_type':'MD5',  #签名类型
         'trade_type': 'JSAPI',  # 公众号支付类型
     }
     # print(params)
     # 调用微信统一下单支付接口url
     notify_result = wx_pay_unifiedorde(params)
 
+    print('params' , params)
+    print('notify_result', notify_result)
+
     params['prepay_id'] = trans_xml_to_dict(notify_result)['prepay_id']
+
+
+
     params['timeStamp'] = int(time.time())
     params['nonceStr'] = random_str(16)
     params['sign'] = get_sign({'appId': APP_ID,

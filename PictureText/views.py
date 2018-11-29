@@ -31,6 +31,7 @@ def picture_text_column(request, pk):
     getInfo = request.GET.get('getInfo', None)
     openid = request.COOKIES.get('openid', '')
     if not openid:
+
         if getInfo != 'yes':
             # 构造一个url，携带一个重定向的路由参数，
             # 然后访问微信的一个url,微信会回调你设置的重定向路由，并携带code参数
@@ -41,10 +42,16 @@ def picture_text_column(request, pk):
             openid = get_openid(request.GET.get('code'), request.GET.get('state', ''))
             if not openid:
                 return HttpResponse('获取用户openid失败')
+            print('openid', openid)
+            print('code', request.GET.get('code',''))
+            print('state', request.GET.get('state', ''))
             response = render(request,'PictureText/column.html',
                                           {'params': get_jsapi_params(openid), 'categories': categories,
                                                    'column': curr_cate, 'abs': abs, 'papers': papers})
             response.set_cookie('openid', openid, expires=60 * 60 * 24 * 30)
+
+
+
             return response
 
         else:
