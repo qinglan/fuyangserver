@@ -31,7 +31,6 @@ def picture_text_column(request, pk):
     getInfo = request.GET.get('getInfo', None)
     openid = request.COOKIES.get('openid', '')
     if not openid:
-
         if getInfo != 'yes':
             # 构造一个url，携带一个重定向的路由参数，
             # 然后访问微信的一个url,微信会回调你设置的重定向路由，并携带code参数
@@ -43,23 +42,20 @@ def picture_text_column(request, pk):
             if not openid:
                 return HttpResponse('获取用户openid失败')
             print('openid', openid)
-            print('code', request.GET.get('code',''))
+            print('code', request.GET.get('code', ''))
             print('state', request.GET.get('state', ''))
-            response = render(request,'PictureText/column.html',
-                                          {'params': get_jsapi_params(openid), 'categories': categories,
-                                                   'column': curr_cate, 'abs': abs, 'papers': papers})
+            total_fee = papers[0].video.price
+            response = render(request, 'PictureText/column.html', {
+                'params': get_jsapi_params(openid, total_fee), 'categories': categories,
+                'column': curr_cate, 'abs': abs, 'papers': papers})
             response.set_cookie('openid', openid, expires=60 * 60 * 24 * 30)
-
-
-
             return response
-
         else:
             return HttpResponse('获取机器编码失败')
     else:
-        return render(request, 'PictureText/column.html',
-                      {'params': get_jsapi_params(openid), 'categories': categories, 'column': curr_cate,
-                               'abs': abs, 'papers': papers})
+        return render(request, 'PictureText/column.html', {
+            'params': get_jsapi_params(openid, 1), 'categories': categories, 'column': curr_cate,
+            'abs': abs, 'papers': papers})
 
     # return render(request, 'PictureText/column.html', {'categories': categories, 'column': curr_cate, 'abs': abs, 'papers': papers})
 
@@ -105,36 +101,35 @@ def picture_text_paper_comment(request, pk):
 
     return HttpResponseRedirect(reverse('picture_text_paper', args=(pk,)))
 
-
-class WxJsAPIPay(View):
-    def get(self, request, *args, **kwargs):
-        """
-        用户点击一个路由或者扫码进入这个views.py中的函数，首先获取用户的openid,
-        使用jsapi方式支付需要此参数
-        :param self:
-        :param request:
-        :param args:
-        :param kwargs:
-        :return:
-        """
-        getInfo = request.GET.get('getInfo', None)
-        openid = request.COOKIES.get('openid', '')
-        if not openid:
-            if getInfo != 'yes':
-                # 构造一个url，携带一个重定向的路由参数，
-                # 然后访问微信的一个url,微信会回调你设置的重定向路由，并携带code参数
-                return HttpResponseRedirect(get_redirect_url())
-            elif getInfo == 'yes':
-                # 我设置的重定向路由还是回到这个函数中，其中设置了一个getInfo=yes的参数
-                # 获取用户的openid
-                openid = get_openid(request.GET.get('code'), request.GET.get('state', ''))
-                if not openid:
-                    return HttpResponse('获取用户openid失败')
-                response = render_to_response('wx_js_pay.html', context={'params': get_jsapi_params(openid)})
-                response.set_cookie('openid', openid, expires=60 * 60 * 24 * 30)
-                return response
-
-            else:
-                return HttpResponse('获取机器编码失败')
-        else:
-            return render(request, 'wx_js_pay.html', context={'params': get_jsapi_params(openid)})
+# class WxJsAPIPay(View):
+#     def get(self, request, *args, **kwargs):
+#         """
+#         用户点击一个路由或者扫码进入这个views.py中的函数，首先获取用户的openid,
+#         使用jsapi方式支付需要此参数
+#         :param self:
+#         :param request:
+#         :param args:
+#         :param kwargs:
+#         :return:
+#         """
+#         getInfo = request.GET.get('getInfo', None)
+#         openid = request.COOKIES.get('openid', '')
+#         if not openid:
+#             if getInfo != 'yes':
+#                 # 构造一个url，携带一个重定向的路由参数，
+#                 # 然后访问微信的一个url,微信会回调你设置的重定向路由，并携带code参数
+#                 return HttpResponseRedirect(get_redirect_url())
+#             elif getInfo == 'yes':
+#                 # 我设置的重定向路由还是回到这个函数中，其中设置了一个getInfo=yes的参数
+#                 # 获取用户的openid
+#                 openid = get_openid(request.GET.get('code'), request.GET.get('state', ''))
+#                 if not openid:
+#                     return HttpResponse('获取用户openid失败')
+#                 response = render_to_response('wx_js_pay.html', context={'params': get_jsapi_params(openid)})
+#                 response.set_cookie('openid', openid, expires=60 * 60 * 24 * 30)
+#                 return response
+#
+#             else:
+#                 return HttpResponse('获取机器编码失败')
+#         else:
+#             return render(request, 'wx_js_pay.html', context={'params': get_jsapi_params(openid)})

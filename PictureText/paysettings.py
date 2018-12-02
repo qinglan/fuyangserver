@@ -50,12 +50,12 @@ def get_sign(data_dict, key):
     # 签名函数，参数为签名的数据和密钥
     params_list = sorted(data_dict.items(), key=lambda e: e[0], reverse=False)  # 参数字典倒排序为列表
     params_str = "&".join(u"{}={}".format(k, v) for k, v in params_list) + '&key=' + key
-    print('params_str',params_str)
+    print('params_str', params_str)
     # 组织参数字符串并在末尾添加商户交易密钥
     md5 = hashlib.md5()  # 使用MD5加密模式
     md5.update(params_str.encode('utf-8'))  # 将参数字符串传入
     sign = md5.hexdigest().upper()  # 完成加密并转为大写
-    print('sign',sign)
+    print('sign', sign)
     return sign
 
 
@@ -85,9 +85,9 @@ def wx_pay_unifiedorde(detail):
     :return:
     """
     detail['sign'] = get_sign(detail, API_KEY)
-    print('detail',detail)
+    print('detail', detail)
     xml = trans_dict_to_xml(detail)  # 转换字典为XML
-    print('xml',xml)
+    print('xml', xml)
     response = requests.request('post', UFDODER_URL, data=xml)  # 以POST方式向微信公众平台服务器发起请求
     # data_dict = trans_xml_to_dict(response.content)  # 将请求返回的数据转为字典
 
@@ -129,44 +129,39 @@ def get_openid(code, state):
         info = requests.get(url=WeChatcode, params=urlinfo)
         info_dict = eval(info.content.decode('utf-8'))
 
-        print('info_dict',info_dict)
+        print('info_dict', info_dict)
 
         return info_dict['openid']
     return None
 
 
-def get_jsapi_params(openid):
+def get_jsapi_params(openid, total_fee=1):
     """
     获取微信的Jsapi支付需要的参数
     :param openid: 用户的openid
     :return:
     """
-
-    total_fee = 1  # 付款金额，单位是分，必须是整数
-
     params = {
         'appid': APP_ID,  # APPID
         'mch_id': MCH_ID,  # 商户号
         'nonce_str': random_str(16),  # 随机字符串
-        'out_trade_no': order_num('123'),  # 订单编号,可自定义
-        'total_fee': total_fee,  # 订单总金额
+        'out_trade_no': order_num('fy'),  # 订单编号,可自定义
+        'total_fee': total_fee,  # 订单总金额|付款金额，单位是分，必须是整数
         'spbill_create_ip': CREATE_IP,  # 发送请求服务器的IP地址
         'openid': openid,
         'notify_url': NOTIFY_URL,  # 支付成功后微信回调路由
-        'body': '1111111111111',  # 商品描述
-        'sign_type':'MD5',  #签名类型
+        'body': '扶阳医学-购买视频',  # 商品描述
+        'sign_type': 'MD5',  # 签名类型
         'trade_type': 'JSAPI',  # 公众号支付类型
     }
     # print(params)
     # 调用微信统一下单支付接口url
     notify_result = wx_pay_unifiedorde(params)
 
-    print('params' , params)
+    print('params', params)
     print('notify_result', notify_result)
 
     params['prepay_id'] = trans_xml_to_dict(notify_result)['prepay_id']
-
-
 
     params['timeStamp'] = int(time.time())
     params['nonceStr'] = random_str(16)

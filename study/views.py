@@ -52,8 +52,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 
-# Create your views here.
-
+from PictureText.paysettings import *
 
 '''
 WEIXIN_APP_ID = 'wxb4bfb462ce44afd4'
@@ -405,6 +404,7 @@ PAGE_HAS_VIDEO = 18
 
 @login_required(login_url='/accounts/login/')
 def studyfuyang(request):
+    '直播区首页'
     page = 1
     if 'page' in request.GET:
         page = int(request.GET['page'])
@@ -551,6 +551,7 @@ def videoplaystudyfuyang(request, pk):
 @login_required(login_url='/accounts/login/')
 def videoplaylecture(request, pk):
     '视频区详情页面'
+
     gas = VideoInfoLecture.objects.filter(pk=pk)
     if len(gas) <= 0:
         return HttpResponse('error')
@@ -566,12 +567,42 @@ def videoplaylecture(request, pk):
             b = True
             break
     isBuy = gas[0].price == 0 or b
-
     isCollection = Collection.is_collection(request.user, gas[0])
-    return render(request, 'study/video_play_lecture.html', {'videoinfo': gas[0],
-                                                             'isBuy': isBuy,
-                                                             'vpcs': vpcs,
-                                                             'isCollection': isCollection})
+    total_fee = gas[0].price * 100
+
+    getInfo = request.GET.get('getInfo', None)
+    openid = request.COOKIES.get('openid', '')
+    if not openid:
+        if getInfo != 'yes':
+            # 构造一个url，携带一个重定向的路由参数，
+            # 然后访问微信的一个url,微信会回调你设置的重定向路由，并携带code参数
+            return HttpResponseRedirect(get_redirect_url())
+        elif getInfo == 'yes':
+            # 我设置的重定向路由还是回到这个函数中，其中设置了一个getInfo=yes的参数
+            # 获取用户的openid
+            openid = get_openid(request.GET.get('code'), request.GET.get('state', ''))
+            if not openid:
+                return HttpResponse('获取用户openid失败')
+            print('openid', openid)
+            print('code', request.GET.get('code', ''))
+            print('state', request.GET.get('state', ''))
+
+            response = render(request, 'study/video_play_lecture.html', {
+                'params': get_jsapi_params(openid, total_fee), 'videoinfo': gas[0],
+                'isBuy': isBuy,
+                'vpcs': vpcs,
+                'isCollection': isCollection})
+            response.set_cookie('openid', openid, expires=60 * 60 * 24 * 30)
+            return response
+
+        else:
+            return HttpResponse('获取机器编码失败')
+    return render(request, 'study/video_play_lecture.html', {
+        'params': get_jsapi_params(openid, 1),
+        'videoinfo': gas[0],
+        'isBuy': isBuy,
+        'vpcs': vpcs,
+        'isCollection': isCollection})
 
 
 def videoplaylecture_comment(request, pk):
@@ -911,6 +942,7 @@ def class_job_redo(request, pk):
 
 
 def buyvideolecture(request, pk):
+    '购买视频'
     vcs = VideoInfoLecture.objects.filter(pk=pk)
     if len(vcs) > 0:
         order = VideoInfoLectureOrder.objects.create(
