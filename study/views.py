@@ -568,7 +568,12 @@ def videoplaylecture(request, pk):
             break
     isBuy = gas[0].price == 0 or b
     isCollection = Collection.is_collection(request.user, gas[0])
+
+    print('gas[0].price',gas[0].price)
+    if gas[0].price ==0:
+       gas[0].price = 1
     total_fee = gas[0].price * 100
+    print('total_fee',total_fee)
 
     getInfo = request.GET.get('getInfo', None)
     openid = request.COOKIES.get('openid', '')
@@ -598,7 +603,7 @@ def videoplaylecture(request, pk):
         else:
             return HttpResponse('获取机器编码失败')
     return render(request, 'study/video_play_lecture.html', {
-        'params': get_jsapi_params(openid, 1),
+        'params': get_jsapi_params(openid, total_fee),
         'videoinfo': gas[0],
         'isBuy': isBuy,
         'vpcs': vpcs,
