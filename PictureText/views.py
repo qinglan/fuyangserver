@@ -28,6 +28,9 @@ def picture_text_column(request, pk):
 
     abs = VideoInfoLectureBanners.objects.all()  # banner广告
 
+    total_fee = papers[0].video.price
+    if total_fee == 0: total_fee = 1
+    total_fee *= 100
     getInfo = request.GET.get('getInfo', None)
     openid = request.COOKIES.get('openid', '')
     if not openid:
@@ -44,7 +47,7 @@ def picture_text_column(request, pk):
             print('openid', openid)
             print('code', request.GET.get('code', ''))
             print('state', request.GET.get('state', ''))
-            total_fee = papers[0].video.price
+
             response = render(request, 'PictureText/column.html', {
                 'params': get_jsapi_params(openid, total_fee), 'categories': categories,
                 'column': curr_cate, 'abs': abs, 'papers': papers})
@@ -52,10 +55,10 @@ def picture_text_column(request, pk):
             return response
         else:
             return HttpResponse('获取机器编码失败')
-    else:
-        return render(request, 'PictureText/column.html', {
-            'params': get_jsapi_params(openid, 1), 'categories': categories, 'column': curr_cate,
-            'abs': abs, 'papers': papers})
+
+    return render(request, 'PictureText/column.html', {
+        'params': get_jsapi_params(openid, total_fee), 'categories': categories, 'column': curr_cate,
+        'abs': abs, 'papers': papers})
 
     # return render(request, 'PictureText/column.html', {'categories': categories, 'column': curr_cate, 'abs': abs, 'papers': papers})
 
