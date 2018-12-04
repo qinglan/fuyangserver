@@ -7,6 +7,9 @@ from django.urls import reverse
 from django.views import View
 from .paysettings import *
 
+from study import views as study_views  # new
+from django.contrib.auth.decorators import login_required
+
 
 def picture_text_paper(request, pk):
     abs = VideoInfoLectureBanners.objects.all()
@@ -20,6 +23,7 @@ def picture_text_paper(request, pk):
     return HttpResponse('error')
 
 
+@login_required(login_url='/accounts/login/')
 def picture_text_column(request, pk):
     '报名区'
     categories = PictureTextColumn.objects.filter(category='报名区').values('id', 'name').order_by('id')  # 获取报名区的所有类别
@@ -42,7 +46,10 @@ def picture_text_column(request, pk):
             # 我设置的重定向路由还是回到这个函数中，其中设置了一个getInfo=yes的参数
             # 获取用户的openid
             openid = get_openid(request.GET.get('code'), request.GET.get('state', ''))
+            print ('picture_text_column+openid',openid)
+
             if not openid:
+                #study_views.weixin_redirect(request)
                 return HttpResponse('获取用户openid失败')
             print('openid', openid)
             print('code', request.GET.get('code', ''))
