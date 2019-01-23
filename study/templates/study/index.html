@@ -5,48 +5,25 @@
 {% block title %}首页{% endblock %}
 
 {% block content %}
-
-    <section class="es-poster swiper-container">
-        <div class="swiper-wrapper"
-             style="width: 3375px; transform: translate3d(-1125px, 0px, 0px); transition-duration: 0.3s; height: 117px;">
-            {% for item in abs %}
-                <div class="swiper-slide" style="background: rgb(244, 244, 244); width: 375px; height: 117px;">
-                    <div>
-                        <a href="{{ item.url }}" target="_blank">
-                            <img class="img-responsive" src="{{ item.image.url }}">
-                        </a>
+    <div id="content-container" class="container">
+        <div class="row">
+            {% for i in items %}
+                <div class="col-sm-6">
+                    <div class="thumbnail">
+                        <a href="{% url 'picture_text_column' i.pk %}"><img src="{{ i.image.url }}" alt="{{ i.name }}"></a>
+                        <div class="caption">
+                            <h3>{{ i.name }}</h3>
+                            <p>{{ i.introduce }}</p>
+                            <p>
+                                {% if i.video.is_expires %}
+                                    <span class="badge float-right" style="color:forestgreen">报名中</span>
+                                {% endif %}
+                                <span class="text-danger">¥{{ i.video.price }}</span>
+                            </p>
+                        </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
-        <div class="swiper-pager">
-            {% for item in abs %}
-                <span class="swiper-pagination-switch"></span>
-            {% endfor %}
-        </div>
-    </section>
-
-    <!-- 推荐班级 -->
-    <div id="content-container" class="container">
-        <div class="open-course-list">
-            <div class="recommend-class-list row">
-                {% for item in vcs %}
-                    <div class="col-md-3 col-xs-6">
-                        <div class="class-item">
-                            <div class="class-img-wrap">
-                                <a class="class-img" href="{% url 'video_curriculum_detail' item.id %}">
-                                    <img src="{{ item.image.url }}" alt="{{ item.name }}" class="img-responsive">
-                                </a>
-                            </div>
-                            <h3>
-                                <a class="link-dark" href="{{ item.get_absolute_url }}">{{ item.name }}</a>
-                            </h3>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
     </div>
-
-
 {% endblock %}

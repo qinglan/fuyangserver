@@ -109,6 +109,10 @@ class VideoCurriculum(models.Model):
         '获取评论数'
         return VideoCurriculumComment.objects.filter(ascription=self.pk).count()
 
+    def is_expires(self):
+        '是否过期'
+        return self.buy_time > datetime.datetime.now()
+
     class Meta:
         verbose_name = 'a1直播课程'
         verbose_name_plural = 'a1直播课程'

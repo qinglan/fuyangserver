@@ -1,7 +1,7 @@
 # coding:utf-8
 from django.shortcuts import render
 import os
-from django.conf import settings
+from PictureText.models import PictureTextPaper
 from django.http import HttpResponse
 from fuyangserver.settings import HERE
 from fuyangserver.settings import MEDIA_URL
@@ -72,7 +72,9 @@ DO_MAIN = 'http://fuyang.51nayun.com/'
 
 @login_required(login_url='/accounts/login/')
 def index(request):
-    return pv.picture_text_column(request, 1)  # 首页直接跳转到报名区
+    items = PictureTextPaper.objects.filter(column_id=1)
+    return render(request, 'study/index.html', locals())
+    # return pv.picture_text_column(request, 1)  # 首页直接跳转到报名区
     # abs = AdvertisingBanners.objects.all()
     # vcs = VideoCurriculum.objects.all().order_by('sequeue')
     # if len(vcs) > 0: return video_curriculum_detail(request, vcs[0].pk)
@@ -569,11 +571,11 @@ def videoplaylecture(request, pk):
     isBuy = gas[0].price == 0 or b
     isCollection = Collection.is_collection(request.user, gas[0])
 
-    print('gas[0].price',gas[0].price)
-    if gas[0].price ==0:
-       gas[0].price = 1
+    print('gas[0].price', gas[0].price)
+    if gas[0].price == 0:
+        gas[0].price = 1
     total_fee = gas[0].price * 100
-    print('total_fee',total_fee)
+    print('total_fee', total_fee)
 
     getInfo = request.GET.get('getInfo', None)
     openid = request.COOKIES.get('openid', '')
