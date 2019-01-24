@@ -34,10 +34,8 @@
                             <img src="{{ i.image.url }}" alt="{{ i.name }}">
                         </a>
                         <div class="caption">
-                            <h3>{{ i.name }}</h3>
-                            <p>{{ i.introduce|slice:'26' }}...
-                                <a href="{% url 'picture_text_paper' i.pk %}">查看全文</a>
-                            </p>
+                            <h3 style="margin-top: 10px;">{{ i.name }}</h3>
+                            <p>{{ i.introduce|slice:'26' }}...</p>
                             <p><span class="badge"
                                      style="color:forestgreen; float:right;">{% is_buy i.video.pk request.user.pk %}</span>
                                 <span style="color:orange">¥{{ i.video.price }}/{{ i.video.count }}课时</span>
