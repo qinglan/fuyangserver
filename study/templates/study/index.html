@@ -1,6 +1,6 @@
 {% extends 'study/main_base.html' %}
 
-{% load staticfiles %}
+{% load htmlhelper %}
 
 {% block title %}首页{% endblock %}
 
@@ -10,15 +10,16 @@
             {% for i in items %}
                 <div class="col-sm-6">
                     <div class="thumbnail">
-                        <a href="{% url 'picture_text_column' i.pk %}"><img src="{{ i.image.url }}" alt="{{ i.name }}"></a>
+                        <a href="{% url 'picture_text_paper' i.pk %}">
+                            <img src="{{ i.image.url }}" alt="{{ i.name }}">
+                        </a>
                         <div class="caption">
                             <h3>{{ i.name }}</h3>
-                            <p>{{ i.introduce }}</p>
-                            <p>
-                                {% if i.video.is_expires %}
-                                    <span class="badge float-right" style="color:forestgreen">报名中</span>
-                                {% endif %}
-                                <span class="text-danger">¥{{ i.video.price }}</span>
+                            <p>{{ i.introduce|slice:'26' }}...
+                                <a href="{% url 'picture_text_paper' i.pk %}">查看全文</a>
+                            </p>
+                            <p><span class="badge" style="color:forestgreen; float:right;">{% is_buy i.video.pk request.user.pk %}</span>
+                                <span style="color:orange">¥{{ i.video.price }}/{{ i.video.count }}课时</span>
                             </p>
                         </div>
                     </div>
