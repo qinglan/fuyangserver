@@ -12,6 +12,7 @@ class VideoCurriculumOrderAdmin(admin.ModelAdmin):
 
     list_display = ('buy_user', 'purchaser','apply_bill','price','register_date')
     ordering = ('-purchaser',)
+    search_fields = ('purchaser__nickname',)
 
 
 class VideoInfoStudyFuyangOrderAdmin(admin.ModelAdmin):
