@@ -3,29 +3,7 @@
 {% load htmlhelper %}
 
 {% block title %}首页{% endblock %}
-{% block titlefile %}
-    <style type="text/css">
-        .thumbnail {
-            border: 0 none;
-        }
 
-        .col-sm-6, .col-xs-6 {
-            padding:5px 2px;
-
-        }
-
-        .badge {
-            display: inline;
-        }
-
-
-
- .mg-top {
-            margin-top:-10px;
-        }
-
-    </style>
-{% endblock %}
 {% block content %}
     <section class="es-poster swiper-container">
         <div class="swiper-wrapper"
@@ -48,7 +26,7 @@
     </section>
 
     <div id="content-container" class="container">
-        <div class="row mg-top">
+        <div class="row">
             {% for i in items %}
                 <div class="col-sm-6 col-xs-6">
                     <div class="thumbnail">
@@ -56,11 +34,11 @@
                             <img src="{{ i.image.url }}" alt="{{ i.name }}">
                         </a>
                         <div class="caption">
-                            <div style="margin-top: 1px;font-weight:bold; font-size:1.6rem ">{{ i.name }}</div>
-                            <p style="font-size:1.2rem">{{ i.introduce|slice:'22' }}...</p>
-                            <p style="margin-bottom:0" >
-                                <span class="badge" style="color:forestgreen; float:right;"><small>{% is_buy i.video.pk request.user.pk %}</small></span>
-                                <span style="color:orange"><small>¥{{ i.video.price }}/{{ i.video.count }}课时</small></span>
+                            <h3 style="margin-top: 10px;">{{ i.name }}</h3>
+                            <p>{{ i.introduce|slice:'26' }}...</p>
+                            <p><span class="badge"
+                                     style="color:forestgreen; float:right;">{% is_buy i.video.pk request.user.pk %}</span>
+                                <span style="color:orange">¥{{ i.video.price }}/{{ i.video.count }}课时</span>
                             </p>
                         </div>
                     </div>

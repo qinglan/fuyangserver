@@ -24,7 +24,8 @@ def is_buy(vid, uid):
             break
 
     if not isbuy:
-        if us.first().video_curriculum.buy_time > datetime.datetime.now():
+        vc = VideoCurriculum.objects.get(pk=vid)
+        if vc.buy_time > datetime.datetime.now():
             alink = '<a href="javascript:void(0)" onclick="javascript:callpay(%d);return false">报名中</a>' % vid
         else:
             alink = "<a href='javascript:void(0)'>报名已截止</a>"

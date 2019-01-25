@@ -72,6 +72,7 @@ DO_MAIN = 'http://fuyang.51nayun.com/'
 
 @login_required(login_url='/accounts/login/')
 def index(request):
+    abs = VideoInfoLectureBanners.objects.all()  # banner广告
     items = PictureTextPaper.objects.filter(column_id=1)
     return render(request, 'study/index.html', locals())
     # return pv.picture_text_column(request, 1)  # 首页直接跳转到报名区
