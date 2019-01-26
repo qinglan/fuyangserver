@@ -17,7 +17,6 @@ from django.contrib import admin
 from django.urls import path
 from study import views as study_views  # new
 from django.conf import settings
-from PictureText.views import WxJsAPIPay
 from django.conf.urls import include, url
 
 urlpatterns = [
@@ -119,7 +118,6 @@ urlpatterns = [
     path('class/job/iframe/post/<int:pk>/', study_views.class_job_iframe_post, name='class_job_iframe_post'),
 
     path('wxsign/', study_views.getwxsign),
-    path('wxpay/', WxJsAPIPay.as_view(), name='weixinpay'),
     # userinfo
 
     # url(r'^userinfo/', include('userinfo.urls')),

@@ -1,25 +1,60 @@
 from django.http import HttpResponse
-from django.shortcuts import render, render_to_response
-from django.views import View
+from django.shortcuts import render
 from .models import PictureTextColumn, PictureTextPaper, PictureTextPaperComment
 from advertise.models import VideoInfoLectureBanners
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from study.models import VideoCurriculum
 from .paysettings import *
 
 
 def picture_text_paper(request, pk):
     abs = VideoInfoLectureBanners.objects.all()
-    papers = PictureTextPaper.objects.filter(pk=pk)
+    pp = PictureTextPaper.objects.get(pk=pk)
+    pp.views_count += 1
+    pp.save()
+    comments = PictureTextPaperComment.objects.filter(ascription=pp)
 
-    if len(papers) > 0:
-        papers[0].views_count = papers[0].views_count + 1
-        papers[0].save()
-        comments = PictureTextPaperComment.objects.filter(ascription=papers[0])
-        return render(request, 'PictureText/paper.html', {'paper': papers[0], 'abs': abs, 'comments': comments})
-    return HttpResponse('error')
+    total_fee = pp.video.price
+    if total_fee == 0: total_fee = 1
+    total_fee *= 100
+    print('requeststr:', request.GET)
+    getInfo = request.GET.get('getInfo', None)
+    openid = request.COOKIES.get('openid', '')
+    if not openid:
+        if getInfo != 'yes':
+            # 构造一个url，携带一个重定向的路由参数，
+            # 然后访问微信的一个url,微信会回调你设置的重定向路由，并携带code参数
+            return HttpResponseRedirect(get_redirect_url())
+        elif getInfo == 'yes':
+            # 我设置的重定向路由还是回到这个函数中，其中设置了一个getInfo=yes的参数
+            # 获取用户的openid
+            openid = get_openid(request.GET.get('code'), request.GET.get('state', ''))
+            print('study.index+openid', openid)
+
+            if not openid:
+                # study_views.weixin_redirect(request)
+                return HttpResponse('获取用户openid失败')
+            print('openid', openid)
+            print('code', request.GET.get('code', ''))
+            print('state', request.GET.get('state', ''))
+
+            response = render(request, 'PictureText/paper.html', {
+                'params': get_jsapi_params(openid, total_fee),
+                'paper': pp,
+                'abs': abs,
+                'comments': comments
+            })
+            response.set_cookie('openid', openid, expires=60 * 60 * 24 * 30)
+            return response
+        else:
+            return HttpResponse('获取机器编码失败')
+    return render(request, 'PictureText/paper.html', {
+        'params': get_jsapi_params(openid, total_fee),
+        'paper': pp,
+        'abs': abs,
+        'comments': comments
+    })
 
 
 @login_required(login_url='/accounts/login/')
@@ -78,43 +113,3 @@ def picture_text_paper_comment(request, pk):
         new_chat.save()
 
     return HttpResponseRedirect(reverse('picture_text_paper', args=(pk,)))
-
-
-class WxJsAPIPay(View):
-    def get(self, request):
-        vid = request.GET.get('vid', 0)
-        print('get vid:', vid)
-        vc = VideoCurriculum.objects.get(pk=vid)
-        total_fee = vc.price
-        if total_fee == 0: total_fee = 1
-        total_fee *= 100
-
-        getInfo = request.GET.get('getInfo', None)
-        openid = request.COOKIES.get('openid', '')
-        if not openid:
-            print('no openid')
-            if getInfo != 'yes':
-                # 构造一个url，携带一个重定向的路由参数，
-                # 然后访问微信的一个url,微信会回调你设置的重定向路由，并携带code参数
-                return HttpResponseRedirect(get_redirect_url())
-            elif getInfo == 'yes':
-                # 我设置的重定向路由还是回到这个函数中，其中设置了一个getInfo=yes的参数
-                # 获取用户的openid
-                openid = get_openid(request.GET.get('code'), request.GET.get('state', ''))
-                print('study.index+openid', openid)
-
-                if not openid:
-                    return HttpResponse('获取用户openid失败')
-                print('openid', openid)
-                print('code', request.GET.get('code', ''))
-                print('state', request.GET.get('state', ''))
-
-                response = HttpResponse({'params': get_jsapi_params(openid, total_fee)})
-                # response = render(request, 'study/index.html', {'params': get_jsapi_params(openid, total_fee)})
-                response.set_cookie('openid', openid, expires=60 * 60 * 24 * 30)
-                return response
-            else:
-                return HttpResponse('获取机器编码失败')
-        else:
-            print('else openid')
-            return HttpResponse('未调用微信支付')

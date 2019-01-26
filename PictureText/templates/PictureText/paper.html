@@ -1,5 +1,5 @@
 {% extends 'study/main_base.html' %}
-{% load staticfiles %}
+{% load htmlhelper %}
 {% block title %}{{ paper.name }}{% endblock %}
 {% block content %}
     <section class="es-poster swiper-container">
@@ -33,8 +33,6 @@
             <!-- 主内容 -->
             <div class="col-md-12 article-detail-main">
                 <section class="es-section article-content">
-
-
                     <div class="article-metas">
                         <div class="pull-left">
                             <div class="date">
@@ -43,16 +41,13 @@
                             </div>
                         </div>
                         <div class="metas-body">
-                            <h2 class="title">
-                                {{ paper.name }}
-                            </h2>
+                            <h2 class="title">{{ paper.name }}</h2>
                             <div class="sns">
-                            <span class="views-num">
-                                <i class="es-icon es-icon-visibility"></i>{{ paper.views_count }}
-                            </span>
-                                <span class="comment-num">
-                                <i class="es-icon es-icon-textsms"></i>{{ paper.get_comment_count }}
-                            </span>
+                                <span class="badge" style="color:forestgreen; float:right;"><small>{% is_buy paper.video.pk request.user.pk %}</small></span>
+                                <span class="views-num"><i
+                                        class="es-icon es-icon-visibility"></i>{{ paper.views_count }}</span>
+                                <span class="comment-num"><i
+                                        class="es-icon es-icon-textsms"></i>{{ paper.get_comment_count }}</span>
                             </div>
                         </div>
                     </div>
@@ -85,7 +80,7 @@
                             <li id="post-370" data-user-id="4720"
                                 class="thread-post thread-post-370 media media-comment user-id-4720">
                                 <div class="media-left">
-                                    <a class="user-avatar js-user-card" 
+                                    <a class="user-avatar js-user-card"
                                        data-card-url="/user/4720/card/show" data-user-id="4720">
                                         <img class="avatar-sm" src="{{ comment.author.headimgurl }}">
                                     </a>
@@ -126,6 +121,59 @@
                 return false;
             }
             return true;
+        }
+
+        //调用微信JS api 支付
+        function onBridgeReady(vid) {
+            console.log('step3:' + vid);
+            WeixinJSBridge.invoke(
+                'getBrandWCPayRequest',
+                {
+                    appId: "{{ params.appid }}",        //公众号名称，由商户传入
+                    timeStamp: "{{ params.timeStamp }}", //时间戳，自1970年以来的秒数
+                    nonceStr: "{{ params.nonceStr }}",  //随机串
+                    package: "prepay_id={{ params.prepay_id }}",  //预支付id
+                    signType: "MD5",  //微信签名方式
+                    paySign: "{{ params.sign }}"     //微信签名
+                },
+                function (res) {
+                    //支付成功后返回 get_brand_wcpay_request:ok
+                    if (res.err_msg == "get_brand_wcpay_request:ok") {
+                        // 跳转到支付成功的页面
+                        //window.location.href = '#';
+                        alert('支付成功');
+                        $.get("{% url 'buyvideocurriculum' %}", {'pk': vid}, function (ret) {
+                            if (ret == "1")
+                                location.reload();
+                            else
+                                alert('保存支付记录失败')
+                        })
+                    } else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+                        alert("您已取消支付!");
+                        {#alert({{ params.machine_code }});#}
+                        {#window.location.href = '';#}
+                    } else if (res.err_msg == "get_brand_wcpay_request:fail") {
+                        $.each(res, function (key, value) {
+                            alert(value);
+                        });
+                        alert("支付失败!");
+                    }
+                }
+            );
+        }
+
+        function callpay(vid) {
+            console.log('step1:' + vid);
+            if (typeof WeixinJSBridge == "undefined") {
+                if (document.addEventListener) {
+                    document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                } else if (document.attachEvent) {
+                    document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                    document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                }
+            } else {
+                onBridgeReady(vid);
+            }
         }
     </script>
 {% endblock %}
