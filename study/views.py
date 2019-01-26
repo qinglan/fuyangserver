@@ -568,7 +568,7 @@ def videoplaylecture(request, pk):
         if getInfo != 'yes':
             # 构造一个url，携带一个重定向的路由参数，
             # 然后访问微信的一个url,微信会回调你设置的重定向路由，并携带code参数
-            return HttpResponseRedirect(get_redirect_url())
+            return HttpResponseRedirect(get_redirect_url(request.path))
         elif getInfo == 'yes':
             # 我设置的重定向路由还是回到这个函数中，其中设置了一个getInfo=yes的参数
             # 获取用户的openid

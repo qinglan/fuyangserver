@@ -46,7 +46,7 @@
                             <article class="article-item xt-article-item">
                                 <div class="article-metas clearfix">
                                     <div class="pull-right">
-                                        {% is_buy paper.video.pk request.user.pk %}
+                                        {% index_check_buy paper.pk paper.video.pk request.user.pk %}
                                     </div>
                                     <div class="pull-left">
                                         <div class="date">
