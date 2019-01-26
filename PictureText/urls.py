@@ -10,5 +10,4 @@ urlpatterns = [
     path('paper/comment/<int:pk>/', views.picture_text_paper_comment, name='picture_text_paper_comment'),
     path('column/<int:pk>/', views.picture_text_column, name='picture_text_column'),
     path('category/<int:pk>/', views.picture_text_category, name='picture_text_category'),
-    path('wxpay/', views.WxJsAPIPay.as_view(), name='weixinpay')
 ]
