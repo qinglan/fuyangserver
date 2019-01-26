@@ -23,16 +23,12 @@
                     <div class="html-mask"></div>
                     <div class="nav-mobile">
                         <ul class="nav navbar-nav">
-
-                            <!--<li class="">
-                                <a href="/" target="_blank">首页 </a>
-                            </li>-->
                             <li class="nav-hover">
                                 <a href="/" data-toggle="dropdown">扶阳学院
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{% url "picture_text_column" 1 %}">报名区</a></li>
+                                    <li><a href="/">报名区</a></li>
                                     <li><a href="{% url 'studyfuyang' %}">直播区</a></li>
                                     <li><a href="{% url 'videolecture' %}">视频区</a></li>
                                     <li><a href="{% url 'datalist' %}">资料区</a></li>
@@ -55,20 +51,18 @@
                     </div>
                 </div>
                 <a href="/" class="navbar-brand">
-                    <img src="{{ main_info.image.url }}" alt="{{ main_info.text_1 }}" longdesc="{{ main_info.text_2 }}" />
+                    <img src="{{ main_info.image.url }}" alt="{{ main_info.text_1 }}"
+                         longdesc="{{ main_info.text_2 }}"/>
                 </a>
             </div>
             <nav class="collapse navbar-collapse">
                 <ul class="nav navbar-nav clearfix hidden-xs " id="nav">
-                    <!--<li class="">
-                        <a href="/" target="_blank">首页</a>
-                    </li>-->
                     <li class="nav-hover">
                         <a href="/" data-toggle="dropdown">扶阳学院
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{% url "picture_text_column" 1 %}">报名区</a></li>
+                            <li><a href="/">报名区</a></li>
                             <li><a href="{% url 'studyfuyang' %}">直播区</a></li>
                             <li><a href="{% url 'videolecture' %}">视频区</a></li>
                             <li><a href="{% url 'datalist' %}">资料区</a></li>

@@ -2,9 +2,7 @@
 from django.shortcuts import render
 import os
 from PictureText.models import PictureTextPaper
-from django.http import HttpResponse
 from fuyangserver.settings import HERE
-from fuyangserver.settings import MEDIA_URL
 from advertise.models import AdvertisingBanners, VideoInfoLectureBanners, VideoInfoStudyFuyangBanners
 from study.models import VideoColumn
 from study.models import VideoCurriculum
@@ -22,35 +20,26 @@ from study.models import TaskInfoVideoAsk
 from study.models import VideoCurriculumFile
 from study.models import TaskLiveFile
 from study.models import CurriculumTaskInfoJob, CurriculumTaskInfoJobAnswer
-
 from userinfo.models import Collection
-
 from django.http import StreamingHttpResponse
-
 from .comment_form import VideoCurriculumCommentForm, VideoInfoStudyFuyangCommentForm, VideoInfoLectureCommentForm
 from django.http.response import HttpResponse
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from users.models import User
-import hashlib
 import urllib.parse
 import datetime
 import string, random
-import time
 import urllib
 
 from userinfo.models import VideoCurriculumOrder
 from userinfo.models import VideoInfoLectureOrder
 from userinfo.models import VideoInfoStudyFuyangOrder
-from django.db.models import Q
-from PictureText import views as pv
-
 import urllib.request
 import json
 import logging
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
-from django.contrib.auth import logout
 
 from PictureText.paysettings import *
 
@@ -74,13 +63,8 @@ DO_MAIN = 'http://fuyang.51nayun.com/'
 def index(request):
     abs = VideoInfoLectureBanners.objects.all()  # banner广告
     items = PictureTextPaper.objects.filter(column_id=1)
+
     return render(request, 'study/index.html', locals())
-    # return pv.picture_text_column(request, 1)  # 首页直接跳转到报名区
-    # abs = AdvertisingBanners.objects.all()
-    # vcs = VideoCurriculum.objects.all().order_by('sequeue')
-    # if len(vcs) > 0: return video_curriculum_detail(request, vcs[0].pk)
-    #
-    # return render(request, 'study/index.html', {'abs': abs, 'vcs': vcs})
 
 
 def do_login(request):
