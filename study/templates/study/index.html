@@ -57,7 +57,7 @@
                         </a>
                         <div class="caption">
                             <a href="{% url 'picture_text_paper' i.pk %}">
-                                <p style="font-size:1.2rem">{{ i.introduce|slice:'22' }}...</p>
+                                <p style="font-size:1.2rem;color:black">{{ i.introduce|slice:'22' }}...</p>
                             </a>
                             <p style="margin-bottom:0">
                                 <span class="badge" style="color:forestgreen; float:right;"><small>{% is_buy i.video.pk request.user.pk %}</small></span>
