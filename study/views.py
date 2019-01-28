@@ -62,7 +62,7 @@ DO_MAIN = 'http://fuyang.51nayun.com/'
 @login_required(login_url='/accounts/login/')
 def index(request):
     abs = VideoInfoLectureBanners.objects.all()  # banner广告
-    items = PictureTextPaper.objects.filter(column_id=1)
+    items = PictureTextPaper.objects.filter(column_id=[1,12],).filter( buy_time < timezone.now ).order_by('sequeue')
 
     return render(request, 'study/index.html', locals())
 
