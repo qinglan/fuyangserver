@@ -1,0 +1,76 @@
+{% extends 'study/main_base.html' %}
+
+{% load htmlhelper %}
+
+{% block title %}直播区改版{% endblock %}
+{% block titlefile %}
+    <style type="text/css">
+        .thumbnail {
+            border: 0 none;
+        }
+
+        .col-sm-6, .col-xs-6 {
+            padding: 2px 2px;
+        }
+
+        .badge {
+            display: inline;
+        }
+
+        .mg-top {
+            margin-top: -10px;
+        }
+
+        .mg-bottom {
+            margin-bottom: 1px;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <section class="es-poster swiper-container">
+        <div class="swiper-wrapper"
+             style="width: 3375px; transform: translate3d(-1125px, 0px, 0px); transition-duration: 0.3s; height: 117px;">
+            {% for item in abs %}
+                <div class="swiper-slide" style="background: rgb(244, 244, 244); width: 375px; height: 117px;">
+                    <div>
+                        <a href="{{ item.url }}" target="_blank">
+                            <img class="img-responsive" src="{{ item.image.url }}">
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="swiper-pager">
+            {% for item in abs %}
+                <span class="swiper-pagination-switch"></span>
+            {% endfor %}
+        </div>
+    </section>
+
+    <div id="content-container" class="container">
+        <div class="row mg-top">
+            {% for i in items %}
+                <div class="col-sm-6 col-xs-6">
+                    <div class="thumbnail mg-bottom">
+                        <a href="{% url 'picture_text_paper' i.pk %}">
+                            <img src="{{ i.image.url }}" alt="{{ i.name }}">
+                        </a>
+                        <div class="caption">
+                            <a href="{% url 'VideoCurriculum' i.pk %}">
+                                <p style="font-size:1.2rem;color:black">{{ i.intro|slice:'18' }}...</p>
+                            </a>
+                            <div class="metas" style="color: #ccc;">
+                                    <span class="num">
+                                        <i class="es-icon es-icon-removeredeye"></i> {{ i.views_count|default:0 }}
+                                    </span>
+                                    <span class="comment">
+                                        <i class="es-icon es-icon-textsms"></i> {{ i.get_comment_count|default:0 }}
+                                    </span>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

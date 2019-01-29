@@ -50,6 +50,7 @@ class VideoCurriculum(models.Model):
 
     count = models.IntegerField('课程数', default=0)
     sequeue = models.IntegerField('排序', default=9999)
+    is_show = models.BooleanField('是否展示', default=True)
     views_count = models.IntegerField('浏览次数', default=0, editable=False)
 
     def __str__(self):

@@ -79,7 +79,7 @@ urlpatterns = [
 
     path('tasklive/material/iframe/<int:pk>/', study_views.iframe_tasklive_material, name='iframe_tasklive_material'),
 
-    path('studyfuyang/', study_views.studyfuyang, name='studyfuyang'),
+    path('studyfuyang/', study_views.studyfuyang_index, name='studyfuyang'),
     path('videolecture/', study_views.videolecture, name='videolecture'),
     path('singlepage/<int:pk>/', study_views.guide, name='guide'),
     path('datalist/', study_views.getdatalist, name='datalist'),
