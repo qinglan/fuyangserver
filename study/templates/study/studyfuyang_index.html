@@ -52,14 +52,14 @@
             {% for i in items %}
                 <div class="col-sm-6 col-xs-6">
                     <div class="thumbnail mg-bottom">
-                        <a href="{% url 'picture_text_paper' i.pk %}">
+                          <a href="{{ i.get_absolute_url }}" target="_blank">
                             <img src="{{ i.image.url }}" alt="{{ i.name }}">
-                        </a>
+                           </a>
                         <div class="caption">
-                            <a href="{% url 'VideoCurriculum' i.pk %}">
+                       <a href="{{ i.get_absolute_url }}" target="_blank">
                                 <p style="font-size:1.2rem;color:black">{{ i.intro|slice:'18' }}...</p>
                             </a>
-                            <div class="metas" style="color: #ccc;">
+                             <div class="metas" style="color: #ccc; margin-bottom:-10px;margin-top:-10px ">
                                     <span class="num">
                                         <i class="es-icon es-icon-removeredeye"></i> {{ i.views_count|default:0 }}
                                     </span>
