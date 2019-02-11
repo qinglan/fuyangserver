@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .paysettings import *
 
-
+@login_required(login_url='/accounts/login/')
 def picture_text_paper(request, pk):
     abs = VideoInfoLectureBanners.objects.all()
     pp = PictureTextPaper.objects.get(pk=pk)
@@ -18,14 +18,14 @@ def picture_text_paper(request, pk):
     total_fee = pp.video.price
     if total_fee == 0: total_fee = 1
     total_fee *= 100
-    print('requeststr:', request.GET)
     getInfo = request.GET.get('getInfo', None)
     openid = request.COOKIES.get('openid', '')
     if not openid:
         if getInfo != 'yes':
             # 构造一个url，携带一个重定向的路由参数，
             # 然后访问微信的一个url,微信会回调你设置的重定向路由，并携带code参数
-            return HttpResponseRedirect(get_redirect_url())
+            print('current url:',request.path)
+            return HttpResponseRedirect(get_redirect_url(request.path))
         elif getInfo == 'yes':
             # 我设置的重定向路由还是回到这个函数中，其中设置了一个getInfo=yes的参数
             # 获取用户的openid
@@ -33,7 +33,6 @@ def picture_text_paper(request, pk):
             print('study.index+openid', openid)
 
             if not openid:
-                # study_views.weixin_redirect(request)
                 return HttpResponse('获取用户openid失败')
             print('openid', openid)
             print('code', request.GET.get('code', ''))

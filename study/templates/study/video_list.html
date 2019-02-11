@@ -1,7 +1,36 @@
 {% extends 'study/main_base.html' %}
 {% load staticfiles %}
 {% block title %}视频列表{% endblock %}
+
+{% block titlefile %}
+ <style type="text/css">
+        .thumbnail {
+            border: 0 none;
+        }
+
+
+        .badge {
+            display: inline;
+        }
+
+        .mg-top {
+            margin-top: -4px;
+        }
+
+        .mg-bottom {
+            margin-bottom: 1px;
+        }
+
+         @media (max-width: 767px)
+        .es-open-course-list .col-xs-6 {
+                     padding-left: 2px;
+                     padding-right: 2px;
+          }
+
+    </style>
+{% endblock %}
 {% block content %}
+
     <!--{% block listname %}视频列表{% endblock %}-->
     <section class="es-poster swiper-container">
         <div class="swiper-wrapper"
@@ -27,10 +56,10 @@
 
     <div id="content-container" class="container">
         <div class="open-course-list">
-            <div class="row course-list es-open-course-list">
+            <div class="row course-list es-open-course-list mg-top">
                 {% for info in vis %}
                     <div class="col-md-4 col-xs-6">
-                        <div class="thumbnail">
+                        <div class="thumbnail mg-bottom" >
                             <a href="{{ info.get_absolute_url }}" target="_blank">
                                 <img src="{{ info.image.url }}" alt="{{ info.name }}"
                                      class="img-responsive"/>

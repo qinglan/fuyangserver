@@ -94,7 +94,7 @@ def wx_pay_unifiedorde(detail):
     return response.content
 
 
-def get_redirect_url():
+def get_redirect_url(url):
     """
     获取微信返回的重定向的url
     :return: url,其中携带code
@@ -102,7 +102,7 @@ def get_redirect_url():
     WeChatcode = 'https://open.weixin.qq.com/connect/oauth2/authorize'
     urlinfo = OrderedDict()
     urlinfo['appid'] = APP_ID
-    urlinfo['redirect_uri'] = 'http://fuyang.51nayun.com/?getInfo=yes'  # 设置重定向路由
+    urlinfo['redirect_uri'] = 'http://fuyang.51nayun.com/%s/?getInfo=yes' % url  # 设置重定向路由
     urlinfo['response_type'] = 'code'
     urlinfo['scope'] = 'snsapi_base'  # 只获取基本信息
     urlinfo['state'] = 'mywxpay'  # 自定义的状态码

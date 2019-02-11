@@ -43,6 +43,10 @@ from django.contrib.auth import authenticate, login
 
 from PictureText.paysettings import *
 
+from django.db.models import Q
+
+from django.db.models import Q
+import django.utils.timezone as timezone
 '''
 WEIXIN_APP_ID = 'wxb4bfb462ce44afd4'
 WEIXIN_APPSECRET = '4488c166e2b78d2549b2a1ea56b8fa3e'
@@ -62,7 +66,7 @@ DO_MAIN = 'http://fuyang.51nayun.com/'
 @login_required(login_url='/accounts/login/')
 def index(request):
     abs = VideoInfoLectureBanners.objects.all()  # banner广告
-    items = PictureTextPaper.objects.filter(column_id=1)
+    items = PictureTextPaper.objects.filter( column_id=1,buy_time__gt= datetime.datetime.now()).order_by('sequeue')
 
     return render(request, 'study/index.html', locals())
 
@@ -429,7 +433,7 @@ def studyfuyang(request):
             itme['class'] = ''
         pagelist.append(itme)
 
-    vis = VideoCurriculum.objects.all().order_by('sequeue')[
+    vis = VideoCurriculum.objects.filter( is_show = True).order_by('sequeue')[
           page * PAGE_HAS_VIDEO - PAGE_HAS_VIDEO:page * PAGE_HAS_VIDEO]
     abs = VideoInfoStudyFuyangBanners.objects.all()
     return render(request, 'study/study_fuyang.html', \
@@ -437,6 +441,13 @@ def studyfuyang(request):
                    'abs': abs, \
                    'maxleft': maxleft, 'left': left, 'maxright': maxright, 'right': right, \
                    'pagelist': pagelist})
+
+@login_required(login_url='/accounts/login/')
+def studyfuyang_index(request):
+    '直播区首页样式改版'
+    items = VideoCurriculum.objects.filter( is_show = True).order_by('sequeue')
+    abs = VideoInfoStudyFuyangBanners.objects.all()
+    return render(request, 'study/studyfuyang_index.html', locals())
 
 
 @login_required(login_url='/accounts/login/')
@@ -568,7 +579,7 @@ def videoplaylecture(request, pk):
         if getInfo != 'yes':
             # 构造一个url，携带一个重定向的路由参数，
             # 然后访问微信的一个url,微信会回调你设置的重定向路由，并携带code参数
-            return HttpResponseRedirect(get_redirect_url())
+            return HttpResponseRedirect(get_redirect_url(request.path))
         elif getInfo == 'yes':
             # 我设置的重定向路由还是回到这个函数中，其中设置了一个getInfo=yes的参数
             # 获取用户的openid

@@ -13,9 +13,10 @@ register = template.Library()
 
 @register.simple_tag
 def is_buy(vid, uid):
+    '课程页面判断是否购买课程'
     us = VideoCurriculumOrder.objects.filter(video_curriculum__pk=vid)
 
-    isbuy = False;
+    isbuy = False
 
     for u in us:
         if u.purchaser.pk == uid:
@@ -27,6 +28,29 @@ def is_buy(vid, uid):
         vc = VideoCurriculum.objects.get(pk=vid)
         if vc.buy_time > datetime.datetime.now():
             alink = '<a href="javascript:void(0)" onclick="javascript:callpay(%d);return false">报名中</a>' % vid
+        else:
+            alink = "<a href='javascript:void(0)'>报名已截止</a>"
+
+    return mark_safe(alink)
+
+
+@register.simple_tag
+def index_check_buy(id, vid, uid):
+    '首页判断是否购买课程过虑器'
+    us = VideoCurriculumOrder.objects.filter(video_curriculum__pk=vid)
+
+    isbuy = False
+
+    for u in us:
+        if u.purchaser.pk == uid:
+            alink = "<a href='javascript:void(0)'>已购买</a>"
+            isbuy = True
+            break
+
+    if not isbuy:
+        vc = VideoCurriculum.objects.get(pk=vid)
+        if vc.buy_time > datetime.datetime.now():
+            alink = '<a href="/picture/text/paper/%s/">报名中</a>' % id
         else:
             alink = "<a href='javascript:void(0)'>报名已截止</a>"
 

@@ -33,7 +33,8 @@ class PictureTextPaper(models.Model):
     content = UEditorField('图文内容', height=300, width=1000,
                            default=u'', blank=True, imagePath="uploads/images/",
                            toolbars='besttome', filePath='uploads/files/')
-
+    buy_time = models.DateTimeField('购买截止日期', editable=True, default=timezone.now)
+    sequeue = models.IntegerField('排序', default=9999)
     views_count = models.IntegerField('浏览次数', default=0, editable=False)
 
     def __str__(self):

@@ -13,7 +13,7 @@ class VideoColumnAdmin(admin.ModelAdmin):
 
 
 class VideoCurriculumAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'intro', 'start_time', 'stop_time', \
+    list_display = ('id', 'name', 'intro', 'start_time', 'stop_time',
                     'buy_time', 'plan', 'image', 'price')
     list_display_links = ('id', 'name')
 

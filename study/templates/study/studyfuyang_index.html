@@ -2,7 +2,7 @@
 
 {% load htmlhelper %}
 
-{% block title %}首页{% endblock %}
+{% block title %}直播区改版{% endblock %}
 {% block titlefile %}
     <style type="text/css">
         .thumbnail {
@@ -52,17 +52,21 @@
             {% for i in items %}
                 <div class="col-sm-6 col-xs-6">
                     <div class="thumbnail mg-bottom">
-                        <a href="{% url 'picture_text_paper' i.pk %}">
+                          <a href="{{ i.get_absolute_url }}" target="_blank">
                             <img src="{{ i.image.url }}" alt="{{ i.name }}">
-                        </a>
+                           </a>
                         <div class="caption">
-                            <a href="{% url 'picture_text_paper' i.pk %}">
-                                <p style="font-size:1.2rem;color:black">{{ i.introduce|slice:'18' }}...</p>
+                       <a href="{{ i.get_absolute_url }}" target="_blank">
+                                <p style="font-size:1.2rem;color:black">{{ i.intro|slice:'18' }}...</p>
                             </a>
-                            <p style="margin-bottom:0">
-                                <span class="badge" style="color:forestgreen; float:right;"><small>{% index_check_buy i.pk i.video.pk request.user.pk %}</small></span>
-                                <span style="color:orange"><small>¥{{ i.video.price }}/{{ i.video.count }}课时</small></span>
-                            </p>
+                             <div class="metas" style="color: #ccc; margin-bottom:-10px;margin-top:-10px ">
+                                    <span class="num">
+                                        <i class="es-icon es-icon-removeredeye"></i> {{ i.views_count|default:0 }}
+                                    </span>
+                                    <span class="comment">
+                                        <i class="es-icon es-icon-textsms"></i> {{ i.get_comment_count|default:0 }}
+                                    </span>
+                                </div>
                         </div>
                     </div>
                 </div>
