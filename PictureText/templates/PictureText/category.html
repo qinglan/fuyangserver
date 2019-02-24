@@ -27,15 +27,15 @@
     </section>
 
     <div id="content-container" class="container">
-        <div class="es-tabs article-list-header">
+        <div class="es-tabs article-list-header" style="border:0px solid #e4ecf3;">
             <div class="tab-header">
-                <ul class="clearfix">
+
                     {% for c in columns %}
                         <li class="{% if c.pk == column.pk %}active{% endif %}">
                             <a href="{% url "picture_text_category" c.pk %}">{{ c.name }}</a>
                         </li>
                     {% endfor %}
-                </ul>
+
             </div>
 
         </div>
@@ -44,18 +44,19 @@
         <div class="article-list-body row">
             <div class="col-md-12 article-list-main">
 
-                <section class="es-section">
+                <section class="es-section" style="padding:1px; border:0px solid #e4ecf3; " >
                     <div class="article-list">
                         {% for paper in papers %}
-                            <div class="media media-sm">
-                                <a class="media-left" href="{% url "picture_details" paper.pk %}">
-                                    <img src="{{ paper.image.url }}" alt="{{ paper.name }}" class="media-object"
-                                         width="80" height="60"/>
-                                </a>
-                                <div class="media-body">
-                                    <a href="{% url 'picture_details' paper.pk %}"><h4 class="media-heading" style="color: #000;">{{ paper.name }}</h4></a>
-                                    <p>{{ paper.introduce|truncatechars:43 }}</p>
+                            <div class="media media-sm" style="margin-top:10px">
+                                <div class="media-body" style="padding-left:5px">
+                                    <a href="{% url 'picture_details' paper.pk %}"><h4 class="media-heading" style="color:black;font-style: " PingFangSC-Semibold, sans-serif;"; ">{{ paper.name }}</h4></a>
+                                    <span class="media-heading" style="color:black;font-style: " PingFangSC-Semibold, sans-serif;"; " >{{ paper.introduce|truncatechars:28 }}</span>
+                                    <p><small>{{ paper.register_date|date:"Y-m-d" }}</small></p>
                                 </div>
+                                <a class="media-left" style="padding-right:1px;" href="{% url "picture_details" paper.pk %}">
+                                    <img src="{{ paper.image.url }}" alt="{{ paper.name }}" class="media-object"
+                                         width="106" height="80"/>
+                                </a>
                             </div>
                         {% endfor %}
 
