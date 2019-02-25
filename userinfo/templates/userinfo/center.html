@@ -4,10 +4,6 @@
 
 {% block title %}账户中心{% endblock %}
 
-{% block userinfo_title %}
-    个人信息
-{% endblock %}
-{% block userinfo_base_center_class %}active{% endblock %}
 {% block userinfo_content %}
 
     <form id="user-profile-form" class="row cd-row" action="{% url 'userinfo_center_change' %}" method="post"
@@ -21,10 +17,11 @@
         <div class="col-md-5">
             <div class="form-group cd-form-group">
                 <label for="profile_truename">昵称</label>
-                <input type="text" id="profile_truename" name="profile[truename]" class="form-control" value="{{ user.nickname }}">
+                <input type="text" id="profile_truename" name="profile[truename]" class="form-control"
+                       value="{{ user.nickname }}">
             </div>
         </div>
-        <div class="col-md-5 col-md-offset-1">
+        <div class="col-md-5">
             <div class="form-group cd-form-group">
                 <label>性别</label>
                 <div class="cd-radio-group">
@@ -45,46 +42,17 @@
 
         <div class="col-md-5">
             <div class="form-group cd-form-group">
-                <label for="profile_title">国家</label>
-                <input type="text" id="profile_title" name="profile[title]" class="form-control"
-                       value="{{ user.country }}">
-            </div>
-        </div>
-
-        <div class="col-md-5 col-md-offset-1">
-            <div class="form-group cd-form-group">
-                <label for="profile_signature">省 / 城市</label>
-                <div class="input-group">
-                    <input type="text" id="profile_signature" name="profile[signature]" class="form-control"
-                           value="{{ user.province }}">
-                    <span class="input-group-addon">/</span>
-                    <input type="text" id="profile_city" name="profile[city]" class="form-control"
-                           value="{{ user.city }}">
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-5 col-md-offset-1">
-            <div class="form-group cd-form-group">
-                <label for="profile_signature">地址</label>
-                <input type="text" id="profile_address" name="profile[address]" class="form-control"
-                       value="{{ user.address }}">
-            </div>
-        </div>
-
-        <div class="col-md-5 col-md-offset-1">
-            <div class="form-group cd-form-group">
-                <label for="profile_signature">真实姓名</label>
-                <input type="text" id="profile_real_name" name="profile[real_name]" class="form-control"
-                       value="{{ user.real_name }}">
+                <label for="profile_qq">QQ</label>
+                <input type="text" id="profile_qq" name="profile[qq]" class="form-control"
+                       value="{{ user.qq }}">
             </div>
         </div>
 
         <div class="col-md-5">
             <div class="form-group cd-form-group">
-                <label for="profile_title">手机号</label>
-                <input type="text" id="profile_phone_number" name="profile[phone_number]" class="form-control"
-                       value="{{ user.phone_number }}">
+                <label for="profile_signature">地址</label>
+                <input type="text" id="profile_address" name="profile[address]" class="form-control"
+                       value="{{ user.address }}">
             </div>
         </div>
 
@@ -96,7 +64,7 @@
             </div>
         </div>
 
-        <div class="col-md-5 col-md-offset-1">
+        <div class="col-md-5">
             <div class="form-group cd-form-group">
                 <label for="profile_protocal">用户服务协议</label>
                 <textarea class="form-control" name="profile_protocal" rows="6" disabled="disabled">

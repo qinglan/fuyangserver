@@ -43,7 +43,7 @@ class UserAdmin(BaseUserAdmin):
             'fields': ('email', 'password', 'openid', 'nickname',
                        'sex', 'province', 'country',
                        'headimgurl', 'real_name', 'phone_number',
-                       'city', 'address', 'email_address',)
+                       'city', 'address', 'email_address', 'qq', 'paycode')
         }),
         (_('Permissions'), {
             'fields': ('is_active', 'is_staff', 'is_superuser',

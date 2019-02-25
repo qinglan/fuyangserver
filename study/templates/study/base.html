@@ -20,6 +20,7 @@
     <link href="{% static "xuantong/css/main-v2.css" %}" rel="stylesheet">
     <link href="{% static "xuantong/css/header-white.css" %}" rel="stylesheet">
     <link href="{% static "xuantong/css/main(1).css" %}" rel="stylesheet">
+    <link href="{% static 'css/site.css' %}" rel="stylesheet">
     <script src="{% static "xuantong/js/index.js" %}"></script>
     {% block main_titlefile %}
     {% endblock %}
@@ -28,8 +29,11 @@
     <title>{% block title %}扶阳医学{% endblock %} - 扶阳医学</title>
 </head>
 
-<body class="es-main-default es-nav-white homepage {% block bodyclass %} {% endblock %}" {% block bodycode %} {% endblock %}>
-<div style="margin:0;width:0;height:0;overflow:hidden;"><img src="/media/image/wxscreenshot.png" width="360" height="360" alt="火神门" longdesc="{{ main_info.text_2 }}"></div>
+<body class="es-main-default es-nav-white homepage {% block bodyclass %} {% endblock %}"
+        {% block bodycode %} {% endblock %}>
+<div style="margin:0;width:0;height:0;overflow:hidden;"><img src="/media/image/wxscreenshot.png" width="360"
+                                                             height="360" alt="火神门" longdesc="{{ main_info.text_2 }}">
+</div>
 {% block bodycontent %}
     <div>扶阳中医真的好</div>
 {% endblock %}
@@ -52,5 +56,6 @@
 <script src="{% static "xuantong/js/index(3).js" %}"></script>
 {% block scriptfile %}
 {% endblock %}
+<script src="{% static 'js/site.js' %}"></script>
 </body>
 </html>
