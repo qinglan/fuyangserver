@@ -4,38 +4,28 @@
 
 {% block title %}用户中心{% endblock %}
 
-
 {% block content %}
     <div class="container cd-container">
         <div class="cd-content">
             <div class="cd-sidebar">
-                <ul class="cd-sidebar__list">
-                    <li class="cd-sidebar__heading">
-                        账户中心
-                    </li>
-                    <li class="cd-sidebar__item {% block userinfo_base_orders_class %}{% endblock %}">
-                        <a href="{% url 'userinfo_orders' %}">我的订单</a>
-                    </li>
-                    <li class="cd-sidebar__item {% block userinfo_base_center_class %}{% endblock %}">
-                        <a href="{% url 'userinfo_center' %}">个人信息</a>
-                    </li>
-                    <li class="cd-sidebar__item {% block userinfo_base_collection_class %}{% endblock %}">
-                        <a href="{% url 'userinfo_collection' %}">我的收藏</a>
-                    </li>
-
-                </ul>
-            </div>
-            <div class="cd-main">
-                <div class="cd-main__heading">
-                    <div class="cd-main__title">
-                        {% block userinfo_title %}
-                            用户中心的标题
-                        {% endblock %}
+                <div class="panel" style="margin-bottom: 0;">
+                    <div class="panel-heading">账户中心</div>
+                    <div class="panel-body" style="padding-bottom: 0;">
+                        <ul class="list-inline" id="usermenus">
+                            <li><a href="{% url 'userinfo_center' %}">个人信息</a></li>
+                            <li><a href="{% url 'userinfo_realname' %}">实名认证</a></li>
+                            <li><a href="{% url 'userinfo_secure' %}">安全设置</a></li>
+                            <li><a href="{% url 'userinfo_finance' %}">账务中心</a></li>
+                            <li><a href="{% url 'userinfo_orders' %}">我的订单</a></li>
+                            <li><a href="{% url 'userinfo_collection' %}">我的收藏</a></li>
+                        </ul>
                     </div>
                 </div>
+            </div>
+            <div class="cd-main">
                 <div class="cd-main__body">
                     {% block userinfo_content %}
-                        用户中心的标题
+                        用户中心内容
                     {% endblock %}
                 </div>
             </div>
@@ -44,6 +34,5 @@
 
     {% block userinfo_content_end %}
     {% endblock %}
-
 
 {% endblock %}

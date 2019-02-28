@@ -49,13 +49,13 @@
                         {% for paper in papers %}
                             <div class="media media-sm" style="margin-top:10px">
                                 <div class="media-body" style="padding-left:5px">
-                                    <a href="{% url 'picture_details' paper.pk %}"><h4 class="media-heading" style="color:#000;">{{ paper.name }}</h4></a>
-                                    <p><amall>{{ paper.introduce|truncatechars:16 }}</amall></p>
-                                    <p><amall>{{ paper.register_date|date:"Y-m-d" }}</amall></p>
+                                    <a href="{% url 'picture_details' paper.pk %}"><h4 class="media-heading" style="color:black;font-style: " PingFangSC-Semibold, sans-serif;"; ">{{ paper.name }}</h4></a>
+                                    <span class="media-heading" style="color:black;font-style: " PingFangSC-Semibold, sans-serif;"; " >{{ paper.introduce|truncatechars:28 }}</span>
+                                    <p><small>{{ paper.register_date|date:"Y-m-d" }}</small></p>
                                 </div>
                                 <a class="media-left" style="padding-right:1px;" href="{% url "picture_details" paper.pk %}">
                                     <img src="{{ paper.image.url }}" alt="{{ paper.name }}" class="media-object"
-                                         width="96" height="80"/>
+                                         width="106" height="80"/>
                                 </a>
                             </div>
                         {% endfor %}

@@ -22,6 +22,10 @@ urlpatterns = [
 
     path('collection/', views.userinfo_collection, name='userinfo_collection'),
 
-
+    path('secure/', views.secure, name='userinfo_secure'),
+    path('setpay/', views.pay_password, name='userinfo_setpay'),
+    path('setmobile/', views.bind_mobile, name='userinfo_setmobile'),
+    path('realname/', views.realname, name='userinfo_realname'),
+    path('finance/', views.finance, name='userinfo_finance')
 
 ]

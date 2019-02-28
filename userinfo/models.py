@@ -105,6 +105,7 @@ class VideoInfoStudyFuyangOrder(OrderBase):
 
 
 class Collection(models.Model):
+    '我的收藏'
     class_name = models.CharField('类名', max_length=256, default='', null=True, blank=True)
     item_pk = models.IntegerField('收藏的pk', default=0)
     author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, verbose_name='收藏者', default=None)

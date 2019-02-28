@@ -1,0 +1,47 @@
+<div class="modal-dialog  cd-modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                <i class="cd-icon cd-icon-close"></i>
+            </button>
+            <h4 class="modal-title">手机绑定</h4>
+        </div>
+        <div class="modal-body">
+            <form id="bind-mobile-form" method="post" action="{% url 'userinfo_setmobile' %}">
+                {% csrf_token %}
+                <div class="form-group cd-form-group">
+                    <label class="readonly">已绑定手机号</label>
+                    <input type="text" class="form-control" value="{{ user.phone_number }}" readonly="readonly">
+                </div>
+
+                <div class="form-group cd-form-group">
+                    <label for="mobile">新手机号码</label>
+                    <input type="text" id="mobile" name="mobile" data-url="/register/email_or_mobile/check"
+                           class="form-control" data-role="mobile">
+                </div>
+
+                <div class="form-group cd-form-group cd-form-group-action cd-mb24">
+                    <label for="sms_code">短信验证码</label>
+                    <input type="text" id="sms-code" name="sms_code" class="form-control"
+                           data-url="/edu_cloud/sms_check/sms_bind">
+                    <div class="action-button">
+                        <button type="button" class="btn cd-btn cd-btn-ghost-primary btn-block js-sms-send" disabled=""
+                                data-url="/edu_cloud/sms_send">
+                            <span id="js-time-left"></span>
+                            <span id="js-fetch-btn-text">获取验证码</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn cd-btn cd-btn-flat-default cd-btn-lg" data-dismiss="modal">
+                取消
+            </button>
+            <button id="submit-btn" type="button" class="btn cd-btn cd-btn-primary cd-btn-lg" data-toggle="form-submit"
+                    data-target="#bind-mobile-form" data-loading-text="正在保存...">
+                提交
+            </button>
+        </div>
+    </div>
+</div>

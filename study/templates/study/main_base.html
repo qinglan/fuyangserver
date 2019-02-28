@@ -93,16 +93,14 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li role="presentation" class="dropdown-header">{{ user_info.nickname }}</li>
                                     <li>
-                                        <a href="{% url 'userinfo_center' %}">
-                                            <i class="es-icon es-icon-setting"></i>个人设置</a>
+                                        <a href="{% url 'userinfo_center' %}"><i class="glyphicon glyphicon-dashboard"></i>个人信息</a>
                                     </li>
-                                    <li>
-                                        <a href="{% url 'userinfo_orders' %}">
-                                            <i class="es-icon es-icon-accountwallet"></i>账户中心</a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'userinfo_collection' %}">
-                                            <i class="es-icon es-icon-web"></i>我的收藏</a>
+                                    <li><a href="{% url 'userinfo_realname' %}"><i class="glyphicon glyphicon-credit-card"></i> 实名认证</a></li>
+                                    <li><a href="{% url 'userinfo_secure' %}"><i class="glyphicon glyphicon-cog"></i> 安全设置</a></li>
+                                    <li><a href="{% url 'userinfo_finance' %}"><i class="glyphicon glyphicon-stats"></i> 账务中心</a></li>
+                                    <li><a href="{% url 'userinfo_orders' %}"><i
+                                            class="es-icon es-icon-accountwallet"></i>我的订单</a></li>
+                                    <li><a href="{% url 'userinfo_collection' %}"><i class="es-icon es-icon-web"></i>我的收藏</a>
                                     </li>
                                 </ul>
                             </li>
@@ -116,7 +114,7 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li class="user-nav-li-login">
                                         <a href="/">
-                                            <i class="es-icon es-icon-denglu"></i>登录1
+                                            <i class="es-icon es-icon-denglu"></i>登录
                                         </a>
                                     </li>
                                     <li class="user-nav-li-register">
@@ -127,7 +125,7 @@
                                 </ul>
                             </li>
                             <li class="hidden-xs">
-                                <a href="/">登录1</a>
+                                <a href="/">登录</a>
                             </li>
                             <li class="hidden-xs">
                                 <a href="/">注册</a>
@@ -148,12 +146,8 @@
                 <div class="container">
                     Powered by
                     <a href="/" target="_blank">火神门</a>
-                    <script src="{% static "xuantong/js/entrance.js" %}" class="zhiCustomBtn" id="zhichiScript"
-                            data-args="属性名1=属性值1&amp;属性名2=属性值2"></script>
                     <div class="mts">
-                        <a href="http://www.miibeian.gov.cn/" target="_blank">
-                            粤ICP备18023026号
-                        </a>
+                        <a href="http://www.miibeian.gov.cn/" target="_blank">粤ICP备18023026号</a>
                     </div>
                 </div>
             </div>

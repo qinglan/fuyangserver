@@ -1,0 +1,61 @@
+<div class="modal-dialog  cd-modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                <i class="cd-icon cd-icon-close"></i>
+            </button>
+            <h4 class="modal-title"> 支付密码
+            </h4>
+        </div>
+        <div class="modal-body">
+            <form id="settings-pay-password-form" name="setPayCodeFrm" method="post"
+                  action="{% url 'userinfo_setpay' %}" onsubmit="return check(this);">
+                {% csrf_token %}
+                <div class="form-group cd-form-group">
+                    <label for="form_currentUserLoginPassword">原支付密码</label>
+                    <input type="password" class="form-control" id="form_currentPayPassword"
+                           name="currentPayCode" placeholder="请输入原支付密码" required="required"
+                           oninput="setCustomValidity('')">
+                </div>
+                <div class="form-group cd-form-group">
+                    <label for="form_newPayPassword">新支付密码</label>
+                    <input type="password" class="form-control" id="form_newPayPassword" name="newPayPassword"
+                           placeholder="请输入新支付密码" required="required">
+                </div>
+                <div class="form-group cd-form-group cd-mb24">
+                    <label for="form_confirmPayPassword">确认支付密码</label>
+                    <input type="password" class="form-control" id="form_confirmPayPassword" name="confirmPayPassword"
+                           placeholder="请再输入一次支付密码" required="required" oninput="setCustomValidity('')">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn cd-btn cd-btn-flat-default cd-btn-lg" data-dismiss="modal">
+                取消
+            </button>
+            <button id="password-save-btn" type="button" class="btn cd-btn cd-btn-primary cd-btn-lg"
+                    data-toggle="form-submit" data-target="#settings-pay-password-form" data-loading-text="正在保存...">提交
+            </button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function check(form) {
+        var op = form.currentPayCode;
+        if (op.value !== '{{ request.user.paycode }}') {
+            //op.setCustomValidity('原支付密码输入不正确');
+            alert('原支付密码输入不正确');
+            return false;
+        }
+
+        var p1 = form.newPayPassword;
+        var p2 = form.confirmPayPassword;
+        if (p1.value != p2.value) {
+            //p2.setCustomValidity('两次输入的密码不匹配');
+            alert('两次输入的密码不匹配');
+            return false;
+        }
+        return true;
+    }
+</script>

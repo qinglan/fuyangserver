@@ -80,12 +80,24 @@ class User(AbstractUser):
 
     city = models.CharField('城市', default='', max_length=256)
 
+    qq = models.CharField('QQ', max_length=50, default='')
+
     address = models.CharField('地址', default='', max_length=256)
 
     email_address = models.EmailField('邮箱', default='', max_length=256)
+
+    paycode = models.CharField('支付密码', default='', max_length=50)
+
+    idnum = models.CharField('身份证号', default='', max_length=50)
+    idfront = models.ImageField('身份证正面', null=True, blank=True, upload_to='idcards')
+    idback = models.ImageField('身份证反面', null=True, blank=True, upload_to='idcards')
 
     def __str__(self):
         return self.nickname
 
     class Meta(AbstractUser.Meta):
         swappable = 'AUTH_USER_MODEL'
+
+    def is_realname(self):
+        '是否实名认证'
+        return self.real_name and self.idnum and self.idfront and self.idback
