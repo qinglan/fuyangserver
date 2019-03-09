@@ -9,8 +9,9 @@
         </div>
         <div class="modal-body">
             <form id="settings-pay-password-form" name="setPayCodeFrm" method="post"
-                  action="{% url 'userinfo_setpay' %}" onsubmit="return check(this);">
+                  action="{% url 'userinfo_setpay' %}" onsubmit="return checkpayfrm(this);">
                 {% csrf_token %}
+                <input type="hidden" name="origcode" id="origcode" value="{{ request.user.paycode }}">
                 {% if request.user.paycode %}
                     <div class="form-group cd-form-group">
                         <label for="form_currentUserLoginPassword">原支付密码</label>
@@ -41,25 +42,3 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    function check(form) {
-        var op = form.currentPayCode;
-        if (op != undefined) {
-            if (op.value !== '{{ request.user.paycode }}') {
-                //op.setCustomValidity('原支付密码输入不正确');
-                alert('原支付密码输入不正确');
-                return false;
-            }
-        }
-
-        var p1 = form.newPayPassword;
-        var p2 = form.confirmPayPassword;
-        if (p1.value != p2.value) {
-            //p2.setCustomValidity('两次输入的密码不匹配');
-            alert('两次输入的密码不匹配');
-            return false;
-        }
-        return true;
-    }
-</script>

@@ -7,8 +7,11 @@
             <h4 class="modal-title">重设密码</h4>
         </div>
         <div class="modal-body">
-            <form id="bind-mobile-form" method="post" action="{% url 'userinfo_setpay' %}">
+            <form id="bind-mobile-form" method="post" action="{% url 'userinfo_setpay' %}"
+                  onsubmit="return checkpayfrm(this);">
                 {% csrf_token %}
+                <input type="hidden" name="origcode" id="origcode" value="{{ request.user.paycode }}">
+
                 <div class="form-group cd-form-group">
                     <label class="readonly">已绑定手机号</label>
                     <input type="text" class="form-control" value="{{ user.phone_number }}" readonly="readonly">
