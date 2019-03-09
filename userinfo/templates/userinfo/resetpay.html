@@ -1,0 +1,52 @@
+<div class="modal-dialog  cd-modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                <i class="cd-icon cd-icon-close"></i>
+            </button>
+            <h4 class="modal-title">重设密码</h4>
+        </div>
+        <div class="modal-body">
+            <form id="bind-mobile-form" method="post" action="{% url 'userinfo_setpay' %}">
+                {% csrf_token %}
+                <div class="form-group cd-form-group">
+                    <label class="readonly">已绑定手机号</label>
+                    <input type="text" class="form-control" value="{{ user.phone_number }}" readonly="readonly">
+                </div>
+
+                <div class="form-group cd-form-group cd-form-group-action cd-mb24">
+                    <label for="sms_code">短信验证码</label>
+                    <input type="text" id="sms-code" name="sms_code" class="form-control"/>
+                    <div class="action-button">
+                        <button type="button" class="btn cd-btn cd-btn-ghost-primary btn-block js-sms-send"
+                                data-url="/edu_cloud/sms_send">
+                            <span id="js-time-left"></span>
+                            <span id="js-fetch-btn-text">获取验证码</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group cd-form-group">
+                    <label for="form_newPayPassword">新支付密码</label>
+                    <input type="password" class="form-control" id="form_newPayPassword" name="newPayPassword"
+                           required="required" minlength="6">
+                </div>
+
+                <div class="form-group cd-form-group cd-mb24">
+                    <label for="form_confirmPayPassword">确认支付密码</label>
+                    <input type="password" class="form-control" id="form_confirmPayPassword" name="confirmPayPassword"
+                           required="required" minlength="6" oninput="setCustomValidity('')">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn cd-btn cd-btn-flat-default cd-btn-lg" data-dismiss="modal">
+                取消
+            </button>
+            <button id="submit-btn" type="button" class="btn cd-btn cd-btn-primary cd-btn-lg" data-toggle="form-submit"
+                    data-target="#bind-mobile-form" data-loading-text="正在保存...">
+                提交
+            </button>
+        </div>
+    </div>
+</div>

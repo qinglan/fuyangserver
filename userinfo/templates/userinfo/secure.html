@@ -4,21 +4,6 @@
 {% block userinfo_content %}
 
     <div class="cd-setting">
-        <span class="setting-icon"><i class="cd-icon cd-icon-payment"></i></span>
-        <span class="setting-title">支付密码</span>
-        <span class="setting-content">用于支付时的二次密码校验，加强账户安全性</span>
-        <span class="setting-action">
-            {% if request.user.paycode %}
-                <span class="cd-setting-status cd-setting-status-done">已设置</span>
-            {% else %}
-                <span class="cd-setting-status">未设置</span>
-            {% endif %}
-            <button class="btn cd-btn cd-btn-default" data-url="{% url 'userinfo_setpay' %}" data-toggle="modal"
-                    data-target="#modal">设置</button>
-        </span>
-    </div>
-
-    <div class="cd-setting">
         <span class="setting-icon"><i class="cd-icon cd-icon-iphone"></i></span>
         <span class="setting-title">手机绑定</span>
         <span class="setting-content">已绑定手机：{{ request.user.phone_number }}</span>
@@ -31,5 +16,30 @@
             <button class="btn cd-btn cd-btn-default" data-url="{% url 'userinfo_setmobile' %}" data-toggle="modal"
                     data-target="#modal">修改</button>
         </span>
+    </div>
+
+    <div class="cd-setting" style="box-shadow: none;-webkit-box-shadow: none;">
+        <span class="setting-icon"><i class="cd-icon cd-icon-payment"></i></span>
+        <span class="setting-title">支付密码</span>
+        <span class="setting-content">用于支付时的二次密码校验，加强账户安全性</span>
+        <span class="setting-action">
+            {% if request.user.paycode %}
+                <span class="cd-setting-status cd-setting-status-done">已设置</span>
+            {% else %}
+                <span class="cd-setting-status">未设置</span>
+            {% endif %}
+            <button type="button" class="btn cd-btn cd-btn-default" data-url="{% url 'userinfo_setpay' %}"
+                    data-toggle="modal"
+                    data-target="#modal">设置</button>
+        </span>
+    </div>
+
+    <div class="cd-setting">
+        <span class="setting-title"> </span>
+        <span class="setting-action">
+        <button type="button" class="btn btn-link" data-url="{% url 'userinfo_reset' %}"
+                data-toggle="modal" data-target="#modal"
+                style="margin-left:3px">找回密码</button>
+    </span>
     </div>
 {% endblock %}

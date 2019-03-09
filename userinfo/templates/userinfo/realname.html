@@ -1,5 +1,5 @@
 {% extends 'userinfo/userinfo_base.html' %}
-
+{% load staticfiles %}
 {% block title %}实名认证{% endblock %}
 
 {% block userinfo_content %}
@@ -75,4 +75,10 @@
             </div>
         {% endif %}
     </form>
+{% endblock %}
+
+{% block scriptfile %}
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'xuantong/js/jquery-validation.js' %}"></script>
+    <script type="text/javascript" src="{% static 'xuantong/js/cdupload.js' %}"></script>
 {% endblock %}

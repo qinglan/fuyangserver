@@ -4,3 +4,7 @@
 root/ubuntu 账号密码：  fUyanG1892377
 IP是：134.175.177.28
 服务端口为 8000
+
+数据库：
+'USER': 'root',
+'PASSWORD': 't66y123456',

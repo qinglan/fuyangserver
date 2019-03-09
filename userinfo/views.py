@@ -137,6 +137,11 @@ def pay_password(request):
     return render(request, 'userinfo/setpay.html')
 
 
+def reset_password(request):
+    '重设支付密码'
+    return render(request, 'userinfo/resetpay.html')
+
+
 def bind_mobile(request):
     '设置手机号码'
     if request.method == 'POST':
@@ -161,4 +166,4 @@ def realname(request):
 
 def finance(request):
     '财务中心'
-    pass
+    return render(request, 'userinfo/finance.html')

@@ -1,0 +1,34 @@
+{% extends 'userinfo/userinfo_base.html' %}
+
+{% block title %}账务中心{% endblock %}
+
+{% block userinfo_content %}
+    <div class="cd-setting">
+        <span class="setting-icon"><i class="cd-icon cd-icon-money-bag"></i></span>
+        <span class="setting-title">账户余额</span>
+        <span class="setting-content">经常更改密码有助于保护您的帐号安全</span>
+        <span class="setting-action">
+            <button type="button" class="btn btn-link"><span class="badge">0</span></button>
+            <button class="btn cd-btn cd-btn-default" disabled data-toggle="modal"
+                data-target="#modal">充值</button>
+          </span>
+    </div>
+
+    <div class="cd-setting">
+        <span class="setting-icon"><i class="cd-icon cd-icon-coupon"></i></span>
+        <span class="setting-title">听课券</span>
+        <span class="setting-content"></span>
+        <span class="setting-action">
+            <button type="button" class="btn btn-link"><span class="badge">0</span></button>
+        </span>
+    </div>
+
+    <div class="cd-setting">
+        <span class="setting-icon"><i class="cd-icon cd-icon-coupon"></i></span>
+        <span class="setting-title">兑换券</span>
+        <span class="setting-content"></span>
+        <span class="setting-action">
+            <button type="button" class="btn btn-link"><span class="badge">0</span></button>
+        </span>
+    </div>
+{% endblock %}
