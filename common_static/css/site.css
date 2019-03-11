@@ -1,10 +1,12 @@
 /* 用户中心菜单项 */
 #usermenus a:link {
-    color: #666;
+    color: #000;
+    line-height:30px;
+    font-weight: bold;
 }
 
 #usermenus a:visited {
-    color: #666;
+    color: #333;
 }
 
 #usermenus li.active a {

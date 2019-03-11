@@ -8,7 +8,7 @@ import time
 import requests
 from collections import OrderedDict
 from random import Random
-from bs4 import BeautifulSou
+from bs4 import BeautifulSoup
 
 APP_ID = "wx6ce6cc38ff2c028c"  # 公众账号appid
 MCH_ID = "1517550611"  # 商户号

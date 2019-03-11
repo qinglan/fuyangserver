@@ -67,7 +67,7 @@
         <div class="col-md-5">
             <div class="form-group cd-form-group">
                 <label for="profile_protocal">用户服务协议</label>
-                <textarea class="form-control" name="profile_protocal" rows="6" disabled="disabled">
+                <textarea class="form-control" name="profile_protocal" rows="12" disabled="disabled">
 扶阳医学在线学习平台
 ——用户服务协议
 
@@ -185,24 +185,15 @@ b. 经平台批准的第三方合作网站登录的用户，包括微信绑定�
 
         function submitForm() {
             em = document.getElementById('profile_email_address').value
-            tel = document.getElementById('profile_phone_number').value
             em = em.replace(/[ ]/g, "");   //去掉所有空格
-            tel = tel.replace(/[ ]/g, "");   //去掉所有空格
 
-            if (tel != '' && !regBox.regMobile.test(tel)) {
-                alert("手机号格式错误")
-                return false
-            }
             if (em != '' && !regBox.regEmail.test(em)) {
                 alert("邮箱格式错误")
                 return false
             }
-
             var form = document.getElementById("user-profile-form")
             form.submit();
         }
-
-
     </script>
 
 {% endblock %}

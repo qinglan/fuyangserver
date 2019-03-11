@@ -42,8 +42,8 @@ class UserAdmin(BaseUserAdmin):
         (None, {
             'fields': ('email', 'password', 'openid', 'nickname',
                        'sex', 'province', 'country',
-                       'headimgurl', 'real_name', 'phone_number',
-                       'city', 'address', 'email_address', 'qq', 'paycode')
+                       'headimgurl', 'real_name', 'idnum', 'phone_number',
+                       'city', 'address', 'email_address', 'qq', 'paycode', 'idfront', 'idback')
         }),
         (_('Permissions'), {
             'fields': ('is_active', 'is_staff', 'is_superuser',
@@ -66,7 +66,7 @@ class UserAdmin(BaseUserAdmin):
 
     list_display = ('nickname', 'email', 'is_active')
     list_filter = (UserModelFilter, 'is_staff', 'is_superuser', 'is_active',)
-    search_fields = ('email',)
+    search_fields = ('email', 'nickname', 'real_name')
     ordering = ('email',)
     actions = ('activate_users', 'send_activation_email',)
     readonly_fields = ('last_login', 'date_joined',)
