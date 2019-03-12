@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-# Create your views here.
+from django.views.decorators.csrf import csrf_exempt
 from .models import VideoCurriculumOrder, VideoInfoStudyFuyangOrder, VideoInfoLectureOrder, Collection
 
 
@@ -131,9 +131,14 @@ def secure(request):
 def pay_password(request):
     '设置支付密码'
     if request.method == 'POST':
-        request.user.paycode = request.POST.get('newPayPassword')  # todo:支付密码最好加密
-        request.user.save()
-        return HttpResponseRedirect(reverse('userinfo_secure'))
+        vcode = request.POST.get('sms_code')
+        if vcode == request.session["smscode"]:
+            request.user.paycode = request.POST.get('newPayPassword')  # todo:支付密码最好加密
+            request.user.save()
+            del request.session["smscode"]
+            return HttpResponseRedirect(reverse('userinfo_secure'))
+        else:
+            render(request, 'userinfo/setpay.html', {'errmsg': '设置支付密码失败：验证码输入有误.'})
     return render(request, 'userinfo/setpay.html')
 
 
@@ -145,9 +150,14 @@ def reset_password(request):
 def bind_mobile(request):
     '设置手机号码'
     if request.method == 'POST':
-        request.user.phone_number = request.POST.get('mobile')
-        request.user.save()
-        return HttpResponseRedirect(reverse('userinfo_secure'))
+        vcode = request.POST.get('sms_code')
+        if vcode == request.session["smscode"]:
+            request.user.phone_number = request.POST.get('mobile')
+            request.user.save()
+            del request.session["smscode"]
+            return HttpResponseRedirect(reverse('userinfo_secure'))
+        else:
+            return render(request, 'userinfo/setmobile.html', {'errmsg': '绑定手机号码失败：验证码输入有误.'})
     return render(request, 'userinfo/setmobile.html')
 
 
@@ -167,3 +177,38 @@ def realname(request):
 def finance(request):
     '财务中心'
     return render(request, 'userinfo/finance.html')
+
+
+@csrf_exempt
+def sendsms(request):
+    '发送短信验证码'
+
+    # 短信应用SDK AppID
+    appid = 1400190626  # SDK AppID是1400开头
+    # 短信应用SDK AppKey
+    appkey = "a2e88702d03c9f2453d33ea48bd86219"
+    # 需要发送短信的手机号码
+    phone_numbers = [request.POST.get('phone')]
+    # 短信模板ID，需要在短信应用中申请
+    template_id = 291365  # NOTE: 这里的模板ID`7839`只是一个示例，真实的模板ID需要在短信控制台中申请
+    # templateId 7839 对应的内容是"您的验证码是: {1}"
+    # 签名
+    sms_sign = "国医传承医学研究院"  # NOTE: 签名参数使用的是`签名内容`，而不是`签名ID`。
+
+    from qcloudsms_py import SmsSingleSender
+    from qcloudsms_py.httpclient import HTTPError
+    import random
+
+    ssender = SmsSingleSender(appid, appkey)
+    rndlist = random.sample('1234567890', 4)
+    rndnum = ''.join(rndlist)
+    request.session['smscode'] = rndnum
+    params = [rndnum]  # 短信验证码
+    try:
+        result = ssender.send_with_param(86, phone_numbers[0], template_id, params, sign=sms_sign, extend="",
+                                         ext="")  # 签名参数未提供或者为空时，会使用默认签名发送短信
+    except HTTPError as e:
+        print(e)
+    except Exception as e:
+        print(e)
+    return JsonResponse(result)  # {'result': 0, 'errmsg': 'OK', 'ext': '', 'sid': '2019:3801938042322070546', 'fee': 1}
