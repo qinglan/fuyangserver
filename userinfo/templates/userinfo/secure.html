@@ -2,7 +2,11 @@
 
 {% block title %}账户中心{% endblock %}
 {% block userinfo_content %}
-
+    {% if errmsg %}
+        <div class="alert cd-alert cd-alert-warning">
+            {{ errmsg }}
+        </div>
+    {% endif %}
     <div class="cd-setting">
         <span class="setting-icon"><i class="cd-icon cd-icon-iphone"></i></span>
         <span class="setting-title">手机绑定</span>

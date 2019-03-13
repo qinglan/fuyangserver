@@ -14,16 +14,15 @@
 
                 <div class="form-group cd-form-group">
                     <label class="readonly">已绑定手机号</label>
-                    <input type="text" class="form-control" value="{{ user.phone_number }}" readonly="readonly">
+                    <input type="text" id="mobile" name="mobile" class="form-control" value="{{ user.phone_number }}" readonly="readonly">
                 </div>
 
                 <div class="form-group cd-form-group cd-form-group-action cd-mb24">
                     <label for="sms_code">短信验证码</label>
                     <input type="text" id="sms-code" name="sms_code" class="form-control"/>
                     <div class="action-button">
-                        <button type="button" class="btn cd-btn cd-btn-ghost-primary btn-block js-sms-send"
-                                data-url="/edu_cloud/sms_send">
-                            <span id="js-time-left"></span>
+                        <button type="button" id="sendsms" class="btn cd-btn cd-btn-ghost-primary btn-block"
+                                data-url="{% url 'userinfo_sendsms' %}">
                             <span id="js-fetch-btn-text">获取验证码</span>
                         </button>
                     </div>
@@ -38,7 +37,7 @@
                 <div class="form-group cd-form-group cd-mb24">
                     <label for="form_confirmPayPassword">确认支付密码</label>
                     <input type="password" class="form-control" id="form_confirmPayPassword" name="confirmPayPassword"
-                           required="required" minlength="6" oninput="setCustomValidity('')">
+                           required="required" minlength="6">
                 </div>
             </form>
         </div>

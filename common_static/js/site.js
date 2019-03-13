@@ -8,6 +8,22 @@ $(function () {
             $(ele).addClass('active');
         }
     });
+    //发送短信验证码
+    $('#sendsms').on('click', function () {
+        var smsurl = $(this).data('url');
+        var tel = $('#mobile').val();
+        $.ajax({
+            url: smsurl,
+            async: false,
+            type: 'POST',
+            data: {phone: tel},
+            success: function (data, txtstatus, xhr) {
+                if (data.result == 0) $(this).attr('disabled', 'disabled');
+                //console.log(data);
+                //alert(data);
+            }
+        });
+    });
 })
 
 //验证支付密码表单

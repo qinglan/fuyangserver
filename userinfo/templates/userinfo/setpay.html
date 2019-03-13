@@ -8,6 +8,11 @@
             </h4>
         </div>
         <div class="modal-body">
+            {% if errmsg %}
+                <div class="alert cd-alert cd-alert-warning">
+                    {{ errmsg }}
+                </div>
+            {% endif %}
             <form id="settings-pay-password-form" name="setPayCodeFrm" method="post"
                   action="{% url 'userinfo_setpay' %}" onsubmit="return checkpayfrm(this);">
                 {% csrf_token %}

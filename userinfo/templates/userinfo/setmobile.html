@@ -16,18 +16,15 @@
 
                 <div class="form-group cd-form-group">
                     <label for="mobile">新手机号码</label>
-                    <input type="text" id="mobile" name="mobile" data-url="/register/email_or_mobile/check"
-                           class="form-control" data-role="mobile">
+                    <input type="text" id="mobile" name="mobile" class="form-control" data-role="mobile">
                 </div>
 
                 <div class="form-group cd-form-group cd-form-group-action cd-mb24">
                     <label for="sms_code">短信验证码</label>
-                    <input type="text" id="sms-code" name="sms_code" class="form-control"
-                           data-url="/edu_cloud/sms_check/sms_bind">
+                    <input type="text" id="sms-code" name="sms_code" class="form-control" required="required">
                     <div class="action-button">
-                        <button type="button" class="btn cd-btn cd-btn-ghost-primary btn-block js-sms-send" disabled=""
-                                data-url="/edu_cloud/sms_send">
-                            <span id="js-time-left"></span>
+                        <button type="button" id="sendsms" class="btn cd-btn cd-btn-ghost-primary btn-block"
+                                data-url="{% url 'userinfo_sendsms' %}">
                             <span id="js-fetch-btn-text">获取验证码</span>
                         </button>
                     </div>

@@ -8,3 +8,7 @@ IP是：134.175.177.28
 数据库：
 'USER': 'root',
 'PASSWORD': 't66y123456',
+
+短信python sdk:
+https://cloud.tencent.com/document/product/382/11672
+https://cloud.tencent.com/document/product/382/13297
