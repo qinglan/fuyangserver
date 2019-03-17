@@ -28,5 +28,8 @@ urlpatterns = [
     path('setmobile/', views.bind_mobile, name='userinfo_setmobile'),
     path('realname/', views.realname, name='userinfo_realname'),
     path('finance/', views.finance, name='userinfo_finance'),
+    path('refill/', views.refill, name='userinfo_refill'),
+    path('recharge/', views.recharge, name='userinfo_recharge'),
+    path('record/', views.recharge_record, name='userinfo_record'),
     path('sendsms/', views.sendsms, name='userinfo_sendsms')
 ]

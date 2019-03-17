@@ -11,6 +11,21 @@ $(function () {
 
 })
 
+//报名区在线支付校验
+function checkpay(vid, price, paytype) {
+    //如果价格为0或支付方式为免费则直接添加到订单表
+    if (price == 0 || paytype == 0) {
+        $.get("/buyvideocurriculum/", {'pk': vid}, function (ret) {
+            if (ret == "1")
+                location.reload();
+            else
+                alert('保存支付记录失败')
+        })
+    } else {
+        location.href = '/picture/text/signpay/' + vid;
+    }
+}
+
 //验证支付密码表单
 function checkpayfrm(form) {
     var op = form.currentPayCode;

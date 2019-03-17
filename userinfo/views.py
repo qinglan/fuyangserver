@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from .models import VideoCurriculumOrder, VideoInfoStudyFuyangOrder, VideoInfoLectureOrder, Collection
+from PictureText.paysettings import *
 
 
 def ordersSortKey(elem):
@@ -173,6 +174,7 @@ def realname(request):
         request.user.idnum = request.POST.get('idcard')
         request.user.idfront = request.FILES.get('faceImg')
         request.user.idback = request.FILES.get('backImg')
+        request.user.id_checkstate = 1  # 审核中
         request.user.save()
 
         return HttpResponseRedirect(reverse('userinfo_realname'))
@@ -182,6 +184,67 @@ def realname(request):
 def finance(request):
     '财务中心'
     return render(request, 'userinfo/finance.html')
+
+
+def refill(request):
+    '账户充值'
+    return render(request, 'userinfo/refill.html')
+
+
+def recharge(request):
+    '账户充值'
+    total_fee = int(request.POST.get('money'))
+    request.session['money'] = total_fee
+    total_fee *= 100
+    getInfo = request.GET.get('getInfo', None)
+    openid = request.COOKIES.get('openid', '')
+    if not openid:
+        if getInfo != 'yes':
+            # 构造一个url，携带一个重定向的路由参数，
+            # 然后访问微信的一个url,微信会回调你设置的重定向路由，并携带code参数
+            # print('current url:', request.path)
+            return HttpResponseRedirect(get_redirect_url(request.path))
+        elif getInfo == 'yes':
+            # 我设置的重定向路由还是回到这个函数中，其中设置了一个getInfo=yes的参数
+            # 获取用户的openid
+            openid = get_openid(request.GET.get('code'), request.GET.get('state', ''))
+
+            if not openid: return HttpResponse('获取用户openid失败')
+
+            response = render(request, 'userinfo/recharge.html',
+                              {'params': get_jsapi_params(openid, total_fee)})
+            response.set_cookie('openid', openid, expires=60 * 60 * 24 * 30)
+            return response
+        else:
+            return HttpResponse('获取机器编码失败')
+    return render(request, 'userinfo/recharge.html', {'params': get_jsapi_params(openid, total_fee)})
+
+
+def recharge_record(request):
+    '充值记录'
+    from django.db import transaction
+    from users.models import UserPaydetails, User
+    try:
+        with transaction.atomic():
+            print('zhifujine:', request.session['money'], 'type:', type(request.session['money']))
+            print('currentuser:', request.user.id)
+            fee = request.session['money']
+            UserPaydetails.objects.create(purchaser=request.user,
+                                          pay_bill=fee,
+                                          pay_type='0',
+                                          remark='充值操作成功')
+            UserPaydetails.objects.create(purchaser=request.user,
+                                          pay_bill=fee,
+                                          pay_type='2',
+                                          remark='充值操作成功')
+            cusr = User.objects.get(id=request.user.id)
+            cusr.account_sum += fee
+            cusr.attendance_ticket += fee
+            cusr.save()
+            del request.session['money']
+            return HttpResponse('1')
+    except Exception as e:
+        return HttpResponse("出现错误<%s>" % str(e))
 
 
 @csrf_exempt

@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from .conf import settings
 from .forms import UserChangeForm, UserCreationForm
-from .models import User,UserPaydetails
+from .models import User, UserPaydetails
 from .utils import send_activation_email
 
 try:
@@ -42,8 +42,9 @@ class UserAdmin(BaseUserAdmin):
         (None, {
             'fields': ('email', 'password', 'openid', 'nickname',
                        'sex', 'province', 'country',
-                       'headimgurl', 'real_name', 'idnum', 'phone_number',
-                       'city', 'address', 'email_address', 'qq', 'paycode', 'idfront', 'idback','id_checkstate','account_sum','attendance_ticket','exchange_ticket')
+                       'headimgurl', 'email_address',
+                       'idfront', 'idback', 'id_checkstate',
+                       'account_sum', 'attendance_ticket', 'exchange_ticket')
         }),
         (_('Permissions'), {
             'fields': ('is_active', 'is_staff', 'is_superuser',
@@ -64,9 +65,10 @@ class UserAdmin(BaseUserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
 
-    list_display = ('nickname', 'email', 'is_active','id_checkstate','account_sum','attendance_ticket','exchange_ticket')
+    list_display = (
+        'nickname', 'email', 'is_active', 'id_checkstate', 'account_sum', 'attendance_ticket', 'exchange_ticket')
 
-    list_filter = (UserModelFilter, 'is_staff', 'is_superuser', 'is_active',)
+    list_filter = (UserModelFilter, 'is_staff', 'is_superuser', 'is_active', 'id_checkstate')
     search_fields = ('email', 'nickname', 'real_name')
     ordering = ('email',)
     actions = ('activate_users', 'send_activation_email',)
@@ -118,10 +120,9 @@ class UserAdmin(BaseUserAdmin):
 
 
 class UserPaydetailsAdmin(admin.ModelAdmin):
-    list_display = ('purchaser','pay_bill','pay_type', 'pay_date','remark')
+    list_display = ('purchaser', 'pay_bill', 'pay_type', 'pay_date', 'remark')
     ordering = ('-pay_date',)
+
 
 admin.site.register(UserPaydetails, UserPaydetailsAdmin)
 admin.site.register(User, UserAdmin)
-
-

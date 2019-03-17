@@ -1,0 +1,151 @@
+.products {
+    background: #fff;
+    height: 120px;
+    width: 100%;
+    position: relative;
+}
+
+.products img {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.products .name {
+    font-size: 1.2rem;
+    position: absolute;
+    left: 110px;
+    top: 30px;
+}
+
+.products .count {
+    position: absolute;
+    left: 110px;
+    top: 70px;
+    color: #989898;
+}
+
+.products .price {
+    font-size: 1.2rem;
+    position: absolute;
+    right: 20px;
+    top: 30px;
+}
+
+.products .num {
+    position: absolute;
+    right: 20px;
+    top: 70px;
+    color: #989898;
+}
+
+.pay_group {
+    margin-top: 20px;
+    background: #fff;
+}
+
+.pay_group hr {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    left: 20px;
+    height: 1px;
+    background: #F2F2F2;
+    padding: 0px;
+    margin: 0px;
+
+}
+
+.pay_group .item {
+    background: #fff;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: relative;
+
+}
+
+.pay_group .item .name {
+    height: 50px;
+    color: #414B52;
+    vertical-align: middle;
+    padding-left: 50px;
+}
+
+.pay_group .item .name.c1 {
+    background: url("../imgs/pay_1.png") no-repeat;
+    background-size: 25px 100%;
+    background-position: left;
+}
+
+.pay_group .item .name.c2 {
+    background: url("../imgs/pay_2.png") no-repeat;
+    background-size: 25px 100%;
+    background-position: left;
+}
+
+.pay_group .item .name.c3 {
+    background: url("../imgs/pay_3.png") no-repeat;
+    background-size: 25px 100%;
+    background-position: left;
+}
+
+.pay_group .item .price {
+    color: #E06F30;
+    position: absolute;
+    right: 50px;
+}
+
+.pay_group input[type="radio"] {
+    position: absolute;
+    right: 20px;
+    top: 12px;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+
+}
+
+/*设置选中的input的样式*/
+/* + 是兄弟选择器,获取选中后的label元素*/
+.pay_group input:checked {
+    background-color: #fe6d32;
+    border: 1px solid #fe6d32;
+}
+
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    background: #fff;
+    height: 50px;
+    width: 100%;
+    line-height: 50px;
+    padding-left: 20px;
+    color: #989898;
+}
+
+.footer .pay {
+    position: absolute;
+    right: 0;
+    background: #B71B22;
+    border: 0 none;
+    color: #fff;
+    font-size: 1.2rem;
+    width: 120px;
+    height: 100%;
+    text-align: center;
+
+}
+
+.footer .price {
+    position: absolute;
+    right: 140px;
+    color: #E06F30;
+    font-size: 1.2rem;
+}
+
+
