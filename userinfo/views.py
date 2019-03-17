@@ -125,7 +125,8 @@ def secure(request):
         request.user.paycode = request.POST.get('profile[paycode]')
         request.user.save()
         return HttpResponseRedirect(reverse('userinfo_secure'))
-    return render(request, 'userinfo/secure.html')
+    ck = request.COOKIES.get('tips', None)
+    return render(request, 'userinfo/secure.html', {'tips': ck})
 
 
 def pay_password(request):
@@ -136,9 +137,11 @@ def pay_password(request):
             request.user.paycode = request.POST.get('newPayPassword')  # todo:支付密码最好加密
             request.user.save()
             del request.session["smscode"]
-            return HttpResponseRedirect(reverse('userinfo_secure'))
+            res = HttpResponseRedirect(reverse('userinfo_secure'))
+            res.set_cookie("tips", value="设置支付密码成功", max_age=5, path="/userinfo/")
+            return res
         else:
-            render(request, 'userinfo/setpay.html', {'errmsg': '设置支付密码失败：验证码输入有误.'})
+            render(request, 'userinfo/setpay.html')
     return render(request, 'userinfo/setpay.html')
 
 
@@ -155,9 +158,11 @@ def bind_mobile(request):
             request.user.phone_number = request.POST.get('mobile')
             request.user.save()
             del request.session["smscode"]
-            return HttpResponseRedirect(reverse('userinfo_secure'))
+            res = HttpResponseRedirect(reverse('userinfo_secure'))
+            res.set_cookie("tips", value="绑定手机号码成功", max_age=5, path="/userinfo/")
+            return res
         else:
-            return render(request, 'userinfo/setmobile.html', {'errmsg': '绑定手机号码失败：验证码输入有误.'})
+            return render(request, 'userinfo/setmobile.html')
     return render(request, 'userinfo/setmobile.html')
 
 

@@ -2,9 +2,9 @@
 
 {% block title %}账户中心{% endblock %}
 {% block userinfo_content %}
-    {% if errmsg %}
+    {% if tips %}
         <div class="alert cd-alert cd-alert-warning">
-            {{ errmsg }}
+            {{ tips }}
         </div>
     {% endif %}
     <div class="cd-setting">
@@ -18,7 +18,7 @@
                 <span class="cd-setting-status">未绑定</span>
             {% endif %}
             <button class="btn cd-btn cd-btn-default" data-url="{% url 'userinfo_setmobile' %}" data-toggle="modal"
-                    data-target="#modal">修改</button>
+                    data-target="#modal" data-keyboard="false">修改</button>
         </span>
     </div>
 
@@ -34,7 +34,7 @@
             {% endif %}
             <button type="button" class="btn cd-btn cd-btn-default" data-url="{% url 'userinfo_setpay' %}"
                     data-toggle="modal"
-                    data-target="#modal">设置</button>
+                    data-target="#modal" data-keyboard="false">设置</button>
         </span>
     </div>
 
