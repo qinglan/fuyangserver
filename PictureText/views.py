@@ -2,10 +2,13 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from .models import PictureTextColumn, PictureTextPaper, PictureTextPaperComment
 from advertise.models import VideoInfoLectureBanners
+from study.models import VideoCurriculum
+from userinfo.models import VideoCurriculumOrder
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .paysettings import *
+
 
 @login_required(login_url='/accounts/login/')
 def picture_text_paper(request, pk):
@@ -15,41 +18,7 @@ def picture_text_paper(request, pk):
     pp.save()
     comments = PictureTextPaperComment.objects.filter(ascription=pp)
 
-    total_fee = pp.video.price
-    if total_fee == 0: total_fee = 1
-    total_fee *= 100
-    getInfo = request.GET.get('getInfo', None)
-    openid = request.COOKIES.get('openid', '')
-    if not openid:
-        if getInfo != 'yes':
-            # 构造一个url，携带一个重定向的路由参数，
-            # 然后访问微信的一个url,微信会回调你设置的重定向路由，并携带code参数
-            print('current url:',request.path)
-            return HttpResponseRedirect(get_redirect_url(request.path))
-        elif getInfo == 'yes':
-            # 我设置的重定向路由还是回到这个函数中，其中设置了一个getInfo=yes的参数
-            # 获取用户的openid
-            openid = get_openid(request.GET.get('code'), request.GET.get('state', ''))
-            print('study.index+openid', openid)
-
-            if not openid:
-                return HttpResponse('获取用户openid失败')
-            print('openid', openid)
-            print('code', request.GET.get('code', ''))
-            print('state', request.GET.get('state', ''))
-
-            response = render(request, 'PictureText/paper.html', {
-                'params': get_jsapi_params(openid, total_fee),
-                'paper': pp,
-                'abs': abs,
-                'comments': comments
-            })
-            response.set_cookie('openid', openid, expires=60 * 60 * 24 * 30)
-            return response
-        else:
-            return HttpResponse('获取机器编码失败')
     return render(request, 'PictureText/paper.html', {
-        'params': get_jsapi_params(openid, total_fee),
         'paper': pp,
         'abs': abs,
         'comments': comments
@@ -112,3 +81,69 @@ def picture_text_paper_comment(request, pk):
         new_chat.save()
 
     return HttpResponseRedirect(reverse('picture_text_paper', args=(pk,)))
+
+
+def signpay(request, pk):
+    '报名区在线支付'
+    vc = VideoCurriculum.objects.get(pk=pk)
+    return render(request, 'PictureText/signpay.html', locals())
+
+
+def payment(request, pk):
+    '报名区在线支付'
+    vc = VideoCurriculum.objects.get(pk=pk)
+
+    total_fee = vc.price
+    if total_fee == 0: total_fee = 1
+    total_fee *= 100
+    getInfo = request.GET.get('getInfo', None)
+    openid = request.COOKIES.get('openid', '')
+    if not openid:
+        if getInfo != 'yes':
+            # 构造一个url，携带一个重定向的路由参数，
+            # 然后访问微信的一个url,微信会回调你设置的重定向路由，并携带code参数
+            return HttpResponseRedirect(get_redirect_url(request.path))
+        elif getInfo == 'yes':
+            # 我设置的重定向路由还是回到这个函数中，其中设置了一个getInfo=yes的参数
+            # 获取用户的openid
+            openid = get_openid(request.GET.get('code'), request.GET.get('state', ''))
+
+            if not openid: return HttpResponse('获取用户openid失败')
+
+            response = render(request, 'PictureText/payment.html', {
+                'params': get_jsapi_params(openid, total_fee),
+                'vc': vc,
+            })
+            response.set_cookie('openid', openid, expires=60 * 60 * 24 * 30)
+            return response
+        else:
+            return HttpResponse('获取机器编码失败')
+    return render(request, 'PictureText/payment.html', {
+        'params': get_jsapi_params(openid, total_fee),
+        'vc': vc,
+    })
+
+
+def courseattent(request):
+    '课程报名支付'
+    from django.db import transaction
+    from users.models import UserPaydetails
+    pkid = int(request.GET['pk'])
+    vc = VideoCurriculum.objects.get(pk=pkid)
+
+    try:
+        with transaction.atomic():
+            order = VideoCurriculumOrder.objects.create(
+                price=vc.price,
+                purchaser=request.user,
+                video_curriculum=vc,
+            )
+            order.save()
+            paytype = '0' if request.GET['pt'] in ['cashpay', 'wxpay'] else '1'
+            UserPaydetails.objects.create(purchaser=request.user,
+                                          pay_bill=0 - vc.price,
+                                          pay_type=paytype,
+                                          remark='直播课程报名')
+            return HttpResponse('1')
+    except Exception as e:
+        return HttpResponse("出现错误<%s>" % str(e))

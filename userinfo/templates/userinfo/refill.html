@@ -1,0 +1,24 @@
+{% extends 'userinfo/userinfo_base.html' %}
+
+{% block title %}账户充值{% endblock %}
+
+{% block userinfo_content %}
+    <form id="user-profile-form" class="row cd-row" action="{% url 'userinfo_recharge' %}" method="post"
+          novalidate="novalidate">
+        {% csrf_token %}
+        <div class="col-md-5">
+            <div class="form-group cd-form-group">
+                <h3>充值金额</h3>
+                <p>
+                    <input type="number" id="money" name="money" class="form-control rmb" min="1" step="1"
+                           required="required">
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-11">
+            <input id="btnrecharge" type="submit" class="btn cd-btn cd-btn-primary cd-btn-lg btn-block" value="下一步"/>
+        </div>
+    </form>
+{% endblock %}
+

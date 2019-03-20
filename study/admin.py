@@ -5,7 +5,7 @@ from django.contrib import admin
 from .models import VideoColumn, GraphicColumn, GraphicArticle, GraphicComment, VideoCurriculumFile, VideoCurriculum, \
     VideoClass, VideoCurriculumComment, DataLst, CurriculumTaskInfoJob, CurriculumTaskInfoVideo, VideoInfoStudyFuyang, \
     VideoInfoLecture, VideoInfoLectureComment, SinglePage, MianInfo, TaskLiveFile, TaskInfoVideoComment, \
-    CurriculumTaskInfoJobAnswer
+    CurriculumTaskInfoJobAnswer,VideoInfoLectureClassfy
 
 
 class VideoColumnAdmin(admin.ModelAdmin):
@@ -114,6 +114,10 @@ class CurriculumTaskInfoJobAnswerAdmin(admin.ModelAdmin):
     list_display = ('job_parent', 'comment',)
 
 
+class VideoInfoLectureClassfyAdmin(admin.ModelAdmin):
+    list_display = ('message', 'remark','register_date')
+
+admin.site.register(VideoInfoLectureClassfy, VideoInfoLectureClassfyAdmin)
 admin.site.register(CurriculumTaskInfoJobAnswer, CurriculumTaskInfoJobAnswerAdmin)
 admin.site.register(TaskLiveFile, TaskLiveFileAdmin)
 admin.site.register(VideoClass, VideoClassAdmin)

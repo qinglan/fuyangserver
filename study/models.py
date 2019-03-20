@@ -53,6 +53,13 @@ class VideoCurriculum(models.Model):
     is_show = models.BooleanField('是否展示', default=True)
     views_count = models.IntegerField('浏览次数', default=0, editable=False)
 
+    TYPE_CHOICE = (
+        (u'0', u'免费'),
+        (u'1', u'余额/微信'),
+        (u'2', u'听课券'),
+    )
+    pay_type = models.CharField('支付方式', max_length=2, choices=TYPE_CHOICE, default='0')
+
     def __str__(self):
         return self.name
 
@@ -427,10 +434,42 @@ class VideoInfo(models.Model):
         ordering = ['name']
 
 
+class VideoInfoLectureClassfy(models.Model):
+    '视频区一级分类表'
+    message = models.CharField('视频分类', max_length=256)
+    remark = models.TextField('分类相关说明', max_length=256)
+    register_date = models.DateTimeField('添加时间', default=timezone.now, editable=False)
+
+    def __str__(self):
+        return self.message
+
+    class Meta:
+        verbose_name = '视频区一级分类表'
+        verbose_name_plural = '视频区一级分类表'
+        ordering = ['-register_date']
+
+
 class VideoInfoLecture(VideoInfo):
     '视频区'
     intro = models.CharField('简介', max_length=256)
     sequeue = models.IntegerField('排序', default=9999)
+
+    TYPE_CHOICE = (
+        (u'0', u'免费'),
+        (u'1', u'余额/微信'),
+        (u'2', u'听课券'),
+    )
+    pay_type = models.CharField('支付方式', max_length=2, choices=TYPE_CHOICE, default='0')
+
+    lecture_type_first = models.ForeignKey(VideoInfoLectureClassfy, on_delete=models.CASCADE, blank=True, null=True,
+                                           verbose_name='视频一级分类')
+
+    TYPE_CHOICE_SECOND = (
+        (u'0', u'推荐课程'),
+        (u'1', u'直播课程'),
+        (u'2', u'名师课程'),
+    )
+    lecture_type_second = models.CharField('视频二级分类', max_length=2, choices=TYPE_CHOICE_SECOND, default='0')
 
     def __str__(self):
         return self.name

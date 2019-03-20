@@ -14,7 +14,8 @@
 
                 <div class="form-group cd-form-group">
                     <label class="readonly">已绑定手机号</label>
-                    <input type="text" id="mobile" name="mobile" class="form-control" value="{{ user.phone_number }}" readonly="readonly">
+                    <input type="text" id="mobile" name="mobile" class="form-control" value="{{ user.phone_number }}"
+                           readonly="readonly">
                 </div>
 
                 <div class="form-group cd-form-group cd-form-group-action cd-mb24">
@@ -52,3 +53,24 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        //发送短信验证码
+        $('#sendsms').on('click', function () {
+            var smsurl = $(this).data('url');
+            var tel = $('#mobile').val();
+            $.ajax({
+                url: smsurl,
+                async: false,
+                type: 'POST',
+                data: {phone: tel},
+                success: function (data, txtstatus, xhr) {
+                    if (data.result == 0) $(this).attr('disabled', 'disabled');
+                    //console.log(data);
+                    //alert(data);
+                }
+            });
+        });
+    })
+</script>

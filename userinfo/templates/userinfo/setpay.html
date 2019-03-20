@@ -8,9 +8,9 @@
             </h4>
         </div>
         <div class="modal-body">
-            {% if errmsg %}
+            {% if tips %}
                 <div class="alert cd-alert cd-alert-warning">
-                    {{ errmsg }}
+                    {{ tips }}
                 </div>
             {% endif %}
             <form id="settings-pay-password-form" name="setPayCodeFrm" method="post"
@@ -41,8 +41,8 @@
             <button type="button" class="btn cd-btn cd-btn-flat-default cd-btn-lg" data-dismiss="modal">
                 取消
             </button>
-            <button id="password-save-btn" type="button" class="btn cd-btn cd-btn-primary cd-btn-lg"
-                    data-toggle="form-submit" data-target="#settings-pay-password-form" data-loading-text="正在保存...">提交
+            <button id="password-save-btn" type="submit" class="btn cd-btn cd-btn-primary cd-btn-lg"
+                    form="settings-pay-password-form">提交
             </button>
         </div>
     </div>

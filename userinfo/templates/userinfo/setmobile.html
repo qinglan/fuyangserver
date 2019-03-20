@@ -7,7 +7,7 @@
             <h4 class="modal-title">手机绑定</h4>
         </div>
         <div class="modal-body">
-            <form id="bind-mobile-form" method="post" action="{% url 'userinfo_setmobile' %}">
+            <form id="bind-mobile-form" name="bind-mobile-form" method="post" action="{% url 'userinfo_setmobile' %}">
                 {% csrf_token %}
                 <div class="form-group cd-form-group">
                     <label class="readonly">已绑定手机号</label>
@@ -16,7 +16,9 @@
 
                 <div class="form-group cd-form-group">
                     <label for="mobile">新手机号码</label>
-                    <input type="text" id="mobile" name="mobile" class="form-control" data-role="mobile">
+                    <input type="text" id="mobile" name="mobile" minlength="11" maxlength="11"
+                           pattern="^1[3456789][0-9]{9}$" required="required"
+                           class="form-control" data-role="mobile">
                 </div>
 
                 <div class="form-group cd-form-group cd-form-group-action cd-mb24">
@@ -25,6 +27,7 @@
                     <div class="action-button">
                         <button type="button" id="sendsms" class="btn cd-btn cd-btn-ghost-primary btn-block"
                                 data-url="{% url 'userinfo_sendsms' %}">
+                            <span id="js-time-left"></span>
                             <span id="js-fetch-btn-text">获取验证码</span>
                         </button>
                     </div>
@@ -35,10 +38,47 @@
             <button type="button" class="btn cd-btn cd-btn-flat-default cd-btn-lg" data-dismiss="modal">
                 取消
             </button>
-            <button id="submit-btn" type="button" class="btn cd-btn cd-btn-primary cd-btn-lg" data-toggle="form-submit"
-                    data-target="#bind-mobile-form" data-loading-text="正在保存...">
+            <button id="submit-btn" type="submit" class="btn cd-btn cd-btn-primary cd-btn-lg" form="bind-mobile-form">
                 提交
             </button>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        //发送短信验证码
+        $('#sendsms').on('click', function () {
+            var smsurl = $(this).data('url');
+            var tel = $('#mobile').val();
+            if (tel.length == 0) {
+                alert('请输入新手机号');
+                return;
+            }
+            $.ajax({
+                url: smsurl,
+                async: false,
+                type: 'POST',
+                data: {phone: tel},
+                success: function (data, txtstatus, xhr) {
+                    if (data.result == 0) settime();
+                }
+            });
+        });
+    })
+    var countdown = 30; //倒计时30s
+
+    function settime() {
+        if (countdown == 0) {
+            $('#sendsms').removeAttr('disabled');
+            countdown = 30;
+        } else {
+            $('#sendsms').attr('disabled', 'disabled');
+            $('#js-time-left').text('(' + countdown + ')');
+            countdown--;
+            setTimeout(function () {
+                settime()
+            }, 1000)
+        }
+    }
+</script>
