@@ -197,7 +197,7 @@ def refill(request):
 
 def recharge(request):
     '账户充值'
-    total_fee = int(request.POST.get('money'))
+    total_fee = int(request.POST.get('money','100'))
     request.session['money'] = total_fee
     total_fee *= 100
     getInfo = request.GET.get('getInfo', None)

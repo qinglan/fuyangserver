@@ -451,8 +451,8 @@ def studyfuyang_index(request):
 
 
 @login_required(login_url='/accounts/login/')
-def videolecture(request):
-    '视频区首页'
+def videolecturesecond(request):
+    '视频区第二页面'
     page = 1
     if 'page' in request.GET:
         page = int(request.GET['page'])
@@ -498,6 +498,16 @@ def videolecture(request):
                    'abs': abs, \
                    'maxleft': maxleft, 'left': left, 'maxright': maxright, 'right': right, \
                    'pagelist': pagelist})
+
+@login_required(login_url='/accounts/login/')
+def videolecture(request):
+    '视频区首页'
+    items = VideoCurriculum.objects.filter(is_show=True).order_by('sequeue')
+    abs = VideoInfoStudyFuyangBanners.objects.all()
+    return render(request, 'study/video_lecture_first.html', locals())
+
+
+
 
 
 def videoplaylecture_collection(request, pk):
