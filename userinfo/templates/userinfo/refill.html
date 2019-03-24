@@ -4,14 +4,12 @@
 
 {% block userinfo_content %}
     <form id="user-profile-form" class="row cd-row" action="{% url 'userinfo_recharge' %}" method="post"
-          novalidate="novalidate">
-        {% csrf_token %}
+          novalidate="novalidate">{% csrf_token %}
         <div class="col-md-5">
             <div class="form-group cd-form-group">
                 <h3>充值金额</h3>
                 <p>
-                    <input type="number" id="money" name="money" class="form-control rmb" min="1" step="1"
-                           required="required">
+                    <input type="tel" id="money" name="money" min="1" step="1" required="required" class="form-control rmb" />
                 </p>
             </div>
         </div>
