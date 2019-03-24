@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.admindocs',
     'channels',
     'study',
     'users',
@@ -66,7 +67,7 @@ ROOT_URLCONF = 'fuyangserver.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,8 +77,11 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'fuyangserver.context_processor.user_info',
                 'fuyangserver.context_processor.main_info',
-
+                'fuyangserver.context_processor.advers'
             ],
+            'libraries': {
+                'htmlhelper': 'PictureText.templatetags.htmlhelper',
+            }
         },
     },
 ]
@@ -92,7 +96,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'fuyangdatabase',
         'USER': 'root',
-        'PASSWORD': 'fly#snow02',
+        'PASSWORD': 'fly#snow02.',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4'},
@@ -140,7 +144,7 @@ DATETIME_FORMAT = 'Y-m-d H:i:s'
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 STATIC_URL = '/static/'
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # 公共的 static 文件，比如 jquery.js 可以放这里，这里面的文件夹不能包含 STATIC_ROOT
 STATICFILES_DIRS = (
@@ -154,3 +158,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 ASGI_APPLICATION = 'fuyangserver.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}

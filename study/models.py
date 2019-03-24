@@ -446,7 +446,7 @@ class VideoInfoLectureClassfy(models.Model):
     class Meta:
         verbose_name = '视频区一级分类表'
         verbose_name_plural = '视频区一级分类表'
-        ordering = ['-register_date']
+        ordering = ['register_date']
 
 
 class VideoInfoLecture(VideoInfo):
@@ -461,7 +461,8 @@ class VideoInfoLecture(VideoInfo):
     )
     pay_type = models.CharField('支付方式', max_length=2, choices=TYPE_CHOICE, default='0')
 
-    lecture_type_first = models.ForeignKey(VideoInfoLectureClassfy, on_delete=models.CASCADE, blank=True, null=True,
+    lecture_type_first = models.ForeignKey(VideoInfoLectureClassfy, related_name='vlist', on_delete=models.CASCADE,
+                                           blank=True, null=True,
                                            verbose_name='视频一级分类')
 
     TYPE_CHOICE_SECOND = (
