@@ -13,7 +13,7 @@ from study.models import GraphicArticle
 from study.models import VideoClass
 from study.models import CurriculumTaskInfoVideo
 from study.models import DataLst, SinglePage
-from study.models import VideoInfoLecture, VideoInfoLectureComment
+from study.models import VideoInfoLecture, VideoInfoLectureComment, VideoInfoLectureClassfy
 from study.models import VideoInfoStudyFuyang, VideoInfoStudyFuyangComment
 from study.models import TaskInfoVideoComment
 from study.models import TaskInfoVideoAsk
@@ -47,6 +47,7 @@ from django.db.models import Q
 
 from django.db.models import Q
 import django.utils.timezone as timezone
+
 '''
 WEIXIN_APP_ID = 'wxb4bfb462ce44afd4'
 WEIXIN_APPSECRET = '4488c166e2b78d2549b2a1ea56b8fa3e'
@@ -66,7 +67,7 @@ DO_MAIN = 'http://fuyang.51nayun.com/'
 @login_required(login_url='/accounts/login/')
 def index(request):
     abs = VideoInfoLectureBanners.objects.all()  # banner广告
-    items = PictureTextPaper.objects.filter( column_id=1,buy_time__gt= datetime.datetime.now()).order_by('sequeue')
+    items = PictureTextPaper.objects.filter(column_id=1, buy_time__gt=datetime.datetime.now()).order_by('sequeue')
 
     return render(request, 'study/index.html', locals())
 
@@ -433,7 +434,7 @@ def studyfuyang(request):
             itme['class'] = ''
         pagelist.append(itme)
 
-    vis = VideoCurriculum.objects.filter( is_show = True).order_by('sequeue')[
+    vis = VideoCurriculum.objects.filter(is_show=True).order_by('sequeue')[
           page * PAGE_HAS_VIDEO - PAGE_HAS_VIDEO:page * PAGE_HAS_VIDEO]
     abs = VideoInfoStudyFuyangBanners.objects.all()
     return render(request, 'study/study_fuyang.html', \
@@ -442,10 +443,11 @@ def studyfuyang(request):
                    'maxleft': maxleft, 'left': left, 'maxright': maxright, 'right': right, \
                    'pagelist': pagelist})
 
+
 @login_required(login_url='/accounts/login/')
 def studyfuyang_index(request):
     '直播区首页样式改版'
-    items = VideoCurriculum.objects.filter( is_show = True).order_by('sequeue')
+    items = VideoCurriculum.objects.filter(is_show=True).order_by('sequeue')
     abs = VideoInfoStudyFuyangBanners.objects.all()
     return render(request, 'study/studyfuyang_index.html', locals())
 
@@ -453,51 +455,8 @@ def studyfuyang_index(request):
 @login_required(login_url='/accounts/login/')
 def videolecture(request):
     '视频区首页'
-    page = 1
-    if 'page' in request.GET:
-        page = int(request.GET['page'])
-
-    maxpage = int((len(VideoInfoLecture.objects.all()) - 1) / PAGE_HAS_VIDEO) + 1
-    if page < 1:
-        page = 1
-    if page > maxpage:
-        page = maxpage
-
-    maxleft = reverse('videolecture') + '?page=1'
-
-    left = reverse('videolecture') + '?page=' + str(page - 1)
-
-    maxright = reverse('videolecture') + '?page=' + str(maxpage)
-
-    right = reverse('videolecture') + '?page=' + str(page + 1)
-
-    pagelist = []
-
-    start = page - 1
-    if start < 1:
-        start = 1
-    stop = start + 3
-    if stop > maxpage + 1:
-        stop = maxpage + 1
-
-    for j in range(start, stop):
-        itme = {}
-        itme['url'] = reverse('videolecture') + '?page=' + str(j)
-        itme['text'] = str(j)
-        if j == page:
-            itme['class'] = 'active'
-        else:
-            itme['class'] = ''
-        pagelist.append(itme)
-
-    vis = VideoInfoLecture.objects.all().order_by('sequeue')[
-          page * PAGE_HAS_VIDEO - PAGE_HAS_VIDEO:page * PAGE_HAS_VIDEO]
-    abs = VideoInfoLectureBanners.objects.all()
-    return render(request, 'study/video_lecture.html', \
-                  {'vis': vis, \
-                   'abs': abs, \
-                   'maxleft': maxleft, 'left': left, 'maxright': maxright, 'right': right, \
-                   'pagelist': pagelist})
+    vcls = VideoInfoLectureClassfy.objects.all()
+    return render(request, 'study/video_lecture.html', locals())
 
 
 def videoplaylecture_collection(request, pk):

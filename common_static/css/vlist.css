@@ -1,0 +1,158 @@
+
+.tab{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	display: flex;
+	justify-content: space-between;
+	border-bottom:1px solid #EAEBEC;
+}
+
+.tab li{
+	padding: 5px;
+}
+
+.tab a{
+	text-decoration:none;
+	color:#999;
+	padding-bottom: 5px;
+
+}
+
+.tab .active a{
+	color:#CB0013;
+	border-bottom:3px solid #CB0013
+}
+
+.search_bar{
+	position: relative;
+	border-radius: 25px;
+	height:36px;
+	margin:10px 30px;
+	background: #E8E9EA;
+	margin:10px 30px;
+}
+
+.search_bar input{
+	position: absolute;
+	top: 5px;
+	left: 10px;
+	right: 60px;
+	height: 25;
+	line-height: 25px;
+	padding: 3px;
+	border-width: 0; 
+	outline:none;
+	box-shadow: none;
+	background: #E8E9EA;
+	/*width: 100%;
+	margin-right: 30px;*/
+}
+
+.search_bar button{
+	position: absolute;
+	top: 5px;
+	right: 20px;
+	width: 25px;
+	height: 25px;
+	background-image: url(../images/search.jpg);
+	background-repeat: no-repeat;
+	background-size: 25px 25px;
+	margin: 0;
+	padding: 0;
+	border: 0px solid transparent; 
+	outline: none;
+
+}
+
+.search_bar span{
+	background:#9D9FA0;
+	width: 1px;
+	height: 25px;
+	position: absolute;
+	right: 55px;
+	top: 5px;
+}
+
+.column .head{
+	padding: 15px 10px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.column .head .name{
+	font-size: 1rem;
+	padding-left: 30px;
+}
+
+.column .head .more{
+	font-size: 0.8rem;
+	color: 	#7D7D7D;
+	background: url(../images/more.png) no-repeat scroll right center transparent;
+	background-size: 18px;
+	padding-right: 20px;
+	padding-top: 3px;
+}
+
+.column.c1 .head .name{
+	background: url(../images/c1.jpg) no-repeat;
+	background-size: 25px;
+}
+
+.column.c2 .head .name{
+	background: url(../images/c2.jpg) no-repeat;
+	background-size: 25px;
+}
+
+.column.c3 .head .name{
+	background: url(../images/c3.jpg) no-repeat;
+	background-size: 25px;
+}
+
+.column.c4 .head .name{
+	background: url(../images/c4.jpg) no-repeat;
+	background-size: 25px;
+}
+
+.column.c5 .head .name{
+	background: url(../images/c5.jpg) no-repeat;
+	background-size: 25px;
+}
+
+.column.c6 .head .name{
+	background: url(../images/c6.jpg) no-repeat;
+	background-size: 25px;
+}
+
+
+.unit .title{
+	padding: 5px 10px;
+	margin:0px;
+}
+
+.unit .video{
+	position: relative;
+}
+
+.unit .cover{
+	height: 100px;
+	width: 100%;
+}
+
+.video .label{
+	padding: 3px 6px;
+	color: #fff;
+	position: absolute;
+	bottom: 10px;
+	right: 0px;
+	font-size: 0.8rem;
+	background: #FF5A00;
+}
+
+.video .label.c1{
+	background: #FF5A00;
+}
+
+.video .label.c2{
+	background: #00C1A3;
+}

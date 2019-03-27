@@ -1,0 +1,18 @@
+<div id="banners" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        {% for ad in abs %}
+            <li data-target="#banners" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}
+                class="active"{% endif %}></li>
+        {% endfor %}
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        {% for ad in abs %}
+            <div class="item{% if forloop.first %} active{% endif %}">
+                <img src="{{ ad.image.url }}" height="200" alt="{{ ad.name }}">
+            </div>
+        {% endfor %}
+    </div>
+</div>

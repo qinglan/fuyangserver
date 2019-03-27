@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from .models import VideoCurriculumOrder, VideoInfoStudyFuyangOrder, VideoInfoLectureOrder, Collection
+from users.models import UserPaydetails
 from PictureText.paysettings import *
 
 
@@ -183,7 +184,10 @@ def realname(request):
 
 def finance(request):
     '财务中心'
-    return render(request, 'userinfo/finance.html')
+    yuetab = UserPaydetails.objects.filter(purchaser=request.user, pay_type='0')
+    tingtab = UserPaydetails.objects.filter(purchaser=request.user, pay_type='1')
+    extab = UserPaydetails.objects.filter(purchaser=request.user, pay_type='2')
+    return render(request, 'userinfo/finance.html', locals())
 
 
 def refill(request):
@@ -193,7 +197,7 @@ def refill(request):
 
 def recharge(request):
     '账户充值'
-    total_fee = int(request.POST.get('money'))
+    total_fee = int(request.POST.get('money','100'))
     request.session['money'] = total_fee
     total_fee *= 100
     getInfo = request.GET.get('getInfo', None)

@@ -1,36 +1,110 @@
 {% extends 'userinfo/userinfo_base.html' %}
-
+{% load staticfiles %}
 {% block title %}账务中心{% endblock %}
 
 {% block userinfo_content %}
     <div class="cd-setting">
         <span class="setting-icon"><i class="cd-icon cd-icon-money-bag"></i></span>
-        <span class="setting-title">账户余额</span>
-        <span class="setting-content">经常更改密码有助于保护您的帐号安全</span>
+        <span class="setting-title">账户余额 <span class="cd-icon cd-icon-add"></span></span>
         <span class="setting-action">
             <button type="button" class="btn btn-link"><span
                     class="badge fc-green">¥ {{ request.user.account_sum }}</span></button>
             <a href="{% url 'userinfo_refill' %}" class="btn cd-btn cd-btn-default">充值</a>
           </span>
+        <div class="table-responsive m-t-10" style="display: none">
+            <table class="table table-bordered table-condensed">
+                <thead>
+                <th>消费金额</th>
+                <th>消费时间</th>
+                <th>备注</th>
+                </thead>
+                <tbody>
+                {% for y in yuetab %}
+                    <tr>
+                        <td>{{ y.pay_bill }}</td>
+                        <td>{{ y.pay_date }}</td>
+                        <td>{{ y.remark }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td class="text-center" colspan="3">没有记录</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div class="cd-setting">
         <span class="setting-icon"><i class="cd-icon cd-icon-coupon"></i></span>
-        <span class="setting-title">听课券</span>
-        <span class="setting-content"></span>
+        <span class="setting-title">听课券 <span class="cd-icon cd-icon-add"></span></span>
         <span class="setting-action">
             <button type="button" class="btn btn-link"><span
                     class="badge fc-green">{{ request.user.attendance_ticket }}</span></button>
         </span>
+        <div class="table-responsive m-t-10" style="display: none">
+            <table class="table table-bordered table-condensed">
+                <thead>
+                <th>消费金额</th>
+                <th>消费时间</th>
+                <th>备注</th>
+                </thead>
+                <tbody>
+                {% for t in tingtab %}
+                    <tr>
+                        <td>{{ t.pay_bill }}</td>
+                        <td>{{ t.pay_date }}</td>
+                        <td>{{ t.remark }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td class="text-center" colspan="3">没有记录</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div class="cd-setting">
         <span class="setting-icon"><i class="cd-icon cd-icon-coupon"></i></span>
-        <span class="setting-title">兑换券</span>
-        <span class="setting-content"></span>
+        <span class="setting-title">兑换券 <span class="cd-icon cd-icon-add"></span></span>
         <span class="setting-action">
             <button type="button" class="btn btn-link"><span
                     class="badge fc-green">{{ request.user.exchange_ticket }}</span></button>
         </span>
+        <div class="table-responsive m-t-10" style="display: none">
+            <table class="table table-bordered table-condensed">
+                <thead>
+                <th>消费金额</th>
+                <th>消费时间</th>
+                <th>备注</th>
+                </thead>
+                <tbody>
+                {% for e in extab %}
+                    <tr>
+                        <td>{{ e.pay_bill }}</td>
+                        <td>{{ e.pay_date }}</td>
+                        <td>{{ e.remark }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td class="text-center" colspan="3">没有记录</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
+{% endblock %}
+
+{% block scriptfile %}
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.setting-title span').css('cursor', 'pointer').on('click', function () {
+                $(this).parents('.cd-setting').find('.table-responsive').toggle();
+            })
+        })
+    </script>
 {% endblock %}

@@ -3,8 +3,7 @@
 {% block title %}账户充值{% endblock %}
 
 {% block userinfo_content %}
-    <form id="user-profile-form" class="row cd-row" action="{% url 'userinfo_recharge' %}" method="post"
-          novalidate="novalidate">
+    <form id="user-profile-form" class="row cd-row" action="{% url 'userinfo_recharge' %}" method="post">
         {% csrf_token %}
         <div class="col-md-5">
             <div class="form-group cd-form-group">

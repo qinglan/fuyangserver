@@ -123,6 +123,28 @@ class UserPaydetailsAdmin(admin.ModelAdmin):
     list_display = ('purchaser', 'pay_bill', 'pay_type', 'pay_date', 'remark')
     ordering = ('-pay_date',)
 
+    def save_model(self, request, obj, form, change):
+        '只能添加消费记录，已禁用编辑和删除功能'
+        puid = obj.purchaser.pk
+        pt = form.cleaned_data['pay_type']
+        pu = User.objects.get(pk=puid)
+        if pt == '0':  # 账户余额
+            pu.account_sum += obj.pay_bill
+        elif pt == '1':  # 听课券
+            pu.attendance_ticket += obj.pay_bill
+        else:  # 兑换券
+            pu.exchange_ticket += obj.pay_bill
+        pu.save()
+        super(UserPaydetailsAdmin, self).save_model(request, obj, form, change)
+
+    def has_change_permission(self, request, obj=None):
+        '禁止编辑'
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        '禁止删除'
+        return False
+
 
 admin.site.register(UserPaydetails, UserPaydetailsAdmin)
 admin.site.register(User, UserAdmin)

@@ -4,7 +4,7 @@
 # @Author  : Weizhong Tu (mail@tuweizhong.com)
 
 from django.conf import settings as original_settings
-from users.models import User
+from advertise.models import VideoInfoLectureBanners
 from study.models import MianInfo, VideoCurriculum
 
 
@@ -23,3 +23,8 @@ def main_info(request):
         return {'main_info': main_infos[0], 'main_vcs': main_vcs}
 
     return {'main_info': {}, 'main_vcs': main_vcs}
+
+
+def advers(request):
+    abs = VideoInfoLectureBanners.objects.all()
+    return {'abs': abs}
