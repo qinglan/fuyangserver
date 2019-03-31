@@ -29,7 +29,7 @@
                 <div class="item">
                     <span class="name c3">微信支付</span>
                     <span class="price">￥{{ vc.price }}</span>
-                    <input id="item3" type="radio" name="item" value="wxpay">
+                    <input id="item3" type="radio" name="item" value="wxpay" checked="checked">
                 </div>
             {% else %}
                 <div class="item">
@@ -70,9 +70,10 @@
                     } else {
                         var vid = '{{ vc.pk }}';
                         $.get("{% url 'picture_text_coursepay' %}", {'pk': vid, 'pt': paytype}, function (ret) {
-                            if (ret == "1")
+                            if (ret == "1") {
+                                alert('报名成功!');
                                 location.href = '/';
-                            else
+                            } else
                                 alert('保存支付记录失败')
                         })
                     }

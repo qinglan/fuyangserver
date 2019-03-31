@@ -1,0 +1,66 @@
+{% extends 'study/main_base.html' %}
+{% load staticfiles %}
+{% block title %}视频区列表-分页{% endblock %}
+{% block titlefile %}
+    <link href="{% static 'css/vlist.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <ul class="nav nav-pills">
+        {% for cls in vcls %}
+            <li role="presentation"{% if cls.pk == cateid %} class="active"{% endif %}>
+                <a href="{% url 'videocates' cls.pk %}">{{ cls.message }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <form name="videosearchfrm" action="{% url 'video_pages' %}" method="get">
+        <div class="search_bar">
+            <input type="search" name="txtkey" placeholder="请输入字段名"/>
+            <span></span>
+            <button type="submit" class="searh"></button>
+        </div>
+    </form>
+    {% include 'carousel.html' %}
+    <div id="content-container" class="container">
+        <div class="open-course-list">
+            <div class="row course-list es-open-course-list">
+                {% for v in pageInfo %}
+                    <div class="col-md-4 col-xs-6">
+                        <div class="thumbnail">
+                            <a href="{{ v.get_absolute_url }}" target="_blank">
+                                <img src="{{ v.image.url }}" alt="{{ v.name }}" class="img-responsive"/>
+                            </a>
+                            <div class="caption">
+                                {{ v.name }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    {% if pageInfo.has_previous %}
+                        <li>
+                            <a href="{% url 'video_pages' %}?cid={{ cateid }}&flag={{ flag }}&page={{ pageInfo.previous_page_number }}"
+                               aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% for num in pageInfo.paginator.page_range|slice:':6' %}
+                        <li{% if num == pageInfo.number %} class="active"{% endif %}><a
+                                href="{% url 'video_pages' %}?cid={{ cateid }}&flag={{ flag }}&page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endfor %}
+                    {% if pageInfo.has_next %}
+                        <li>
+                            <a href="{% url 'video_pages' %}?cid={{ cateid }}&flag={{ flag }}&page={{ pageInfo.next_page_number }}"
+                               aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+{% endblock %}

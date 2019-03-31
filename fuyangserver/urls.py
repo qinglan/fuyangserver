@@ -81,6 +81,10 @@ urlpatterns = [
 
     path('studyfuyang/', study_views.studyfuyang_index, name='studyfuyang'),
     path('videolecture/', study_views.videolecture, name='videolecture'),
+
+    path('videolecture/category/<int:cid>', study_views.videocates, name='videocates'),
+    path('videolecture/pagination/', study_views.videopages, name='video_pages'),
+
     path('singlepage/<int:pk>/', study_views.guide, name='guide'),
     path('datalist/', study_views.getdatalist, name='datalist'),
     path('datadetail/<int:pk>/', study_views.getdatadetail, name='datadetail'),

@@ -197,7 +197,7 @@ def refill(request):
 
 def recharge(request):
     '账户充值'
-    total_fee = int(request.POST.get('money','100'))
+    total_fee = int(request.POST.get('chmoney', '100'))
     request.session['money'] = total_fee
     total_fee *= 100
     getInfo = request.GET.get('getInfo', None)
@@ -239,11 +239,11 @@ def recharge_record(request):
                                           remark='充值操作成功')
             UserPaydetails.objects.create(purchaser=request.user,
                                           pay_bill=fee,
-                                          pay_type='2',
+                                          pay_type='2',  # 兑换券
                                           remark='充值操作成功')
             cusr = User.objects.get(id=request.user.id)
             cusr.account_sum += fee
-            cusr.attendance_ticket += fee
+            cusr.exchange_ticket += fee  # 兑换券
             cusr.save()
             del request.session['money']
             return HttpResponse('1')
