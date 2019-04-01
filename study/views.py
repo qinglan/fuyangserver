@@ -454,16 +454,16 @@ def studyfuyang_index(request):
 @login_required(login_url='/accounts/login/')
 def videolecture(request):
     '视频区首页'
-    vcls = VideoInfoLectureClassfy.objects.all().order_by('pk')
+    vcls = VideoInfoLectureClassfy.objects.all().order_by('sequeue')
     return render(request, 'study/video_lecture.html', locals())
 
 
 def videocates(request, cid):
     '视频区二级分类列表'
-    vcls = VideoInfoLectureClassfy.objects.all().order_by('pk')
-    tuijian = VideoInfoLecture.objects.filter(lecture_type_first__pk=cid, lecture_type_second='0').order_by('-id')[:4]
-    zhibao = VideoInfoLecture.objects.filter(lecture_type_first__id=cid, lecture_type_second='1').order_by('-id')[:4]
-    teachers = VideoInfoLecture.objects.filter(lecture_type_first__id=cid, lecture_type_second='2').order_by('-id')[:4]
+    vcls = VideoInfoLectureClassfy.objects.all().order_by('sequeue')
+    tuijian = VideoInfoLecture.objects.filter(lecture_type_first__pk=cid, lecture_type_second='0').order_by('sequeue')[:4]
+    zhibao = VideoInfoLecture.objects.filter(lecture_type_first__id=cid, lecture_type_second='1').order_by('sequeue')[:4]
+    teachers = VideoInfoLecture.objects.filter(lecture_type_first__id=cid, lecture_type_second='2').order_by('sequeue')[:4]
     return render(request, 'study/video_secates.html', locals())
 
 
@@ -473,8 +473,8 @@ def videopages(request):
     flag = int(request.GET.get('flag', '0'))
     page = request.GET.get('page')
     txtkey = request.GET.get('txtkey', '')
-    vcls = VideoInfoLectureClassfy.objects.all().order_by('pk')
-    vlist = VideoInfoLecture.objects.all()
+    vcls = VideoInfoLectureClassfy.objects.all().order_by('sequeue')
+    vlist = VideoInfoLecture.objects.all().order_by('sequeue')
     if cateid > 0:
         vlist = vlist.filter(lecture_type_first=cateid)
     if flag > 0:

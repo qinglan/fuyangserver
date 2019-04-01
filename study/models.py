@@ -439,6 +439,7 @@ class VideoInfoLectureClassfy(models.Model):
     message = models.CharField('视频分类', max_length=256)
     remark = models.TextField('分类相关说明', max_length=256)
     register_date = models.DateTimeField('添加时间', default=timezone.now, editable=False)
+    sequeue = models.IntegerField('排序', default=9999)
 
     def __str__(self):
         return self.message

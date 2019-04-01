@@ -7644,7 +7644,7 @@ a.transition:hover {
 .es-section {
   background: #fff;
   padding: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
@@ -9021,7 +9021,7 @@ textarea {
   border: 1px solid #e4ecf3;
 }
 .nav-pills > li {
-  margin-right: 5px;
+ /* margin-right: 5px; */
 }
 .nav-pills > li + li {
   margin-left: 0;
@@ -16011,8 +16011,13 @@ textarea {
   .es-open-course-list .thumbnail {
   	border:0 none;
 	margin-bottom:5px;
+	padding:0px;
   }
-  .es-open-course-list .thumbnail img { min-height:120px; }
+  .es-open-course-list .thumbnail img {
+     /*min-height:120px;*/
+     height: 99px;
+     width: 176px;
+   }
 }
 .es-open-course-list .course-item .course-img .img-responsive {
   padding: 0;
