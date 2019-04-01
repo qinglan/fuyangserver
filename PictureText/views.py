@@ -139,11 +139,27 @@ def courseattent(request):
                 video_curriculum=vc,
             )
             order.save()
-            paytype = '0' if request.GET['pt'] in ['cashpay', 'wxpay'] else '1'
-            UserPaydetails.objects.create(purchaser=request.user,
-                                          pay_bill=0 - vc.price,
-                                          pay_type=paytype,
-                                          remark='直播课程报名')
+            paytype = request.GET['pt']
+
+            if paytype == 'cashpay':
+                request.user.account_sum -= vc.price  # 账户余额扣减
+                UserPaydetails.objects.create(purchaser=request.user,
+                                              pay_bill=0 - vc.price,
+                                              pay_type='0',
+                                              remark='直播课程报名扣减余额')
+            elif paytype == 'wxpay':
+                request.user.exchange_ticket += vc.price  # 增加兑换券
+                UserPaydetails.objects.create(purchaser=request.user,
+                                              pay_bill=0 + vc.price,
+                                              pay_type='2',
+                                              remark='直播课程报名赠送兑换券')
+            else:
+                request.user.attendance_ticket -= vc.price  # 听课券扣减
+                UserPaydetails.objects.create(purchaser=request.user,
+                                              pay_bill=0 - vc.price,
+                                              pay_type='1',
+                                              remark='直播课程报名扣减听课券')
+            request.user.save()
             return HttpResponse('1')
     except Exception as e:
         return HttpResponse("出现错误<%s>" % str(e))

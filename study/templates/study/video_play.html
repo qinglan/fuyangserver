@@ -88,48 +88,41 @@
         </div>
 
         <div class="es-section open-course-detail clearfix">
-            <div class="open-course-detail-main media hidden-sm hidden-xs">
-                <div class="media-left">
-                    <img class="img-responsive" src="{{ videoinfo.image.url }}"
-                         alt="{{ videoinfo.name }}">
-                </div>
-                <div class="media-body">
-                    <div class="title">{{ videoinfo.name }}</div>
-                    <div class="metas">
+            <div class="open-course-detail-operation">
+                <div class="clearfix">
+                    <div class="metas" style="float:right">
                         <span><i class="es-icon es-icon-removeredeye mrs"></i>{{ videoinfo.views_count }}</span>
                         <span><i class="es-icon es-icon-textsms mrs"></i>{{ videoinfo.get_comment_count }}</span>
                     </div>
+                    <p>{{ videoinfo.name }}</p>
                 </div>
             </div>
-            <div class="open-course-detail-operation">
-                <div class="operation-list no-border favorite-right" id="id_favorite"
-                     style="display: {% if isCollection %}none{% else %}block{% endif %}">
-                    <div class="operation-img operation-collection">
-                        <a href="javascript:save_collection();" class="js-favorite-num " data-cancel-favorite-url="/open/course/13/unfavorite
-                " data-favorite-url="/open/course/13/favorite " data-login-url="/login/ajax "><i
-                                class="es-icon es-icon-bookmarkoutline "></i></a>
-                    </div>
-                    <span>收藏</span>
-                </div>
-
-                <div class="operation-list no-border favorite-right" id="id_unfavorite"
-                     style="display: {% if isCollection %}block{% else %}none{% endif %}">
-                    <div class="operation-img operation-collection active">
-                        <a href="javascript:cancel_collection();" class="js-favorite-num " data-cancel-favorite-url="/open/course/13/unfavorite
-                " data-favorite-url="/open/course/13/favorite " data-login-url="/login/ajax "><i
-                                class="es-icon es-icon-bookmarkoutline "></i></a>
-                    </div>
-                    <span>已收藏</span>
-                </div>
-            </div>
+            {% autoescape off %}
+                <small>{{ videoinfo.introduce|striptags }}</small>
+            {% endautoescape %}
         </div>
 
         <div class="open-course-detail row">
             <div class="col-md-12">
                 <div class="es-section gray-darker editor-text">
-                    {% autoescape off %}
-                        {{ videoinfo.introduce }}
-                    {% endautoescape %}
+                    <p class="caption">相关视频
+                        <a href="{% url 'video_pages' %}?cid={{ videoinfo.lecture_type_first.pk }}&flag={{ videoinfo.lecture_type_second }}"
+                           style="display: inline-block; float:right;">更多</a>
+                    </p>
+                    <div class="row course-list es-open-course-list">
+                        {% for v in relations %}
+                            <div class="col-md-4 col-xs-6">
+                                <div class="thumbnail">
+                                    <a href="{{ v.get_absolute_url }}" target="_blank">
+                                        <img src="{{ v.image.url }}" alt="{{ v.name }}" class="img-responsive"/>
+                                    </a>
+                                    <div class="caption">
+                                        {{ v.name }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
 
                 <div class="es-section" id="open-course-comment">
@@ -172,21 +165,6 @@
     <script type="text/javascript" src="{% static " js/jquery.min.js" %}"></script>
     <script type="text/javascript" src="http://res2.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
     <script type="text/javascript">
-        function save_collection() {
-            $.get("{{ videoinfo.get_collection_url }}", {'is_save': "is_save"}, function (ret) {
-                //alert(ret)
-                document.getElementById('id_unfavorite').style.display = "block"
-                document.getElementById('id_favorite').style.display = "none"
-            })
-        }
-
-        function cancel_collection() {
-            $.get("{{ videoinfo.get_collection_url }}", {}, function (ret) {
-                document.getElementById('id_unfavorite').style.display = "none"
-                document.getElementById('id_favorite').style.display = "block"
-            })
-        }
-
         //拿到form
         var form = document.getElementById("review-form")
 

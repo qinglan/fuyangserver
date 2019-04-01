@@ -1,34 +1,35 @@
 {% extends 'study/main_base.html' %}
 {% load staticfiles %}
 {% block title %}视频列表{% endblock %}
-
 {% block titlefile %}
-    <link href="{% static 'css/vlist.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/vlist.css' %}" rel="stylesheet">
 {% endblock %}
 {% block content %}
-    <div style="background: #fff;width: 100%;">
-        <ul class="tab">
-            <li class="active"><a href="#">课程</a></li>
-            <li>会议</li>
-            <li>国医</li>
-            <li>常见病</li>
-            <li>纪录片</li>
-            <li>传承人</li>
-        </ul>
+    <ul class="nav nav-pills">
+        {% for cls in vcls %}
+            <li role="presentation">
+                <a href="{% url 'videocates' cls.pk %}">{{ cls.message }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <form name="videosearchfrm" action="{% url 'video_pages' %}" method="get">
         <div class="search_bar">
-            <input type="text" placeholder="请输入字段名"/>
+            <input type="search" name="txtkey" placeholder="请输入字段名"/>
             <span></span>
-            <button class="searh"></button>
+            <button type="submit" class="searh"></button>
         </div>
-    </div>
+    </form>
     {% include 'carousel.html' %}
 
     <div id="content-container" class="container">
-        <div class="open-course-list">
+        <p class="open-course-list">
             {% for cls in vcls %}
-                <h4 class="caption">{{ cls.message }}
-                    <small>查看更多</small>
-                </h4>
+                <p class="leader">
+                    {{ cls.message }}
+                    <a href="{% url 'videocates' cls.pk %}" style="display: inline-block; float:right;">
+                        <small>查看更多</small>
+                    </a>
+                </p>
                 <div class="row course-list es-open-course-list">
                     {% for v in cls.vlist.all|slice:'4' %}
                         <div class="col-md-4 col-xs-6">
@@ -44,7 +45,7 @@
                     {% endfor %}
                 </div>
             {% endfor %}
-        </div>
+    </div>
     </div>
 
 {% endblock %}

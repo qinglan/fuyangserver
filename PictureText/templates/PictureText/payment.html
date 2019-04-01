@@ -33,9 +33,10 @@
                         alert('支付成功');
                         var vid = '{{ vc.pk }}';
                         $.get("{% url 'picture_text_coursepay' %}", {'pk': vid, 'pt': 0}, function (ret) {
-                            if (ret == "1")
+                            if (ret == "1") {
+                                alert('报名成功!');
                                 location.href = '/';
-                            else
+                            } else
                                 alert('保存支付记录失败')
                         })
                     } else if (res.err_msg == "get_brand_wcpay_request:cancel") {

@@ -43,10 +43,9 @@ from django.contrib.auth import authenticate, login
 
 from PictureText.paysettings import *
 
-from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from django.db.models import Q
-import django.utils.timezone as timezone
+from django.views.decorators.csrf import csrf_exempt
 
 '''
 WEIXIN_APP_ID = 'wxb4bfb462ce44afd4'
@@ -455,8 +454,42 @@ def studyfuyang_index(request):
 @login_required(login_url='/accounts/login/')
 def videolecture(request):
     '视频区首页'
-    vcls = VideoInfoLectureClassfy.objects.all()
+    vcls = VideoInfoLectureClassfy.objects.all().order_by('pk')
     return render(request, 'study/video_lecture.html', locals())
+
+
+def videocates(request, cid):
+    '视频区二级分类列表'
+    vcls = VideoInfoLectureClassfy.objects.all().order_by('pk')
+    tuijian = VideoInfoLecture.objects.filter(lecture_type_first__pk=cid, lecture_type_second='0').order_by('-id')[:4]
+    zhibao = VideoInfoLecture.objects.filter(lecture_type_first__id=cid, lecture_type_second='1').order_by('-id')[:4]
+    teachers = VideoInfoLecture.objects.filter(lecture_type_first__id=cid, lecture_type_second='2').order_by('-id')[:4]
+    return render(request, 'study/video_secates.html', locals())
+
+
+def videopages(request):
+    '视频区栏目分页'
+    cateid = int(request.GET.get('cid', '0'))
+    flag = int(request.GET.get('flag', '0'))
+    page = request.GET.get('page')
+    txtkey = request.GET.get('txtkey', '')
+    vcls = VideoInfoLectureClassfy.objects.all().order_by('pk')
+    vlist = VideoInfoLecture.objects.all()
+    if cateid > 0:
+        vlist = vlist.filter(lecture_type_first=cateid)
+    if flag > 0:
+        vlist = vlist.filter(lecture_type_second=flag)
+    if len(txtkey) > 0:
+        vlist = vlist.filter(name__icontains=txtkey)
+
+    p = Paginator(vlist, 16)  # 每页显示16条数据
+    try:
+        pageInfo = p.page(page)
+    except PageNotAnInteger:
+        pageInfo = p.page(1)  # 如果参数page数据类型不是整数，就返回第一页数据
+    except EmptyPage:
+        pageInfo = p.page(p.num_pages)  # 若用户访问的页数大于实际页数，则返回最后一页数据
+    return render(request, 'study/video_pages.html', locals())
 
 
 def videoplaylecture_collection(request, pk):
@@ -508,11 +541,9 @@ def videoplaystudyfuyang(request, pk):
 @login_required(login_url='/accounts/login/')
 def videoplaylecture(request, pk):
     '视频区详情页面'
-
     gas = VideoInfoLecture.objects.filter(pk=pk)
-    if len(gas) <= 0:
-        return HttpResponse('error')
-    gas[0].views_count = gas[0].views_count + 1
+    if len(gas) <= 0: return HttpResponse('error')
+    gas[0].views_count += 1
     gas[0].save()
 
     vpcs = VideoInfoLectureComment.objects.filter(ascription__pk=pk)  # 视频评论
@@ -524,7 +555,9 @@ def videoplaylecture(request, pk):
             b = True
             break
     isBuy = gas[0].price == 0 or b
-    isCollection = Collection.is_collection(request.user, gas[0])
+    # isCollection = Collection.is_collection(request.user, gas[0])
+    relations = VideoInfoLecture.objects.filter(lecture_type_first=gas[0].lecture_type_first,
+                                                lecture_type_second=gas[0].lecture_type_second).order_by('-id')[:4]
 
     print('gas[0].price', gas[0].price)
     if gas[0].price == 0:
@@ -553,7 +586,7 @@ def videoplaylecture(request, pk):
                 'params': get_jsapi_params(openid, total_fee), 'videoinfo': gas[0],
                 'isBuy': isBuy,
                 'vpcs': vpcs,
-                'isCollection': isCollection})
+                'relations': relations})
             response.set_cookie('openid', openid, expires=60 * 60 * 24 * 30)
             return response
 
@@ -564,7 +597,7 @@ def videoplaylecture(request, pk):
         'videoinfo': gas[0],
         'isBuy': isBuy,
         'vpcs': vpcs,
-        'isCollection': isCollection})
+        'relations': relations})
 
 
 def videoplaylecture_comment(request, pk):
