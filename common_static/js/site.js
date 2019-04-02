@@ -21,6 +21,7 @@ function checkpay(vid, price, paytype) {
             else
                 alert('保存支付记录失败')
         })
+        alert('报名成功，该课程价格为0或者该课程为免费课程')
     } else {
         location.href = '/picture/text/signpay/' + vid;
     }
