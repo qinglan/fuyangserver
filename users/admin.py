@@ -41,8 +41,8 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {
             'fields': ('email', 'password', 'openid', 'nickname',
-                       'sex', 'province', 'country',
-                       'headimgurl', 'email_address',
+                       'sex',
+                       'headimgurl',
                        'idfront', 'idback', 'id_checkstate',
                        'account_sum', 'attendance_ticket', 'exchange_ticket')
         }),

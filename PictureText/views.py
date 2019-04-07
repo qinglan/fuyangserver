@@ -147,18 +147,18 @@ def courseattent(request):
                                               pay_bill=0 - vc.price,
                                               pay_type='0',
                                               remark='直播课程报名扣减余额')
-            elif paytype == 'wxpay':
-                request.user.exchange_ticket += vc.price  # 增加兑换券
-                UserPaydetails.objects.create(purchaser=request.user,
-                                              pay_bill=0 + vc.price,
-                                              pay_type='2',
-                                              remark='直播课程报名赠送兑换券')
-            else:
+            if paytype == 'ticket':
                 request.user.attendance_ticket -= vc.price  # 听课券扣减
                 UserPaydetails.objects.create(purchaser=request.user,
                                               pay_bill=0 - vc.price,
                                               pay_type='1',
                                               remark='直播课程报名扣减听课券')
+            else:
+                request.user.exchange_ticket += vc.price  # 增加兑换券
+                UserPaydetails.objects.create(purchaser=request.user,
+                                              pay_bill=0 + vc.price,
+                                              pay_type='2',
+                                              remark='直播课程报名赠送兑换券')
             request.user.save()
             return HttpResponse('1')
     except Exception as e:
