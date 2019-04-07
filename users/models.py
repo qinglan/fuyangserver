@@ -101,6 +101,12 @@ class User(AbstractUser):
     attendance_ticket = models.IntegerField('听课券', default=0)
     exchange_ticket = models.IntegerField('兑换券', default=0)
 
+    TYPE_CHOICE1 = (
+        (0, u'非视频区VIP'),
+        (1, u'视频区VIP'),
+    )
+    video_vip = models.CharField('视频区会员', max_length=2, choices=TYPE_CHOICE1, default=0)
+
     def __str__(self):
         return self.nickname
 

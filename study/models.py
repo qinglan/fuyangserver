@@ -439,6 +439,12 @@ class VideoInfoLectureClassfy(models.Model):
     message = models.CharField('视频分类', max_length=256)
     remark = models.TextField('分类相关说明', max_length=256)
     register_date = models.DateTimeField('添加时间', default=timezone.now, editable=False)
+    TYPE_CHOICE = (
+        (0, u'一行两列'),
+        (1, u'一行三列'),
+    )
+    show_type = models.CharField('显示方式', max_length=2, choices=TYPE_CHOICE, default=0)
+
     sequeue = models.IntegerField('排序', default=9999)
 
     def __str__(self):
@@ -448,6 +454,18 @@ class VideoInfoLectureClassfy(models.Model):
         verbose_name = '视频区一级分类表'
         verbose_name_plural = '视频区一级分类表'
         ordering = ['register_date']
+
+class VideoVipPrice(models.Model):
+    '视频区VIP会员价格表'
+    VIP_price = models.IntegerField('VIP价格', default=9999)
+
+    def __str__(self):
+        return self.VIP_price
+
+    class Meta:
+        verbose_name = '视频区VIP会员价格表'
+        verbose_name_plural = '视频区VIP会员价格表'
+        ordering = ['VIP_price']
 
 
 class VideoInfoLecture(VideoInfo):
@@ -467,11 +485,15 @@ class VideoInfoLecture(VideoInfo):
                                            verbose_name='视频一级分类')
 
     TYPE_CHOICE_SECOND = (
-        (u'0', u'推荐课程'),
-        (u'1', u'直播课程'),
+        (u'0', u'最新课程'),
+        (u'1', u'全部课程'),
         (u'2', u'名师课程'),
     )
     lecture_type_second = models.CharField('视频二级分类', max_length=2, choices=TYPE_CHOICE_SECOND, default='0')
+
+    viede_set_name = models.CharField('视频选集名称',blank=True, null=True, max_length=256)
+    viede_set_order = models.IntegerField('视频选集顺序', blank=True, null=True,)
+
 
     def __str__(self):
         return self.name
@@ -501,7 +523,7 @@ class VideoInfoLecture(VideoInfo):
     class Meta:
         verbose_name = '视频区'
         verbose_name_plural = '视频区'
-        ordering = ['name']
+        ordering = ['sequeue']
 
 
 class VideoInfoLectureComment(models.Model):
