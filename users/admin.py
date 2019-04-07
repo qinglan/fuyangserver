@@ -44,7 +44,8 @@ class UserAdmin(BaseUserAdmin):
                        'sex',
                        'headimgurl',
                        'idfront', 'idback', 'id_checkstate',
-                       'account_sum', 'attendance_ticket', 'exchange_ticket')
+                       'account_sum', 'attendance_ticket', 'exchange_ticket',
+                       'video_vip',)
         }),
         (_('Permissions'), {
             'fields': ('is_active', 'is_staff', 'is_superuser',

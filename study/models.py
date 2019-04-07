@@ -460,7 +460,7 @@ class VideoVipPrice(models.Model):
     VIP_price = models.IntegerField('VIP价格', default=9999)
 
     def __str__(self):
-        return self.VIP_price
+        return str(self.VIP_price)
 
     class Meta:
         verbose_name = '视频区VIP会员价格表'

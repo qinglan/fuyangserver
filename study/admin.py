@@ -120,6 +120,14 @@ class VideoInfoLectureClassfyAdmin(admin.ModelAdmin):
 class VideoVipPriceAdmin(admin.ModelAdmin):
     list_display = ('VIP_price',)
 
+    def has_add_permission(self, request, obj=None):
+        '禁止新增'
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        '禁止删除'
+        return False
+
 admin.site.register(VideoInfoLectureClassfy, VideoInfoLectureClassfyAdmin)
 admin.site.register(CurriculumTaskInfoJobAnswer, CurriculumTaskInfoJobAnswerAdmin)
 admin.site.register(TaskLiveFile, TaskLiveFileAdmin)
