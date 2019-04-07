@@ -463,7 +463,6 @@ def videocates(request, cid):
     vcls = VideoInfoLectureClassfy.objects.all().order_by('sequeue')
     tuijian = VideoInfoLecture.objects.filter(lecture_type_first__pk=cid, lecture_type_second='0').order_by('sequeue')[:4]
     zhibao = VideoInfoLecture.objects.filter(lecture_type_first__id=cid, lecture_type_second='1').order_by('sequeue')[:4]
-    teachers = VideoInfoLecture.objects.filter(lecture_type_first__id=cid, lecture_type_second='2').order_by('sequeue')[:4]
     return render(request, 'study/video_secates.html', locals())
 
 

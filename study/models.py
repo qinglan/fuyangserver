@@ -487,7 +487,6 @@ class VideoInfoLecture(VideoInfo):
     TYPE_CHOICE_SECOND = (
         (u'0', u'最新课程'),
         (u'1', u'全部课程'),
-        (u'2', u'名师课程'),
     )
     lecture_type_second = models.CharField('视频二级分类', max_length=2, choices=TYPE_CHOICE_SECOND, default='0')
 

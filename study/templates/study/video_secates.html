@@ -24,7 +24,7 @@
     <div id="content-container" class="container">
         <div class="open-course-list">
             {% if tuijian %}
-                <p class="leader">推荐课程
+                <p class="leader">最新课程
                     <a href="{% url 'video_pages' %}?cid={{ cid }}&flag=0" style="display: inline-block; float:right;">更多</a>
                 </p>
                 <div class="row course-list es-open-course-list">
@@ -43,7 +43,7 @@
                 </div>
             {% endif %}
             {% if zhibao %}
-                <p class="leader">直播课程
+                <p class="leader">全部课程
                     <a href="{% url 'video_pages' %}?cid={{ cid }}&flag=1" style="display: inline-block; float:right;">更多</a>
                 </p>
                 <div class="row course-list es-open-course-list">
@@ -61,25 +61,7 @@
                     {% endfor %}
                 </div>
             {% endif %}
-            {% if teachers %}
-                <p class="leader">名师课程
-                    <a href="{% url 'video_pages' %}?cid={{ cid }}&flag=2" style="display: inline-block; float:right;">更多</a>
-                </p>
-                <div class="row course-list es-open-course-list">
-                    {% for v in teachers %}
-                        <div class="col-md-4 col-xs-6">
-                            <div class="thumbnail">
-                                <a href="{{ v.get_absolute_url }}" target="_blank">
-                                    <img src="{{ v.image.url }}" alt="{{ v.name }}" class="img-responsive"/>
-                                </a>
-                                <div class="caption">
-                                    {{ v.name }}
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
+
         </div>
     </div>
 
