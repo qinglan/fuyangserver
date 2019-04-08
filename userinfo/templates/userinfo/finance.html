@@ -106,7 +106,7 @@
         <span class="setting-action">
             {% if request.user.video_vip == 0 %}
                 <span class="cd-setting-status">未设置</span>
-                <a class="btn cd-btn cd-btn-default" href="{% url 'userinfo_paytype' %}">充值</a>
+                <a class="btn cd-btn cd-btn-default" href="{% url 'userinfo_paytype' %}">购买</a>
             {% else %}
                 <span class="cd-setting-status cd-setting-status-done">VIP会员</span>
             {% endif %}
