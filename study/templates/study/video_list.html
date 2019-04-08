@@ -5,6 +5,7 @@
     <link href="{% static 'css/vlist.css' %}" rel="stylesheet">
 {% endblock %}
 {% block content %}
+
     <ul class="nav nav-pills">
         {% for cls in vcls %}
             <li role="presentation">
@@ -24,7 +25,7 @@
     <div id="content-container" class="container">
         <p class="open-course-list">
             {% for cls in vcls %}
-                <p class="leader">
+                <p class="leader" style="font-size: larger;font-weight: bold;">
                     {{ cls.message }}
                     <a href="{% url 'videocates' cls.pk %}" style="display: inline-block; float:right;">
                         <small>查看更多</small>
@@ -39,13 +40,14 @@
                                 </a>
                                 <div class="caption">
                                     {{ v.name }}
+                                    <br>
+                                    <small class="text-muted">{{ v.intro|striptags|truncatechars:'12' }}</small>
                                 </div>
                             </div>
                         </div>
                     {% endfor %}
                 </div>
             {% endfor %}
-    </div>
     </div>
 
 {% endblock %}

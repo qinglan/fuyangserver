@@ -14,123 +14,32 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from study import views as study_views  # new
+from django.urls import path, re_path, include
 from django.conf import settings
-from django.conf.urls import include, url
+from study.views import index as study_index
+from study.views import do_login, weixin_login, register, password_reset, weixin_check_signature, weixin_redirect, \
+    mp_verify, MP_verify_SjPP8XG0lmvxzlAs, MP_verify_svvmO8SYa47rm2Sm, getwxsign
 
 urlpatterns = [
-    path('', study_views.index),  # new
-    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    path('', study_index),  # new
+    path('login/', do_login),
+    path('accounts/login/', weixin_login),
+    path('register/', register),
+    path('password/reset/', password_reset),
+    path('weixin_check_signature/', weixin_check_signature),
+    path('weixin/redirect/', weixin_redirect, name='weixin_redirect'),
+
+    path('MP_verify_9OqPDvvikphMdXB2.txt', mp_verify),
+    path('MP_verify_SjPP8XG0lmvxzlAs.txt', MP_verify_SjPP8XG0lmvxzlAs),
+    path('MP_verify_svvmO8SYa47rm2Sm.txt', MP_verify_svvmO8SYa47rm2Sm),
+    path('wxsign/', getwxsign),
+
+    re_path(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
-
-    path('yinanzazheng/', study_views.yinanzazheng),
-    path('login/', study_views.do_login),
-    path('register/', study_views.register),
-    path('password/reset/', study_views.password_reset),
-    path('weixin_check_signature/', study_views.weixin_check_signature),
-    path('accounts/login/', study_views.weixin_login),
-    path('weixin/redirect/', study_views.weixin_redirect, name='weixin_redirect'),
-
-    path('MP_verify_9OqPDvvikphMdXB2.txt', study_views.mp_verify),
-    path('MP_verify_SjPP8XG0lmvxzlAs.txt', study_views.MP_verify_SjPP8XG0lmvxzlAs),
-
-    path('MP_verify_svvmO8SYa47rm2Sm.txt', study_views.MP_verify_svvmO8SYa47rm2Sm),
-
-    path('videocurriculum/collection/<int:pk>/', study_views.video_curriculum_collection,
-         name='video_curriculum_collection'),
-
-    path('videocurriculum/<int:pk>/', study_views.video_curriculum_detail, name='video_curriculum_detail'),
-    path('videocurriculumtasks/<int:pk>/', study_views.video_curriculum_tasks, name='video_curriculum_tasks'),
-    path('videocurriculumtmaterial/<int:pk>/', study_views.video_curriculum_material, name='video_curriculum_material'),
-
-    path('videocurriculumreviews/<int:pk>/', study_views.video_curriculum_reviews, name='video_curriculum_reviews'),
-    path('videocurriculumreviews/curriculum/<int:pk>/', study_views.video_curriculum_reviews_curriculum, \
-         name='video_curriculum_reviews_curriculum'),
-
-    path('graphicarticle/<int:pk>/', study_views.graphic_article, name='graphic_article'),
-
-    path('testlive/', study_views.testlive, name='testlive'),
-
-    path('tasklive/introduce/<int:pk>/', study_views.tasklive_introduce, name='tasklive_introduce'),
-
-    path('tasklive/ask/<int:pk>/', study_views.tasklive_ask, name='tasklive_ask'),
-
-    path('tasklive/reviews/<int:pk>/', study_views.tasklive_reviews, name='tasklive_reviews'),
-
-    path('tasklive/introduce/iframe/<int:pk>/', study_views.iframe_tasklive_introduce,
-         name='iframe_tasklive_introduce'),
-
-    path('tasklive/introduce/iframe/nextimage/<int:pk>/', study_views.iframe_tasklive_introduce_nextimage,
-         name='iframe_tasklive_introduce_nextimage'),
-
-    path('tasklive/introduce/iframe/liveimage/<int:pk>/', study_views.iframe_tasklive_introduce_liveimage,
-         name='iframe_tasklive_introduce_liveimage'),
-
-    path('tasklive/ask/iframe/<int:pk>/', study_views.iframe_tasklive_ask, name='iframe_tasklive_ask'),
-
-    path('tasklive/ask/iframe/post/<int:pk>/', \
-         study_views.iframe_tasklive_ask_post, name='iframe_tasklive_ask_post'),
-
-    path('tasklive/reviews/iframe/<int:pk>/', study_views.iframe_tasklive_reviews, name='iframe_tasklive_reviews'),
-
-    path('tasklive/reviews/iframe/post/<int:pk>/', \
-         study_views.iframe_tasklive_reviews_post, name='iframe_tasklive_reviews_post'),
-
-    path('tasklive/material/iframe/<int:pk>/', study_views.iframe_tasklive_material, name='iframe_tasklive_material'),
-
-    path('studyfuyang/', study_views.studyfuyang_index, name='studyfuyang'),
-    path('videolecture/', study_views.videolecture, name='videolecture'),
-
-    path('videolecture/category/<int:cid>', study_views.videocates, name='videocates'),
-    path('videolecture/pagination/', study_views.videopages, name='video_pages'),
-
-    path('singlepage/<int:pk>/', study_views.guide, name='guide'),
-    path('datalist/', study_views.getdatalist, name='datalist'),
-    path('datadetail/<int:pk>/', study_views.getdatadetail, name='datadetail'),
-
-    path('studyfuyang/videoplaystudyfuyang/collection/<int:pk>/', study_views.videoplaystudyfuyang_collection,
-         name='videoplaystudyfuyang_collection'),
-
-    path('videolecture/videoplaylecture/collection/<int:pk>/', study_views.videoplaylecture_collection,
-         name='videoplaylecture_collection'),
-
-    path('studyfuyang/videoplaystudyfuyang/<int:pk>/', study_views.videoplaystudyfuyang, name='videoplaystudyfuyang'),
-
-    path('videolecture/videoplaylecture/<int:pk>/', study_views.videoplaylecture, name='videoplaylecture'),
-
-    path('studyfuyang/videoplaystudyfuyang/comment/<int:pk>/', study_views.videoplaystudyfuyang_comment,
-         name='videoplaystudyfuyang_comment'),
-
-    path('videolecture/videoplaylecture/comment/<int:pk>/', study_views.videoplaylecture_comment,
-         name='videoplaylecture_comment'),
-
-    path('buyvideolecture/<int:pk>/', study_views.buyvideolecture, name='buyvideolecture'),
-
-    path('buystudyfuyang/<int:pk>/', study_views.buystudyfuyang, name='buystudyfuyang'),
-
-    path('buyvideocurriculum/', study_views.buyvideocurriculum, name='buyvideocurriculum'),
-
-    path('filedownload/<int:pk>/', study_views.big_file_download, name='big_file_download'),
-
-    path('class/job/<int:pk>/', study_views.class_job, name='class_job'),
-
-    path('class/job/redo/<int:pk>/', study_views.class_job_redo, name='class_job_redo'),
-
-    path('class/job/iframe/<int:pk>/', study_views.class_job_iframe, name='class_job_iframe'),
-
-    path('class/job/iframe/post/<int:pk>/', study_views.class_job_iframe_post, name='class_job_iframe_post'),
-
-    path('wxsign/', study_views.getwxsign),
-    # userinfo
-
-    # url(r'^userinfo/', include('userinfo.urls')),
+    path('study/', include('study.urls')),
     path('userinfo/', include('userinfo.urls')),
-
     path('picture/text/', include('PictureText.urls')),
-
-    url(r'^ueditor/', include('DjangoUeditor.urls')),
-
+    re_path(r'^ueditor/', include('DjangoUeditor.urls')),
 ]
 
 if settings.DEBUG:

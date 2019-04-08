@@ -63,8 +63,7 @@ class VideoCurriculumOrder(OrderBase):
 
 
 class VideoInfoLectureOrder(OrderBase):
-    video = models.ForeignKey(VideoInfoLecture, on_delete=models.CASCADE, blank=True,
-                              verbose_name='所属免费视频讲座视频')
+    video = models.ForeignKey(VideoInfoLecture, on_delete=models.CASCADE, blank=True, verbose_name='视频讲座')
 
     def __str__(self):
         return self.get_order_id()
@@ -78,8 +77,8 @@ class VideoInfoLectureOrder(OrderBase):
         return self.video.get_absolute_url()
 
     class Meta:
-        verbose_name = 'o1免费视频讲座视频订单'
-        verbose_name_plural = 'o1免费视频讲座视频订单'
+        verbose_name = 'o1视频订单'
+        verbose_name_plural = verbose_name
         ordering = ['-register_date']
 
 

@@ -5,7 +5,7 @@ from django.contrib import admin
 from .models import VideoColumn, GraphicColumn, GraphicArticle, GraphicComment, VideoCurriculumFile, VideoCurriculum, \
     VideoClass, VideoCurriculumComment, DataLst, CurriculumTaskInfoJob, CurriculumTaskInfoVideo, VideoInfoStudyFuyang, \
     VideoInfoLecture, VideoInfoLectureComment, SinglePage, MianInfo, TaskLiveFile, TaskInfoVideoComment, \
-    CurriculumTaskInfoJobAnswer,VideoInfoLectureClassfy,VideoVipPrice
+    CurriculumTaskInfoJobAnswer, VideoInfoLectureClassfy, VideoVipPrice
 
 
 class VideoColumnAdmin(admin.ModelAdmin):
@@ -29,7 +29,7 @@ class DataListAdmin(admin.ModelAdmin):
 
 
 class MianInfoAdmin(admin.ModelAdmin):
-    list_display = ('name','text_1',)
+    list_display = ('name', 'text_1',)
 
 
 class VideoClassAdmin(admin.ModelAdmin):
@@ -115,7 +115,8 @@ class CurriculumTaskInfoJobAnswerAdmin(admin.ModelAdmin):
 
 
 class VideoInfoLectureClassfyAdmin(admin.ModelAdmin):
-    list_display = ('message', 'remark','register_date')
+    list_display = ('message', 'remark', 'register_date')
+
 
 class VideoVipPriceAdmin(admin.ModelAdmin):
     list_display = ('VIP_price',)
@@ -128,6 +129,7 @@ class VideoVipPriceAdmin(admin.ModelAdmin):
         '禁止删除'
         return False
 
+
 admin.site.register(VideoInfoLectureClassfy, VideoInfoLectureClassfyAdmin)
 admin.site.register(CurriculumTaskInfoJobAnswer, CurriculumTaskInfoJobAnswerAdmin)
 admin.site.register(TaskLiveFile, TaskLiveFileAdmin)
@@ -136,7 +138,7 @@ admin.site.register(VideoCurriculumComment, VideoCurriculumCommentAdmin)
 admin.site.register(CurriculumTaskInfoJob, CurriculumTaskInfoJobAdmin)
 admin.site.register(CurriculumTaskInfoVideo, CurriculumTaskInfoVideoAdmin)
 admin.site.register(VideoInfoLecture, VideoInfoLectureAdmin)
-admin.site.register(VideoInfoStudyFuyang, VideoInfoStudyFuyangAdmin)
+# admin.site.register(VideoInfoStudyFuyang, VideoInfoStudyFuyangAdmin)
 admin.site.register(VideoCurriculum, VideoCurriculumAdmin)
 admin.site.register(VideoInfoLectureComment, VideoInfoLectureCommentAdmin)
 admin.site.register(MianInfo, MianInfoAdmin)

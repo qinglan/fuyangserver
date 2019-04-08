@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from .models import VideoCurriculumOrder, VideoInfoStudyFuyangOrder, VideoInfoLectureOrder, Collection
 from users.models import UserPaydetails
+from study.models import VideoVipPrice
 from PictureText.paysettings import *
 
 
@@ -246,6 +247,68 @@ def recharge_record(request):
             cusr.exchange_ticket += fee  # 兑换券
             cusr.save()
             del request.session['money']
+            return HttpResponse('1')
+    except Exception as e:
+        return HttpResponse("出现错误<%s>" % str(e))
+
+
+def paytype(request):
+    '视频区vip支付方式'
+    vp = VideoVipPrice.objects.first()
+    return render(request, 'userinfo/paytype.html', locals())
+
+
+def payment(request):
+    '视频区vip微信支付'
+    vp = VideoVipPrice.objects.first()
+    total_fee = vp.VIP_price
+    total_fee *= 100
+    getInfo = request.GET.get('getInfo', None)
+    openid = request.COOKIES.get('openid', '')
+    if not openid:
+        if getInfo != 'yes':
+            # 构造一个url，携带一个重定向的路由参数，
+            # 然后访问微信的一个url,微信会回调你设置的重定向路由，并携带code参数
+            # print('current url:', request.path)
+            return HttpResponseRedirect(get_redirect_url(request.path))
+        elif getInfo == 'yes':
+            # 我设置的重定向路由还是回到这个函数中，其中设置了一个getInfo=yes的参数
+            # 获取用户的openid
+            openid = get_openid(request.GET.get('code'), request.GET.get('state', ''))
+
+            if not openid: return HttpResponse('获取用户openid失败')
+
+            response = render(request, 'userinfo/payment.html', {'params': get_jsapi_params(openid, total_fee)})
+            response.set_cookie('openid', openid, expires=60 * 60 * 24 * 30)
+            return response
+        else:
+            return HttpResponse('获取机器编码失败')
+    return render(request, 'userinfo/payment.html', {'params': get_jsapi_params(openid, total_fee)})
+
+
+def videoVipAttent(request):
+    '视频区VIP支付后回调函数'
+    from django.db import transaction
+    from users.models import UserPaydetails
+    try:
+        with transaction.atomic():
+            vp = VideoVipPrice.objects.first()
+            paytype = request.GET['pt']
+
+            if paytype == 'cashpay':
+                request.user.account_sum -= vp.VIP_price  # 账户余额扣减
+                UserPaydetails.objects.create(purchaser=request.user,
+                                              pay_bill=0 - vp.VIP_price,
+                                              pay_type='0',
+                                              remark='直播课程报名扣减余额')
+            else:  # 微信支付
+                request.user.exchange_ticket += vp.VIP_price  # 增加兑换券
+                UserPaydetails.objects.create(purchaser=request.user,
+                                              pay_bill=0 + vp.VIP_price,
+                                              pay_type='2',
+                                              remark='直播课程报名赠送兑换券')
+            request.user.video_vip = 1  # 更改为视频区VIP
+            request.user.save()
             return HttpResponse('1')
     except Exception as e:
         return HttpResponse("出现错误<%s>" % str(e))

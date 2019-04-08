@@ -89,9 +89,10 @@ def signpay(request, pk):
     return render(request, 'PictureText/signpay.html', locals())
 
 
-def payment(request, pk):
+def payment(request,vcid):
     '报名区在线支付'
-    vc = VideoCurriculum.objects.get(pk=pk)
+    #vcid = request.GET.get('id')
+    vc = VideoCurriculum.objects.get(pk=vcid)
 
     total_fee = vc.price
     if total_fee == 0: total_fee = 1
@@ -147,18 +148,18 @@ def courseattent(request):
                                               pay_bill=0 - vc.price,
                                               pay_type='0',
                                               remark='直播课程报名扣减余额')
-            if paytype == 'ticket':
-                request.user.attendance_ticket -= vc.price  # 听课券扣减
-                UserPaydetails.objects.create(purchaser=request.user,
-                                              pay_bill=0 - vc.price,
-                                              pay_type='1',
-                                              remark='直播课程报名扣减听课券')
-            else:
+            elif paytype == 'wxpay':
                 request.user.exchange_ticket += vc.price  # 增加兑换券
                 UserPaydetails.objects.create(purchaser=request.user,
                                               pay_bill=0 + vc.price,
                                               pay_type='2',
                                               remark='直播课程报名赠送兑换券')
+            else:
+                request.user.attendance_ticket -= vc.price  # 听课券扣减
+                UserPaydetails.objects.create(purchaser=request.user,
+                                              pay_bill=0 - vc.price,
+                                              pay_type='1',
+                                              remark='直播课程报名扣减听课券')
             request.user.save()
             return HttpResponse('1')
     except Exception as e:
