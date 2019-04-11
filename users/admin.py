@@ -41,7 +41,7 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {
             'fields': ('email', 'password', 'openid', 'nickname',
-                       'sex',
+                       'sex','phone_number',
                        'headimgurl',
                        'idfront', 'idback', 'id_checkstate',
                        'account_sum', 'attendance_ticket', 'exchange_ticket',
@@ -123,6 +123,7 @@ class UserAdmin(BaseUserAdmin):
 class UserPaydetailsAdmin(admin.ModelAdmin):
     list_display = ('purchaser', 'pay_bill', 'pay_type', 'pay_date', 'remark')
     ordering = ('-pay_date',)
+    search_fields = ('purchaser__nickname',)
 
     def save_model(self, request, obj, form, change):
         '只能添加消费记录，已禁用编辑和删除功能'
