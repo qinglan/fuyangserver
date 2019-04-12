@@ -1,0 +1,73 @@
+{% extends 'study/base.html' %}
+{% load staticfiles %}
+
+{% block main_titlefile %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/payment.css' %}">
+{% endblock %}
+
+{% block title %}视频区VIP在线支付{% endblock %}
+
+{% block bodycontent %}
+
+    <div class="es-wrap">
+        <div class="products">
+            <img src="{% static 'study/image/study.png' %}" width="80" height="80" alt="视频区VIP购买"/>
+            <span class="name">视频区VIP</span>
+            <span class="count"></span>
+            <span class="price">￥{{ vp.VIP_price }}</span>
+            <span class="num">x1</span>
+        </div>
+        <div class="pay_group">
+            <div class="item">
+                <span class="name c2">账户余额</span>
+                <span class="price"
+                      data-price="{{ request.user.account_sum }}">￥{{ request.user.account_sum }}</span>
+                <input id="item2" type="radio" name="item" value="cashpay">
+                <hr/>
+            </div>
+            <div class="item">
+                <span class="name c3">微信支付</span>
+                <span class="price">￥{{ vp.VIP_price }}</span>
+                <input id="item3" type="radio" name="item" value="wxpay" checked="checked">
+            </div>
+        </div>
+        <div class="footer">
+            <span>支付金额：</span>
+            <span class="price" id="total" data-price="{{ vp.VIP_price }}">￥{{ vp.VIP_price }}</span>
+            <button type="button" id="btncpay" name="btncpay" class="pay">立即支付</button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scriptfile %}
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#btncpay').on('click', function () {
+                var paytype = $(':radio[name=item]:checked').val();
+                if (paytype == undefined) {
+                    alert('请选择支付方式');
+                    return;
+                }
+                if (paytype === 'wxpay') {
+                    location.href = '{% url 'userinfo_wxpay' %}';
+                } else {
+                    var ptprice = parseInt($(':radio[name=item]:checked').prev().data('price'));
+                    var total = parseInt($('#total').data('price'));    //总价:支付金额
+                    if (ptprice < total) {
+                        alert('余额不足，请选择其它支付方式。');
+                        return;
+                    } else {
+                        $.get("{% url 'userinfo_vipattent' %}", {'pt': paytype}, function (ret) {
+                            if (ret == "1") {
+                                alert('购买成功!');
+                                location.href = '/';
+                            } else
+                                alert('保存支付记录失败')
+                        })
+                    }
+                }
+            })
+        })
+    </script>
+{% endblock %}

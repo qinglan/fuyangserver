@@ -89,9 +89,10 @@ def signpay(request, pk):
     return render(request, 'PictureText/signpay.html', locals())
 
 
-def payment(request, pk):
+def payment(request, vcid):
     '报名区在线支付'
-    vc = VideoCurriculum.objects.get(pk=pk)
+    # vcid = request.GET.get('id')
+    vc = VideoCurriculum.objects.get(pk=vcid)
 
     total_fee = vc.price
     if total_fee == 0: total_fee = 1

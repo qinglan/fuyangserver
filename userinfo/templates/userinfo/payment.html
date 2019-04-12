@@ -31,10 +31,9 @@
                         // 跳转到支付成功的页面
                         //window.location.href = '#';
                         alert('支付成功');
-                        var vid = '{{ vc.pk }}';
-                        $.get("{% url 'picture_text_coursepay' %}", {'pk': vid, 'pt': 'wxpay'}, function (ret) {
+                        $.get("{% url 'userinfo_vipattent' %}", {'pt': 'wxpay'}, function (ret) {
                             if (ret == "1") {
-                                alert('报名成功!');
+                                alert('购买成功!');
                                 location.href = '/';
                             } else
                                 alert('保存支付记录失败')

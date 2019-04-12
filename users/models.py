@@ -57,6 +57,7 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
             self.user_type = ContentType.objects.get_for_model(self, for_concrete_model=False)
         super(AbstractUser, self).save(*args, **kwargs)
 
+
 class User(AbstractUser):
     """
     Concrete class of AbstractUser.
@@ -97,9 +98,11 @@ class User(AbstractUser):
     )
     id_checkstate = models.CharField('身份证审核结果', max_length=2, choices=TYPE_CHOICE, default='0')
 
-    account_sum = models.IntegerField('账户余额',default=0 )
+    account_sum = models.IntegerField('账户余额', default=0)
     attendance_ticket = models.IntegerField('听课券', default=0)
     exchange_ticket = models.IntegerField('兑换券', default=0)
+
+    video_vip = models.IntegerField('视频区会员', choices=((0, u'非视频区VIP'), (1, u'视频区VIP')), default=0)
 
     def __str__(self):
         return self.nickname
@@ -113,8 +116,10 @@ class User(AbstractUser):
 
 
 from users.models import User
+
+
 class UserPaydetails(models.Model):
-    purchaser = models.ForeignKey(User,on_delete=models.CASCADE, blank=True, verbose_name='购买者')
+    purchaser = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, verbose_name='购买者')
     pay_bill = models.IntegerField('消费金额', default=0)
 
     TYPE_CHOICE = (
@@ -124,13 +129,10 @@ class UserPaydetails(models.Model):
     )
     pay_type = models.CharField('消费分类', max_length=2, choices=TYPE_CHOICE, default='0')
     pay_date = models.DateTimeField('消费时间', default=timezone.now, editable=False)
-    #pay_date = models.CharField(blank=True, default='', max_length=256, null=True, verbose_name='消费时间'),
+    # pay_date = models.CharField(blank=True, default='', max_length=256, null=True, verbose_name='消费时间'),
     remark = models.CharField('备注', default='', max_length=256, blank=True)
-
 
     class Meta:
         verbose_name = 'S用户消费记录单'
         verbose_name_plural = 'S用户消费记录单'
         ordering = ['-pay_date']
-
-

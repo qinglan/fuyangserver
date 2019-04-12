@@ -38,7 +38,8 @@ class VideoInfoLectureOrderAdmin(admin.ModelAdmin):
         return obj.purchaser.nickname + '-' + obj.video.name
 
     list_display = ('buy_user', 'purchaser', 'apply_bill', 'price', 'register_date')
-    ordering = ('-purchaser',)
+    search_fields = ('purchaser__nickname',)
+    ordering = ('-register_date',)
 
 
 admin.site.register(VideoInfoLectureOrder, VideoInfoLectureOrderAdmin)

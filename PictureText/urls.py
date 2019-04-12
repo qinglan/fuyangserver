@@ -11,6 +11,6 @@ urlpatterns = [
     path('column/<int:pk>/', views.picture_text_column, name='picture_text_column'),
     path('category/<int:pk>/', views.picture_text_category, name='picture_text_category'),
     path('signpay/<int:pk>/', views.signpay, name='picture_text_signpay'),
-    path('payment/<int:pk>/', views.payment, name='picture_text_payment'),
+    path('payment/<int:vcid>/', views.payment, name='picture_text_payment'),
     path('courseattent/', views.courseattent, name='picture_text_coursepay')
 ]

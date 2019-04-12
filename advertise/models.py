@@ -45,3 +45,34 @@ class VideoInfoStudyFuyangBanners(models.Model):
         verbose_name = '直播区页面广告维护'
         verbose_name_plural = '直播区页面广告维护'
         ordering = ['name']
+
+class VideoAlternateBanners(models.Model):
+    '视频区首页顶部轮播图片'
+    name = models.CharField('广告名', max_length=256)
+    image = models.ImageField('封面 2:1 ', upload_to='image')
+    url = models.CharField('图文栏目网址', max_length=256, db_index=True)
+    sequence = models.IntegerField('排序', default=9999)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = '视频区滚动页面广告维护'
+        verbose_name_plural = '视频区滚动页面广告维护'
+        ordering = ['sequence']
+
+
+class VideoInnerAdBanners(models.Model):
+    '视频首页内部广告图片'
+    name = models.CharField('广告名', max_length=256)
+    image = models.ImageField('封面 2:1 ', upload_to='image')
+    url = models.CharField('图文栏目网址', max_length=256, db_index=True)
+    sequence = models.IntegerField('排序', default=9999)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = '视频首页内部广告图片维护'
+        verbose_name_plural = '视频首页内部广告图片维护'
+        ordering = ['sequence']

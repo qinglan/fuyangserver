@@ -461,9 +461,10 @@ def videolecture(request):
 def videocates(request, cid):
     '视频区二级分类列表'
     vcls = VideoInfoLectureClassfy.objects.all().order_by('sequeue')
-    tuijian = VideoInfoLecture.objects.filter(lecture_type_first__pk=cid, lecture_type_second='0').order_by('sequeue')[:4]
-    zhibao = VideoInfoLecture.objects.filter(lecture_type_first__id=cid, lecture_type_second='1').order_by('sequeue')[:4]
-    teachers = VideoInfoLecture.objects.filter(lecture_type_first__id=cid, lecture_type_second='2').order_by('sequeue')[:4]
+    tuijian = VideoInfoLecture.objects.filter(lecture_type_first__pk=cid, lecture_type_second='0').order_by('sequeue')[
+              :4]
+    zhibao = VideoInfoLecture.objects.filter(lecture_type_first__id=cid, lecture_type_second='1').order_by('sequeue')[
+             :4]
     return render(request, 'study/video_secates.html', locals())
 
 
@@ -554,7 +555,7 @@ def videoplaylecture(request, pk):
         if u.purchaser.pk == request.user.pk:
             b = True
             break
-    isBuy = gas[0].price == 0 or b
+    isBuy = gas[0].price == 0 or b or request.user.video_vip == 1
     # isCollection = Collection.is_collection(request.user, gas[0])
     relations = VideoInfoLecture.objects.filter(lecture_type_first=gas[0].lecture_type_first,
                                                 lecture_type_second=gas[0].lecture_type_second).order_by('-id')[:4]
@@ -562,8 +563,25 @@ def videoplaylecture(request, pk):
     print('gas[0].price', gas[0].price)
     if gas[0].price == 0:
         gas[0].price = 1
-    total_fee = gas[0].price * 100
-    print('total_fee', total_fee)
+
+    return render(request, 'study/video_play_lecture.html', {
+        'videoinfo': gas[0],
+        'isBuy': isBuy,
+        'vpcs': vpcs,
+        'relations': relations})
+
+
+def paytype(request, pk):
+    '视频区购买：支付方式'
+    vc = VideoInfoLecture.objects.get(pk=pk)
+    return render(request, 'study/paytype.html', locals())
+
+
+def payment(request, vid):
+    '视频区微信支付页面'
+    # vid = request.GET.get('id')
+    vc = VideoInfoLecture.objects.get(pk=vid)
+    total_fee = vc.price * 100
 
     getInfo = request.GET.get('getInfo', None)
     openid = request.COOKIES.get('openid', '')
@@ -582,22 +600,17 @@ def videoplaylecture(request, pk):
             print('code', request.GET.get('code', ''))
             print('state', request.GET.get('state', ''))
 
-            response = render(request, 'study/video_play_lecture.html', {
-                'params': get_jsapi_params(openid, total_fee), 'videoinfo': gas[0],
-                'isBuy': isBuy,
-                'vpcs': vpcs,
-                'relations': relations})
+            response = render(request, 'study/payment.html',
+                              {'params': get_jsapi_params(openid, total_fee), 'videoinfo': vc})
             response.set_cookie('openid', openid, expires=60 * 60 * 24 * 30)
             return response
 
         else:
             return HttpResponse('获取机器编码失败')
-    return render(request, 'study/video_play_lecture.html', {
+    return render(request, 'study/payment.html', {
         'params': get_jsapi_params(openid, total_fee),
-        'videoinfo': gas[0],
-        'isBuy': isBuy,
-        'vpcs': vpcs,
-        'relations': relations})
+        'videoinfo': vc
+    })
 
 
 def videoplaylecture_comment(request, pk):
@@ -938,16 +951,43 @@ def class_job_redo(request, pk):
 
 def buyvideolecture(request, pk):
     '购买视频'
-    vcs = VideoInfoLecture.objects.filter(pk=pk)
-    if len(vcs) > 0:
-        order = VideoInfoLectureOrder.objects.create(
-            price=vcs[0].price,
-            purchaser=request.user,
-            video=vcs[0],
-        )
-        order.save()
+    from django.db import transaction
+    from users.models import UserPaydetails
+    try:
+        with transaction.atomic():
+            vcs = VideoInfoLecture.objects.get(pk=pk)
+            paytype = request.GET.get('pt')
+            if vcs:
+                order = VideoInfoLectureOrder.objects.create(
+                    price=vcs.price,
+                    purchaser=request.user,
+                    video=vcs,
+                )
+                order.save()
 
-    return HttpResponse('1')
+                if paytype == 'cashpay':
+                    request.user.account_sum -= vcs.price  # 账户余额扣减
+                    UserPaydetails.objects.create(purchaser=request.user,
+                                                  pay_bill=0 - vcs.price,
+                                                  pay_type='0',
+                                                  remark='视频购买扣减余额')
+                elif paytype == 'wxpay':
+                    request.user.exchange_ticket += vcs.price  # 增加兑换券
+                    UserPaydetails.objects.create(purchaser=request.user,
+                                                  pay_bill=0 + vcs.price,
+                                                  pay_type='2',
+                                                  remark='视频购买赠送兑换券')
+                else:
+                    request.user.attendance_ticket -= vcs.price  # 听课券扣减
+                    UserPaydetails.objects.create(purchaser=request.user,
+                                                  pay_bill=0 - vcs.price,
+                                                  pay_type='1',
+                                                  remark='视频购买扣减听课券')
+
+                request.user.save()
+            return HttpResponse('1')
+    except Exception as e:
+        return HttpResponse("出现错误<%s>" % str(e))
 
 
 def buystudyfuyang(request, pk):

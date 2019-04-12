@@ -1,0 +1,84 @@
+{% extends 'study/base.html' %}
+{% load staticfiles %}
+
+{% block main_titlefile %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/payment.css' %}">
+{% endblock %}
+
+{% block title %}视频区在线支付{% endblock %}
+
+{% block bodycontent %}
+
+    <div class="es-wrap">
+        <div class="products">
+            <img src="{{ vc.image.url }}" width="80" height="80" alt="{{ vc.name }}"/>
+            <span class="name">{{ vc.name }}</span>
+            <span class="count">&nbsp;</span>
+            <span class="price">￥{{ vc.price }}</span>
+            <span class="num">x1</span>
+        </div>
+        <div class="pay_group">
+            {% if vc.pay_type == '1' %}
+                <div class="item">
+                    <span class="name c2">账户余额</span>
+                    <span class="price"
+                          data-price="{{ request.user.account_sum }}">￥{{ request.user.account_sum }}</span>
+                    <input id="item2" type="radio" name="item" value="cashpay">
+                    <hr/>
+                </div>
+                <div class="item">
+                    <span class="name c3">微信支付</span>
+                    <span class="price">￥{{ vc.price }}</span>
+                    <input id="item3" type="radio" name="item" value="wxpay" checked="checked">
+                </div>
+            {% else %}
+                <div class="item">
+                    <span class="name c1">听课劵</span>
+                    <span class="price"
+                          data-price="{{ request.user.attendance_ticket }}">{{ request.user.attendance_ticket }}</span>
+                    <input id="item1" type="radio" name="item" value="ticket">
+                    <hr/>
+                </div>
+            {% endif %}
+        </div>
+        <div class="footer">
+            <span>支付金额：</span>
+            <span class="price" id="total" data-price="{{ vc.price }}">￥{{ vc.price }}</span>
+            <button type="button" id="btncpay" name="btncpay" class="pay">立即支付</button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scriptfile %}
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#btncpay').on('click', function () {
+                var paytype = $(':radio[name=item]:checked').val();
+                if (paytype == undefined) {
+                    alert('请选择支付方式');
+                    return;
+                }
+                if (paytype === 'wxpay') {
+                    location.href = '{% url 'study_payment' vc.pk %}';
+                } else {
+                    var ptprice = parseInt($(':radio[name=item]:checked').prev().data('price'));
+                    var total = parseInt($('#total').data('price'));    //总价:支付金额
+                    if (ptprice < total) {
+                        alert('余额不足，请选择其它支付方式。');
+                        return;
+                    } else {
+                        var vid ={{ vc.pk }};
+                        $.get("{{ vc.get_buy_url }}", {'pk': vid, 'pt': paytype}, function (ret) {
+                            if (ret == "1") {
+                                alert('购买成功!');
+                                location.href = '{{ vc.get_absolute_url }}';
+                            } else
+                                alert('保存支付记录失败')
+                        })
+                    }
+                }
+            })
+        })
+    </script>
+{% endblock %}

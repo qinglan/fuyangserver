@@ -96,6 +96,22 @@
             </table>
         </div>
     </div>
+
+    <div class="cd-setting">
+        <span class="setting-icon"><i class="cd-icon cd-icon-smile"></i></span>
+        <span class="setting-title">视频区VIP</span>
+        <span class="setting-content">
+              VIP会员可以观看视频区内的所有视频
+          </span>
+        <span class="setting-action">
+            {% if request.user.video_vip == 0 %}
+                <span class="cd-setting-status">未设置</span>
+                <a class="btn cd-btn cd-btn-default" href="{% url 'userinfo_paytype' %}">购买</a>
+            {% else %}
+                <span class="cd-setting-status cd-setting-status-done">VIP会员</span>
+            {% endif %}
+          </span>
+    </div>
 {% endblock %}
 
 {% block scriptfile %}

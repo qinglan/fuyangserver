@@ -31,5 +31,8 @@ urlpatterns = [
     path('refill/', views.refill, name='userinfo_refill'),
     path('recharge/', views.recharge, name='userinfo_recharge'),
     path('record/', views.recharge_record, name='userinfo_record'),
+    path('paytype/', views.paytype, name='userinfo_paytype'),
+    path('payment/', views.payment, name='userinfo_wxpay'),
+    path('vipattent/', views.videoVipAttent, name='userinfo_vipattent'),
     path('sendsms/', views.sendsms, name='userinfo_sendsms')
 ]

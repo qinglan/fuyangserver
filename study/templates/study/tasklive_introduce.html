@@ -190,9 +190,9 @@
             });
         {% else %}
             var player = new TcPlayer('id_test_video', {
-                "m3u8": "http://www.shejibang.cc/live/{{ liveinfo.live_key }}.m3u8",
-                "m3u8_hd"   : "http://www.shejibang.cc/live/{{ liveinfo.live_key }}.m3u8",
-                "m3u8_sd"   : "http://www.shejibang.cc/live/{{ liveinfo.live_key }}.m3u8",
+                "m3u8": "http://play.51nayun.com/live/{{ liveinfo.live_key }}.m3u8",
+                "m3u8_hd"   : "http://play.51nayun.com/live/{{ liveinfo.live_key }}.m3u8",
+                "m3u8_sd"   : "http://play.51nayun.com/live/{{ liveinfo.live_key }}.m3u8",
                 "autoplay": true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
             });
         {% endif %}
@@ -202,7 +202,7 @@
             {% else %}
                 player.destroy();
                 player = new TcPlayer('id_test_video', {
-                    "m3u8": "http://www.shejibang.cc/live/{{ liveinfo.live_key }}.m3u8",
+                    "m3u8": "http://play.51nayun.com/live/{{ liveinfo.live_key }}.m3u8",
                     "autoplay": true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
                 });
             {% endif %}
