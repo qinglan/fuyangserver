@@ -453,6 +453,7 @@ class VideoInfoLectureClassfy(models.Model):
 class VideoVipPrice(models.Model):
     '视频区VIP会员价格表'
     VIP_price = models.IntegerField('VIP价格', default=9999)
+    min_exchange_ticket_price = models.IntegerField('赠送兑换券最小价格', default=9999)
 
     def __str__(self):
         return str(self.VIP_price)

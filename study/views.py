@@ -4,7 +4,7 @@ import os
 from PictureText.models import PictureTextPaper
 from fuyangserver.settings import HERE
 from advertise.models import AdvertisingBanners, VideoInfoLectureBanners, VideoInfoStudyFuyangBanners
-from study.models import VideoColumn
+from study.models import VideoColumn,VideoVipPrice
 from study.models import VideoCurriculum
 from study.models import VideoCurriculumComment
 import xml.dom.minidom
@@ -967,24 +967,30 @@ def buyvideolecture(request, pk):
 
                 if paytype == 'cashpay':
                     request.user.account_sum -= vcs.price  # 账户余额扣减
+                    request.user.save()
                     UserPaydetails.objects.create(purchaser=request.user,
                                                   pay_bill=0 - vcs.price,
                                                   pay_type='0',
                                                   remark='视频购买扣减余额')
                 elif paytype == 'wxpay':
-                    request.user.exchange_ticket += vcs.price  # 增加兑换券
-                    UserPaydetails.objects.create(purchaser=request.user,
-                                                  pay_bill=0 + vcs.price,
-                                                  pay_type='2',
-                                                  remark='视频购买赠送兑换券')
+                    vp = VideoVipPrice.objects.first()
+                    if vcs.price >= vp.min_exchange_ticket_price:  # 当充值金额大于设置价格的时候才赠送兑换券
+                        request.user.exchange_ticket += vcs.price  # 增加兑换券
+                        request.user.save()
+                        UserPaydetails.objects.create(purchaser=request.user,
+                                                      pay_bill=0 + vcs.price,
+                                                      pay_type='2',
+                                                      remark='视频购买赠送兑换券')
+                    else:
+                        print('视频购买成功但不赠送兑换券', vcs.price, vp.min_exchange_ticket_price, request.user.nickname)
                 else:
                     request.user.attendance_ticket -= vcs.price  # 听课券扣减
+                    request.user.save()
                     UserPaydetails.objects.create(purchaser=request.user,
                                                   pay_bill=0 - vcs.price,
                                                   pay_type='1',
                                                   remark='视频购买扣减听课券')
 
-                request.user.save()
             return HttpResponse('1')
     except Exception as e:
         return HttpResponse("出现错误<%s>" % str(e))
