@@ -94,9 +94,9 @@ WSGI_APPLICATION = 'fuyangserver.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'fuyangdatabase',
+        'NAME': 'fuyang',
         'USER': 'root',
-        'PASSWORD': 'fly#snow02.',
+        'PASSWORD': 'gxADMIN0833!@#',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4'},

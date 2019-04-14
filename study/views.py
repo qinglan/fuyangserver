@@ -458,6 +458,12 @@ def videolecture(request):
     return render(request, 'study/video_lecture.html', locals())
 
 
+@login_required(login_url='/accounts/login/')
+def videolectureindex(request):
+    '视频区首页'
+    vcls = VideoInfoLectureClassfy.objects.all().order_by('sequeue')
+    return render(request, 'study/video_lecture_index.html', locals())
+
 def videocates(request, cid):
     '视频区二级分类列表'
     vcls = VideoInfoLectureClassfy.objects.all().order_by('sequeue')

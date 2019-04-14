@@ -52,6 +52,8 @@ urlpatterns = [
     path('studyfuyang/', studyfuyang_index, name='studyfuyang'),
     path('videolecture/', videolecture, name='videolecture'),
 
+    path('videolectureindex/', videolectureindex, name='videolectureindex'),
+
     path('videolecture/category/<int:cid>', videocates, name='videocates'),
     path('videolecture/pagination/', videopages, name='video_pages'),
 
