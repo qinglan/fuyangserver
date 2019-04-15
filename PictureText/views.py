@@ -89,9 +89,9 @@ def signpay(request, pk):
     return render(request, 'PictureText/signpay.html', locals())
 
 
-def payment(request, vcid):
+def payment(request,vcid):
     '报名区在线支付'
-    # vcid = request.GET.get('id')
+    #vcid = request.GET.get('id')
     vc = VideoCurriculum.objects.get(pk=vcid)
 
     total_fee = vc.price
@@ -144,23 +144,29 @@ def courseattent(request):
 
             if paytype == 'cashpay':
                 request.user.account_sum -= vc.price  # 账户余额扣减
+                request.user.save()
                 UserPaydetails.objects.create(purchaser=request.user,
                                               pay_bill=0 - vc.price,
                                               pay_type='0',
                                               remark='直播课程报名扣减余额')
             elif paytype == 'wxpay':
-                request.user.exchange_ticket += vc.price  # 增加兑换券
-                UserPaydetails.objects.create(purchaser=request.user,
-                                              pay_bill=0 + vc.price,
-                                              pay_type='2',
-                                              remark='直播课程报名赠送兑换券')
+                vp = VideoVipPrice.objects.first()
+                if vc.price >= vp.min_exchange_ticket_price:  # 当充值金额大于设置价格的时候才赠送兑换券
+                    request.user.exchange_ticket += vc.price  # 增加兑换券
+                    request.user.save()
+                    UserPaydetails.objects.create(purchaser=request.user,
+                                                  pay_bill=0 + vc.price,
+                                                  pay_type='2',
+                                                  remark='直播课程报名赠送兑换券')
+                else:
+                    print('直播课程报名成功但不赠送兑换券', vc.price, vp.min_exchange_ticket_price, request.user.nickname)
             else:
                 request.user.attendance_ticket -= vc.price  # 听课券扣减
+                request.user.save()
                 UserPaydetails.objects.create(purchaser=request.user,
                                               pay_bill=0 - vc.price,
                                               pay_type='1',
                                               remark='直播课程报名扣减听课券')
-            request.user.save()
             return HttpResponse('1')
     except Exception as e:
         return HttpResponse("出现错误<%s>" % str(e))

@@ -439,8 +439,11 @@ class VideoInfoLectureClassfy(models.Model):
     message = models.CharField('视频分类', max_length=256)
     remark = models.TextField('分类相关说明', max_length=256)
     register_date = models.DateTimeField('添加时间', default=timezone.now, editable=False)
-    sequeue = models.IntegerField('排序', default=9999)
-
+    TYPE_CHOICE = (
+        (u'0', u'一行两列'),
+        (u'1', u'一行三列'),
+    )
+    show_face = models.CharField('显示方式', max_length=2, choices=TYPE_CHOICE, default='0')
     sequeue = models.IntegerField('排序', default=9999)
 
     def __str__(self):
@@ -454,6 +457,7 @@ class VideoInfoLectureClassfy(models.Model):
 class VideoVipPrice(models.Model):
     '视频区VIP会员价格表'
     VIP_price = models.IntegerField('VIP价格', default=9999)
+    min_exchange_ticket_price = models.IntegerField('赠送兑换券最小价格', default=9999)
 
     def __str__(self):
         return str(self.VIP_price)

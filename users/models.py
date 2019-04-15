@@ -76,7 +76,7 @@ class User(AbstractUser):
 
     real_name = models.CharField('真实姓名', default='', max_length=256)
 
-    phone_number = models.CharField('电话号码', default='', max_length=256)
+    phone_number = models.CharField('电话号码', default='',null=True, blank=True,  max_length=256)
 
     city = models.CharField('城市', default='', max_length=256)
 

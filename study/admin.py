@@ -119,7 +119,7 @@ class VideoInfoLectureClassfyAdmin(admin.ModelAdmin):
 
 
 class VideoVipPriceAdmin(admin.ModelAdmin):
-    list_display = ('VIP_price',)
+    list_display = ('VIP_price','min_exchange_ticket_price')
 
     def has_add_permission(self, request, obj=None):
         '禁止新增'

@@ -1,25 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3d2db82b-6cdf-4822-b7b4-f5530f6f763c" name="Default Changelist" comment="细节问题修改完成">
-      <change afterPath="$PROJECT_DIR$/study/templates/study/payment.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/study/templates/study/paytype.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/study/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/userinfo/templates/userinfo/payment.html" afterDir="false" />
+    <list default="true" id="3d2db82b-6cdf-4822-b7b4-f5530f6f763c" name="Default Changelist" comment="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;study/models.py&#10;#&#9;userinfo/views.py">
+      <change afterPath="$PROJECT_DIR$/study/templates/study/video_lecture_index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PictureText/templates/PictureText/payment.html" beforeDir="false" afterPath="$PROJECT_DIR$/PictureText/templates/PictureText/payment.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PictureText/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/PictureText/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common_static/xuantong/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/common_static/xuantong/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fuyangserver/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/fuyangserver/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common_static/xuantong/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/common_static/xuantong/css/bootstrap.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fuyangserver/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/fuyangserver/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/study/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/study/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/study/templates/study/video_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/study/templates/study/video_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/study/templates/study/video_play.html" beforeDir="false" afterPath="$PROJECT_DIR$/study/templates/study/video_play.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/study/templates/study/video_play_lecture.html" beforeDir="false" afterPath="$PROJECT_DIR$/study/templates/study/video_play_lecture.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/study/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/study/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/study/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/study/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/study/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/study/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userinfo/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/userinfo/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userinfo/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/userinfo/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userinfo/templates/userinfo/finance.html" beforeDir="false" afterPath="$PROJECT_DIR$/userinfo/templates/userinfo/finance.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userinfo/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/userinfo/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/userinfo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/userinfo/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
     </list>
@@ -35,16 +26,49 @@
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-462338926">
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="css" value="3" />
+          <entry key="html" value="8" />
+          <entry key="js" value="1" />
+          <entry key="py" value="12" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CSS" value="3" />
+          <entry key="HTML" value="8" />
+          <entry key="JavaScript" value="1" />
+          <entry key="Python" value="12" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="css" value="36" />
+          <entry key="html" value="148" />
+          <entry key="py" value="13" />
+          <entry key="txt" value="6" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="CSS" value="36" />
+          <entry key="HTML" value="148" />
+          <entry key="PLAIN_TEXT" value="6" />
+          <entry key="Python" value="13" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PictureText/urls.py">
+        <entry file="file://$PROJECT_DIR$/study/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="9871">
+              <caret line="527" column="52" lean-forward="true" selection-start-line="527" selection-start-column="52" selection-end-line="527" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -52,8 +76,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PictureText/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="93" column="5" selection-start-line="93" selection-start-column="5" selection-end-line="93" selection-end-column="5" />
+            <state relative-caret-position="323">
+              <caret line="156" column="73" lean-forward="true" selection-start-line="156" selection-start-column="73" selection-end-line="156" selection-end-column="73" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
@@ -62,10 +86,70 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/PictureText/templates/PictureText/signpay.html">
+        <entry file="file://$PROJECT_DIR$/common_static/xuantong/css/bootstrap.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="62" column="75" selection-start-line="62" selection-start-column="75" selection-end-line="62" selection-end-column="75" />
+            <state relative-caret-position="487">
+              <caret line="1544" column="17" lean-forward="true" selection-start-line="1544" selection-start-column="17" selection-end-line="1544" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/study/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="437" column="14" lean-forward="true" selection-start-line="437" selection-start-column="14" selection-end-line="437" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/study/templates/study/video_lecture_index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="684">
+              <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
+              <folding>
+                <element signature="n#div#0;n#if#1;n#div#0;n#div#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/study/templates/study/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="428">
+              <caret line="23" column="22" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/study/templates/study/studyfuyang_index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="38">
+              <caret line="5" selection-start-line="5" selection-end-line="27" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PictureText/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/users/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="115">
+              <caret line="100" column="4" selection-start-line="100" selection-start-column="4" selection-end-line="100" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -75,15 +159,19 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Python Script" />
         <option value="JavaScript File" />
         <option value="CSS File" />
         <option value="HTML File" />
-        <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+      <find>picture_text_column</find>
+      <find>filter</find>
+      <find>titlefile</find>
+      <find>weixin</find>
       <find>oauth2/authorize</find>
       <find>request.</find>
       <find>get_redirect_url</find>
@@ -102,18 +190,14 @@
       <find>ynzz.html</find>
       <find>request.user</find>
       <find>views_count</find>
-      <find>tuijian</find>
-      <find>sum</find>
-      <find>datalist</find>
-      <find>paytype</find>
-      <find>VideoVip</find>
       <find>videoplaylecture</find>
-      <find>order</find>
-      <find>videoinfolectureorder</find>
-      <find>request.user.account_sum -= vcs.price  # 账户余额扣减</find>
-      <find>VideoInfoStudyFuyang</find>
+      <find>order_by</find>
+      <find>视频</find>
+      <find>nav</find>
       <find>videolecture</find>
-      <find>payment</find>
+      <find>/*</find>
+      <find>thumbnail</find>
+      <find>直播课程报名扣减听课券</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -123,12 +207,18 @@
         <option value="安全设置+实名认证" />
       </list>
     </option>
-    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/userinfo/templates/userinfo/orders_base.html" />
+        <option value="$PROJECT_DIR$/static/js/site.js" />
+        <option value="$PROJECT_DIR$/study/templates/study/main_base.html" />
+        <option value="$PROJECT_DIR$/users/models.py" />
+        <option value="$PROJECT_DIR$/PictureText/paysettings.py" />
+        <option value="$PROJECT_DIR$/userinfo/templates/userinfo/orders.html" />
+        <option value="$PROJECT_DIR$/userinfo/templates/userinfo/findpass.html" />
         <option value="$PROJECT_DIR$/userinfo/templates/userinfo/userinfo_base.html" />
         <option value="$PROJECT_DIR$/userinfo/templates/userinfo/center.html" />
         <option value="$PROJECT_DIR$/说明.txt" />
@@ -139,54 +229,48 @@
         <option value="$PROJECT_DIR$/userinfo/templates/userinfo/secure.html" />
         <option value="$PROJECT_DIR$/common_static/css/payment.css" />
         <option value="$PROJECT_DIR$/userinfo/templates/userinfo/confirm.html" />
+        <option value="$PROJECT_DIR$/userinfo/urls.py" />
         <option value="$PROJECT_DIR$/userinfo/templates/userinfo/recharge.html" />
         <option value="$PROJECT_DIR$/common_static/js/site.js" />
         <option value="$PROJECT_DIR$/PictureText/templates/PictureText/paper.html" />
+        <option value="$PROJECT_DIR$/PictureText/urls.py" />
         <option value="$PROJECT_DIR$/PictureText/templatetags/htmlhelper.py" />
         <option value="$PROJECT_DIR$/users/admin.py" />
         <option value="$PROJECT_DIR$/common_static/css/site.css" />
+        <option value="$PROJECT_DIR$/study/templates/study/base.html" />
+        <option value="$PROJECT_DIR$/userinfo/templates/userinfo/finance.html" />
         <option value="$PROJECT_DIR$/common_static/xuantong/js/cdupload.js" />
         <option value="$PROJECT_DIR$/userinfo/templates/userinfo/realname.html" />
         <option value="$PROJECT_DIR$/study/templates/study/video_lecture.html" />
         <option value="$USER_HOME$/Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/2.0b4.0.9/311c05a5fc2f49d691689daccb54f9ba/Message/MessageTemp/748ff211e89ac4934089ad775561eb15/File/hsm/视频列表.html" />
         <option value="$PROJECT_DIR$/common_static/xuantong/css/main.css" />
-        <option value="$PROJECT_DIR$/study/models.py" />
         <option value="$PROJECT_DIR$/fuyangserver/context_processor.py" />
         <option value="$PROJECT_DIR$/templates/carousel.html" />
+        <option value="$PROJECT_DIR$/PictureText/templates/PictureText/payment.html" />
+        <option value="$PROJECT_DIR$/PictureText/templates/PictureText/signpay.html" />
+        <option value="$PROJECT_DIR$/userinfo/admin.py" />
         <option value="$PROJECT_DIR$/userinfo/templates/userinfo/refill.html" />
+        <option value="$PROJECT_DIR$/fuyangserver/urls.py" />
+        <option value="$PROJECT_DIR$/study/templates/study/video_list.html" />
         <option value="$PROJECT_DIR$/study/templates/study/video_pages.html" />
         <option value="$PROJECT_DIR$/study/templates/study/video_secates.html" />
         <option value="$PROJECT_DIR$/fuyangserver/settings.py" />
-        <option value="$PROJECT_DIR$/common_static/css/vlist.css" />
-        <option value="$PROJECT_DIR$/PictureText/templates/PictureText/payment.html" />
-        <option value="$PROJECT_DIR$/userinfo/templates/userinfo/payment.html" />
-        <option value="$PROJECT_DIR$/userinfo/templates/userinfo/videovip.html" />
-        <option value="$PROJECT_DIR$/study/templates/study/video_play.html" />
-        <option value="$PROJECT_DIR$/fuyangserver/urls.py" />
-        <option value="$PROJECT_DIR$/users/models.py" />
-        <option value="$PROJECT_DIR$/userinfo/templates/userinfo/finance.html" />
-        <option value="$PROJECT_DIR$/userinfo/urls.py" />
-        <option value="$PROJECT_DIR$/userinfo/views.py" />
-        <option value="$PROJECT_DIR$/study/templates/study/video_play_lecture.html" />
-        <option value="$PROJECT_DIR$/userinfo/models.py" />
-        <option value="$PROJECT_DIR$/userinfo/admin.py" />
-        <option value="$PROJECT_DIR$/study/admin.py" />
-        <option value="$PROJECT_DIR$/study/templates/study/payment.html" />
-        <option value="$PROJECT_DIR$/study/templates/study/base.html" />
-        <option value="$PROJECT_DIR$/study/templates/study/video_list.html" />
-        <option value="$PROJECT_DIR$/study/urls.py" />
         <option value="$PROJECT_DIR$/study/views.py" />
-        <option value="$PROJECT_DIR$/study/templates/study/paytype.html" />
-        <option value="$PROJECT_DIR$/PictureText/urls.py" />
+        <option value="$PROJECT_DIR$/study/templates/study/video_play.html" />
+        <option value="$PROJECT_DIR$/common_static/css/vlist.css" />
+        <option value="$PROJECT_DIR$/study/models.py" />
         <option value="$PROJECT_DIR$/PictureText/views.py" />
-        <option value="$PROJECT_DIR$/PictureText/templates/PictureText/signpay.html" />
+        <option value="$PROJECT_DIR$/userinfo/views.py" />
+        <option value="$PROJECT_DIR$/study/templates/study/video_lecture_index.html" />
+        <option value="$PROJECT_DIR$/common_static/xuantong/css/bootstrap.css" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1680" />
-    <option name="height" value="961" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="506" />
+    <option name="y" value="149" />
+    <option name="width" value="1292" />
+    <option name="height" value="1036" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -202,7 +286,7 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
@@ -210,6 +294,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -220,31 +305,30 @@
             <path>
               <item name="fuyangserver" type="b2602c69:ProjectViewProjectNode" />
               <item name="fuyangserver" type="462c0819:PsiDirectoryNode" />
-              <item name="fuyangserver" type="462c0819:PsiDirectoryNode" />
+              <item name="common_static" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="fuyangserver" type="b2602c69:ProjectViewProjectNode" />
               <item name="fuyangserver" type="462c0819:PsiDirectoryNode" />
-              <item name="PictureText" type="462c0819:PsiDirectoryNode" />
+              <item name="common_static" type="462c0819:PsiDirectoryNode" />
+              <item name="xuantong" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="fuyangserver" type="b2602c69:ProjectViewProjectNode" />
               <item name="fuyangserver" type="462c0819:PsiDirectoryNode" />
-              <item name="PictureText" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="common_static" type="462c0819:PsiDirectoryNode" />
+              <item name="xuantong" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="fuyangserver" type="b2602c69:ProjectViewProjectNode" />
               <item name="fuyangserver" type="462c0819:PsiDirectoryNode" />
-              <item name="PictureText" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="PictureText" type="462c0819:PsiDirectoryNode" />
+              <item name="userinfo" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -259,12 +343,131 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/common_static/js" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/common_static/xuantong/js" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/common_static/js" />
+    </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/PictureText/views.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/common_static/xuantong/css/bootstrap.css</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/fuyangserver/settings.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/study/admin.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/study/models.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/study/urls.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/study/views.py</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/users/models.py</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/study/templates/study/video_lecture_index.html</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+        <PATH vcs="Git" revision="">$PROJECT_DIR$/userinfo/views.py</PATH>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -346,9 +549,7 @@
       <workItem from="1553780994683" duration="48000" />
       <workItem from="1553781268335" duration="3424000" />
       <workItem from="1553997977461" duration="362000" />
-      <workItem from="1553999218023" duration="12931000" />
-      <workItem from="1554620153253" duration="17224000" />
-      <workItem from="1554733343158" duration="1327000" />
+      <workItem from="1553999218023" duration="12832000" />
     </task>
     <task id="LOCAL-00001" summary="报名区支付功能调试完成">
       <created>1543816347975</created>
@@ -476,37 +677,44 @@
       <option name="project" value="LOCAL" />
       <updated>1553423657185</updated>
     </task>
-    <task id="LOCAL-00019" summary="细节问题修改完成">
-      <created>1554013523812</created>
+    <task id="LOCAL-00019" summary="修改首页排序">
+      <created>1554184312028</created>
       <option name="number" value="00019" />
       <option name="presentableId" value="LOCAL-00019" />
       <option name="project" value="LOCAL" />
-      <updated>1554013523812</updated>
+      <updated>1554184312028</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="同步更新study模板+视频区首页布局修改初版">
+      <created>1554184356269</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1554184356269</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="165899000" />
+    <option name="totallyTimeSpent" value="147249000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1680" height="961" extended-state="0" />
+    <frame x="-4" y="-4" width="1288" height="988" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21916972" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.33200952" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.29196218" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.29196218" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.2777778" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4993895" weight="0.37352246" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4988086" weight="0.37352246" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50061053" side_tool="true" weight="0.32978722" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50119144" side_tool="true" weight="0.37352246" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32978722" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="bottom" id="Messages" order="13" />
@@ -516,6 +724,30 @@
       <window_info anchor="right" id="SciView" order="3" />
       <window_info anchor="right" id="Database" order="4" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.33200952" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.29196218" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.2777778" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="8" sideWeight="0.4988086" visible="true" weight="0.37352246" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50119144" side_tool="true" weight="0.37352246" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32978722" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info anchor="bottom" id="Messages" order="13" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -555,20 +787,9 @@
         </entry>
       </map>
     </option>
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list />
-          </value>
-        </entry>
-        <entry key="User">
-          <value>
-            <list />
-          </value>
-        </entry>
-      </map>
-    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="首页布局样式修改" />
@@ -588,20 +809,10 @@
     <MESSAGE value="安全中心提示信息" />
     <MESSAGE value="充值、报名支付功能" />
     <MESSAGE value="实名认证上传身份证bug修改" />
+    <MESSAGE value="修改首页排序" />
     <MESSAGE value="同步更新study模板+视频区首页布局修改初版" />
-    <MESSAGE value="细节问题修改完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="细节问题修改完成" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/userinfo/views.py</url>
-          <line>25</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;study/models.py&#10;#&#9;userinfo/views.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;study/models.py&#10;#&#9;userinfo/views.py" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -613,6 +824,30 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/fields/related_descriptors.py" />
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/base.py" />
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/contrib/admin/options.py" />
+    <entry file="file://$PROJECT_DIR$/userinfo/templates/userinfo/userinfo_base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="27" lean-forward="true" selection-start-column="27" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common_static/xuantong/js/cdupload.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="263" selection-start-column="263" selection-end-column="263" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/userinfo/templates/userinfo/realname.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="42" column="82" selection-start-line="42" selection-start-column="82" selection-end-line="42" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/PictureText/templates/PictureText/column.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="782">
@@ -627,10 +862,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common_static/xuantong/css/main.css">
+    <entry file="file://$PROJECT_DIR$/advertise/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-368">
-          <caret line="6859" column="2" selection-start-line="6859" selection-start-column="2" selection-end-line="6859" selection-end-column="2" />
+        <state relative-caret-position="326">
+          <caret line="22" column="9" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/users/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="126" column="28" selection-start-line="126" selection-start-column="28" selection-end-line="126" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -657,6 +899,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/userinfo/templates/userinfo/finance.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1494">
+          <caret line="83" column="33" selection-start-line="83" selection-start-column="28" selection-end-line="83" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/userinfo/templates/userinfo/recharge.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="89">
@@ -664,31 +913,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/contrib/auth/middleware.py">
+    <entry file="file://$PROJECT_DIR$/PictureText/templates/PictureText/signpay.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="23" column="8" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
+        <state relative-caret-position="274">
+          <caret line="31" column="93" selection-start-line="31" selection-start-column="93" selection-end-line="31" selection-end-column="93" />
         </state>
       </provider>
     </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/core/handlers/exception.py">
+    <entry file="file://$PROJECT_DIR$/PictureText/templates/PictureText/payment.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        <state relative-caret-position="155">
+          <caret line="34" column="53" lean-forward="true" selection-start-line="34" selection-start-column="53" selection-end-line="34" selection-end-column="53" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/2.0b4.0.9/311c05a5fc2f49d691689daccb54f9ba/Message/MessageTemp/748ff211e89ac4934089ad775561eb15/File/hsm/视频列表.html">
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/contrib/auth/middleware.py" />
+    <entry file="file://$PROJECT_DIR$/userinfo/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="85" selection-start-line="85" selection-end-line="87" selection-end-column="43" />
-          <folding>
-            <element signature="n#nav#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="208">
+          <caret line="44" column="49" selection-start-line="44" selection-start-column="49" selection-end-line="44" selection-end-column="49" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/userinfo/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="20" column="39" lean-forward="true" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/userinfo/templates/userinfo/refill.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="67" selection-start-line="11" selection-start-column="67" selection-end-line="11" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/userinfo/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="31" column="32" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/core/handlers/exception.py" />
+    <entry file="file://$USER_HOME$/Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/2.0b4.0.9/311c05a5fc2f49d691689daccb54f9ba/Message/MessageTemp/748ff211e89ac4934089ad775561eb15/File/hsm/视频列表.html" />
     <entry file="file://$PROJECT_DIR$/study/templates/study/video_pages.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
@@ -696,10 +965,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/core/handlers/base.py">
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/core/handlers/base.py" />
+    <entry file="file://$PROJECT_DIR$/study/templates/study/video_secates.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="124" selection-start-line="124" selection-end-line="124" />
+        <state relative-caret-position="347">
+          <caret line="27" column="125" lean-forward="true" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="125" />
         </state>
       </provider>
     </entry>
@@ -720,6 +990,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/study/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="119" column="73" selection-start-line="119" selection-start-column="45" selection-end-line="119" selection-end-column="73" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/study/templates/study/video_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="31" column="20" lean-forward="true" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/study/templates/study/video_play_lecture.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="25" lean-forward="true" selection-start-column="25" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/study/templates/study/video_play.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="108" column="95" selection-start-line="108" selection-start-column="95" selection-end-line="108" selection-end-column="95" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/common_static/css/vlist.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
@@ -727,279 +1028,123 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/study/templates/study/video_secates.html">
+    <entry file="file://$PROJECT_DIR$/common_static/css/bootstrap.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-348">
-          <caret line="27" column="125" lean-forward="true" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="125" />
-          <folding>
-            <element signature="e#1050#1093#0#HTML" expanded="true" />
-          </folding>
+        <state relative-caret-position="111">
+          <caret line="3988" column="21" lean-forward="true" selection-start-line="3988" selection-start-column="21" selection-end-line="3988" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/advertise/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-226">
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/advertise/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-631">
-          <caret line="22" column="9" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/study/consumers.py">
+    <entry file="file://$PROJECT_DIR$/common_static/js/bootstrap.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/users/admin.py">
+    <entry file="file://$PROJECT_DIR$/fuyangserver/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="126" column="28" selection-start-line="126" selection-start-column="28" selection-end-line="126" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/userinfo/templates/userinfo/refill.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="67" selection-start-line="11" selection-start-column="67" selection-end-line="11" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common_static/xuantong/css/main-v2.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="37" column="1" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/userinfo/templates/userinfo/payment.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="30" column="37" lean-forward="true" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PictureText/templates/PictureText/paper.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../elearning/elearning/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="25" column="4" lean-forward="true" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="57" />
-          <folding>
-            <element signature="e#633#665#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/userinfo/templates/userinfo/finance.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="108" column="83" selection-start-line="108" selection-start-column="83" selection-end-line="108" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PictureText/templates/PictureText/payment.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/userinfo/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="35" column="35" lean-forward="true" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/userinfo/templates/userinfo/paytype.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="60" column="78" selection-start-line="60" selection-start-column="71" selection-end-line="60" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/study/templates/study/video_play.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="68" column="13" lean-forward="true" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/study/templates/study/video_play_lecture.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/users/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="524">
-          <caret line="66" column="12" selection-start-line="66" selection-start-column="4" selection-end-line="66" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/userinfo/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="565">
-          <caret line="40" column="43" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/userinfo/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-752">
-          <caret line="13" column="36" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/userinfo/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="602">
-          <caret line="310" column="31" lean-forward="true" selection-start-line="310" selection-start-column="31" selection-end-line="310" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/study/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="515">
-          <caret line="140" column="1" selection-start-line="140" selection-start-column="1" selection-end-line="140" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/study/templates/study/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-565" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/study/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="472" column="9" selection-start-line="472" selection-start-column="4" selection-end-line="472" selection-end-column="9" />
+        <state relative-caret-position="141">
+          <caret line="82" column="45" selection-start-line="82" selection-start-column="45" selection-end-line="82" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/study/templates/study/video_lecture.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="23" selection-start-column="23" selection-end-column="23" />
+        <state relative-caret-position="95">
+          <caret line="5" column="40" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuyangserver/urls.py">
+    <entry file="file://$PROJECT_DIR$/common_static/xuantong/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="23" column="20" lean-forward="true" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
+        <state relative-caret-position="263">
+          <caret line="9029" column="16" lean-forward="true" selection-start-line="9029" selection-start-column="16" selection-end-line="9029" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/study/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9871">
+          <caret line="527" column="52" lean-forward="true" selection-start-line="527" selection-start-column="52" selection-end-line="527" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/users/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="100" column="4" selection-start-line="100" selection-start-column="4" selection-end-line="100" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PictureText/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
           <folding>
-            <element signature="e#636#668#0" expanded="true" />
+            <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/study/templates/study/base.html">
+    <entry file="file://$PROJECT_DIR$/study/templates/study/studyfuyang_index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-266">
-          <caret line="4" column="55" selection-start-line="4" selection-start-column="55" selection-end-line="4" selection-end-column="55" />
+        <state relative-caret-position="38">
+          <caret line="5" selection-start-line="5" selection-end-line="27" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/study/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="437" column="14" lean-forward="true" selection-start-line="437" selection-start-column="14" selection-end-line="437" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/study/templates/study/main_base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="21" lean-forward="true" selection-start-column="21" selection-end-column="21" />
+          <caret column="22" selection-start-column="18" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/study/templates/study/video_list.html">
+    <entry file="file://$PROJECT_DIR$/study/templates/study/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="27" column="77" selection-start-line="27" selection-start-column="77" selection-end-line="27" selection-end-column="77" />
+        <state relative-caret-position="428">
+          <caret line="23" column="22" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/study/templates/study/video_lecture_index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
           <folding>
-            <element signature="e#927#971#0#HTML" expanded="true" />
+            <element signature="n#div#0;n#if#1;n#div#0;n#div#0;n#!!top" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/study/templates/study/payment.html">
+    <entry file="file://$PROJECT_DIR$/userinfo/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="36" column="43" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/study/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="581" column="33" selection-start-line="581" selection-start-column="33" selection-end-line="581" selection-end-column="33" />
+        <state relative-caret-position="-171">
+          <caret line="21" column="76" selection-start-line="21" selection-start-column="76" selection-end-line="21" selection-end-column="76" />
           <folding>
-            <element signature="e#15#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/study/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="688">
-          <caret line="78" column="26" selection-start-line="78" selection-start-column="26" selection-end-line="78" selection-end-column="26" />
-          <folding>
-            <element signature="e#101#129#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/study/templates/study/paytype.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="62" column="68" selection-start-line="62" selection-start-column="68" selection-end-line="62" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PictureText/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
+            <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PictureText/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="93" column="5" selection-start-line="93" selection-start-column="5" selection-end-line="93" selection-end-column="5" />
+        <state relative-caret-position="323">
+          <caret line="156" column="73" lean-forward="true" selection-start-line="156" selection-start-column="73" selection-end-line="156" selection-end-column="73" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PictureText/templates/PictureText/signpay.html">
+    <entry file="file://$PROJECT_DIR$/common_static/xuantong/css/bootstrap.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="62" column="75" selection-start-line="62" selection-start-column="75" selection-end-line="62" selection-end-column="75" />
+        <state relative-caret-position="487">
+          <caret line="1544" column="17" lean-forward="true" selection-start-line="1544" selection-start-column="17" selection-end-line="1544" selection-end-column="17" />
         </state>
       </provider>
     </entry>

@@ -234,18 +234,35 @@ def recharge_record(request):
             print('zhifujine:', request.session['money'], 'type:', type(request.session['money']))
             print('currentuser:', request.user.id)
             fee = request.session['money']
+
+            cusr = User.objects.get(id=request.user.id)
+            cusr.account_sum += fee
+            cusr.save()
             UserPaydetails.objects.create(purchaser=request.user,
                                           pay_bill=fee,
                                           pay_type='0',
                                           remark='充值操作成功')
-            UserPaydetails.objects.create(purchaser=request.user,
+
+            vp = VideoVipPrice.objects.first()
+            if fee >= vp.min_exchange_ticket_price:  # 当充值金额大于设置价格的时候才赠送兑换券
+               cusr.exchange_ticket += fee  # 兑换券
+               cusr.save()
+               UserPaydetails.objects.create(purchaser=request.user,
                                           pay_bill=fee,
+<<<<<<< HEAD
                                           pay_type='2',
                                           remark='充值操作成功')
             cusr = User.objects.get(id=request.user.id)
             cusr.account_sum += fee
             cusr.exchange_ticket += fee
             cusr.save()
+=======
+                                          pay_type='2',  # 兑换券
+                                          remark='充值操作成功赠送兑换券')
+            else:
+                print('充值操作成功但不赠送兑换券', fee,cusr.min_exchange_ticket_price, request.user.nickname)
+
+>>>>>>> origin/master
             del request.session['money']
             return HttpResponse('1')
     except Exception as e:
@@ -297,16 +314,21 @@ def videoVipAttent(request):
 
             if paytype == 'cashpay':
                 request.user.account_sum -= vp.VIP_price  # 账户余额扣减
+                request.user.save()
                 UserPaydetails.objects.create(purchaser=request.user,
                                               pay_bill=0 - vp.VIP_price,
                                               pay_type='0',
-                                              remark='直播课程报名扣减余额')
+                                              remark='购买视频VIP扣减余额')
             else:  # 微信支付
-                request.user.exchange_ticket += vp.VIP_price  # 增加兑换券
-                UserPaydetails.objects.create(purchaser=request.user,
-                                              pay_bill=0 + vp.VIP_price,
-                                              pay_type='2',
-                                              remark='直播课程报名赠送兑换券')
+                if vp.VIP_price  >= vp.min_exchange_ticket_price:  # 当VIP价格大于设置价格的时候才赠送兑换券
+                    request.user.exchange_ticket += vp.VIP_price  # 增加兑换券
+                    request.user.save()
+                    UserPaydetails.objects.create(purchaser=request.user,
+                                                  pay_bill=0 + vp.VIP_price,
+                                                  pay_type='2',
+                                                  remark='购买视频VIP赠送兑换券')
+                else :
+                    print('购买视频VIP但不赠送兑换券',vp.VIP_price,vp.min_exchange_ticket_price,request.user.nickname)
             request.user.video_vip = 1  # 更改为视频区VIP
             request.user.save()
             return HttpResponse('1')
