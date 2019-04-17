@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from .models import PictureTextColumn, PictureTextPaper, PictureTextPaperComment
 from advertise.models import VideoInfoLectureBanners
-from study.models import VideoCurriculum
+from study.models import VideoCurriculum, VideoVipPrice
 from userinfo.models import VideoCurriculumOrder
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -89,9 +89,9 @@ def signpay(request, pk):
     return render(request, 'PictureText/signpay.html', locals())
 
 
-def payment(request,vcid):
+def payment(request, vcid):
     '报名区在线支付'
-    #vcid = request.GET.get('id')
+    # vcid = request.GET.get('id')
     vc = VideoCurriculum.objects.get(pk=vcid)
 
     total_fee = vc.price
