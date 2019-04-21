@@ -62,12 +62,13 @@
             {% endfor %}
 
             <div class="vcaption">
+                <img src="{{ cls.thumbnail.url }}" alt="{{ cls.message }}" class="capicon">
                 <span class="subtitle">{{ cls.message }}</span>
                 <a href="{% url 'videocates' cls.pk %}"><span class="more">查看更多</span></a>
             </div>
             <div class="row course-list es-open-course-list">
                 {% for v in cls.vlist.all|slice:'6' %}
-                    {% if cls.show_face == '1' %}
+                    {% if cls.show_face == 1 %}
                         <div class="col-md-4 col-xs-4">
                             <div class="thumbnail">
                                 <a href="{{ v.get_absolute_url }}" target="_blank">

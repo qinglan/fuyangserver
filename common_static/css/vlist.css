@@ -158,20 +158,27 @@
 
 .vcaption {
     padding: 10px 5px;
-    vertical-align: middle;
-    background: url("../imgs/c1.jpg") 0 10px no-repeat;
-    -webkit-background-size: 20px;
-    background-size: 20px;
+    margin-left: -10px;
+    margin-right: -10px;
+    background-color: #F0EDFB;
+}
+
+.capicon {
+    width: 20px;
+    height: 20px;
+    vertical-align: text-bottom;
 }
 
 .subtitle {
     display: inline-block;
-    text-indent: 1.4em;
+    text-indent: .3em;
+    font-size: large;
 }
 
 .vcaption a {
     display: inline-block;
     float: right;
+    margin-top: 3px;
     color: #7D7D7D;
 }
 
