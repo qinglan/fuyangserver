@@ -17,7 +17,7 @@ class VideoAlternateBannersAdmin(admin.ModelAdmin):
 
 
 class VideoInnerAdBannersAdmin(admin.ModelAdmin):
-    list_display = ('name', 'image', 'url')
+    list_display = ('name', 'image', 'url' , 'location')
 
 
 class VideoInfoStudyFuyangBannersAdmin(admin.ModelAdmin):

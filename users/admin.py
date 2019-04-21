@@ -67,10 +67,10 @@ class UserAdmin(BaseUserAdmin):
     add_form = UserCreationForm
 
     list_display = (
-        'nickname', 'email', 'is_active', 'id_checkstate', 'account_sum', 'attendance_ticket', 'exchange_ticket')
+        'nickname', 'phone_number', 'is_active', 'id_checkstate', 'account_sum', 'attendance_ticket', 'exchange_ticket')
 
     list_filter = (UserModelFilter, 'is_staff', 'is_superuser', 'is_active', 'id_checkstate')
-    search_fields = ('email', 'nickname', 'real_name')
+    search_fields = ('phone_number', 'nickname', 'real_name')
     ordering = ('email',)
     actions = ('activate_users', 'send_activation_email',)
     readonly_fields = ('last_login', 'date_joined',)

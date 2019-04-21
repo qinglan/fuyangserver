@@ -3,7 +3,7 @@ from django.shortcuts import render
 import os
 from PictureText.models import PictureTextPaper
 from fuyangserver.settings import HERE
-from advertise.models import AdvertisingBanners, VideoInfoLectureBanners, VideoInfoStudyFuyangBanners
+from advertise.models import AdvertisingBanners, VideoInfoLectureBanners, VideoInfoStudyFuyangBanners,VideoAlternateBanners,VideoInnerAdBanners
 from study.models import VideoColumn,VideoVipPrice
 from study.models import VideoCurriculum
 from study.models import VideoCurriculumComment
@@ -461,7 +461,9 @@ def videolecture(request):
 @login_required(login_url='/accounts/login/')
 def videolectureindex(request):
     '视频区首页'
+    abs = VideoAlternateBanners.objects.all().order_by('sequence')
     vcls = VideoInfoLectureClassfy.objects.all().order_by('sequeue')
+    innerabs = VideoInnerAdBanners.objects.all().order_by('sequence')
     return render(request, 'study/video_lecture_index.html', locals())
 
 def videocates(request, cid):

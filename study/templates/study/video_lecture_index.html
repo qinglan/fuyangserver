@@ -8,6 +8,11 @@
            height: 175px;
            width: 100%;
         }
+        .img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+           display: block;
+           max-width: 100%;
+           height: 188px;
+        }
 
 </style>
 {% endblock %}
@@ -27,50 +32,82 @@
         <button type="submit" class="searh"></button>
     </div>
 </form>
-{% include 'carousel.html' %}
+
+
+<div id="banners" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        {% for ad in abs %}
+        <li data-target="#banners" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}
+            class="active" {% endif %}></li>
+        {% endfor %}
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        {% for ad in abs %}
+        <div class="item{% if forloop.first %} active{% endif %}">
+            <a href="{{ ad.url }}" target="_blank">
+                <img src="{{ ad.image.url }}" height="200" alt="{{ ad.name }}">
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 
 <div id="content-container" class="container">
     <p class="open-course-list">
         {% for cls in vcls %}
-                <p class="leader" style="font-size: larger;font-weight: bold;">
-                    {{ cls.message }}
-                    <a href="{% url 'videocates' cls.pk %}" style="display: inline-block; float:right;">
-                        <small>查看更多</small>
-                    </a>
-                </p>
-                <div class="row course-list es-open-course-list">
-                    {% for v in cls.vlist.all|slice:'6' %}
-                        {% if cls.show_face == '1' %}
-                            <div class="col-md-4 col-xs-4">
-                                <div class="thumbnail11">
-                                    <a href="{{ v.get_absolute_url }}" target="_blank">
-                                        <img src="{{ v.image.url }}" alt="{{ v.name }}" class="img-responsive"/>
-                                    </a>
-                                    <div class="caption">
-                                        {{ v.name|striptags|truncatechars:'6' }}
-                                        <br>
-                                        <small class="text-muted">{{ v.intro|striptags|truncatechars:'6' }}</small>
-                                    </div>
-                                </div>
-                            </div>
-                        {% else %}
-                            <div class="col-md-4 col-xs-6">
-                                <div class="thumbnail">
-                                    <a href="{{ v.get_absolute_url }}" target="_blank">
-                                        <img src="{{ v.image.url }}" alt="{{ v.name }}" class="img-responsive"/>
-                                    </a>
-                                    <div class="caption">
-                                        {{ v.name|striptags|truncatechars:'10' }}
-                                        <br>
-                                        <small class="text-muted">{{ v.intro|striptags|truncatechars:'12' }}</small>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
 
+           {% for inad in innerabs %}
+             {% if cls.message == inad.location  %}
+                 <div class="row course-list es-open-course-list" >
+                    <a href="{{ inad.url }}" target="_blank"><img src="{{ inad.image.url }}" height="180px" width="100%" alt="{{ inad.name }}">
+                    </a>
+                 </div>
+             {% endif %}
+           {% endfor %}
+
+
+    <p class="leader" style="font-size: larger;font-weight: bold;">
+        {{ cls.message }}
+        <a href="{% url 'videocates' cls.pk %}" style="display: inline-block; float:right;">
+            <small>查看更多</small>
+        </a>
+    </p>
+    <div class="row course-list es-open-course-list">
+        {% for v in cls.vlist.all|slice:'6' %}
+        {% if cls.show_face == '1' %}
+        <div class="col-md-4 col-xs-4">
+            <div class="thumbnail11">
+                <a href="{{ v.get_absolute_url }}" target="_blank">
+                    <img src="{{ v.image.url }}" alt="{{ v.name }}" class="img-responsive"/>
+                </a>
+                <div class="caption">
+                    {{ v.name|striptags|truncatechars:'6' }}
+                    <br>
+                    <small class="text-muted">{{ v.intro|striptags|truncatechars:'6' }}</small>
                 </div>
-         {% endfor %}
+            </div>
+        </div>
+        {% else %}
+        <div class="col-md-4 col-xs-6">
+            <div class="thumbnail">
+                <a href="{{ v.get_absolute_url }}" target="_blank">
+                    <img src="{{ v.image.url }}" alt="{{ v.name }}" class="img-responsive"/>
+                </a>
+                <div class="caption">
+                    {{ v.name|striptags|truncatechars:'10' }}
+                    <br>
+                    <small class="text-muted">{{ v.intro|striptags|truncatechars:'12' }}</small>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+    </div>
+    {% endfor %}
 </div>
 
 {% endblock %}

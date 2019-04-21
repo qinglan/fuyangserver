@@ -49,7 +49,7 @@ class VideoInfoStudyFuyangBanners(models.Model):
 class VideoAlternateBanners(models.Model):
     '视频区首页顶部轮播图片'
     name = models.CharField('广告名', max_length=256)
-    image = models.ImageField('封面 2:1 ', upload_to='image')
+    image = models.ImageField('封面 2:1 (建议:360px * 180 px ) ', upload_to='image')
     url = models.CharField('图文栏目网址', max_length=256, db_index=True)
     sequence = models.IntegerField('排序', default=9999)
 
@@ -65,7 +65,8 @@ class VideoAlternateBanners(models.Model):
 class VideoInnerAdBanners(models.Model):
     '视频首页内部广告图片'
     name = models.CharField('广告名', max_length=256)
-    image = models.ImageField('封面 2:1 ', upload_to='image')
+    location = models.CharField('广告位置（填写视频一级分类名称）', max_length=256)
+    image = models.ImageField('封面 2:1 (建议:360px * 180 px )', upload_to='image')
     url = models.CharField('图文栏目网址', max_length=256, db_index=True)
     sequence = models.IntegerField('排序', default=9999)
 
