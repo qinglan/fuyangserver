@@ -2,7 +2,8 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import VideoColumn, GraphicColumn, GraphicArticle, GraphicComment, VideoCurriculumFile, VideoCurriculum, \
+from .models import VideoColumn, VideoInfoLectureDetails, GraphicArticle, GraphicComment, VideoCurriculumFile, \
+    VideoCurriculum, \
     VideoClass, VideoCurriculumComment, DataLst, CurriculumTaskInfoJob, CurriculumTaskInfoVideo, VideoInfoStudyFuyang, \
     VideoInfoLecture, VideoInfoLectureComment, SinglePage, MianInfo, TaskLiveFile, TaskInfoVideoComment, \
     CurriculumTaskInfoJobAnswer, VideoInfoLectureClassfy, VideoVipPrice
@@ -98,8 +99,15 @@ class CurriculumTaskInfoVideoAdmin(admin.ModelAdmin):
     list_display = ('name',)
 
 
+class VideoInfoLectureInline(admin.TabularInline):
+    model = VideoInfoLectureDetails
+    extra = 0  # 默认不显示新增
+
+
 class VideoInfoLectureAdmin(admin.ModelAdmin):
     list_display = ('name', 'intro',)
+    exclude = ('play_id', 'play_app_id')  # 屏蔽录播文件id
+    inlines = [VideoInfoLectureInline]
 
 
 class VideoInfoStudyFuyangAdmin(admin.ModelAdmin):
@@ -119,7 +127,7 @@ class VideoInfoLectureClassfyAdmin(admin.ModelAdmin):
 
 
 class VideoVipPriceAdmin(admin.ModelAdmin):
-    list_display = ('VIP_price','min_exchange_ticket_price')
+    list_display = ('VIP_price', 'min_exchange_ticket_price')
 
     def has_add_permission(self, request, obj=None):
         '禁止新增'

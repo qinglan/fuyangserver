@@ -198,7 +198,7 @@ def refill(request):
 
 def recharge(request):
     '账户充值'
-    total_fee = int(request.POST.get('money','100'))
+    total_fee = int(request.POST.get('chmoney', '100'))
     request.session['money'] = total_fee
     total_fee *= 100
     getInfo = request.GET.get('getInfo', None)
@@ -249,20 +249,11 @@ def recharge_record(request):
                cusr.save()
                UserPaydetails.objects.create(purchaser=request.user,
                                           pay_bill=fee,
-<<<<<<< HEAD
-                                          pay_type='2',
-                                          remark='充值操作成功')
-            cusr = User.objects.get(id=request.user.id)
-            cusr.account_sum += fee
-            cusr.exchange_ticket += fee
-            cusr.save()
-=======
                                           pay_type='2',  # 兑换券
                                           remark='充值操作成功赠送兑换券')
             else:
                 print('充值操作成功但不赠送兑换券', fee,cusr.min_exchange_ticket_price, request.user.nickname)
 
->>>>>>> origin/master
             del request.session['money']
             return HttpResponse('1')
     except Exception as e:

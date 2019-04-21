@@ -454,6 +454,7 @@ class VideoInfoLectureClassfy(models.Model):
         verbose_name_plural = '视频区一级分类表'
         ordering = ['register_date']
 
+
 class VideoVipPrice(models.Model):
     '视频区VIP会员价格表'
     VIP_price = models.IntegerField('VIP价格', default=9999)
@@ -468,37 +469,37 @@ class VideoVipPrice(models.Model):
         ordering = ['VIP_price']
 
 
+# 支付方式
+PAYTYPE = (
+    ('0', u'免费'),
+    ('1', u'余额/微信'),
+    ('2', u'听课券'),
+    ('3', u'VIP'),
+)
+
+
 class VideoInfoLecture(VideoInfo):
     '视频区'
     intro = models.CharField('简介', max_length=256)
     sequeue = models.IntegerField('排序', default=9999)
 
-    TYPE_CHOICE = (
-        (u'0', u'免费'),
-        (u'1', u'余额/微信'),
-        (u'2', u'听课券'),
-    )
-    pay_type = models.CharField('支付方式', max_length=2, choices=TYPE_CHOICE, default='0')
+    pay_type = models.CharField('支付方式', max_length=2, choices=PAYTYPE, default='0')
 
     lecture_type_first = models.ForeignKey(VideoInfoLectureClassfy, related_name='vlist', on_delete=models.CASCADE,
                                            blank=True, null=True,
                                            verbose_name='视频一级分类')
 
-    TYPE_CHOICE_SECOND = (
-        (u'0', u'最新'),
-        (u'1', u'全部'),
-    )
-    lecture_type_second = models.CharField('视频二级分类', max_length=2, choices=TYPE_CHOICE_SECOND, default='0')
-
-    viede_set_name = models.CharField('视频选集名称',blank=True, null=True, max_length=256)
-    viede_set_order = models.IntegerField('视频选集顺序', blank=True, null=True,)
-
+    lecture_type_second = models.CharField('视频二级分类', max_length=2, choices=(('0', u'最新'), ('1', u'全部')), default='0')
 
     def __str__(self):
         return self.name
 
     def class_name(self):
         return 'VideoInfoLecture'
+
+    def hasItems(self):
+        '判断是否有剧集'
+        return self.details.count() > 1
 
     @abstractmethod
     def get_collection_url(self):
@@ -523,6 +524,25 @@ class VideoInfoLecture(VideoInfo):
         verbose_name = '视频区'
         verbose_name_plural = '视频区'
         ordering = ['sequeue']
+
+
+class VideoInfoLectureDetails(models.Model):
+    '视频区剧集子表'
+    play_id = models.CharField('录播视频文件ID', max_length=256)
+    play_app_id = models.CharField('录播视频appID', max_length=256, default='1257252657')
+    # pay_type = models.CharField('支付方式', max_length=2, choices=PAYTYPE, default='0')    暂时不设置单集价格
+    sequence = models.IntegerField('第几集', default=1)
+    updatetime = models.DateTimeField('更新日期', auto_now=True)
+    belongto = models.ForeignKey(VideoInfoLecture, verbose_name='所属视频大类', related_name='details',
+                                 on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.belongto.name + '-' + str(self.id)
+
+    class Meta:
+        verbose_name = '视频区剧集'
+        verbose_name_plural = verbose_name
+        ordering = ['sequence']
 
 
 class VideoInfoLectureComment(models.Model):

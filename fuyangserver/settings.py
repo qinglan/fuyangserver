@@ -75,6 +75,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
                 'fuyangserver.context_processor.user_info',
                 'fuyangserver.context_processor.main_info',
                 'fuyangserver.context_processor.advers'
@@ -94,9 +96,9 @@ WSGI_APPLICATION = 'fuyangserver.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'fuyang',
+        'NAME': 'fuyangdatabase',
         'USER': 'root',
-        'PASSWORD': 'gxADMIN0833!@#',
+        'PASSWORD': 'fly#snow02.',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4'},
@@ -124,7 +126,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'zh_Hans'
+LANGUAGE_CODE = 'zh-Hans'
 
 TIME_ZONE = 'Asia/Shanghai'
 

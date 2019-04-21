@@ -41,11 +41,9 @@
         }
 
         .divcss_center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin-top: -20px;
-            margin-left: -60px;
+            position: relative;
+            top: 40%;
+            margin:0 auto;
         }
 
         .backcolor {
@@ -72,8 +70,14 @@
                 {% if isBuy %}
                     <video id="player-container-id" class="player-size" playsinline webkit-playsinline>
                     </video>
+                {% elif videoinfo.pay_type == '3' and request.user.video_vip == 0 %}
+                    <div class="text-center player-size backcolor">
+                        <a class="btn btn-primary btn-lg divcss_center" href="{% url 'userinfo_finance' %}">
+                            该视频为VIP专属视频<br/>请到账务中心购买VIP会员
+                        </a>
+                    </div>
                 {% else %}
-                    <div class="text-right player-size backcolor">
+                    <div class="text-center player-size backcolor">
                         <a class="btn btn-primary btn-lg divcss_center" href="{% url 'study_paytype' videoinfo.pk %}">
                             ￥{{ videoinfo.price }} 购买
                         </a>
@@ -96,7 +100,20 @@
                 <small>{{ videoinfo.introduce|striptags }}</small>
             {% endautoescape %}
         </div>
-
+        {% if videoinfo.hasItems %}
+            <div class="es-section">
+                <div class="gray-darker pbl"><strong>选集</strong></div>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination" style="margin-bottom:0;">
+                        {% for p in videoinfo.details.all %}
+                            <li{% if p.pk == subtab.pk %} class="active"{% endif %}>
+                                <a href="?item={{ p.pk }}">{{ forloop.counter }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+        {% endif %}
         <div class="open-course-detail row">
             <div class="col-md-12">
                 <div class="es-section gray-darker editor-text">
@@ -188,8 +205,8 @@
 
         {% if isBuy %}
             var player = TCPlayer("player-container-id", { // player-container-id 为播放器容器ID，必须与html中一致
-                fileID: "{{ videoinfo.play_id }}", // 请传入需要播放的视频filID 必须
-                appID: "{{ videoinfo.play_app_id }}", // 请传入点播账号的appID 必须
+                fileID: "{{ subtab.play_id }}", // 请传入需要播放的视频filID 必须
+                appID: "{{ subtab.play_app_id }}", // 请传入点播账号的appID 必须
                 autoplay: true //是否自动播放
                 //其他参数请在开发文档中查看
             });

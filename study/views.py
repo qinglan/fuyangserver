@@ -3,8 +3,9 @@ from django.shortcuts import render
 import os
 from PictureText.models import PictureTextPaper
 from fuyangserver.settings import HERE
-from advertise.models import AdvertisingBanners, VideoInfoLectureBanners, VideoInfoStudyFuyangBanners,VideoAlternateBanners,VideoInnerAdBanners
-from study.models import VideoColumn,VideoVipPrice
+from advertise.models import AdvertisingBanners, VideoInfoLectureBanners, VideoInfoStudyFuyangBanners, \
+    VideoAlternateBanners, VideoInnerAdBanners
+from study.models import VideoColumn, VideoVipPrice
 from study.models import VideoCurriculum
 from study.models import VideoCurriculumComment
 import xml.dom.minidom
@@ -13,7 +14,7 @@ from study.models import GraphicArticle
 from study.models import VideoClass
 from study.models import CurriculumTaskInfoVideo
 from study.models import DataLst, SinglePage
-from study.models import VideoInfoLecture, VideoInfoLectureComment, VideoInfoLectureClassfy
+from study.models import VideoInfoLecture, VideoInfoLectureComment, VideoInfoLectureClassfy, VideoInfoLectureDetails
 from study.models import VideoInfoStudyFuyang, VideoInfoStudyFuyangComment
 from study.models import TaskInfoVideoComment
 from study.models import TaskInfoVideoAsk
@@ -466,6 +467,7 @@ def videolectureindex(request):
     innerabs = VideoInnerAdBanners.objects.all().order_by('sequence')
     return render(request, 'study/video_lecture_index.html', locals())
 
+
 def videocates(request, cid):
     '视频区二级分类列表'
     vcls = VideoInfoLectureClassfy.objects.all().order_by('sequeue')
@@ -550,7 +552,7 @@ def videoplaystudyfuyang(request, pk):
 @login_required(login_url='/accounts/login/')
 def videoplaylecture(request, pk):
     '视频区详情页面'
-    gas = VideoInfoLecture.objects.filter(pk=pk)
+    gas = VideoInfoLecture.objects.select_related().filter(pk=pk)
     if len(gas) <= 0: return HttpResponse('error')
     gas[0].views_count += 1
     gas[0].save()
@@ -564,16 +566,14 @@ def videoplaylecture(request, pk):
             b = True
             break
     isBuy = gas[0].price == 0 or b or request.user.video_vip == 1
-    # isCollection = Collection.is_collection(request.user, gas[0])
     relations = VideoInfoLecture.objects.filter(lecture_type_first=gas[0].lecture_type_first,
                                                 lecture_type_second=gas[0].lecture_type_second).order_by('-id')[:4]
 
-    print('gas[0].price', gas[0].price)
-    if gas[0].price == 0:
-        gas[0].price = 1
+    itemid = int(request.GET.get('item', '0'))
+    subtab = VideoInfoLectureDetails.objects.first() if itemid == 0 else VideoInfoLectureDetails.objects.get(pk=itemid)
 
     return render(request, 'study/video_play_lecture.html', {
-        'videoinfo': gas[0],
+        'videoinfo': gas[0], 'subtab': subtab,
         'isBuy': isBuy,
         'vpcs': vpcs,
         'relations': relations})
