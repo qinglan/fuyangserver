@@ -24,8 +24,8 @@ class PictureTextColumn(models.Model):
 
 class PictureTextPaper(models.Model):
     name = models.CharField('图文标题', max_length=256)
-    column = models.ForeignKey(PictureTextColumn, on_delete=models.CASCADE, blank=True, null=True, verbose_name='所属栏目')
-    video = models.ForeignKey(VideoCurriculum, on_delete=models.CASCADE, blank=True, null=True, verbose_name='所属课程')
+    column = models.ForeignKey(PictureTextColumn, on_delete=models.SET_NULL, verbose_name='所属栏目')
+    video = models.ForeignKey(VideoCurriculum, on_delete=models.SET_NULL, verbose_name='所属课程')
     remark = models.CharField('说明', max_length=256, blank=True, default='')  # 新增字段:用于标明课程价格、时长
     introduce = models.TextField('图文简介', default='')
     image = models.ImageField('封面', upload_to='image')

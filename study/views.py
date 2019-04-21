@@ -46,7 +46,7 @@ from PictureText.paysettings import *
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q
 
 '''
 WEIXIN_APP_ID = 'wxb4bfb462ce44afd4'
@@ -566,11 +566,14 @@ def videoplaylecture(request, pk):
             b = True
             break
     isBuy = gas[0].price == 0 or b or request.user.video_vip == 1
-    relations = VideoInfoLecture.objects.filter(lecture_type_first=gas[0].lecture_type_first,
-                                                lecture_type_second=gas[0].lecture_type_second).order_by('-id')[:4]
+
+    relations = VideoInfoLecture.objects.filter(~Q(id=pk)).filter(lecture_type_first=gas[0].lecture_type_first,
+                                                                  lecture_type_second=gas[
+                                                                      0].lecture_type_second).order_by('-id')[:4]
 
     itemid = int(request.GET.get('item', '0'))
-    subtab = VideoInfoLectureDetails.objects.first() if itemid == 0 else VideoInfoLectureDetails.objects.get(pk=itemid)
+    subtab = VideoInfoLectureDetails.objects.filter(
+        belongto=pk).first() if itemid == 0 else VideoInfoLectureDetails.objects.get(pk=itemid)
 
     return render(request, 'study/video_play_lecture.html', {
         'videoinfo': gas[0], 'subtab': subtab,
