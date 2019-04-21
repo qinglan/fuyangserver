@@ -43,13 +43,25 @@
         .divcss_center {
             position: relative;
             top: 40%;
-            margin:0 auto;
+            margin: 0 auto;
         }
 
         .backcolor {
             background-color: #000000;
         }
 
+        /* 视频区选集 */
+        .selset p {
+            margin-top: 10px;
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+
+        .selset .pagination {
+            margin-top: 0;
+            margin-bottom: 0;
+            margin-left: -5px;
+        }
     </style>
 {% endblock %}
 {% block title %}在线视频{% endblock %}
@@ -93,18 +105,16 @@
                         <span><i class="es-icon es-icon-removeredeye mrs"></i>{{ videoinfo.views_count }}</span>
                         <span><i class="es-icon es-icon-textsms mrs"></i>{{ videoinfo.get_comment_count }}</span>
                     </div>
-                    <p>{{ videoinfo.name }}</p>
+                    <p><strong>{{ videoinfo.name }}</strong></p>
                 </div>
             </div>
             {% autoescape off %}
                 <small>{{ videoinfo.introduce|striptags }}</small>
             {% endautoescape %}
-        </div>
-        {% if videoinfo.hasItems %}
-            <div class="es-section">
-                <div class="gray-darker pbl"><strong>选集</strong></div>
-                <nav aria-label="Page navigation">
-                    <ul class="pagination" style="margin-bottom:0;">
+            {% if videoinfo.hasItems %}
+                <nav aria-label="navigation" class="selset">
+                    <p>选集</p>
+                    <ul class="pagination">
                         {% for p in videoinfo.details.all %}
                             <li{% if p.pk == subtab.pk %} class="active"{% endif %}>
                                 <a href="?item={{ p.pk }}">{{ forloop.counter }}</a>
@@ -112,8 +122,9 @@
                         {% endfor %}
                     </ul>
                 </nav>
-            </div>
-        {% endif %}
+            {% endif %}
+        </div>
+
         <div class="open-course-detail row">
             <div class="col-md-12">
                 <div class="es-section gray-darker editor-text">

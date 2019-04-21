@@ -398,7 +398,7 @@ class VideoInfo(models.Model):
 
     play_app_id = models.CharField('录播视频appID', null=True, blank=True, max_length=256, default='1257252657')
 
-    image = models.ImageField('封面 304x171 px', upload_to='image', null=True, )
+    image = models.ImageField('封面', upload_to='image', null=True, help_text='一行两列 368x218 一行三列 236x350')
     pub_date = models.DateTimeField('开始时间', default=timezone.now, editable=False)
 
     views_count = models.IntegerField('浏览次数', default=0, editable=False)
@@ -430,7 +430,7 @@ class VideoInfo(models.Model):
 
     class Meta:
         verbose_name = '点播视频'
-        verbose_name_plural = '点播视频'
+        verbose_name_plural = verbose_name
         ordering = ['name']
 
 
@@ -439,11 +439,8 @@ class VideoInfoLectureClassfy(models.Model):
     message = models.CharField('视频分类', max_length=256)
     remark = models.TextField('分类相关说明', max_length=256)
     register_date = models.DateTimeField('添加时间', default=timezone.now, editable=False)
-    TYPE_CHOICE = (
-        (u'0', u'一行两列'),
-        (u'1', u'一行三列'),
-    )
-    show_face = models.CharField('显示方式', max_length=2, choices=TYPE_CHOICE, default='0')
+    show_face = models.IntegerField('显示方式', choices=((0, u'一行两列'), (1, u'一行三列'),), default=0)
+    thumbnail = models.FileField('栏目图标', upload_to='image/', help_text='图片大小：36x36')
     sequeue = models.IntegerField('排序', default=9999)
 
     def __str__(self):
@@ -451,7 +448,7 @@ class VideoInfoLectureClassfy(models.Model):
 
     class Meta:
         verbose_name = '视频区一级分类表'
-        verbose_name_plural = '视频区一级分类表'
+        verbose_name_plural = verbose_name
         ordering = ['register_date']
 
 
@@ -465,7 +462,7 @@ class VideoVipPrice(models.Model):
 
     class Meta:
         verbose_name = '视频区VIP会员价格表'
-        verbose_name_plural = '视频区VIP会员价格表'
+        verbose_name_plural = verbose_name
         ordering = ['VIP_price']
 
 
@@ -522,7 +519,7 @@ class VideoInfoLecture(VideoInfo):
 
     class Meta:
         verbose_name = '视频区'
-        verbose_name_plural = '视频区'
+        verbose_name_plural = verbose_name
         ordering = ['sequeue']
 
 
