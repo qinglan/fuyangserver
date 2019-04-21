@@ -61,7 +61,7 @@ class VideoCurriculumCommentAdmin(admin.ModelAdmin):
 
 class VideoInfoLectureCommentAdmin(admin.ModelAdmin):
     '视频区评论'
-    list_display = ('message', 'register_date', 'author')
+    list_display = ('message', 'register_date', 'author',)
     list_per_page = 30
     list_filter = ('author',)
     search_fields = ('message',)
@@ -105,7 +105,7 @@ class VideoInfoLectureInline(admin.TabularInline):
 
 
 class VideoInfoLectureAdmin(admin.ModelAdmin):
-    list_display = ('name', 'intro',)
+    list_display = ('name', 'intro','lecture_type_first')
     exclude = ('play_id', 'play_app_id')  # 屏蔽录播文件id
     inlines = [VideoInfoLectureInline]
 
@@ -123,7 +123,7 @@ class CurriculumTaskInfoJobAnswerAdmin(admin.ModelAdmin):
 
 
 class VideoInfoLectureClassfyAdmin(admin.ModelAdmin):
-    list_display = ('message', 'remark', 'register_date')
+    list_display = ('message', 'remark', 'register_date','show_face')
 
 
 class VideoVipPriceAdmin(admin.ModelAdmin):
