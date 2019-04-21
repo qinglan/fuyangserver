@@ -398,7 +398,7 @@ class VideoInfo(models.Model):
 
     play_app_id = models.CharField('录播视频appID', null=True, blank=True, max_length=256, default='1257252657')
 
-    image = models.ImageField('封面', upload_to='image', null=True, help_text='一行两列 368x218 一行三列 236x350')
+    image = models.ImageField('封面', upload_to='image', null=True, help_text='一行两列 304 x 171  一行三列 240x324')
     pub_date = models.DateTimeField('开始时间', default=timezone.now, editable=False)
 
     views_count = models.IntegerField('浏览次数', default=0, editable=False)
