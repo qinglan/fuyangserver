@@ -108,7 +108,7 @@ class VideoInfoLectureAdmin(admin.ModelAdmin):
     list_display = ('name', 'intro','lecture_type_first')
     exclude = ('play_id', 'play_app_id')  # 屏蔽录播文件id
     inlines = [VideoInfoLectureInline]
-
+    search_fields = ('name', )
 
 class VideoInfoStudyFuyangAdmin(admin.ModelAdmin):
     list_display = ('name', 'intro',)
