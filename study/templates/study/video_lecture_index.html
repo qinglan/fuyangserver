@@ -28,7 +28,7 @@
     </form>
 
 
-    <div id="banners" class="carousel slide" data-ride="carousel">
+    <div id="banners" class="carousel slide" data-ride="carousel" data-interval="3000">
         <!-- Indicators -->
         <ol class="carousel-indicators">
             {% for ad in abs %}
@@ -54,7 +54,7 @@
             {% for inad in innerabs %}
                 {% if cls.message == inad.location %}
                     <div class="row course-list es-open-course-list">
-                        <a href="{{ inad.url }}" target="_blank"><img src="{{ inad.image.url }}" height="180px"
+                        <a href="{{ inad.url }}" target="_blank"><img src="{{ inad.image.url }}" height="50%"
                                                                       width="100%" alt="{{ inad.name }}">
                         </a>
                     </div>
@@ -100,5 +100,4 @@
             </div>
         {% endfor %}
     </div>
-
 {% endblock %}

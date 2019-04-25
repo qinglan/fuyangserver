@@ -105,7 +105,7 @@ class VideoInfoLectureInline(admin.TabularInline):
 
 
 class VideoInfoLectureAdmin(admin.ModelAdmin):
-    list_display = ('name', 'intro','lecture_type_first')
+    list_display = ('name', 'intro','lecture_type_first','lecture_type_second','pay_type','price','sequeue',)
     exclude = ('play_id', 'play_app_id')  # 屏蔽录播文件id
     inlines = [VideoInfoLectureInline]
     search_fields = ('name', )
@@ -123,7 +123,7 @@ class CurriculumTaskInfoJobAnswerAdmin(admin.ModelAdmin):
 
 
 class VideoInfoLectureClassfyAdmin(admin.ModelAdmin):
-    list_display = ('message', 'remark', 'register_date','show_face')
+    list_display = ('message', 'remark', 'register_date','show_face','sequeue')
 
 
 class VideoVipPriceAdmin(admin.ModelAdmin):

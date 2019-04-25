@@ -470,11 +470,12 @@ def videolectureindex(request):
 
 def videocates(request, cid):
     '视频区二级分类列表'
+    abs = VideoAlternateBanners.objects.all().order_by('sequence')
     vcls = VideoInfoLectureClassfy.objects.all().order_by('sequeue')
     tuijian = VideoInfoLecture.objects.filter(lecture_type_first__pk=cid, lecture_type_second='0').order_by('sequeue')[
-              :4]
+              :8]
     zhibao = VideoInfoLecture.objects.filter(lecture_type_first__id=cid, lecture_type_second='1').order_by('sequeue')[
-             :4]
+             :12]
     return render(request, 'study/video_secates.html', locals())
 
 
@@ -484,6 +485,7 @@ def videopages(request):
     flag = int(request.GET.get('flag', '0'))
     page = request.GET.get('page')
     txtkey = request.GET.get('txtkey', '')
+    abs = VideoAlternateBanners.objects.all().order_by('sequence')
     vcls = VideoInfoLectureClassfy.objects.all().order_by('sequeue')
     vlist = VideoInfoLecture.objects.all().order_by('sequeue')
     if cateid > 0:
@@ -569,7 +571,7 @@ def videoplaylecture(request, pk):
 
     relations = VideoInfoLecture.objects.filter(~Q(id=pk)).filter(lecture_type_first=gas[0].lecture_type_first,
                                                                   lecture_type_second=gas[
-                                                                      0].lecture_type_second).order_by('-id')[:4]
+                                                                      0].lecture_type_second).order_by('-id')[:6]
 
     itemid = int(request.GET.get('item', '0'))
     subtab = VideoInfoLectureDetails.objects.filter(
