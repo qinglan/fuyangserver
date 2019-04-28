@@ -82,7 +82,7 @@
                 {% endif %}
             {% endfor %}
 
-            <div class="vcaption">
+            <div class="vcaption" style="background-color: {{ cls.bgcolor|default:'#F0EDFB' }}">
                 <img src="{{ cls.thumbnail.url }}" alt="{{ cls.message }}" class="capicon">
                 <span class="subtitle">{{ cls.message }}</span>
                 <a href="{% url 'videocates' cls.pk %}"><span class="more">查看更多</span></a>
