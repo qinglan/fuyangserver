@@ -30,7 +30,7 @@
                     if (res.err_msg == "get_brand_wcpay_request:ok") {
                         // 跳转到支付成功的页面
                         //window.location.href = '#';
-                        alert('支付成功');
+                        //alert('支付成功');
                         var vid ={{ videoinfo.pk }};
                         $.get("{{ videoinfo.get_buy_url }}", {'pk': vid, 'pt': 'wxpay'}, function (ret) {
                             if (ret == "1") {

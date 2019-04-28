@@ -12,6 +12,7 @@
 {% endblock %}
 
 {% block scriptfile %}
+
     <script type="text/javascript">
         //调用微信JS api 支付
         function onBridgeReady() {
@@ -30,9 +31,9 @@
                     if (res.err_msg == "get_brand_wcpay_request:ok") {
                         // 跳转到支付成功的页面
                         //window.location.href = '#';
-                        alert('支付成功');
+                        //alert('支付成功');
                         var vid = '{{ vc.pk }}';
-                        $.get("{% url 'picture_text_coursepay' %}", {pk: vid, pt: 'wxpay'}, function (ret) {
+                        $.get("{% url 'picture_text_coursepay' %}", { pk:vid, pt:'wxpay' }, function (ret) {
                             if (ret == "1") {
                                 alert('报名成功!');
                                 location.href = '/';

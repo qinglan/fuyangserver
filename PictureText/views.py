@@ -131,7 +131,7 @@ def courseattent(request):
     from users.models import UserPaydetails
     pkid = int(request.GET['pk'])
     vc = VideoCurriculum.objects.get(pk=pkid)
-
+    print('ss01:',pkid)
     try:
         with transaction.atomic():
             order = VideoCurriculumOrder.objects.create(
@@ -141,6 +141,7 @@ def courseattent(request):
             )
             order.save()
             paytype = request.GET['pt']
+            print('ss02:',paytype)
 
             if paytype == 'cashpay':
                 request.user.account_sum -= vc.price  # 账户余额扣减
@@ -149,6 +150,7 @@ def courseattent(request):
                                               pay_bill=0 - vc.price,
                                               pay_type='0',
                                               remark='直播课程报名扣减余额')
+                print('ss03:','直播课程报名扣减余额')
             elif paytype == 'wxpay':
                 vp = VideoVipPrice.objects.first()
                 if vc.price >= vp.min_exchange_ticket_price:  # 当充值金额大于设置价格的时候才赠送兑换券
@@ -158,6 +160,7 @@ def courseattent(request):
                                                   pay_bill=0 + vc.price,
                                                   pay_type='2',
                                                   remark='直播课程报名赠送兑换券')
+                    print('ss04:','直播课程报名赠送兑换券')
                 else:
                     print('直播课程报名成功但不赠送兑换券', vc.price, vp.min_exchange_ticket_price, request.user.nickname)
             else:
@@ -167,6 +170,8 @@ def courseattent(request):
                                               pay_bill=0 - vc.price,
                                               pay_type='1',
                                               remark='直播课程报名扣减听课券')
+                print('ss05:','直播课程报名扣减听课券')
+            print('ss06:return 1')
             return HttpResponse('1')
     except Exception as e:
         return HttpResponse("出现错误<%s>" % str(e))
