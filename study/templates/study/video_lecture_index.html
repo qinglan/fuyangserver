@@ -8,25 +8,46 @@
             height: 167px !important;
             width: 100% !important;
         }
+
+        /* 头部固定样式：复制以下内容 */
+        .es-wrap {
+            padding-top: 180px;
+        }
+
+        .es-header {
+            width: 100%;
+            top: 0;
+            left: 0;
+            position: fixed;
+        }
+
+        #wrapper_fixed {
+            position: fixed;
+            top: 60px;
+            z-index: 999;
+            background: #fff;
+            width: 100%;
+        }
     </style>
 {% endblock %}
 
 {% block content %}
-    <ul class="nav nav-pills">
-        {% for cls in vcls %}
-            <li role="presentation">
-                <a href="{% url 'videocates' cls.pk %}">{{ cls.message }}</a>
-            </li>
-        {% endfor %}
-    </ul>
-    <form name="videosearchfrm" action="{% url 'video_pages' %}" method="get">
-        <div class="search_bar">
-            <input type="search" name="txtkey" placeholder="请输入字段名"/>
-            <span></span>
-            <button type="submit" class="searh"></button>
-        </div>
-    </form>
-
+    <div id="wrapper_fixed">
+        <ul class="nav nav-pills">
+            {% for cls in vcls %}
+                <li role="presentation">
+                    <a href="{% url 'videocates' cls.pk %}">{{ cls.message }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <form name="videosearchfrm" action="{% url 'video_pages' %}" method="get">
+            <div class="search_bar">
+                <input type="search" name="txtkey" placeholder="请输入字段名"/>
+                <span></span>
+                <button type="submit" class="searh"></button>
+            </div>
+        </form>
+    </div>
 
     <div id="banners" class="carousel slide" data-ride="carousel" data-interval="3000">
         <!-- Indicators -->
