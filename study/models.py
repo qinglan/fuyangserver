@@ -440,6 +440,7 @@ class VideoInfoLectureClassfy(models.Model):
     remark = models.TextField('分类相关说明', max_length=256)
     register_date = models.DateTimeField('添加时间', default=timezone.now, editable=False)
     show_face = models.IntegerField('显示方式', choices=((0, u'一行两列'), (1, u'一行三列'),), default=0)
+    bgcolor = models.CharField('背景颜色', max_length=50, default='#F0EDFB', help_text='十六进制颜色值')
     thumbnail = models.FileField('栏目图标', upload_to='image/', help_text='图片大小：36x36')
     sequeue = models.IntegerField('排序', default=9999)
 
