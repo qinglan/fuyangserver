@@ -577,8 +577,17 @@ def videoplaylecture(request, pk):
     subtab = VideoInfoLectureDetails.objects.filter(
         belongto=pk).first() if itemid == 0 else VideoInfoLectureDetails.objects.get(pk=itemid)
 
+    page = request.GET.get('page')
+    dp = Paginator(gas[0].details.all(), 6)  # 每页显示6条数据
+    try:
+        pageInfo = dp.page(page)
+    except PageNotAnInteger:
+        pageInfo = dp.page(1)  # 如果参数page数据类型不是整数，就返回第一页数据
+    except EmptyPage:
+        pageInfo = dp.page(dp.num_pages)  # 若用户访问的页数大于实际页数，则返回最后一页数据
+
     return render(request, 'study/video_play_lecture.html', {
-        'videoinfo': gas[0], 'subtab': subtab,
+        'videoinfo': gas[0], 'subtab': subtab, 'dPage': pageInfo,
         'isBuy': isBuy,
         'vpcs': vpcs,
         'relations': relations})

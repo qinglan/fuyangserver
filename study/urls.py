@@ -54,6 +54,8 @@ urlpatterns = [
 
     path('videolectureindex/', videolectureindex, name='videolectureindex'),
 
+    path('videolecture/videoplaylecture/<int:pk>/', videoplaylecture, name='videoplaylecture'),
+
     path('videolecture/category/<int:cid>', videocates, name='videocates'),
     path('videolecture/pagination/', videopages, name='video_pages'),
 
@@ -68,8 +70,6 @@ urlpatterns = [
          name='videoplaylecture_collection'),
 
     path('studyfuyang/videoplaystudyfuyang/<int:pk>/', videoplaystudyfuyang, name='videoplaystudyfuyang'),
-
-    path('videolecture/videoplaylecture/<int:pk>/', videoplaylecture, name='videoplaylecture'),
 
     path('studyfuyang/videoplaystudyfuyang/comment/<int:pk>/', videoplaystudyfuyang_comment,
          name='videoplaystudyfuyang_comment'),

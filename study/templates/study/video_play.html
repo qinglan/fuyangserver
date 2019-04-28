@@ -53,7 +53,6 @@
         /* 视频区选集 */
         .selset p {
             margin-top: 10px;
-            font-weight: bold;
             margin-bottom: 0;
         }
 
@@ -113,13 +112,27 @@
             {% endautoescape %}
             {% if videoinfo.hasItems %}
                 <nav aria-label="navigation" class="selset">
-                    <p>选集</p>
+                    <p>课时  <strong>第{{ subtab.sequence }}集</strong></p>
                     <ul class="pagination">
-                        {% for p in videoinfo.details.all %}
+                        {% if dPage.has_previous %}
+                            <li>
+                                <a href="?page={{ dPage.previous_page_number }}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% for p in dPage %}
                             <li{% if p.pk == subtab.pk %} class="active"{% endif %}>
-                                <a href="?item={{ p.pk }}">{{ forloop.counter }}</a>
+                                <a href="?item={{ p.pk }}&page={{ dPage.number }}">{{ p.sequence }}</a>
                             </li>
                         {% endfor %}
+                        {% if dPage.has_next %}
+                            <li>
+                                <a href="?page={{ dPage.next_page_number }}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </nav>
             {% endif %}
