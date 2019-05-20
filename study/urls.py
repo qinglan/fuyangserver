@@ -81,6 +81,7 @@ urlpatterns = [
     path('payment/<int:vid>/', payment, name='study_payment'),
 
     path('buyvideolecture/<int:pk>/', buyvideolecture, name='buyvideolecture'),
+    path('checkorder', checkwxorder, name='buyvide_checkorder'),
 
     path('buystudyfuyang/<int:pk>/', buystudyfuyang, name='buystudyfuyang'),
 
@@ -95,6 +96,5 @@ urlpatterns = [
     path('class/job/iframe/<int:pk>/', class_job_iframe, name='class_job_iframe'),
 
     path('class/job/iframe/post/<int:pk>/', class_job_iframe_post, name='class_job_iframe_post'),
-
 
 ]

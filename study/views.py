@@ -1018,6 +1018,33 @@ def buyvideolecture(request, pk):
         return HttpResponse("出现错误<%s>" % str(e))
 
 
+def checkwxorder(request):
+    '检查微信订单是否成功'
+    tradeno = request.GET.get('ordernum', '')
+    vid = request.GET.get('vid', 0)
+    paytype = request.GET.get('paytype', '')
+    params = {
+        'appid': APP_ID,  # APPID
+        'mch_id': MCH_ID,  # 商户号
+        'nonce_str': random_str(16),  # 随机字符串
+        'out_trade_no': tradeno,  # 订单编号
+        'sign': get_sign({'appId': APP_ID, "timeStamp": int(time.time()), 'signType': 'MD5', }, API_KEY),
+        'sign_type': 'MD5',  # 签名类型
+        'attach': json.dumps({'pk': vid, 'pt': paytype})  # 附加字符串原样返回
+    }
+    notify_result = wx_pay_unifiedorde(params)
+    print('params', params)
+    print('notify_result', notify_result)
+    retval = trans_xml_to_dict(notify_result)
+    if (retval['return_code'] == 'SUCCESS'):
+        print('查询微信订单成功,重新调支付保存方法')
+        response = requests.get(url=reverse('buyvideolecture'), params=json.loads(retval['attach']))
+        return json.dumps(response.content)
+    else:
+        print('查询微信订单失败')
+        return 'fail'
+
+
 def buystudyfuyang(request, pk):
     vcs = VideoInfoStudyFuyang.objects.filter(pk=pk)
     if len(vcs) > 0:
