@@ -61,7 +61,7 @@
                             </a>
                             <p style="margin-bottom:0">
                                 <span class="badge" style="color:forestgreen; float:right;"><small>{% index_check_buy i.pk i.video.pk request.user.pk %}</small></span>
-                                <span style="color:orange"><small>¥{{ i.video.price }}/{{ i.video.count }}课时</small></span>
+                                <span style="color:orange"><small>{{ i.video.price }}{% if i.video.pay_type == '2' %}券{% else %}元{% endif %}/{{ i.video.count }}课时</small></span>
                             </p>
                         </div>
                     </div>

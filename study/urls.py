@@ -81,7 +81,6 @@ urlpatterns = [
     path('payment/<int:vid>/', payment, name='study_payment'),
 
     path('buyvideolecture/<int:pk>/', buyvideolecture, name='buyvideolecture'),
-    path('checkorder', checkwxorder, name='buyvide_checkorder'),
 
     path('buystudyfuyang/<int:pk>/', buystudyfuyang, name='buystudyfuyang'),
 

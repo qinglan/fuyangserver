@@ -9,6 +9,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .paysettings import *
 import json
+from django.views.decorators.csrf import csrf_exempt
 
 
 @login_required(login_url='/accounts/login/')
@@ -100,6 +101,8 @@ def payment(request, vcid):
     total_fee *= 100
     getInfo = request.GET.get('getInfo', None)
     openid = request.COOKIES.get('openid', '')
+    attachdict = {'action': 'baoming', 'cid': vcid, 'pt': 'wxpay', 'uid': request.user.pk}  # 附加数据，回调时原样返回
+
     if not openid:
         if getInfo != 'yes':
             # 构造一个url，携带一个重定向的路由参数，
@@ -113,7 +116,7 @@ def payment(request, vcid):
             if not openid: return HttpResponse('获取用户openid失败')
 
             response = render(request, 'PictureText/payment.html', {
-                'params': get_jsapi_params(openid, total_fee),
+                'params': get_jsapi_params(openid, total_fee, userdata=json.dumps(attachdict)),
                 'vc': vc,
             })
             response.set_cookie('openid', openid, expires=60 * 60 * 24 * 30)
@@ -121,33 +124,72 @@ def payment(request, vcid):
         else:
             return HttpResponse('获取机器编码失败')
     return render(request, 'PictureText/payment.html', {
-        'params': get_jsapi_params(openid, total_fee),
+        'params': get_jsapi_params(openid, total_fee, userdata=json.dumps(attachdict)),
         'vc': vc,
     })
 
 
 def courseattent(request):
     '课程报名支付'
-    from django.db import transaction
-    from users.models import UserPaydetails
     pkid = int(request.GET['pk'])
+    paytype = request.GET['pt']
+    content = __saveorder(uid=request.user.pk, pk=pkid, pt=paytype)
+    return HttpResponse(content)
+
+
+@csrf_exempt
+def checkwxorder(request):
+    '检查微信订单是否成功'
+    order_result = request.body
+    xmldata = trans_xml_to_dict(order_result)
+    print('xmlstr:', order_result)
+    print('xmldata:', xmldata)
+    if xmldata['return_code'] == 'SUCCESS' and xmldata['result_code'] == 'SUCCESS':
+        userdata = json.loads(xmldata['attach'])
+        print('userdata:', userdata)
+        if userdata['action'] == 'baoming':  # 在线报名
+            info = __saveorder(uid=userdata['uid'], pk=userdata['cid'], pt='wxpay')
+        elif userdata['action'] == 'buyvideo':  # 购买视频
+            from study.views import __saveorder as savevideoorder
+            info = savevideoorder(userdata['uid'], pk=userdata['vid'], pt='wxpay')
+        else:  # 账号充值
+            info = 'other action todo'
+        print('response data:', info)
+
+    params = {
+        'return_code': 'SUCCESS',
+        'return_msg': 'OK'
+    }
+    return HttpResponse(trans_dict_to_xml(params))
+
+
+def __saveorder(uid, pk, pt):
+    '保存订单'
+    from django.db import transaction
+    from users.models import UserPaydetails, User
+    pkid = int(pk)
+    print('ss01:', pkid, 'userid:', uid)
     vc = VideoCurriculum.objects.get(pk=pkid)
-    print('ss01:', pkid)
+    activeuser = User.objects.get(pk=uid)
+
     try:
+        qs = VideoCurriculumOrder.objects.filter(price=vc.price, purchaser=activeuser, video_curriculum=vc)
+        if qs.count() > 0: return '1'
+
         with transaction.atomic():
             order = VideoCurriculumOrder.objects.create(
                 price=vc.price,
-                purchaser=request.user,
+                purchaser=activeuser,
                 video_curriculum=vc,
             )
             order.save()
-            paytype = request.GET['pt']
+            paytype = pt
             print('ss02:', paytype)
 
             if paytype == 'cashpay':
-                request.user.account_sum -= vc.price  # 账户余额扣减
-                request.user.save()
-                UserPaydetails.objects.create(purchaser=request.user,
+                activeuser.account_sum -= vc.price  # 账户余额扣减
+                activeuser.save()
+                UserPaydetails.objects.create(purchaser=activeuser,
                                               pay_bill=0 - vc.price,
                                               pay_type='0',
                                               remark='直播课程报名扣减余额')
@@ -155,51 +197,24 @@ def courseattent(request):
             elif paytype == 'wxpay':
                 vp = VideoVipPrice.objects.first()
                 if vc.price >= vp.min_exchange_ticket_price:  # 当充值金额大于设置价格的时候才赠送兑换券
-                    request.user.exchange_ticket += vc.price  # 增加兑换券
-                    request.user.save()
-                    UserPaydetails.objects.create(purchaser=request.user,
+                    activeuser.exchange_ticket += vc.price  # 增加兑换券
+                    activeuser.save()
+                    UserPaydetails.objects.create(purchaser=activeuser,
                                                   pay_bill=0 + vc.price,
                                                   pay_type='2',
                                                   remark='直播课程报名赠送兑换券')
                     print('ss04:', '直播课程报名赠送兑换券')
                 else:
-                    print('直播课程报名成功但不赠送兑换券', vc.price, vp.min_exchange_ticket_price, request.user.nickname)
+                    print('直播课程报名成功但不赠送兑换券', vc.price, vp.min_exchange_ticket_price, activeuser.nickname)
             else:
-                request.user.attendance_ticket -= vc.price  # 听课券扣减
-                request.user.save()
-                UserPaydetails.objects.create(purchaser=request.user,
+                activeuser.attendance_ticket -= vc.price  # 听课券扣减
+                activeuser.save()
+                UserPaydetails.objects.create(purchaser=activeuser,
                                               pay_bill=0 - vc.price,
                                               pay_type='1',
                                               remark='直播课程报名扣减听课券')
                 print('ss05:', '直播课程报名扣减听课券')
             print('ss06:return 1')
-            return HttpResponse('1')
+            return '1'
     except Exception as e:
-        return HttpResponse("出现错误<%s>" % str(e))
-
-
-def checkwxorder(request):
-    '检查微信订单是否成功'
-    tradeno = request.GET.get('ordernum', '')
-    vid = request.GET.get('vid', 0)
-    paytype = request.GET.get('paytype', '')
-    params = {
-        'appid': APP_ID,  # APPID
-        'mch_id': MCH_ID,  # 商户号
-        'nonce_str': random_str(16),  # 随机字符串
-        'out_trade_no': tradeno,  # 订单编号
-        'sign': get_sign({'appId': APP_ID, "timeStamp": int(time.time()), 'signType': 'MD5', }, API_KEY),
-        'sign_type': 'MD5',  # 签名类型
-        'attach': json.dumps({'pk': vid, 'pt': paytype})  # 附加字符串原样返回
-    }
-    notify_result = wx_pay_unifiedorde(params)
-    print('params', params)
-    print('notify_result', notify_result)
-    retval = trans_xml_to_dict(notify_result)
-    if (retval['return_code'] == 'SUCCESS'):
-        print('查询微信订单成功,重新调支付保存方法')
-        response = requests.get(url=reverse('picture_text_coursepay'), params=json.loads(retval['attach']))
-        return json.dumps(response.content)
-    else:
-        print('查询微信订单失败')
-        return 'fail'
+        raise ValueError(e) from e

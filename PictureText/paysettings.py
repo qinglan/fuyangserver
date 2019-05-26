@@ -15,7 +15,7 @@ MCH_ID = "1517550611"  # 商户号
 API_KEY = "szGyccyxYjyx20191128bAcdCnWpyxgs"  # 微信商户平台(pay.weixin.qq.com) -->账户设置 -->API安全 -->密钥设置，设置完成后把密钥复制到这里
 APP_SECRECT = "f8930880edce3dcf0039539e08074d5a"
 UFDODER_URL = "https://api.mch.weixin.qq.com/pay/unifiedorder"  # url是微信下单api
-NOTIFY_URL = "http://fuyang.51nayun.com"  # 微信支付结果回调接口,需要你自定义
+NOTIFY_URL = "http://fuyang.51nayun.com/picture/text/checkorder"  # 微信支付结果回调接口,需要你自定义
 CREATE_IP = '134.175.177.28'  # 服务器ip
 
 
@@ -134,7 +134,7 @@ def get_openid(code, state):
     return None
 
 
-def get_jsapi_params(openid, total_fee=1):
+def get_jsapi_params(openid, total_fee=1, userdata=None):
     """
     获取微信的Jsapi支付需要的参数
     :param openid: 用户的openid
@@ -152,6 +152,7 @@ def get_jsapi_params(openid, total_fee=1):
         'body': '扶阳医学-购买视频',  # 商品描述
         'sign_type': 'MD5',  # 签名类型
         'trade_type': 'JSAPI',  # 公众号支付类型
+        'attach': userdata  # 附加数据，在查询API和支付通知中原样返回
     }
     # print(params)
     # 调用微信统一下单支付接口url

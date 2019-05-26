@@ -30,13 +30,12 @@
                     //支付成功后返回 get_brand_wcpay_request:ok
                     if (res.err_msg == "get_brand_wcpay_request:ok") {
                         // 跳转到支付成功的页面
-                        $.get("{{ videoinfo.get_buy_url }}", {'pk': vid, 'pt': 'wxpay'}, function (ret) {
+                        $.get("{{ videoinfo.get_buy_url }}", {pk: vid, pt: 'wxpay'}, function (ret) {
                             if (ret == "1") {
                                 alert('购买成功!');
                                 location.href = '{{ videoinfo.get_absolute_url }}';
                             } else {
                                 alert('保存支付记录失败');
-                                checkorder('{{ params.out_trade_no }}', vid, 'wxpay');
                             }
                         })
                     } else if (res.err_msg == "get_brand_wcpay_request:cancel") {
@@ -46,8 +45,6 @@
                             alert(value);
                         });
                         alert("支付失败!");
-                    } else {
-                        checkorder('{{ params.out_trade_no }}', vid, 'wxpay');
                     }
                 }
             );
@@ -64,17 +61,6 @@
             } else {
                 onBridgeReady();
             }
-        }
-
-        //检查微信支付订单是否成功
-        function checkorder(orderno, vid, paytype) {
-            $.get("{% url 'buyvide_checkorder' %}", {
-                'ordernum': orderno,
-                'pk': vid,
-                'pt': paytype
-            }, function (ret) {
-                console.log(ret);
-            })
         }
     </script>
 {% endblock %}

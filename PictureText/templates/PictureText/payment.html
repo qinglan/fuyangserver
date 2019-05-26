@@ -37,7 +37,6 @@
                                 location.href = '/';
                             } else {
                                 alert('保存支付记录失败');
-                                checkorder('{{ params.out_trade_no }}', vid, 'wxpay');
                             }
                         })
                     } else if (res.err_msg == "get_brand_wcpay_request:cancel") {
@@ -47,8 +46,6 @@
                             alert(value);
                         });
                         alert("支付失败!");
-                    } else {
-                        checkorder('{{ params.out_trade_no }}', vid, 'wxpay');
                     }
                 }
             );
@@ -65,17 +62,6 @@
             } else {
                 onBridgeReady();
             }
-        }
-
-        //检查微信支付订单是否成功
-        function checkorder(orderno, vid, paytype) {
-            $.get("{% url 'picture_text_checkorder' %}", {
-                'ordernum': orderno,
-                'pk': vid,
-                'pt': paytype
-            }, function (ret) {
-                console.log(ret);
-            })
         }
     </script>
 {% endblock %}
