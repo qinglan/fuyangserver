@@ -152,8 +152,12 @@ def checkwxorder(request):
         elif userdata['action'] == 'buyvideo':  # 购买视频
             from study.views import __saveorder as savevideoorder
             info = savevideoorder(userdata['uid'], pk=userdata['vid'], pt='wxpay')
-        else:  # 账号充值
-            info = 'other action todo'
+        elif userdata['action'] == 'recharge':  # 账号充值
+            from userinfo.views import __recharge_record
+            info = __recharge_record(userdata['uid'], userdata['amount'])
+        else:  # 购买视频VIP
+            from userinfo.views import __buyvideovip
+            info = __buyvideovip(userdata['uid'], userdata['pt'])
         print('response data:', info)
 
     params = {

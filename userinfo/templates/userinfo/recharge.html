@@ -31,18 +31,9 @@
                         // 跳转到支付成功的页面
                         //window.location.href = '#';
                         alert('支付成功');
-                        $.get("{% url 'userinfo_record' %}", function (ret) {
-                            if (ret == "1")
-                                location.href = '{% url 'userinfo_finance' %}';
-                            else
-                            {
-                                alert('保存支付记录失败:' + ret);
-                            }
-                        })
+                        location.href = '{% url 'userinfo_finance' %}';
                     } else if (res.err_msg == "get_brand_wcpay_request:cancel") {
                         alert("您已取消支付!");
-                        {#alert({{ params.machine_code }});#}
-                        {#window.location.href = '';#}
                     } else if (res.err_msg == "get_brand_wcpay_request:fail") {
                         $.each(res, function (key, value) {
                             alert(value);

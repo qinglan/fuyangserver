@@ -7,6 +7,7 @@ from .models import VideoCurriculumOrder, VideoInfoStudyFuyangOrder, VideoInfoLe
 from users.models import UserPaydetails
 from study.models import VideoVipPrice
 from PictureText.paysettings import *
+import json
 
 
 def ordersSortKey(elem):
@@ -199,10 +200,12 @@ def refill(request):
 def recharge(request):
     '账户充值'
     total_fee = int(request.POST.get('chmoney', '100'))
-    request.session['money'] = total_fee
     total_fee *= 100
     getInfo = request.GET.get('getInfo', None)
     openid = request.COOKIES.get('openid', '')
+
+    attachdict = {'action': 'recharge', 'amount': total_fee, 'uid': request.user.pk}  # 附加数据，回调时原样返回
+
     if not openid:
         if getInfo != 'yes':
             # 构造一个url，携带一个重定向的路由参数，
@@ -217,47 +220,45 @@ def recharge(request):
             if not openid: return HttpResponse('获取用户openid失败')
 
             response = render(request, 'userinfo/recharge.html',
-                              {'params': get_jsapi_params(openid, total_fee)})
+                              {'params': get_jsapi_params(openid, total_fee, userdata=json.dumps(attachdict))})
             response.set_cookie('openid', openid, expires=60 * 60 * 24 * 30)
             return response
         else:
             return HttpResponse('获取机器编码失败')
-    return render(request, 'userinfo/recharge.html', {'params': get_jsapi_params(openid, total_fee)})
+    return render(request, 'userinfo/recharge.html',
+                  {'params': get_jsapi_params(openid, total_fee, userdata=json.dumps(attachdict))})
 
 
-def recharge_record(request):
+def __recharge_record(uid, amount):
     '充值记录'
     from django.db import transaction
     from users.models import UserPaydetails, User
     try:
         with transaction.atomic():
-            print('zhifujine:', request.session['money'], 'type:', type(request.session['money']))
-            print('currentuser:', request.user.id)
-            fee = request.session['money']
+            fee = amount
 
-            cusr = User.objects.get(id=request.user.id)
+            cusr = User.objects.get(id=uid)
             cusr.account_sum += fee
             cusr.save()
-            UserPaydetails.objects.create(purchaser=request.user,
+            UserPaydetails.objects.create(purchaser=cusr,
                                           pay_bill=fee,
                                           pay_type='0',
                                           remark='充值操作成功')
 
             vp = VideoVipPrice.objects.first()
             if fee >= vp.min_exchange_ticket_price:  # 当充值金额大于设置价格的时候才赠送兑换券
-               cusr.exchange_ticket += fee  # 兑换券
-               cusr.save()
-               UserPaydetails.objects.create(purchaser=request.user,
-                                          pay_bill=fee,
-                                          pay_type='2',  # 兑换券
-                                          remark='充值操作成功赠送兑换券')
+                cusr.exchange_ticket += fee  # 兑换券
+                cusr.save()
+                UserPaydetails.objects.create(purchaser=cusr,
+                                              pay_bill=fee,
+                                              pay_type='2',  # 兑换券
+                                              remark='充值操作成功赠送兑换券')
             else:
-                print('充值操作成功但不赠送兑换券', fee,cusr.min_exchange_ticket_price, request.user.nickname)
+                print('充值操作成功但不赠送兑换券', fee, cusr.min_exchange_ticket_price, cusr.nickname)
 
-            del request.session['money']
-            return HttpResponse('1')
+            return '1'
     except Exception as e:
-        return HttpResponse("出现错误<%s>" % str(e))
+        raise ValueError(e) from e
 
 
 def paytype(request):
@@ -273,6 +274,9 @@ def payment(request):
     total_fee *= 100
     getInfo = request.GET.get('getInfo', None)
     openid = request.COOKIES.get('openid', '')
+
+    attachdict = {'action': 'videovip', 'amount': total_fee, 'pt': 'wxpay', 'uid': request.user.pk}  # 附加数据，回调时原样返回
+
     if not openid:
         if getInfo != 'yes':
             # 构造一个url，携带一个重定向的路由参数，
@@ -286,45 +290,55 @@ def payment(request):
 
             if not openid: return HttpResponse('获取用户openid失败')
 
-            response = render(request, 'userinfo/payment.html', {'params': get_jsapi_params(openid, total_fee)})
+            response = render(request, 'userinfo/payment.html',
+                              {'params': get_jsapi_params(openid, total_fee, userdata=json.dumps(attachdict))})
             response.set_cookie('openid', openid, expires=60 * 60 * 24 * 30)
             return response
         else:
             return HttpResponse('获取机器编码失败')
-    return render(request, 'userinfo/payment.html', {'params': get_jsapi_params(openid, total_fee)})
+    return render(request, 'userinfo/payment.html',
+                  {'params': get_jsapi_params(openid, total_fee, userdata=json.dumps(attachdict))})
 
 
 def videoVipAttent(request):
     '视频区VIP支付后回调函数'
+    paytype = request.GET.get('pt')
+    info = __buyvideovip(request.user.pk, pt=paytype)
+    return HttpResponse(info)
+
+
+def __buyvideovip(uid, paytype):
+    '购买视频VIP'
     from django.db import transaction
-    from users.models import UserPaydetails
+    from users.models import UserPaydetails, User
     try:
         with transaction.atomic():
             vp = VideoVipPrice.objects.first()
-            paytype = request.GET['pt']
+            activeuser = User.objects.get(pk=uid)
 
             if paytype == 'cashpay':
-                request.user.account_sum -= vp.VIP_price  # 账户余额扣减
-                request.user.save()
-                UserPaydetails.objects.create(purchaser=request.user,
+                activeuser.account_sum -= vp.VIP_price  # 账户余额扣减
+
+                UserPaydetails.objects.create(purchaser=activeuser,
                                               pay_bill=0 - vp.VIP_price,
                                               pay_type='0',
                                               remark='购买视频VIP扣减余额')
             else:  # 微信支付
-                if vp.VIP_price  >= vp.min_exchange_ticket_price:  # 当VIP价格大于设置价格的时候才赠送兑换券
-                    request.user.exchange_ticket += vp.VIP_price  # 增加兑换券
-                    request.user.save()
-                    UserPaydetails.objects.create(purchaser=request.user,
+                if vp.VIP_price >= vp.min_exchange_ticket_price:  # 当VIP价格大于设置价格的时候才赠送兑换券
+                    activeuser.exchange_ticket += vp.VIP_price  # 增加兑换券
+
+                    UserPaydetails.objects.create(purchaser=activeuser,
                                                   pay_bill=0 + vp.VIP_price,
                                                   pay_type='2',
                                                   remark='购买视频VIP赠送兑换券')
-                else :
-                    print('购买视频VIP但不赠送兑换券',vp.VIP_price,vp.min_exchange_ticket_price,request.user.nickname)
-            request.user.video_vip = 1  # 更改为视频区VIP
-            request.user.save()
-            return HttpResponse('1')
+                else:
+                    print('购买视频VIP但不赠送兑换券', vp.VIP_price, vp.min_exchange_ticket_price, activeuser.nickname)
+
+            activeuser.video_vip = 1  # 更改为视频区VIP
+            activeuser.save()
+            return '1'
     except Exception as e:
-        return HttpResponse("出现错误<%s>" % str(e))
+        raise ValueError(e) from e
 
 
 @csrf_exempt

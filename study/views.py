@@ -1000,7 +1000,7 @@ def __saveorder(uid, pk, pt):
                 purchaser=activeuser,
                 video=vcs,
             )
-            order.save()
+            #order.save()
 
             if pt == 'cashpay':
                 activeuser.account_sum -= vcs.price  # 账户余额扣减
