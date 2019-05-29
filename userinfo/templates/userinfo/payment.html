@@ -31,7 +31,7 @@
                         // 跳转到支付成功的页面
                         //window.location.href = '#';
                         alert('支付成功');
-                        $.get("{% url 'userinfo_vipattent' %}", {'pt': 'wxpay'}, function (ret) {
+                        $.get("{% url 'userinfo_vipattent' %}", { pt: 'wxpay'}, function (ret) {
                             if (ret == "1") {
                                 alert('购买成功!');
                                 location.href = '/';
@@ -40,8 +40,6 @@
                         })
                     } else if (res.err_msg == "get_brand_wcpay_request:cancel") {
                         alert("您已取消支付!");
-                        {#alert({{ params.machine_code }});#}
-                        {#window.location.href = '';#}
                     } else if (res.err_msg == "get_brand_wcpay_request:fail") {
                         $.each(res, function (key, value) {
                             alert(value);

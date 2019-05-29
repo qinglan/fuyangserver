@@ -58,7 +58,7 @@
                         alert('余额不足，请选择其它支付方式。');
                         return;
                     } else {
-                        $.get("{% url 'userinfo_vipattent' %}", {'pt': paytype}, function (ret) {
+                        $.get("{% url 'userinfo_vipattent' %}", { pt: paytype }, function (ret) {
                             if (ret == "1") {
                                 alert('购买成功!');
                                 location.href = '/';
