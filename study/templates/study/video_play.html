@@ -53,6 +53,7 @@
         /* 视频区选集 */
         .selset p {
             margin-top: 10px;
+            font-weight: bold;
             margin-bottom: 0;
         }
 
@@ -74,7 +75,7 @@
             {% block video_play_lastlink %}
                 <li><a href="/">视频</a></li>
             {% endblock %}
-            <li>  {{ videoinfo.name }}  </li>
+            <li>{{ videoinfo.name }}</li>
         </ol>
         <div class="open-course-header">
             <div class="row">
@@ -84,7 +85,7 @@
                 {% elif videoinfo.pay_type == '3' and request.user.video_vip == 0 %}
                     <div class="text-center player-size backcolor">
                         <a class="btn btn-primary btn-lg divcss_center" href="{% url 'userinfo_finance' %}">
-                            该视频为VIP专属视频<br/>点击购买VIP会员
+                            该视频为VIP特权<br/>点击购买VIP
                         </a>
                     </div>
                 {% else %}
@@ -198,7 +199,7 @@
 {% endblock %}
 
 {% block scriptfile %}
-    <script type="text/javascript" src="{% static " js/jquery.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
     <script type="text/javascript" src="http://res2.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
     <script type="text/javascript">
         //拿到form
@@ -232,6 +233,9 @@
                 fileID: "{{ subtab.play_id }}", // 请传入需要播放的视频filID 必须
                 appID: "{{ subtab.play_app_id }}", // 请传入点播账号的appID 必须
                 autoplay: true //是否自动播放
+                //t: '2554387200',
+                //us: '72d4cd1101',
+                //sign: '{%  get_md5 subtab.play_app_id  subtab.play_id    %}'
                 //其他参数请在开发文档中查看
             });
         {% endif %}
