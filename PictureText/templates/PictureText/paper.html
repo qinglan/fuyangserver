@@ -1,6 +1,38 @@
 {% extends 'study/main_base.html' %}
 {% load htmlhelper %}
 {% block title %}{{ paper.name }}{% endblock %}
+{% block titlefile %}
+    <style type="text/css">
+        #quickpay {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            padding-left: 1em;
+            background-color: #f5f5f5;
+        }
+
+        #quickpay span {
+            color: #9cb945;
+            float: right;
+        }
+
+        #quickpay span a {
+            display: inline-block;
+            width: 90px;
+            text-align: center;
+            margin-left: 10px;
+            color: white;
+            background-color: darkred;
+        }
+
+        #quickpay:after {
+            clear: both;
+        }
+    </style>
+{% endblock %}
 {% block content %}
     <section class="es-poster swiper-container">
         <div class="swiper-wrapper"
@@ -100,6 +132,13 @@
             </div>
         </div>
     </div>
+    {% if not isBuy and notExpired %}
+        <!-- 快捷支付 -->
+        <div id="quickpay">
+            <p>支付金额：<span>￥{{ vPrice }} <a href="javascript:checkpay({{ paper.video.pk }},{{ vPrice }},{{ paytype }})">立即支付</a> </span>
+            </p>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block scriptfile %}

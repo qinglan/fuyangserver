@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from .paysettings import *
 import json
 from django.views.decorators.csrf import csrf_exempt
+import datetime
 
 
 @login_required(login_url='/accounts/login/')
@@ -20,10 +21,23 @@ def picture_text_paper(request, pk):
     pp.save()
     comments = PictureTextPaperComment.objects.filter(ascription=pp)
 
+    isBuy = False  # 判断是否购买过
+    vcs = VideoCurriculumOrder.objects.filter(video_curriculum__pk=pp.video.pk)
+    for v in vcs:
+        if v.purchaser.pk == request.user.pk:
+            isBuy = True
+            break
+
+    vc = VideoCurriculum.objects.get(pk=pp.video.pk)
+    vPrice = vc.price
+    payType = vc.pay_type
+    notExpired = vc.buy_time > datetime.datetime.now()  # 是否过期
+    print('isbuy:', isBuy, 'notExpires:', notExpired)
     return render(request, 'PictureText/paper.html', {
         'paper': pp,
         'abs': abs,
-        'comments': comments
+        'comments': comments,
+        'isBuy': isBuy, 'vPrice': vPrice, 'notExpired': notExpired, 'paytype': payType
     })
 
 
