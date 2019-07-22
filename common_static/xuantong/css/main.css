@@ -16006,7 +16006,7 @@ textarea {
     display: block;
     max-width: 100%;
   }
-  .es-open-course-list .col-xs-6 { padding-left:1px; padding-right:1px;}
+  .es-open-course-list .col-xs-6 { padding-left:1px; padding-right:1px; margin-bottom: -5px;}
   .es-open-course-list .thumbnail {
   	border:0 none;
 	margin-bottom:5px;
